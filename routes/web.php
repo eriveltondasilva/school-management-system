@@ -1,6 +1,11 @@
 <?php
 
-use App\Http\Controllers\{DashboardController, ProfileController, SubjectController};
+use App\Http\Controllers\{
+    DashboardController,
+    ProfileController,
+    SocialiteController,
+    SubjectController
+};
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -10,6 +15,7 @@ use Inertia\Inertia;
 | Web Routes
 |--------------------------------------------------------------------------
 */
+
 
 // ##########################
 Route::get('/', function () {
@@ -26,11 +32,6 @@ Route::get('/', function () {
     ]);
 });
 
-
-// ##########################
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 // ##########################
 Route::middleware('auth')
@@ -59,6 +60,7 @@ Route::middleware('auth')
     })->name('calculator');
 });
 
+
 // ##########################
 Route::middleware('auth')
 ->controller(ProfileController::class)
@@ -67,6 +69,19 @@ Route::middleware('auth')
     Route::get('/profile', 'edit')->name('edit');
     Route::patch('/profile', 'update')->name('update');
     Route::delete('/profile', 'destroy')->name('destroy');
+});
+
+
+// ##########################
+Route::controller(SocialiteController::class)
+->prefix('auth/{provider}')
+->name('auth.')
+->group(function () {
+    Route::get('/redirect', 'redirect')->name('redirect');
+    Route::get('/callback', 'callback')->name('callback');
+
+    // http://127.0.0.1:8000/auth/google/redirect
+    // http://127.0.0.1:8000/auth/google/callback
 });
 
 
