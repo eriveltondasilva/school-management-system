@@ -1,13 +1,12 @@
-import { useEffect } from 'react'
+import { useEffect, useId } from 'react'
 import { Head, Link, useForm } from '@inertiajs/react'
 
 import GuestLayout from '@/Layouts/GuestLayout'
-import InputError from '@/Components/InputError'
-import InputLabel from '@/Components/InputLabel'
 import Button from '@/Components/Button'
-import TextInput from '@/Components/TextInput'
+import Input from '@/Components/Input'
 
 export default function Register() {
+  const ID = useId()
   const { data, setData, post, processing, errors, reset } = useForm({
     name: '',
     email: '',
@@ -33,27 +32,27 @@ export default function Register() {
 
       <form onSubmit={submit}>
         <div>
-          <InputLabel htmlFor='name' value='Name' />
+          <Input.Label htmlFor={`${ID}-name`} value='Name' />
 
-          <TextInput
-            id='name'
+          <Input
+            id={`${ID}-name`}
             name='name'
             value={data.name}
             className='mt-1 block w-full'
             autoComplete='name'
-            isFocused={true}
             onChange={(e) => setData('name', e.target.value)}
+            autoFocus
             required
           />
 
-          <InputError message={errors.name} className='mt-2' />
+          <Input.Error message={errors.name} />
         </div>
 
         <div className='mt-4'>
-          <InputLabel htmlFor='email' value='Email' />
+          <Input.Label htmlFor={`${ID}-email`} value='Email' />
 
-          <TextInput
-            id='email'
+          <Input
+            id={`${ID}-email`}
             type='email'
             name='email'
             value={data.email}
@@ -63,14 +62,14 @@ export default function Register() {
             required
           />
 
-          <InputError message={errors.email} className='mt-2' />
+          <Input.Error message={errors.email} />
         </div>
 
         <div className='mt-4'>
-          <InputLabel htmlFor='password' value='Password' />
+          <Input.Label htmlFor={`${ID}-password`} value='Password' />
 
-          <TextInput
-            id='password'
+          <Input
+            id={`${ID}-password`}
             type='password'
             name='password'
             value={data.password}
@@ -80,17 +79,17 @@ export default function Register() {
             required
           />
 
-          <InputError message={errors.password} className='mt-2' />
+          <Input.Error message={errors.password} className='mt-2' />
         </div>
 
         <div className='mt-4'>
-          <InputLabel
-            htmlFor='password_confirmation'
+          <Input.Label
+            htmlFor={`${ID}-password_confirmation`}
             value='Confirm Password'
           />
 
-          <TextInput
-            id='password_confirmation'
+          <Input
+            id={`${ID}-password_confirmation`}
             type='password'
             name='password_confirmation'
             value={data.password_confirmation}
@@ -100,7 +99,10 @@ export default function Register() {
             required
           />
 
-          <InputError message={errors.password_confirmation} className='mt-2' />
+          <Input.Error
+            message={errors.password_confirmation}
+            className='mt-2'
+          />
         </div>
 
         <div className='mt-4 flex items-center justify-end'>
@@ -111,7 +113,9 @@ export default function Register() {
           </Link>
 
           <div className='ms-4'>
-            <Button disabled={processing}>Register</Button>
+            <Button type='submit' disabled={processing}>
+              Register
+            </Button>
           </div>
         </div>
       </form>

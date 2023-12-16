@@ -1,15 +1,13 @@
-import { useRef } from 'react'
-import { useForm } from '@inertiajs/react'
 import { Transition } from '@headlessui/react'
+import { useForm } from '@inertiajs/react'
+import { useId } from 'react'
 
-import InputError from '@/Components/InputError'
-import InputLabel from '@/Components/InputLabel'
 import Button from '@/Components/Button'
-import TextInput from '@/Components/TextInput'
+import Input from '@/Components/Input'
 
 export default function UpdatePasswordForm({ className = '' }) {
+  const ID = useId()
   const passwordInput = useRef()
-  const currentPasswordInput = useRef()
 
   const { data, setData, errors, put, reset, processing, recentlySuccessful } =
     useForm({
@@ -24,17 +22,6 @@ export default function UpdatePasswordForm({ className = '' }) {
     put(route('password.update'), {
       preserveScroll: true,
       onSuccess: () => reset(),
-      onError: (errors) => {
-        if (errors.password) {
-          reset('password', 'password_confirmation')
-          passwordInput.current.focus()
-        }
-
-        if (errors.current_password) {
-          reset('current_password')
-          currentPasswordInput.current.focus()
-        }
-      },
     })
   }
 
@@ -52,11 +39,10 @@ export default function UpdatePasswordForm({ className = '' }) {
 
       <form onSubmit={updatePassword} className='mt-6 space-y-6'>
         <div>
-          <InputLabel htmlFor='current_password' value='Current Password' />
+          <Input.Label htmlFor={`${ID}-current_password`} value='Current Password' />
 
-          <TextInput
-            id='current_password'
-            ref={currentPasswordInput}
+          <Input
+            id={`${ID}-current_password`}
             value={data.current_password}
             onChange={(e) => setData('current_password', e.target.value)}
             type='password'
@@ -64,14 +50,14 @@ export default function UpdatePasswordForm({ className = '' }) {
             autoComplete='current-password'
           />
 
-          <InputError message={errors.current_password} className='mt-2' />
+          <Input.Error message={errors.current_password}/>
         </div>
 
         <div>
-          <InputLabel htmlFor='password' value='New Password' />
+          <Input.Label htmlFor={`${ID}-password`} value='New Password' />
 
-          <TextInput
-            id='password'
+          <Input
+            id={`${ID}-password`}
             ref={passwordInput}
             value={data.password}
             onChange={(e) => setData('password', e.target.value)}
@@ -80,17 +66,17 @@ export default function UpdatePasswordForm({ className = '' }) {
             autoComplete='new-password'
           />
 
-          <InputError message={errors.password} className='mt-2' />
+          <Input.Error message={errors.password} />
         </div>
 
         <div>
-          <InputLabel
-            htmlFor='password_confirmation'
+          <Input.Label
+            htmlFor={`${ID}-password_confirmation`}
             value='Confirm Password'
           />
 
-          <TextInput
-            id='password_confirmation'
+          <Input
+            id={`${ID}-password_confirmation`}
             value={data.password_confirmation}
             onChange={(e) => setData('password_confirmation', e.target.value)}
             type='password'
@@ -98,11 +84,11 @@ export default function UpdatePasswordForm({ className = '' }) {
             autoComplete='new-password'
           />
 
-          <InputError message={errors.password_confirmation} className='mt-2' />
+          <Input.Error message={errors.password_confirmation} />
         </div>
 
         <div className='flex items-center gap-4'>
-          <Button disabled={processing}>Save</Button>
+          <Button type='submit' disabled={processing}>Save</Button>
 
           <Transition
             show={recentlySuccessful}

@@ -1,15 +1,13 @@
-import { useRef, useState } from 'react'
 import { useForm } from '@inertiajs/react'
+import {  useState, useId } from 'react'
 
 import Button from '@/Components/Button'
-import InputError from '@/Components/InputError'
-import InputLabel from '@/Components/InputLabel'
 import Modal from '@/Components/Modal'
-import TextInput from '@/Components/TextInput'
+import Input from '@/Components/Input'
 
 export default function DeleteUserForm({ className = '' }) {
+  const ID = useId()
   const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false)
-  const passwordInput = useRef()
 
   const {
     data,
@@ -32,7 +30,6 @@ export default function DeleteUserForm({ className = '' }) {
     destroy(route('profile.destroy'), {
       preserveScroll: true,
       onSuccess: () => closeModal(),
-      onError: () => passwordInput.current.focus(),
       onFinish: () => reset(),
     })
   }
@@ -74,25 +71,24 @@ export default function DeleteUserForm({ className = '' }) {
           </p>
 
           <div className='mt-6'>
-            <InputLabel
-              htmlFor='password'
+            <Input.Label
+              htmlFor={`${ID}-password`}
               value='Password'
-              className='sr-only'
+              // className='sr-only'
             />
 
-            <TextInput
-              id='password'
+            <Input
+              id={`${ID}-password`}
               type='password'
               name='password'
-              ref={passwordInput}
               value={data.password}
               onChange={(e) => setData('password', e.target.value)}
               className='mt-1 block w-3/4'
-              isFocused
               placeholder='Password'
+              autoFocus
             />
 
-            <InputError message={errors.password} className='mt-2' />
+            <Input.Error message={errors.password} />
           </div>
 
           <div className='mt-6 flex justify-end'>
@@ -100,9 +96,11 @@ export default function DeleteUserForm({ className = '' }) {
               Cancel
             </Button>
 
-            <Button variant='danger' className='ms-3' disabled={processing}>
-              Delete Account
-            </Button>
+            <div className='ms-3'>
+              <Button type='submit' variant='danger' disabled={processing}>
+                Delete Account
+              </Button>
+            </div>
           </div>
         </form>
       </Modal>

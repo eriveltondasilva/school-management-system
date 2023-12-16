@@ -1,16 +1,16 @@
 import { Transition } from '@headlessui/react'
 import { Link, useForm, usePage } from '@inertiajs/react'
+import { useId } from 'react'
 
 import Button from '@/Components/Button'
-import InputError from '@/Components/InputError'
-import InputLabel from '@/Components/InputLabel'
-import TextInput from '@/Components/TextInput'
+import Input from '@/Components/Input'
 
 export default function UpdateProfileInformation({
   mustVerifyEmail,
   status,
   className = '',
 }) {
+  const ID = useId()
   const user = usePage().props.auth.user
 
   const { data, setData, patch, errors, processing, recentlySuccessful } =
@@ -39,26 +39,26 @@ export default function UpdateProfileInformation({
 
       <form onSubmit={submit} className='mt-6 space-y-6'>
         <div>
-          <InputLabel htmlFor='name' value='Name' />
+          <Input.Label htmlFor={`${ID}-name`} value='Name' />
 
-          <TextInput
-            id='name'
+          <Input
+            id={`${ID}-name`}
             className='mt-1 block w-full'
             value={data.name}
             onChange={(e) => setData('name', e.target.value)}
-            required
-            isFocused
             autoComplete='name'
+            autoFocus
+            required
           />
 
-          <InputError className='mt-2' message={errors.name} />
+          <Input.Error message={errors.name} />
         </div>
 
         <div>
-          <InputLabel htmlFor='email' value='Email' />
+          <Input.Label htmlFor={`${ID}-email`} value='Email' />
 
-          <TextInput
-            id='email'
+          <Input
+            id={`${ID}-email`}
             type='email'
             className='mt-1 block w-full'
             value={data.email}
@@ -67,7 +67,7 @@ export default function UpdateProfileInformation({
             autoComplete='username'
           />
 
-          <InputError className='mt-2' message={errors.email} />
+          <Input.Error message={errors.email} />
         </div>
 
         {mustVerifyEmail && user.email_verified_at === null && (
@@ -92,7 +92,9 @@ export default function UpdateProfileInformation({
         )}
 
         <div className='flex items-center gap-4'>
-          <Button disabled={processing}>Save</Button>
+          <Button type='submit' disabled={processing}>
+            Save
+          </Button>
 
           <Transition
             show={recentlySuccessful}

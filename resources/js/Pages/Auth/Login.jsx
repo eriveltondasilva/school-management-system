@@ -1,14 +1,13 @@
 import { Head, Link, useForm } from '@inertiajs/react'
-import { useEffect } from 'react'
+import { useEffect, useId } from 'react'
 
 import Button from '@/Components/Button'
 import Checkbox from '@/Components/Checkbox'
-import InputError from '@/Components/InputError'
-import InputLabel from '@/Components/InputLabel'
-import TextInput from '@/Components/TextInput'
+import Input from '@/Components/Input'
 import GuestLayout from '@/Layouts/GuestLayout'
 
 export default function Login({ status, canResetPassword }) {
+  const ID = useId()
   const { data, setData, post, processing, errors, reset } = useForm({
     email: '',
     password: '',
@@ -37,27 +36,27 @@ export default function Login({ status, canResetPassword }) {
 
       <form onSubmit={submit}>
         <div>
-          <InputLabel htmlFor='email' value='Email' />
+          <Input.Label htmlFor={`${ID}-email`} value='Email' />
 
-          <TextInput
-            id='email'
+          <Input
+            id={`${ID}-email`}
             type='email'
             name='email'
             value={data.email}
             className='mt-1 block w-full'
             autoComplete='username'
-            isFocused={true}
             onChange={(e) => setData('email', e.target.value)}
+            autoFocus
           />
 
-          <InputError message={errors.email} className='mt-2' />
+          <Input.Error message={errors.email} />
         </div>
 
         <div className='mt-4'>
-          <InputLabel htmlFor='password' value='Password' />
+          <Input.Label htmlFor={`${ID}-password`} value='Password' />
 
-          <TextInput
-            id='password'
+          <Input
+            id={`${ID}-password`}
             type='password'
             name='password'
             value={data.password}
@@ -66,7 +65,7 @@ export default function Login({ status, canResetPassword }) {
             onChange={(e) => setData('password', e.target.value)}
           />
 
-          <InputError message={errors.password} className='mt-2' />
+          <Input.Error message={errors.password} />
         </div>
 
         <div className='mt-4 block'>

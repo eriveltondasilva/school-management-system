@@ -1,11 +1,12 @@
 import { Head, useForm } from '@inertiajs/react'
+import { useId } from 'react'
 
 import Button from '@/Components/Button'
-import InputError from '@/Components/InputError'
-import TextInput from '@/Components/TextInput'
+import Input from '@/Components/Input'
 import GuestLayout from '@/Layouts/GuestLayout'
 
 export default function ForgotPassword({ status }) {
+  const ID = useId()
   const { data, setData, post, processing, errors } = useForm({
     email: '',
   })
@@ -33,21 +34,23 @@ export default function ForgotPassword({ status }) {
       )}
 
       <form onSubmit={submit}>
-        <TextInput
-          id='email'
+        <Input
+          id={`${ID}-email`}
           type='email'
           name='email'
           value={data.email}
           className='mt-1 block w-full'
-          isFocused={true}
           onChange={(e) => setData('email', e.target.value)}
+          autoFocus
         />
 
-        <InputError message={errors.email} className='mt-2' />
+        <Input.Error message={errors.email} />
 
         <div className='mt-4 flex items-center justify-end'>
           <div className='ms-4'>
-            <Button disabled={processing}>Email Password Reset Link</Button>
+            <Button type='submit' disabled={processing}>
+              Email Password Reset Link
+            </Button>
           </div>
         </div>
       </form>

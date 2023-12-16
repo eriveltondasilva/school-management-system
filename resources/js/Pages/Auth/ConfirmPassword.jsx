@@ -1,13 +1,12 @@
 import { Head, useForm } from '@inertiajs/react'
-import { useEffect } from 'react'
+import { useEffect, useId } from 'react'
 
 import Button from '@/Components/Button'
-import InputError from '@/Components/InputError'
-import InputLabel from '@/Components/InputLabel'
-import TextInput from '@/Components/TextInput'
+import Input from '@/Components/Input'
 import GuestLayout from '@/Layouts/GuestLayout'
 
 export default function ConfirmPassword() {
+  const ID = useId()
   const { data, setData, post, processing, errors, reset } = useForm({
     password: '',
   })
@@ -35,24 +34,26 @@ export default function ConfirmPassword() {
 
       <form onSubmit={submit}>
         <div className='mt-4'>
-          <InputLabel htmlFor='password' value='Password' />
+          <Input.Label htmlFor={`${ID}-password`} value='Password' />
 
-          <TextInput
-            id='password'
+          <Input
+            id={`${ID}-password`}
             type='password'
             name='password'
             value={data.password}
             className='mt-1 block w-full'
-            isFocused={true}
             onChange={(e) => setData('password', e.target.value)}
+            autoFocus
           />
 
-          <InputError message={errors.password} className='mt-2' />
+          <Input.Error message={errors.password} />
         </div>
 
         <div className='mt-4 flex items-center justify-end'>
           <div className='ms-4'>
-            <Button disabled={processing}>Confirm</Button>
+            <Button type='submit' disabled={processing}>
+              Confirm
+            </Button>
           </div>
         </div>
       </form>
