@@ -8,7 +8,6 @@ export default function Button({
   children,
   ...props
 }) {
-  //
   const BUTTON_VARIANTS = {
     primary: [
       'bg-gray-800 text-white hover:bg-gray-700 focus:bg-gray-700 focus:ring-indigo-500 active:bg-gray-900',

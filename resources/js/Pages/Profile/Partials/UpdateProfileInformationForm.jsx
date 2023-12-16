@@ -1,9 +1,10 @@
+import { Transition } from '@headlessui/react'
+import { Link, useForm, usePage } from '@inertiajs/react'
+
 import Button from '@/Components/Button'
 import InputError from '@/Components/InputError'
 import InputLabel from '@/Components/InputLabel'
 import TextInput from '@/Components/TextInput'
-import { Transition } from '@headlessui/react'
-import { Link, useForm, usePage } from '@inertiajs/react'
 
 export default function UpdateProfileInformation({
   mustVerifyEmail,

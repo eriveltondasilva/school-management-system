@@ -1,6 +1,7 @@
 import GuestLayout from '@/Layouts/GuestLayout'
-import Button from '@/Components/Button'
 import { Head, Link, useForm } from '@inertiajs/react'
+
+import Button from '@/Components/Button'
 
 export default function VerifyEmail({ status }) {
   const { post, processing } = useForm({})

@@ -1,10 +1,11 @@
 import { useRef, useState } from 'react'
+import { useForm } from '@inertiajs/react'
+
 import Button from '@/Components/Button'
 import InputError from '@/Components/InputError'
 import InputLabel from '@/Components/InputLabel'
 import Modal from '@/Components/Modal'
 import TextInput from '@/Components/TextInput'
-import { useForm } from '@inertiajs/react'
 
 export default function DeleteUserForm({ className = '' }) {
   const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false)
