@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import { Link } from '@inertiajs/react'
+import { useState } from 'react'
 
 import ApplicationLogo from '@/Components/ApplicationLogo'
 import Dropdown from '@/Components/Dropdown'
@@ -31,6 +31,8 @@ export default function Authenticated({ user, header, children }) {
               </div>
             </div>
 
+
+            {/* Dropdown ->> */}
             <div className='hidden sm:ms-6 sm:flex sm:items-center'>
               <div className='relative ms-3'>
                 <Dropdown>
@@ -58,18 +60,20 @@ export default function Authenticated({ user, header, children }) {
 
                   <Dropdown.Content>
                     <Dropdown.Link href={route('profile.edit')}>
-                      Profile
+                      Perfil
                     </Dropdown.Link>
                     <Dropdown.Link
                       href={route('logout')}
                       method='post'
                       as='button'>
-                      Log Out
+                      Sair
                     </Dropdown.Link>
                   </Dropdown.Content>
                 </Dropdown>
               </div>
             </div>
+            {/* <<- Dropdown */}
+
 
             <div className='-me-2 flex items-center sm:hidden'>
               <button
