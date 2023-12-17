@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\DB;
 
 class AcademicYearSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         // #Ano Letivo
