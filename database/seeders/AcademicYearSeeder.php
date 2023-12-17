@@ -10,10 +10,10 @@ class AcademicYearSeeder extends Seeder
 {
     public function run(): void
     {
-        // #Ano Letivo
         DB::table('academic_years')->insert([
             'id' => 2023,
             'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

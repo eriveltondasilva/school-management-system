@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\DB;
 
 class GroupSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         // #Turmas

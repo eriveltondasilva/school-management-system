@@ -8,12 +8,8 @@ use App\Models\{ Group, Subject, Teacher, User};
 
 class TeacherSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        // #Professores
         $erivelton = User::factory()
         ->for(
             Teacher::factory(),
