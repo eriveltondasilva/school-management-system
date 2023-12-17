@@ -2,8 +2,12 @@
 
 namespace App\Enums;
 
+use App\Traits\EnumAttributesTrait;
+
 enum RoleEnum: int
 {
+    use EnumAttributesTrait;
+
     case ADMINISTRATOR = 1;  // administrador(a)
     case COORDINATOR   = 2;  // coordenador(a)
     case TEACHER       = 3;  // professor(a)
@@ -12,6 +16,10 @@ enum RoleEnum: int
 
     public const DEFAULT = self::USER;
 
+    /**
+     * Returns a label based on the role of the user.
+     * @return string The label corresponding to the user's role.
+     */
     public function label(): string
     {
         return match($this) {
@@ -19,17 +27,7 @@ enum RoleEnum: int
             self::COORDINATOR   => 'coordenador(a)',
             self::TEACHER       => 'professor(a)',
             self::STUDENT       => 'estudante',
-            default             => 'usuário(a)',
+            self::USER          => 'usuário(a)',
         };
-    }
-
-    public static function names(): array
-    {
-        return array_column(static::cases(), 'name');
-    }
-
-    public static function values(): array
-    {
-        return array_column(static::cases(), 'value');
     }
 };

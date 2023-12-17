@@ -2,14 +2,22 @@
 
 namespace App\Enums;
 
+use App\Traits\EnumAttributesTrait;
+
 enum SubjectEnum: int
 {
+    use EnumAttributesTrait;
+
     case PORTUGUESE  = 1;  // português
     case MATHEMATICS = 2;  // matemática
     case HISTORY     = 3;  // história
     case GEOGRAPHY   = 4;  // geografia
     case ARTS        = 5;  // artes
 
+    /**
+     * Returns the label corresponding to the current instance.
+     * @return string The label.
+     */
     public function label(): string
     {
         return match($this) {
@@ -21,6 +29,10 @@ enum SubjectEnum: int
         };
     }
 
+    /**
+     * Generates the abbreviation for the given value.
+     * @return string The abbreviation.
+     */
     public function abbr(): string
     {
         return match($this) {
@@ -30,15 +42,5 @@ enum SubjectEnum: int
             self::GEOGRAPHY   => 'GEO',
             self::ARTS        => 'ART',
         };
-    }
-
-    public static function names(): array
-    {
-        return array_column(static::cases(), 'name');
-    }
-
-    public static function values(): array
-    {
-        return array_column(static::cases(), 'value');
     }
 }

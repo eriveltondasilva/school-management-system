@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\RoleEnum;
+use App\Enums\{GenderEnum,RoleEnum};
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +17,7 @@ return new class () extends Migration {
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('gender', ['M', 'F'])->default('M');
+            $table->enum('gender', GenderEnum::values())->default(GenderEnum::DEFAULT);
             $table->boolean('status')->default(true);
             $table->string('avatar_url')->nullable();
             $table->string('provider_id')->nullable();

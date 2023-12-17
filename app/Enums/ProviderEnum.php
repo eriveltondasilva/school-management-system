@@ -2,6 +2,9 @@
 
 namespace App\Enums;
 
+/**
+ * Enum representing authentication providers.
+ */
 enum ProviderEnum: string
 {
     case GOOGLE = 'google';

@@ -4,17 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Enums\{
-    RoleEnum,
-    SubjectEnum,
-};
-use App\Models\{
-    Group,
-    Student,
-    Subject,
-    Teacher,
-    User,
-};
+use App\Enums\{ RoleEnum, SubjectEnum };
+use App\Models\{ Group, Student, Subject, Teacher, User};
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -22,32 +13,32 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // #Ano Letivo
-        DB::table('academic_years')->insert([
-            'id' => 2023,
-            'created_at' => now(),
+        $this->call([
+
         ]);
+
+
 
         // #Funções
         DB::table('roles')->insert([
             [
-                'name' => RoleEnum::ADMINISTRATOR->trans(),
+                'name' => RoleEnum::ADMINISTRATOR->label(),
                 'created_at' => now(),
             ],
             [
-                'name' => RoleEnum::COORDINATOR->trans(),
+                'name' => RoleEnum::COORDINATOR->label(),
                 'created_at' => now(),
             ],
             [
-                'name' => RoleEnum::TEACHER->trans(),
+                'name' => RoleEnum::TEACHER->label(),
                 'created_at' => now(),
             ],
             [
-                'name' => RoleEnum::STUDENT->trans(),
+                'name' => RoleEnum::STUDENT->label(),
                 'created_at' => now(),
             ],
             [
-                'name' => RoleEnum::USER->trans(),
+                'name' => RoleEnum::USER->label(),
                 'created_at' => now(),
             ],
         ]);
@@ -55,23 +46,23 @@ class DatabaseSeeder extends Seeder
         // #Disciplinas
         DB::table('subjects')->insert([
             [
-                'name' => SubjectEnum::PORTUGUESE,
+                'name' => SubjectEnum::PORTUGUESE->label(),
                 'created_at' => now(),
             ],
             [
-                'name' => SubjectEnum::MATHEMATICS,
+                'name' => SubjectEnum::MATHEMATICS->label(),
                 'created_at' => now(),
             ],
             [
-                'name' => SubjectEnum::HISTORY,
+                'name' => SubjectEnum::HISTORY->label(),
                 'created_at' => now(),
             ],
             [
-                'name' => SubjectEnum::GEOGRAPHY,
+                'name' => SubjectEnum::GEOGRAPHY->label(),
                 'created_at' => now(),
             ],
             [
-                'name' => SubjectEnum::ARTS,
+                'name' => SubjectEnum::ARTS->label(),
                 'created_at' => now(),
             ],
         ]);
