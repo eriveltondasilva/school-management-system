@@ -2,48 +2,34 @@
 
 namespace App\Enums;
 
-use App\Traits\EnumTrait;
-
 enum RoleEnum: int
 {
-    use EnumTrait;
-
     case ADMINISTRATOR = 1;  // administrador(a)
     case COORDINATOR   = 2;  // coordenador(a)
     case TEACHER       = 3;  // professor(a)
     case STUDENT       = 4;  // estudante
-    case USER          = 5;  // usuário
+    case USER          = 5;  // usuário(a)
 
-    // ####
     public const DEFAULT = self::USER;
 
-    public static function default(): static
-    {
-        return self::DEFAULT;
-    }
-
-
-    // ####
-    public function trans(): string
+    public function label(): string
     {
         return match($this) {
             self::ADMINISTRATOR => 'administrador(a)',
-            self::COORDINATOR => 'coordenador(a)',
-            self::TEACHER => 'professor(a)',
-            self::STUDENT => 'estudante',
-            default => 'usuário(a)',
+            self::COORDINATOR   => 'coordenador(a)',
+            self::TEACHER       => 'professor(a)',
+            self::STUDENT       => 'estudante',
+            default             => 'usuário(a)',
         };
     }
 
-    // ####
-    public function abbr(): string
+    public static function names(): array
     {
-        return match($this) {
-            self::ADMINISTRATOR => 'admin',
-            self::COORDINATOR => 'coord',
-            self::TEACHER => 'prof',
-            self::STUDENT => 'estud',
-            default => 'usuário',
-        };
+        return array_column(static::cases(), 'name');
     }
-}
+
+    public static function values(): array
+    {
+        return array_column(static::cases(), 'value');
+    }
+};

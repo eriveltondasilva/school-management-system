@@ -23,7 +23,7 @@ return new class () extends Migration {
             $table->string('provider_id')->nullable();
             $table->string('provider_name')->nullable();
             $table->nullableMorphs('profile');
-            $table->unsignedBigInteger('role_id')->default(RoleEnum::default());
+            $table->unsignedBigInteger('role_id')->default(RoleEnum::DEFAULT);
             $table->rememberToken();
             $table->timestamps();
         });

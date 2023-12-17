@@ -7,7 +7,6 @@ import Input from '@/Components/Input'
 
 export default function UpdatePasswordForm({ className = '' }) {
   const ID = useId()
-  const passwordInput = useRef()
 
   const { data, setData, errors, put, reset, processing, recentlySuccessful } =
     useForm({
@@ -58,7 +57,6 @@ export default function UpdatePasswordForm({ className = '' }) {
 
           <Input
             id={`${ID}-password`}
-            ref={passwordInput}
             value={data.password}
             onChange={(e) => setData('password', e.target.value)}
             type='password'

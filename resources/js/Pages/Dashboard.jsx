@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 
 export default function Dashboard({ auth }) {
+  const { name, email } = auth.user
   return (
     <AuthenticatedLayout
       user={auth.user}
@@ -17,7 +18,8 @@ export default function Dashboard({ auth }) {
         <div className='mx-auto max-w-7xl sm:px-6 lg:px-8'>
           <div className='overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg'>
             <div className='p-6 text-gray-900 dark:text-gray-100'>
-              You're logged in!
+              You're logged in! <br />
+              {name} <br />
             </div>
           </div>
         </div>
