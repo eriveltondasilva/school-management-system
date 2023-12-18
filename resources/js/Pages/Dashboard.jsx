@@ -18,7 +18,7 @@ export default function Dashboard({ auth }) {
         <div className='mx-auto max-w-7xl sm:px-6 lg:px-8'>
           <div className='overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg'>
             <div className='p-6 text-gray-900 dark:text-gray-100'>
-              You're logged in! <br />
+              You're, logged in! 1234567890 <br />
               {name} <br />
             </div>
           </div>

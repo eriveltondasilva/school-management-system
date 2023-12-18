@@ -22,10 +22,10 @@ export default {
         success  : colors.green,
         warning  : colors.yellow,
       },
-      
+
       fontFamily: {
         sans: [
-          '"Source Sans 3"',
+          'Inter',
           ...defaultTheme.fontFamily.sans
         ],
       },
