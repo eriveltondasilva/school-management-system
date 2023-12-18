@@ -5,7 +5,6 @@ import ApplicationLogo from '@/Components/ApplicationLogo'
 import Dropdown from '@/Components/Dropdown'
 import * as Icon from '@/Components/Icon'
 import NavLink from '@/Components/NavLink'
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink'
 
 export default function Authenticated({ user, header, children }) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] =
@@ -80,11 +79,11 @@ export default function Authenticated({ user, header, children }) {
             (showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'
           }>
           <div className='space-y-1 pb-3 pt-2'>
-            <ResponsiveNavLink
+            <NavLink.Responsive
               href={route('dashboard')}
               active={route().current('dashboard')}>
               Dashboard
-            </ResponsiveNavLink>
+            </NavLink.Responsive>
           </div>
 
           <div className='border-t border-gray-200 pb-1 pt-4 dark:border-gray-600'>
@@ -98,15 +97,15 @@ export default function Authenticated({ user, header, children }) {
             </div>
 
             <div className='mt-3 space-y-1'>
-              <ResponsiveNavLink href={route('profile.edit')}>
+              <NavLink.Responsive href={route('profile.edit')}>
                 Profile
-              </ResponsiveNavLink>
-              <ResponsiveNavLink
+              </NavLink.Responsive>
+              <NavLink.Responsive
                 method='post'
                 href={route('logout')}
                 as='button'>
                 Log Out
-              </ResponsiveNavLink>
+              </NavLink.Responsive>
             </div>
           </div>
         </div>
