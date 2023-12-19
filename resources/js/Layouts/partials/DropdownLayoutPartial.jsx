@@ -1,4 +1,3 @@
-import AvatarRadix from '@/Components/Avatar'
 import Dropdown from '@/Components/Dropdown'
 import * as Icon from '@/Components/Icon'
 import { twJoin } from 'tailwind-merge'
@@ -25,7 +24,7 @@ export default function DropdownLayoutPartial({ user }) {
                 )}>
                 <div className='uppercase tracking-wide'>{role.name}</div>
 
-                <AvatarRadix />
+                {/* <AvatarRadix /> */}
                 <Icon.ChevronDown className='h-4 w-4' />
               </button>
             </span>

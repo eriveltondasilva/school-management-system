@@ -9,6 +9,7 @@ export default {
     './storage/framework/views/*.php',
     './resources/views/**/*.blade.php',
     './resources/js/**/*.jsx',
+    'node_modules/flowbite-react/lib/esm/**/*.js',
   ],
 
   darkMode: 'class',
@@ -16,21 +17,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        danger   : colors.red,
-        primary  : colors.blue,
+        danger: colors.red,
+        primary: colors.blue,
         secondary: colors.gray,
-        success  : colors.green,
-        warning  : colors.yellow,
+        success: colors.green,
+        warning: colors.yellow,
       },
 
       fontFamily: {
-        sans: [
-          'Inter',
-          ...defaultTheme.fontFamily.sans
-        ],
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
     },
   },
 
-  plugins: [forms],
+  plugins: [forms, require('flowbite/plugin')],
 }
