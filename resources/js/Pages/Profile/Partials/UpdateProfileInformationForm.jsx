@@ -4,6 +4,7 @@ import { useId } from 'react'
 
 import Button from '@/Components/Button'
 import Input from '@/Components/Input'
+import * as Icon from '@/Components/Icon'
 
 export default function UpdateProfileInformation({
   mustVerifyEmail,
@@ -93,6 +94,7 @@ export default function UpdateProfileInformation({
 
         <div className='flex items-center gap-4'>
           <Button type='submit' disabled={processing}>
+            <Icon.Save className='w-5 h-5' />
             Save
           </Button>
 

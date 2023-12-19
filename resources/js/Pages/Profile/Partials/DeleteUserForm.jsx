@@ -1,9 +1,10 @@
 import { useForm } from '@inertiajs/react'
-import {  useState, useId } from 'react'
+import { useId, useState } from 'react'
 
 import Button from '@/Components/Button'
-import Modal from '@/Components/Modal'
+import * as Icon from '@/Components/Icon'
 import Input from '@/Components/Input'
+import Modal from '@/Components/Modal'
 
 export default function DeleteUserForm({ className = '' }) {
   const ID = useId()
@@ -55,6 +56,7 @@ export default function DeleteUserForm({ className = '' }) {
       </header>
 
       <Button variant='danger' onClick={confirmUserDeletion}>
+        <Icon.Delete className='h-5 w-5' />
         Delete Account
       </Button>
 

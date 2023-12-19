@@ -3,6 +3,7 @@ import { useForm } from '@inertiajs/react'
 import { useId } from 'react'
 
 import Button from '@/Components/Button'
+import * as Icon from '@/Components/Icon'
 import Input from '@/Components/Input'
 
 export default function UpdatePasswordForm({ className = '' }) {
@@ -38,7 +39,10 @@ export default function UpdatePasswordForm({ className = '' }) {
 
       <form onSubmit={updatePassword} className='mt-6 space-y-6'>
         <div>
-          <Input.Label htmlFor={`${ID}-current_password`} value='Current Password' />
+          <Input.Label
+            htmlFor={`${ID}-current_password`}
+            value='Current Password'
+          />
 
           <Input
             id={`${ID}-current_password`}
@@ -49,7 +53,7 @@ export default function UpdatePasswordForm({ className = '' }) {
             autoComplete='current-password'
           />
 
-          <Input.Error message={errors.current_password}/>
+          <Input.Error message={errors.current_password} />
         </div>
 
         <div>
@@ -86,7 +90,10 @@ export default function UpdatePasswordForm({ className = '' }) {
         </div>
 
         <div className='flex items-center gap-4'>
-          <Button type='submit' disabled={processing}>Save</Button>
+          <Button type='submit' disabled={processing}>
+            <Icon.Save className='h-5 w-5' />
+            Save
+          </Button>
 
           <Transition
             show={recentlySuccessful}

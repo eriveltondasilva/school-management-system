@@ -22,6 +22,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@radix-ui/react-avatar": "^1.0.4",
         "sass": "^1.69.5",
         "tailwind-merge": "^2.1.0"
     }

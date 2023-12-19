@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react'
+import { Link, usePage } from '@inertiajs/react'
 import { useState } from 'react'
 
 import ApplicationLogo from '@/Components/ApplicationLogo'
@@ -7,8 +7,9 @@ import DropdownLayoutPartial from './partials/DropdownLayoutPartial'
 import ResponsiveMenuLayoutPartial from './partials/ResponsiveMenuLayoutPartial'
 import ResponsiveNavLayout from './partials/ResponsiveNavLayout'
 
-export default function Authenticated({ user, header, children }) {
+export default function Authenticated({ header, children }) {
   const [isShownNavDropdown, setIsShownNavDropdown] = useState(false)
+  const user = usePage().props.auth.user
 
   return (
     <div className='min-h-screen bg-gray-100 dark:bg-gray-900'>
@@ -35,7 +36,7 @@ export default function Authenticated({ user, header, children }) {
             </div>
 
             {/* # Dropdown */}
-            <DropdownLayoutPartial user={user} />
+            <DropdownLayoutPartial user={user}/>
 
             {/* # Responsive Dropdown Menu */}
             <ResponsiveMenuLayoutPartial
@@ -52,7 +53,9 @@ export default function Authenticated({ user, header, children }) {
       {header && (
         <header className='bg-white shadow dark:bg-gray-800'>
           <div className='mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8'>
-            {header}
+            <h2 className='text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200'>
+              {header}
+            </h2>
           </div>
         </header>
       )}
