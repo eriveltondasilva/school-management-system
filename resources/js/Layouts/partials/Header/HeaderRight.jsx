@@ -1,20 +1,31 @@
 import { Dropdown } from 'flowbite-react'
 import { ChevronDown, LogOut, UserRoundCog } from 'lucide-react'
+import { twJoin } from 'tailwind-merge'
 
 import image from '../../../../images/profile-old.svg'
 
+// ====================================
 export default function HeaderRight({ user }) {
   const { name, email, role } = user
 
   const dropdownTrigger = (
     <div className='flex cursor-pointer items-center gap-1'>
-      <span className='mr-1 hidden text-sm font-medium uppercase tracking-wider xs:block dark:text-white'>
+      <span
+        className={twJoin(
+          'mr-1 hidden xs:block',
+          'text-sm font-medium uppercase tracking-wider',
+          'dark:text-white'
+        )}>
         {role.name}
       </span>
       <span className='sr-only'>Open user menu</span>
       {/* <!-- Avatar --> */}
       <img
-        className='h-9 w-9 rounded-full bg-slate-100 p-1 drop-shadow-sm hover:ring-2 hover:ring-blue-800 dark:bg-slate-200'
+        className={twJoin(
+          'h-9 w-9 p-1',
+          'rounded-full drop-shadow-sm hover:ring-2',
+          'bg-slate-100 hover:ring-blue-800 dark:bg-slate-200'
+        )}
         src={image}
         alt='Rounded avatar'
       />
