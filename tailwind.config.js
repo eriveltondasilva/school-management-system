@@ -15,6 +15,10 @@ export default {
   darkMode: 'class',
 
   theme: {
+    screens: {
+      xs: '390px',
+      ...defaultTheme.screens,
+    },
     extend: {
       colors: {
         danger: colors.red,
