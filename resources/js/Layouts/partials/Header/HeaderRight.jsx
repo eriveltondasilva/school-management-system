@@ -1,4 +1,4 @@
-import { Avatar, Dropdown } from 'flowbite-react'
+import { Avatar, DarkThemeToggle, Dropdown } from 'flowbite-react'
 import { LogOut, UserRoundCog } from 'lucide-react'
 
 export default function HeaderRight() {
@@ -11,13 +11,20 @@ export default function HeaderRight() {
   )
 
   return (
-    <div className='mr-2 flex'>
+    <div className='mr-2 flex space-x-2'>
+      {/* Dark theme toggle */}
+      <DarkThemeToggle />
+
       {/* Trigger */}
-      <Dropdown inline label={avatar}>
+      <Dropdown inline label={avatar} className='w-48'>
         {/* Dropdown */}
         <Dropdown.Header>
-          <span className='block text-sm font-semibold'>Bonnie Green</span>
-          <span className='block truncate text-sm'>name@flowbite.com</span>
+          <span className='block truncate text-sm font-semibold'>
+            Bonnie Green
+          </span>
+          <span className='block truncate text-sm text-gray-400'>
+            name@flowbite.com
+          </span>
         </Dropdown.Header>
         <Dropdown.Item icon={UserRoundCog}>Perfil</Dropdown.Item>
         <Dropdown.Item icon={LogOut}>Sair</Dropdown.Item>

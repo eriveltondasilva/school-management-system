@@ -4,6 +4,7 @@ import './bootstrap'
 import { createInertiaApp } from '@inertiajs/react'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { createRoot } from 'react-dom/client'
+import { Flowbite } from 'flowbite-react'
 
 import 'flowbite'
 
@@ -19,7 +20,11 @@ createInertiaApp({
   setup({ el, App, props }) {
     const root = createRoot(el)
 
-    root.render(<App {...props} />)
+    root.render(
+      <Flowbite>
+        <App {...props} />
+      </Flowbite>
+    )
   },
   progress: {
     color: '#4B5563',
