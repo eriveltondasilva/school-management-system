@@ -51,7 +51,7 @@ Route::middleware('auth')
 
     // #CALENDAR
     Route::get('/calendario', function () {
-        return Inertia::render('Calender');
+        return Inertia::render('Calendar');
     })->name('calendar');
 
     // #CALCULATOR

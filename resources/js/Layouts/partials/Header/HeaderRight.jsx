@@ -1,8 +1,9 @@
+import { Link } from '@inertiajs/react'
 import { Avatar, DarkThemeToggle, Dropdown } from 'flowbite-react'
 import { LogOut, UserRoundCog } from 'lucide-react'
 
 // ====================================
-export default function HeaderRight() {
+export default function HeaderRight({ name, email }) {
   const avatar = (
     <Avatar
       alt='User settings'
@@ -20,15 +21,19 @@ export default function HeaderRight() {
       <Dropdown inline label={avatar} className='w-48'>
         {/* Dropdown */}
         <Dropdown.Header>
-          <span className='block truncate text-sm font-semibold'>
-            Bonnie Green
+          <span className='block truncate text-sm font-semibold' title={name}>
+            {name || 'Usuário'}
           </span>
-          <span className='block truncate text-sm text-gray-400'>
-            name@flowbite.com
+          <span className='block truncate text-sm text-gray-400' title={email}>
+            {email || 'exemplo@email.com'}
           </span>
         </Dropdown.Header>
-        <Dropdown.Item icon={UserRoundCog}>Perfil</Dropdown.Item>
-        <Dropdown.Item icon={LogOut}>Sair</Dropdown.Item>
+        <Dropdown.Item as={Link} href={route('profile.edit')} icon={UserRoundCog}>
+          Perfil
+        </Dropdown.Item>
+        <Dropdown.Item as={Link} method='post' href={route('logout')} icon={LogOut}>
+          Sair
+        </Dropdown.Item>
         {/* <Dropdown.Divider /> */}
       </Dropdown>
     </div>

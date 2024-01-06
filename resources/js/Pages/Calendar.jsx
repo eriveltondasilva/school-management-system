@@ -1,10 +1,10 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 
 // ====================================
-export default function Dashboard() {
+export default function Calendar() {
   return (
-    <>
-      <AuthenticatedLayout></AuthenticatedLayout>
-    </>
+    <AuthenticatedLayout>
+      <h1>Calendar</h1>
+    </AuthenticatedLayout>
   )
 }
