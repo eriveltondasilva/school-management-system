@@ -1,4 +1,5 @@
 import { Plus } from 'lucide-react'
+import MainRoot from './MainRoot'
 
 // ====================================
 export default function Main({ children }) {
@@ -82,15 +83,5 @@ export default function Main({ children }) {
         </div>
       </div>
     </MainRoot>
-  )
-}
-
-function MainRoot({ children }) {
-  return (
-    <>
-      <div className='rounded-lg py-4'>
-        {children}
-      </div>
-    </>
   )
 }
