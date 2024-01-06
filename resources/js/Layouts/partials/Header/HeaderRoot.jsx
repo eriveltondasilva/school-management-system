@@ -1,5 +1,6 @@
 import { Navbar } from 'flowbite-react'
 
+// ====================================
 export default function HeaderRoot({ children }) {
   return (
     <Navbar

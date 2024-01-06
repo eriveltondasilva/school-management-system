@@ -2,6 +2,7 @@ import { Navbar } from 'flowbite-react'
 import { Menu } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
+// ====================================
 export default function HeaderLeft() {
   return (
     <Navbar.Brand>

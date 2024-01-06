@@ -1,6 +1,7 @@
 import { Avatar, DarkThemeToggle, Dropdown } from 'flowbite-react'
 import { LogOut, UserRoundCog } from 'lucide-react'
 
+// ====================================
 export default function HeaderRight() {
   const avatar = (
     <Avatar
