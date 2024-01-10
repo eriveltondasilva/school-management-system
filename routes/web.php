@@ -43,21 +43,23 @@ Route::middleware('auth')
     Route::get('/painel', DashboardController::class)->name('dashboard');
 
     // #SUBJECTS
-    Route::get('/disciplinas', [SubjectController::class, 'index'])->name('subject.index');
-    Route::get('/disciplinas/{id}', [SubjectController::class, 'show'])->name('subject.show');
-
-    // #BIMESTRES
-    // Route::get('/bimestres')->name('subjects');
+    // Route::get('/disciplinas', [SubjectController::class, 'index'])->name('subject.index');
+    // Route::get('/disciplinas/{id}', [SubjectController::class, 'show'])->name('subject.show');
 
     // #CALENDAR
     Route::get('/calendario', function () {
         return Inertia::render('Calendar');
     })->name('calendar');
 
-    // #CALCULATOR
-    Route::get('/calculadora', function () {
-        return Inertia::render('Calculator');
-    })->name('calculator');
+});
+
+
+Route::middleware('auth')
+->group(function() {
+    // # STUDENTS
+    Route::get('/alunos', function () {
+        return Inertia::render('Student/index');
+    })->name('student.index');
 });
 
 

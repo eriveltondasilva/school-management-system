@@ -4,11 +4,12 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 export default function Calendar() {
   const breadcrumbItems = [
     { title: 'Painel', route: 'dashboard' },
-    { title: 'Calendário' },
+    { title: 'Alunos' },
   ]
 
   return (
     <AuthenticatedLayout
-      breadcrumbItems={breadcrumbItems}></AuthenticatedLayout>
+      breadcrumbItems={breadcrumbItems}>
+      </AuthenticatedLayout>
   )
 }

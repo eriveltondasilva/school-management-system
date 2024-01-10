@@ -6,35 +6,6 @@
     "build": "vite build"
   },
   "license": "MIT",
-  "prettier": {
-    "arrowParens": "always",
-    "bracketSameLine": true,
-    "bracketSpacing": true,
-    "htmlWhitespaceSensitivity": "ignore",
-    "jsxSingleQuote": true,
-    "printWidth": 100,
-    "semi": false,
-    "singleAttributePerLine": false,
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "es5",
-    "overrides": [
-      {
-        "files": ".prettierrc",
-        "options": {
-          "parser": "json"
-        }
-      }
-    ],
-    "tailwindFunctions": [
-      "tw",
-      "twJoin",
-      "twMerge"
-    ],
-    "plugins": [
-      "prettier-plugin-tailwindcss"
-    ]
-  },
   "devDependencies": {
     "@headlessui/react": "^1.4.2",
     "@inertiajs/react": "^1.0.0",
