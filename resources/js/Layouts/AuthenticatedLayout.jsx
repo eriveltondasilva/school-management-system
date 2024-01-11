@@ -1,7 +1,7 @@
 import { Head } from '@inertiajs/react'
 
 import Breadcrumb from './partials/Breadcrumb'
-import Footer from './partials/Footer'
+// import Footer from './partials/Footer'
 import Header from './partials/Header'
 import Main from './partials/Main'
 import Sidebar from './partials/Sidebar'
@@ -16,7 +16,8 @@ export default function AuthenticatedLayout({ title, breadcrumbItems, children }
         <Header title={title} />
         <Breadcrumb items={breadcrumbItems} />
         <Main>{children}</Main>
-        <Footer />
+        {/* {children} */}
+        {/* <Footer /> */}
       </Wrapper>
     </>
   )
