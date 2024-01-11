@@ -3,7 +3,7 @@ import { Menu } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
 // ====================================
-export default function HeaderLeft() {
+export default function HeaderLeft({title}) {
   return (
     <Navbar.Brand>
       {/* Botão de menu */}
@@ -29,7 +29,7 @@ export default function HeaderLeft() {
           'self-center whitespace-nowrap',
           'text-xl font-semibold dark:text-white'
         )}>
-        Bem-vindo(a)
+       {title !== "Painel" ? title : "Bem-vindo(a)"}
       </span>
     </Navbar.Brand>
   )

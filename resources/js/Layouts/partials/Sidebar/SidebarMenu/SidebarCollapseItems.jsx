@@ -7,11 +7,12 @@ export default function SidebarCollapseItems({ items }) {
 
   return (
     <>
-      {items.map(({ title, icon, subItems }, i) => (
+      {items.map(({ title, icon, routes, subItems }, i) => (
         <Sidebar.Collapse
           key={`sidebar-collapse-${i}`}
           icon={icon}
-          label={title}>
+          label={title}
+          open={route().current(routes)}>
           {subItems.map(({ title, route: routeName }, i) => (
             <Sidebar.Item
               key={`sidebar-subItem-${i}`}

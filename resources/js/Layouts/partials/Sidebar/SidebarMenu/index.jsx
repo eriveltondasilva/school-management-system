@@ -13,19 +13,21 @@ export default function SidebarMenu() {
 
   const sidebarCollapseItems = [
     {
-      title: 'Estudantes',
+      title: 'Alunos',
       icon: Backpack,
+      routes: 'student.*',
       subItems: [
-        { title: 'Listar estudantes', route: 'student.index' },
-        { title: 'Frequência', route: 'calendar' },
+        { title: 'Listar alunos', route: 'student.index' },
+        { title: 'Cadastrar aluno', route: 'student.create' },
       ],
     },
     {
       title: 'Professor',
       icon: Briefcase,
+      routes: 'teacher.*',
       subItems: [
-        { title: 'Notas', route: 'calendar' },
-        { title: 'Frequência', route: 'calendar' },
+        { title: 'Listar professores', route: 'teacher.index' },
+        { title: 'Listar professores', route: 'teacher.create' },
       ],
     },
   ]

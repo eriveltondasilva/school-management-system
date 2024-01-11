@@ -54,15 +54,6 @@ Route::middleware('auth')
 });
 
 
-Route::middleware('auth')
-->group(function() {
-    // # STUDENTS
-    Route::get('/alunos', function () {
-        return Inertia::render('Student/index');
-    })->name('student.index');
-});
-
-
 // ##########################
 Route::middleware('auth')
 ->controller(ProfileController::class)
@@ -88,3 +79,5 @@ Route::controller(SocialiteController::class)
 
 
 require __DIR__.'/auth.php';
+require __DIR__.'/student.php';
+require __DIR__.'/teacher.php';

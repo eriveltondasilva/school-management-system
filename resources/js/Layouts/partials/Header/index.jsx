@@ -5,14 +5,12 @@ import HeaderRight from './HeaderRight'
 import HeaderRoot from './HeaderRoot'
 
 // ====================================
-export default function Header() {
-  const {
-    user: { name, email },
-  } = usePage().props.auth
+export default function Header({title}) {
+  const { name, email } = usePage().props.auth.user
 
   return (
     <HeaderRoot>
-      <HeaderLeft />
+      <HeaderLeft title={title}/>
       <HeaderRight name={name} email={email} />
     </HeaderRoot>
   )
