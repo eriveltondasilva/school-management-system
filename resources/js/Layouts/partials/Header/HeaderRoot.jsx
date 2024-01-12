@@ -6,7 +6,7 @@ export default function HeaderRoot({ children }) {
     <Navbar
       fluid
       rounded
-      className='sticky top-0 sm:relative dark:text-white dark:drop-shadow-lg rounded-lg'>
+      className='sticky top-0 z-30 rounded-lg bg-slate-50 dark:text-white dark:drop-shadow-lg sm:relative'>
       {children}
     </Navbar>
   )

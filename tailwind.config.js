@@ -26,6 +26,7 @@ export default {
         secondary: colors.gray,
         success: colors.green,
         warning: colors.yellow,
+        background: colors.slate,
       },
 
       fontFamily: {

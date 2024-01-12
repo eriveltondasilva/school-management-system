@@ -1,13 +1,19 @@
-import { Plus } from 'lucide-react'
-import MainRoot from './MainRoot'
+import { twJoin } from 'tailwind-merge'
 
 // ====================================
 export default function Main({ children }) {
   return (
-    <MainRoot>
-      {children}
+    <>
+      <main
+        className={twJoin(
+          'h-full px-4 py-8 sm:px-8',
+          'rounded-lg border-t-4 border-yellow-300',
+          'bg-gray-50 text-gray-900 dark:bg-gray-800 dark:text-gray-200'
+        )}>
+        {children}
+      </main>
       {/*  */}
-      <div className='mb-4 flex h-48 items-center justify-center rounded bg-gray-50 dark:bg-gray-800'>
+      {/* <div className='mb-4 flex h-48 items-center justify-center rounded bg-gray-50 dark:bg-gray-800'>
         <p className='text-2xl text-gray-400 dark:text-gray-500'>
           <Plus />
         </p>
@@ -60,7 +66,7 @@ export default function Main({ children }) {
             <Plus />
           </p>
         </div>
-      </div>
-    </MainRoot>
+      </div> */}
+    </>
   )
 }

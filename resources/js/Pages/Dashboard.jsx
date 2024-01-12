@@ -1,4 +1,4 @@
-import PanelInfo from '@/Components/PanelInfo'
+import Calendar from '@/Components/Calendar'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 
 // ====================================
@@ -9,8 +9,8 @@ export default function Dashboard() {
 
   return (
     <>
-      <AuthenticatedLayout title={pageTitle} breadcrumbItems={breadcrumbItems}>
-        <PanelInfo />
+      <AuthenticatedLayout title={pageTitle} breadcrumbItems={breadcrumbItems} panelInfo>
+        <Calendar />
       </AuthenticatedLayout>
     </>
   )

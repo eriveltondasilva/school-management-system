@@ -25,6 +25,7 @@
   "dependencies": {
     "@fullcalendar/core": "^6.1.10",
     "@fullcalendar/daygrid": "^6.1.10",
+    "@fullcalendar/list": "^6.1.10",
     "@fullcalendar/react": "^6.1.10",
     "flowbite": "^2.2.1",
     "flowbite-react": "^0.7.2",
