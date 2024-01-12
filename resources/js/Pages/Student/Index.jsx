@@ -1,7 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 
 // ====================================
-export default function Calendar() {
+export default function StudentIndex({students}) {
   const pageTitle = 'Listar alunos'
 
   // prettier-ignore
@@ -10,9 +10,15 @@ export default function Calendar() {
     { title: pageTitle }
   ]
 
+  console.log(students)
+
   return (
     <AuthenticatedLayout title={pageTitle} breadcrumbItems={breadcrumbItems}>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam ducimus sit voluptatum blanditiis, ipsa laborum error eaque obcaecati sapiente placeat? Animi quasi vitae laudantium ut nobis dolorum commodi sint aspernatur eius est nihil excepturi numquam autem pariatur, maxime fugit inventore dolorem mollitia deleniti possimus aut atque. Fugiat in impedit adipisci fuga. Tempore consequatur vel eligendi possimus officia pariatur nemo, architecto quis nulla ea mollitia nostrum vero deleniti commodi consequuntur dolore libero fuga illum ullam eaque est? Ducimus ut alias molestias asperiores, enim sunt, placeat neque eius deserunt quidem odio, quibusdam magni cum expedita id cumque obcaecati accusamus mollitia distinctio? Ullam!
+      <div className='no-wrapper'>
+
+      {JSON.stringify(students)}
+      </div>
+
     </AuthenticatedLayout>
   )
 }

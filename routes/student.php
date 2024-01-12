@@ -1,21 +1,13 @@
 <?php
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use App\Http\Controllers\StudentController;
 
-
-
+//
 Route::middleware('auth')
+->controller(StudentController::class)
 ->group(function () {
-    Route::get('/alunos', function () {
-        return Inertia::render('Student/Index');
-    })->name('student.index');
-
-    Route::get('/alunos/cadastrar', function () {
-        return Inertia::render('Student/Create');
-    })->name('student.create');
-
-    Route::post('/alunos', function () {
-    })->name('student.store');
+    Route::get('/alunos', 'index')->name('student.index');
+    Route::get('/alunos/cadastrar', 'create')->name('student.create');
+    Route::post('/alunos', 'store')->name('student.store');
 });

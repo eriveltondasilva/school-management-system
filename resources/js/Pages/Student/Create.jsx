@@ -1,7 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 
 // ====================================
-export default function Calendar() {
+export default function StudentCreate() {
   const pageTitle = 'Cadastrar alunos'
 
   // prettier-ignore

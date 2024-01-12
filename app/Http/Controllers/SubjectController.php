@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 // use Illuminate\Http\Request;
-use App\Models\AcademicYear;
-use Inertia\Inertia;
+// use App\Models\AcademicYear;
 
 class SubjectController extends Controller
 {
+    //
     public function index()
     {
         // $user = auth()->user();
@@ -17,9 +17,10 @@ class SubjectController extends Controller
         // $subjects = $group->subjects ?? collect();
 
         // ####
-        return Inertia::render('Subject/Index', compact('subjects', 'year'));
+        return inertia('Subject/Index');
     }
 
+    //
     public function show(int $id)
     {
         $user = auth()->user();
@@ -34,6 +35,6 @@ class SubjectController extends Controller
         // }
 
         // ####
-        return Inertia::render('Subject/Show', compact('subject', 'year'));
+        return inertia('Subject/Show');
     }
 }
