@@ -6,7 +6,6 @@ export default function StudentCreate() {
 
   // prettier-ignore
   const breadcrumbItems = [
-    { title: 'Painel', route: 'dashboard' },
     { title: pageTitle }
   ]
 

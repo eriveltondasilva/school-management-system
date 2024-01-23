@@ -13,8 +13,8 @@ class StudentController extends Controller
     public function index()
     {
         // $students = Student::select('id')->get();
-        $students = Student::without('user')->get();
-        DebugBar::addMessage('Another message', 'mylabel lorem');
+        $students = Student::with('user')->get();
+        DebugBar::info($students);
         return inertia('Student/Index', compact('students'));
     }
 
@@ -30,10 +30,16 @@ class StudentController extends Controller
         //
     }
 
+    public function show(Student $student)
+    {
+        return inertia('Student/Show', compact('student'));
+        //
+    }
+
     //
     public function edit()
     {
-        //
+        return inertia('Student/Edit');
     }
 
     //

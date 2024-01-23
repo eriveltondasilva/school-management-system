@@ -14,8 +14,6 @@ class Student extends Model
 
     protected $table = 'students';
 
-    protected $with = ['user'];
-
     // ------------------------------
     // #Relationships
     // ------------------------------
