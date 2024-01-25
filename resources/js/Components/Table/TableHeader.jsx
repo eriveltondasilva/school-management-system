@@ -1,19 +1,27 @@
+import { Link } from '@inertiajs/react'
 import { Button, TextInput } from 'flowbite-react'
 import { Plus, Search } from 'lucide-react'
-import { Link } from '@inertiajs/react'
 
 // ====================================
-export default function TableHeader() {
+export default function TableHeader({ value, onChange }) {
   return (
     <div className='relative mb-4 bg-slate-50 dark:bg-gray-900 sm:rounded-lg'>
       <div className='flex flex-col items-center justify-between space-y-3 p-4 md:flex-row md:space-x-4 md:space-y-0'>
+        {/* <!-- Search --> */}
         <div className='w-full md:w-1/2'>
           <form className='flex items-center'>
             <label htmlFor='simple-search' className='sr-only'>
               Search
             </label>
             <div className='relative w-full'>
-              <TextInput type='search' placeholder='pesquisar' icon={Search} />
+              {/* <!-- Search Input --> */}
+              <TextInput
+                type='search'
+                placeholder='pesquisar'
+                icon={Search}
+                value={value}
+                onChange={onChange}
+              />
             </div>
           </form>
         </div>
