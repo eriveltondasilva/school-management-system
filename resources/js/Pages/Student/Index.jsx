@@ -1,18 +1,17 @@
 import Table from '@/Components/Table'
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
+import AuthLayout from '@/Layouts/AuthenticatedLayout'
+
+const pageTitle = 'Listar alunos'
+const breadcrumbItems = [{ title: pageTitle }]
 
 // ====================================
 export default function StudentIndex({ students }) {
-  const pageTitle = 'Listar alunos'
-
-  // prettier-ignore
-  const breadcrumbItems = [
-    { title: pageTitle }
-  ]
-
-  return (
-    <AuthenticatedLayout title={pageTitle} breadcrumbItems={breadcrumbItems}>
-      <Table items={students} />
-    </AuthenticatedLayout>
-  )
+  return <Table items={students} />
 }
+
+// ------------------------------------
+StudentIndex.layout = (page) => (
+  <AuthLayout title={pageTitle} breadcrumbItems={breadcrumbItems}>
+    {page}
+  </AuthLayout>
+)

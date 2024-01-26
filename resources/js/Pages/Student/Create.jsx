@@ -1,15 +1,16 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
+import AuthLayout from '@/Layouts/AuthenticatedLayout'
+
+const pageTitle = 'Cadastrar aluno'
+const breadcrumbItems = [{ title: pageTitle }]
 
 // ====================================
 export default function StudentCreate() {
-  const pageTitle = 'Cadastrar alunos'
-
-  // prettier-ignore
-  const breadcrumbItems = [
-    { title: pageTitle }
-  ]
-
-  return (
-    <AuthenticatedLayout title={pageTitle} breadcrumbItems={breadcrumbItems}></AuthenticatedLayout>
-  )
+  return null
 }
+
+// ------------------------------------
+StudentCreate.layout = (page) => (
+  <AuthLayout title={pageTitle} breadcrumbItems={breadcrumbItems}>
+    {page}
+  </AuthLayout>
+)

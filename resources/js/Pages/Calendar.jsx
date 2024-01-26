@@ -1,4 +1,4 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
+import AuthLayout from '@/Layouts/AuthenticatedLayout'
 
 const pageTitle = 'Calendário'
 const breadcrumbItems = [{ title: pageTitle }]
@@ -10,9 +10,7 @@ export default function Calendar() {
 
 // -----------------------------------
 Calendar.layout = (page) => (
-  <AuthenticatedLayout
-    title={pageTitle}
-    breadcrumbItems={breadcrumbItems}
-    children={page}
-  />
+  <AuthLayout title={pageTitle} breadcrumbItems={breadcrumbItems}>
+    {page}
+  </AuthLayout>
 )
