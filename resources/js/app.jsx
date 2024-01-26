@@ -2,9 +2,9 @@ import '../sass/global.scss'
 import './bootstrap'
 
 import { createInertiaApp } from '@inertiajs/react'
+import { Flowbite } from 'flowbite-react'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { createRoot } from 'react-dom/client'
-import { Flowbite } from 'flowbite-react'
 
 import 'flowbite'
 
@@ -27,6 +27,6 @@ createInertiaApp({
     )
   },
   progress: {
-    color: '#4B5563',
+    color: '#ff0000',
   },
 })

@@ -17,8 +17,7 @@ export default function Table({ items }) {
     return items.filter((item) => item.user.name.toLowerCase().includes(lowerCaseFilter))
   }, [filter, items])
 
-  console.log(items)
-
+  // =>>
   return (
     <section>
       <TableHeader searchValue={filter} onSearchChange={handleFilterChange} />

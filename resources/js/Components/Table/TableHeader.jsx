@@ -49,7 +49,7 @@ function HeaderRight() {
   return (
     <div className='flex w-full items-center space-x-3 md:w-auto'>
       {/* Dropdown de ano */}
-      <Select labelText='Ano' id='grades'>
+      <Select labeltext='Ano' id='grades'>
         <option></option>
         <option>6° ano</option>
         <option>7° ano</option>

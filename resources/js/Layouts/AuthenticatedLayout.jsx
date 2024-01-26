@@ -8,7 +8,12 @@ import Main from './partials/Main'
 import Sidebar from './partials/Sidebar'
 
 // ====================================
-export default function AuthenticatedLayout({ title, breadcrumbItems, panelInfo, children }) {
+export default function AuthenticatedLayout({
+  title,
+  breadcrumbItems,
+  panelInfo,
+  children,
+}) {
   return (
     <>
       {/* # page title */}
@@ -20,7 +25,6 @@ export default function AuthenticatedLayout({ title, breadcrumbItems, panelInfo,
         <Breadcrumb items={breadcrumbItems} />
         {panelInfo && <PanelInfo />}
         <Main>{children}</Main>
-        {/* {children} */}
         <Footer />
       </Wrapper>
     </>
@@ -30,7 +34,7 @@ export default function AuthenticatedLayout({ title, breadcrumbItems, panelInfo,
 // -----------------------------------
 function Wrapper({ children }) {
   return (
-    <div className=' grid min-h-dvh grid-rows-[auto_auto_1fr_auto] gap-y-3 px-4 py-2 sm:ml-64'>
+    <div className='grid min-h-dvh grid-rows-[auto_auto_1fr_auto] gap-y-3 px-4 py-2 sm:ml-64'>
       {children}
     </div>
   )

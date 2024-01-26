@@ -1,15 +1,18 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 
+const pageTitle = 'Calendário'
+const breadcrumbItems = [{ title: pageTitle }]
+
 // ====================================
 export default function Calendar() {
-  const pageTitle = 'Calendário'
-
-  // prettier-ignore
-  const breadcrumbItems = [
-    { title: pageTitle },
-  ]
-
-  return (
-    <AuthenticatedLayout title={pageTitle} breadcrumbItems={breadcrumbItems}></AuthenticatedLayout>
-  )
+  return null
 }
+
+// -----------------------------------
+Calendar.layout = (page) => (
+  <AuthenticatedLayout
+    title={pageTitle}
+    breadcrumbItems={breadcrumbItems}
+    children={page}
+  />
+)
