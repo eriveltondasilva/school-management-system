@@ -1,7 +1,10 @@
 import AuthLayout from '@/Layouts/AuthenticatedLayout'
 
 const pageTitle = 'Cadastrar aluno'
-const breadcrumbItems = [{ title: pageTitle }]
+const breadcrumbItems = [
+  { title: 'Listar alunos', route: 'student.index' },
+  { title: pageTitle },
+]
 
 // ====================================
 export default function StudentCreate() {
