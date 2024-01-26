@@ -7,7 +7,8 @@ import TableHeader from './TableHeader'
 export default function Table({ items }) {
   const [filter, setfilter] = useState('')
 
-  const handleFilterChange = (e) => {
+  // ------------------------------------
+  function handleFilterChange(e) {
     setfilter(e.target.value)
   }
 
@@ -16,10 +17,12 @@ export default function Table({ items }) {
     return items.filter((item) => item.user.name.toLowerCase().includes(lowerCaseFilter))
   }, [filter, items])
 
+  console.log(items)
+
   return (
-    <>
-      <TableHeader value={filter} onChange={handleFilterChange} />
+    <section>
+      <TableHeader searchValue={filter} onSearchChange={handleFilterChange} />
       <TableBody items={itemsFiltered} />
-    </>
+    </section>
   )
 }
