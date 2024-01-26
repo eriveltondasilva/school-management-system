@@ -1,11 +1,16 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
+import AuthLayout from '@/Layouts/AuthenticatedLayout'
+
+const pageTitle = 'Listar professores'
+const breadcrumbItems = [{ title: pageTitle }]
 
 // ====================================
-export default function Calendar() {
-  const pageTitle = 'Listar professores'
-  const breadcrumbItems = [{ title: pageTitle }]
-
-  return (
-    <AuthenticatedLayout title={pageTitle} breadcrumbItems={breadcrumbItems}></AuthenticatedLayout>
-  )
+export default function TeacherIndex() {
+  return null
 }
+
+// ------------------------------------
+TeacherIndex.layout = (page) => (
+  <AuthLayout title={pageTitle} breadcrumbItems={breadcrumbItems}>
+    {page}
+  </AuthLayout>
+)

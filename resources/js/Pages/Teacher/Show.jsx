@@ -1,15 +1,15 @@
 import AuthLayout from '@/Layouts/AuthenticatedLayout'
 
-const pageTitle = 'Cadastrar professores'
+const pageTitle = 'Visualizar professor'
 const breadcrumbItems = [{ title: pageTitle }]
 
 // ====================================
-export default function TeacherCreate() {
+export default function TeacherShow() {
   return null
 }
 
 // ------------------------------------
-TeacherCreate.layout = (page) => (
+TeacherShow.layout = (page) => (
   <AuthLayout title={pageTitle} breadcrumbItems={breadcrumbItems}>
     {page}
   </AuthLayout>
