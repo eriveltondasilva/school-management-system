@@ -3,7 +3,7 @@ import { useForm } from '@inertiajs/react'
 import { useId } from 'react'
 
 import Button from '@/Components/Button'
-import * as Icon from '@/Components/Icon'
+import * as Icon from '@/Components/Icons'
 import Input from '@/Components/Input'
 
 export default function UpdatePasswordForm({ className = '' }) {

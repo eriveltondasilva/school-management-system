@@ -3,8 +3,8 @@ import { Link, useForm, usePage } from '@inertiajs/react'
 import { useId } from 'react'
 
 import Button from '@/Components/Button'
+import * as Icon from '@/Components/Icons'
 import Input from '@/Components/Input'
-import * as Icon from '@/Components/Icon'
 
 export default function UpdateProfileInformation({
   mustVerifyEmail,
@@ -94,7 +94,7 @@ export default function UpdateProfileInformation({
 
         <div className='flex items-center gap-4'>
           <Button type='submit' disabled={processing}>
-            <Icon.Save className='w-5 h-5' />
+            <Icon.Save className='h-5 w-5' />
             Save
           </Button>
 
