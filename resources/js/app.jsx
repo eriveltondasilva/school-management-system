@@ -1,5 +1,6 @@
 import '../sass/global.scss'
 import './bootstrap'
+import customTheme from './flowbiteTheme'
 
 import { createInertiaApp } from '@inertiajs/react'
 import { Flowbite } from 'flowbite-react'
@@ -21,7 +22,7 @@ createInertiaApp({
     const root = createRoot(el)
 
     root.render(
-      <Flowbite>
+      <Flowbite theme={{ theme: customTheme }}>
         <App {...props} />
       </Flowbite>
     )

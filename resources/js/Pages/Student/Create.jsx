@@ -1,3 +1,4 @@
+import Form from '@/Components/Form'
 import AuthLayout from '@/Layouts/AuthenticatedLayout'
 
 const pageTitle = 'Cadastrar aluno'
@@ -8,7 +9,7 @@ const breadcrumbItems = [
 
 // ====================================
 export default function StudentCreate() {
-  return null
+  return <Form />
 }
 
 // ------------------------------------
