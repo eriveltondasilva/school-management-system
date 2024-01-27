@@ -7,9 +7,9 @@ export default function SidebarItems({ items }) {
 
   return (
     <>
-      {items.map(({ title, icon, route: routeName }, i) => (
+      {items.map(({ title, icon, route: routeName }, index) => (
         <Sidebar.Item
-          key={`sidebar-item-${i}`}
+          key={`sidebar-item-${index}`}
           icon={icon}
           as={Link}
           href={route(routeName)}

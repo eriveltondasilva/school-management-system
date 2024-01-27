@@ -7,21 +7,23 @@ export default function SidebarCollapseItems({ items }) {
 
   return (
     <>
-      {items.map(({ title, icon, routes, subItems }, i) => (
+      {items.map(({ title, icon, routes, subItems }, index) => (
         <Sidebar.Collapse
-          key={`sidebar-collapse-${i}`}
+          key={`sidebar-collapse-${index}`}
           icon={icon}
           label={title}
           open={route().current(routes)}>
-          {subItems.map(({ title, route: routeName }, i) => (
-            <Sidebar.Item
-              key={`sidebar-subItem-${i}`}
-              as={Link}
-              href={route(routeName)}
-              active={route().current(routeName)}>
-              {title}
-            </Sidebar.Item>
-          ))}
+          {subItems.map(
+            ({ title: subItemTitle, route: routeName }, subIndex) => (
+              <Sidebar.Item
+                key={`sidebar-subItem-${subIndex}`}
+                as={Link}
+                href={route(routeName)}
+                active={route().current(routeName)}>
+                {subItemTitle}
+              </Sidebar.Item>
+            )
+          )}
         </Sidebar.Collapse>
       ))}
     </>

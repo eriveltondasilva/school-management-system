@@ -5,8 +5,11 @@ import SidebarItems from './SidebarItems'
 
 // ====================================
 export default function SidebarMenu() {
+  // prettier-ignore
   const sidebarItems = [
-    [{ title: 'Painel', icon: Home, route: 'dashboard' }],
+    [
+      { title: 'Painel', icon: Home, route: 'dashboard' }
+    ],
     [
       { title: 'Calendário', icon: Calendar, route: 'calendar' },
       { title: 'Documentos', icon: Calendar, route: 'calendar' },
@@ -20,27 +23,6 @@ export default function SidebarMenu() {
       // { title: 'Frequências', icon: Briefcase, route: 'dashboard' },
     ],
   ]
-
-  // const sidebarCollapseItems = [
-  //   {
-  //     title: 'Alunos',
-  //     icon: Backpack,
-  //     routes: 'student.*',
-  //     subItems: [
-  //       { title: 'Listar alunos', route: 'student.index' },
-  //       { title: 'Cadastrar aluno', route: 'student.create' },
-  //     ],
-  //   },
-  //   {
-  //     title: 'Professor',
-  //     icon: Briefcase,
-  //     routes: 'teacher.*',
-  //     subItems: [
-  //       { title: 'Listar professores', route: 'teacher.index' },
-  //       { title: 'Listar professores', route: 'teacher.create' },
-  //     ],
-  //   },
-  // ]
 
   return (
     <Sidebar.Items>
@@ -62,3 +44,24 @@ export default function SidebarMenu() {
     </Sidebar.Items>
   )
 }
+
+// const sidebarCollapseItems = [
+//   {
+//     title: 'Alunos',
+//     icon: Backpack,
+//     routes: 'student.*',
+//     subItems: [
+//       { title: 'Listar alunos', route: 'student.index' },
+//       { title: 'Cadastrar aluno', route: 'student.create' },
+//     ],
+//   },
+//   {
+//     title: 'Professor',
+//     icon: Briefcase,
+//     routes: 'teacher.*',
+//     subItems: [
+//       { title: 'Listar professores', route: 'teacher.index' },
+//       { title: 'Listar professores', route: 'teacher.create' },
+//     ],
+//   },
+// ]
