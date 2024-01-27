@@ -1,21 +1,24 @@
 <?php
 
-use Illuminate\Foundation\Application;
+// use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use App\Http\Controllers\TeacherController;
 
-
-
+//
 Route::middleware('auth')
+->controller(TeacherController::class)
+->prefix('/professores')
+->name('teacher.')
 ->group(function () {
-    Route::get('/professores', function () {
-        return Inertia::render('Teacher/Index');
-    })->name('teacher.index');
+    Route::get('/', 'index')->name('index');
 
-    Route::get('/professores/cadastrar', function () {
-        return Inertia::render('Teacher/Create');
-    })->name('teacher.create');
+    Route::get('/cadastrar', 'create')->name('create');
 
-    Route::post('/professores', function () {
-    })->name('teacher.store');
+    Route::post('/', 'store')->name('store');
+
+    Route::get('/{teacher}', 'show')->name('show');
+
+    Route::get('/{teacher}/editar', 'edit')->name('edit');
+
+    Route::put('/{teacher}', 'update')->name('update');
 });

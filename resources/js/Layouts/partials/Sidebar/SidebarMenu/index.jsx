@@ -6,13 +6,18 @@ import SidebarItems from './SidebarItems'
 // ====================================
 export default function SidebarMenu() {
   const sidebarItems = [
+    [{ title: 'Painel', icon: Home, route: 'dashboard' }],
     [
-      { title: 'Painel', icon: Home, route: 'dashboard' },
       { title: 'Calendário', icon: Calendar, route: 'calendar' },
+      { title: 'Documentos', icon: Calendar, route: 'calendar' },
     ],
     [
       { title: 'Alunos', icon: Backpack, route: 'student.index' },
       { title: 'Professor', icon: Briefcase, route: 'teacher.index' },
+    ],
+    [
+      { title: 'Notas', icon: Backpack, route: 'dashboard' },
+      // { title: 'Frequências', icon: Briefcase, route: 'dashboard' },
     ],
   ]
 
@@ -45,6 +50,14 @@ export default function SidebarMenu() {
 
       <Sidebar.ItemGroup>
         <SidebarItems items={sidebarItems[1]} />
+      </Sidebar.ItemGroup>
+
+      <Sidebar.ItemGroup>
+        <SidebarItems items={sidebarItems[2]} />
+      </Sidebar.ItemGroup>
+
+      <Sidebar.ItemGroup>
+        <SidebarItems items={sidebarItems[3]} />
       </Sidebar.ItemGroup>
     </Sidebar.Items>
   )

@@ -8,11 +8,11 @@ const breadcrumbItems = [
 
 // ====================================
 export default function StudentShow() {
-  return null
+  return <div>Visualizar aluno</div>
 }
 
 // ------------------------------------
-StudentCreate.layout = (page) => (
+StudentShow.layout = (page) => (
   <AuthLayout title={pageTitle} breadcrumbItems={breadcrumbItems}>
     {page}
   </AuthLayout>
