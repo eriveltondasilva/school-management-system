@@ -12,9 +12,7 @@ export default function SidebarRoot({ children }) {
         '-translate-x-full transition-transform sm:translate-x-0'
       )}
       aria-label='sidebar'>
-      <Sidebar aria-label='Sidebar'>
-        {children}
-      </Sidebar>
+      <Sidebar aria-label='Sidebar' /* collapsed */>{children}</Sidebar>
     </aside>
   )
 }

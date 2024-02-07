@@ -1,6 +1,7 @@
 import { Table } from 'flowbite-react'
 
-export default function TableBodyHeader() {
+// ====================================
+export default function TableHeader() {
   return (
     <Table.Head>
       <Table.HeadCell>Id</Table.HeadCell>

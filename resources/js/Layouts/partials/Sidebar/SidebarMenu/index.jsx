@@ -25,7 +25,7 @@ export default function SidebarMenu() {
   ]
 
   return (
-    <Sidebar.Items>
+    <Sidebar.Items >
       <Sidebar.ItemGroup>
         <SidebarItems items={sidebarItems[0]} />
       </Sidebar.ItemGroup>

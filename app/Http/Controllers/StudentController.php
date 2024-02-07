@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 use Barryvdh\Debugbar\Facades\Debugbar;
 
-
 class StudentController extends Controller
 {
     //
@@ -15,6 +14,7 @@ class StudentController extends Controller
         // $students = Student::select('id')->get();
         $students = Student::with('user')->get();
         DebugBar::info($students);
+
         return inertia('Student/Index', compact('students'));
     }
 
