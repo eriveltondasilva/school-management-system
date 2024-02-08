@@ -1,4 +1,3 @@
-import { useForm } from '@inertiajs/react'
 import { Label, TextInput } from 'flowbite-react'
 
 import FormFooter from './FormFooter'
@@ -7,11 +6,6 @@ import FormRoot from './FormRoot'
 
 // ===================================
 export default function Form() {
-  const { data, setData, post, processing, errors } = useForm({
-    name: '',
-    email: '',
-  })
-
   return (
     <>
       {/* <Tabs aria-label='tabs' style='underline'> */}

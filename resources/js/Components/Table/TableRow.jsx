@@ -9,7 +9,7 @@ export default memo(function TableRow({ item }) {
   const genderLabel = gender === 'M' ? 'Masculino' : 'Feminino'
 
   if (!item) return
-  // =>>
+
   return (
     <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
       <Table.Cell className='whitespace-nowrap font-medium text-gray-900/50 dark:text-white/50'>

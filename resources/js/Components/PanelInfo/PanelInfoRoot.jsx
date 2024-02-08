@@ -1,3 +1,3 @@
 export default function PanelInfoRoot({ children }) {
-  return <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>{children}</div>
+  return <div className='flex flex-col gap-4 lg:flex-row'>{children}</div>
 }

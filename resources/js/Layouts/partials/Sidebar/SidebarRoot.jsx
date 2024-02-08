@@ -9,7 +9,7 @@ export default function SidebarRoot({ children }) {
       className={twJoin(
         'fixed h-screen w-64',
         'left-0 top-0 z-40',
-        '-translate-x-full transition-transform sm:translate-x-0'
+        '-translate-x-full transition-transform md:translate-x-0'
       )}
       aria-label='sidebar'>
       <Sidebar aria-label='Sidebar' /* collapsed */>{children}</Sidebar>

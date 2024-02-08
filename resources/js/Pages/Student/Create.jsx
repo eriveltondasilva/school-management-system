@@ -9,7 +9,19 @@ const breadcrumbItems = [
 
 // ====================================
 export default function StudentCreate() {
-  return <Form />
+  function handleSubmit(e) {
+    e.preventDefault()
+    alert('submit')
+  }
+  return (
+    <>
+      <Form onSubmit={handleSubmit}>
+        <Form.Header text='Formulário de Cadastro de Aluno' />
+
+        <Form.Footer />
+      </Form>
+    </>
+  )
 }
 
 // ------------------------------------

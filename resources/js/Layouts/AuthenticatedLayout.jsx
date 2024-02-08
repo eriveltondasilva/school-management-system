@@ -34,7 +34,7 @@ export default function AuthenticatedLayout({
 // -----------------------------------
 function Wrapper({ children }) {
   return (
-    <div className='grid min-h-dvh grid-rows-[auto_auto_1fr_auto] gap-y-3 px-4 py-2 sm:ml-64'>
+    <div className='grid min-h-dvh grid-rows-[auto_auto_1fr_auto] gap-y-3 px-4 py-2 md:ml-64'>
       {children}
     </div>
   )

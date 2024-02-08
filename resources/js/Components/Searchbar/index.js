@@ -5,7 +5,7 @@ import SearchbarRoot from './SearchbarRoot'
 // -----------------------------------
 const Searchbar = SearchbarRoot
 
-Right = SearchbarRight
-Left = SearchbarLeft
+Searchbar.Right = SearchbarRight
+Searchbar.Left = SearchbarLeft
 
 export default Searchbar
