@@ -27,23 +27,23 @@ export default function StudentIndex({ students }) {
   return (
     <>
       {/* Searchbar */}
-      <Searchbar.Root>
+      <Searchbar>
         <Searchbar.Left value={filter} onChange={handleFilterChange} />
         <Searchbar.Right>
           <Button as={Link} href={route('student.create')} color='blue'>
             Cadastrar aluno
           </Button>
         </Searchbar.Right>
-      </Searchbar.Root>
+      </Searchbar>
       {/* Tabela */}
-      <Table.Root>
+      <Table>
         <Table.Header />
         <Table.Body>
           {filteredStudents?.map((item) => (
             <Table.Row key={item.id} item={item} />
           ))}
         </Table.Body>
-      </Table.Root>
+      </Table>
     </>
   )
 }

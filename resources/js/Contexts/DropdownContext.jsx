@@ -1,6 +1,6 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useState } from 'react'
 
-const DropdownContext = createContext()
+export const DropdownContext = createContext('')
 
 // ====================================
 export default function DropdownProvider({ children }) {
@@ -15,14 +15,4 @@ export default function DropdownProvider({ children }) {
       {children}
     </DropdownContext.Provider>
   )
-}
-
-export function useDropdownContext() {
-  const context = useContext(DropdownContext)
-
-  if (!context) {
-    throw new Error('useDropdownContext must be used within a DropdownProvider')
-  }
-
-  return context
 }

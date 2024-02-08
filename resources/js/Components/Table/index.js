@@ -4,9 +4,10 @@ import TableRoot from './TableRoot'
 import TableRow from './TableRow'
 
 // ------------------------------------
-export default {
-  Root: TableRoot,
-  Header: TableHeader,
-  Body: TableBody,
-  Row: TableRow,
-}
+const Table = TableRoot
+
+Table.Body = TableBody
+Table.Header = TableHeader
+Table.Row = TableRow
+
+export default Table
