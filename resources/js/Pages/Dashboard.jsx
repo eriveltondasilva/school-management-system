@@ -1,7 +1,7 @@
 import Calendar from '@/Components/Calendar'
 import AuthLayout from '@/Layouts/AuthenticatedLayout'
+import { title } from './pageInfo'
 
-const pageTitle = 'Painel'
 // ====================================
 export default function Dashboard() {
   return (
@@ -13,7 +13,7 @@ export default function Dashboard() {
 
 // -----------------------------------
 Dashboard.layout = (page) => (
-  <AuthLayout panelInfo title={pageTitle}>
+  <AuthLayout panelInfo title={title.dashboard}>
     {page}
   </AuthLayout>
 )

@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react'
 import Searchbar from '@/Components/Searchbar'
 import Table from '@/Components/Table'
 import AuthLayout from '@/Layouts/AuthenticatedLayout'
-import { breadcrumb, title } from './studentTitles'
+import { breadcrumb, title } from './studentInfo'
 
 //* info
 const breadcrumbItems = [{ title: title.index }]

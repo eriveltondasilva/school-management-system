@@ -1,5 +1,5 @@
 import AuthLayout from '@/Layouts/AuthenticatedLayout'
-import { breadcrumb, title } from './teacherTitles'
+import { breadcrumb, title } from './teacherInfo'
 
 // ====================================
 export default function TeacherEdit() {
