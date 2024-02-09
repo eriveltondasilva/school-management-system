@@ -5,10 +5,10 @@ import { useMemo, useState } from 'react'
 import Searchbar from '@/Components/Searchbar'
 import Table from '@/Components/Table'
 import AuthLayout from '@/Layouts/AuthenticatedLayout'
+import { breadcrumb, title } from './studentTitles'
 
 //* info
-const pageTitle = 'Listar alunos'
-const breadcrumbItems = [{ title: pageTitle }]
+const breadcrumbItems = [{ title: title.index }]
 
 // ====================================
 export default function StudentIndex({ students }) {
@@ -50,7 +50,7 @@ export default function StudentIndex({ students }) {
 
 // ------------------------------------
 StudentIndex.layout = (page) => (
-  <AuthLayout title={pageTitle} breadcrumbItems={breadcrumbItems}>
+  <AuthLayout title={title.index} breadcrumbItems={breadcrumb.index}>
     {page}
   </AuthLayout>
 )

@@ -1,7 +1,5 @@
 import AuthLayout from '@/Layouts/AuthenticatedLayout'
-
-const pageTitle = 'Cadastrar professores'
-const breadcrumbItems = [{ title: pageTitle }]
+import { breadcrumb, title } from './teacherTitles'
 
 // ====================================
 export default function TeacherCreate() {
@@ -10,7 +8,7 @@ export default function TeacherCreate() {
 
 // ------------------------------------
 TeacherCreate.layout = (page) => (
-  <AuthLayout title={pageTitle} breadcrumbItems={breadcrumbItems}>
+  <AuthLayout title={title.create} breadcrumbItems={breadcrumb.create}>
     {page}
   </AuthLayout>
 )

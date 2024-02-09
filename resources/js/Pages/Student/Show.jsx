@@ -1,10 +1,5 @@
 import AuthLayout from '@/Layouts/AuthenticatedLayout'
-
-const pageTitle = 'Visualizar aluno'
-const breadcrumbItems = [
-  { title: 'Listar alunos', route: 'student.index' },
-  { title: pageTitle },
-]
+import { breadcrumb, title } from './studentTitles'
 
 // ====================================
 export default function StudentShow() {
@@ -13,7 +8,7 @@ export default function StudentShow() {
 
 // ------------------------------------
 StudentShow.layout = (page) => (
-  <AuthLayout title={pageTitle} breadcrumbItems={breadcrumbItems}>
+  <AuthLayout title={title.show} breadcrumbItems={breadcrumb.show}>
     {page}
   </AuthLayout>
 )
