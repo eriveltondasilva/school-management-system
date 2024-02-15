@@ -1,5 +1,5 @@
 import AuthLayout from '@/Layouts/AuthenticatedLayout'
-import { breadcrumb, title } from './teacherInfo'
+import { breadcrumbs, titles } from './pagesInfo'
 
 // ====================================
 export default function TeacherIndex() {
@@ -8,7 +8,7 @@ export default function TeacherIndex() {
 
 // ------------------------------------
 TeacherIndex.layout = (page) => (
-  <AuthLayout title={title.index} breadcrumbItems={breadcrumb.index}>
+  <AuthLayout title={titles.index} breadcrumbItems={breadcrumbs.index}>
     {page}
   </AuthLayout>
 )

@@ -1,5 +1,5 @@
 import AuthLayout from '@/Layouts/AuthenticatedLayout'
-import { breadcrumb, title } from './teacherInfo'
+import { breadcrumbs, titles } from './pagesInfo'
 
 // ====================================
 export default function TeacherShow() {
@@ -8,7 +8,7 @@ export default function TeacherShow() {
 
 // ------------------------------------
 TeacherShow.layout = (page) => (
-  <AuthLayout title={title.show} breadcrumbItems={breadcrumb.show}>
+  <AuthLayout title={titles.show} breadcrumbItems={breadcrumbs.show}>
     {page}
   </AuthLayout>
 )

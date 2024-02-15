@@ -1,7 +1,7 @@
 import { Head } from '@inertiajs/react'
 
+import Breadcrumb from '@/Components/Breadcrumb'
 import PanelInfo from '@/Components/PanelInfo'
-import Breadcrumb from './partials/Breadcrumb'
 import Footer from './partials/Footer'
 import Header from './partials/Header'
 import Main from './partials/Main'

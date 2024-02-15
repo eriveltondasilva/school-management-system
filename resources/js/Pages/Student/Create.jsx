@@ -2,7 +2,7 @@ import { Label, TextInput, Textarea } from 'flowbite-react'
 
 import Form from '@/Components/Form'
 import AuthLayout from '@/Layouts/AuthenticatedLayout'
-import { breadcrumb, title } from './studentInfo'
+import { breadcrumbs, titles } from './pagesInfo'
 
 // ====================================
 export default function StudentCreate() {
@@ -88,7 +88,7 @@ function FormPersonalData() {
 
 // ------------------------------------
 StudentCreate.layout = (page) => (
-  <AuthLayout title={title.create} breadcrumbItems={breadcrumb.create}>
+  <AuthLayout title={titles.create} breadcrumbItems={breadcrumbs.create}>
     {page}
   </AuthLayout>
 )

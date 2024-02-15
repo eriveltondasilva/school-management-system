@@ -1,6 +1,6 @@
 import Calendar from '@/Components/Calendar'
 import AuthLayout from '@/Layouts/AuthenticatedLayout'
-import { title } from './pageInfo'
+import { breadcrumbs, titles } from './pagesInfo'
 
 // ====================================
 export default function Dashboard() {
@@ -13,7 +13,10 @@ export default function Dashboard() {
 
 // -----------------------------------
 Dashboard.layout = (page) => (
-  <AuthLayout panelInfo title={title.dashboard}>
+  <AuthLayout
+    panelInfo
+    title={titles.dashboard}
+    breadcrumbItems={breadcrumbs.dashboard}>
     {page}
   </AuthLayout>
 )

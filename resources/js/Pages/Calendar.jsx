@@ -1,5 +1,5 @@
 import AuthLayout from '@/Layouts/AuthenticatedLayout'
-import { breadcrumb, title } from './calendarInfo'
+import { breadcrumbs, titles } from './pagesInfo'
 
 // ====================================
 export default function Calendar() {
@@ -8,7 +8,7 @@ export default function Calendar() {
 
 // -----------------------------------
 Calendar.layout = (page) => (
-  <AuthLayout title={title.calendar} breadcrumbItems={breadcrumb.calendar}>
+  <AuthLayout title={titles.calendar} breadcrumbItems={breadcrumbs.calendar}>
     {page}
   </AuthLayout>
 )

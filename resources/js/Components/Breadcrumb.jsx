@@ -3,16 +3,12 @@ import { Breadcrumb } from 'flowbite-react'
 import { Home } from 'lucide-react'
 
 // ===================================
-export default function BreadcrumbIndex({ items = [] }) {
-  // prettier-ignore
-  const breadcrumbItems = [
-    { title: 'Painel', route: 'dashboard' },
-    ...items
-  ]
+export default function BreadcrumbIndex({ items }) {
+  if (!items) return null
 
   return (
     <BreadcrumbRoot>
-      {breadcrumbItems.map((item, index) => (
+      {items?.map((item, index) => (
         <BreadcrumbItem key={index} item={item} />
       ))}
     </BreadcrumbRoot>
@@ -26,12 +22,16 @@ function BreadcrumbRoot({ children }) {
 
 function BreadcrumbItem({ item }) {
   const { title, route: routeName } = item
-  const icon = title === 'Painel' ? Home : null
-  const lowerCaseTitle = title.toLowerCase()
+  const icon = title === 'Painel' && Home
+  const lowerCaseTitle = title?.toLowerCase()
 
-  const routeLink = <Link href={route(routeName)}>{lowerCaseTitle}</Link>
-
-  const text = routeName ? routeLink : lowerCaseTitle
-
-  return <Breadcrumb.Item icon={icon}>{text}</Breadcrumb.Item>
+  return (
+    <Breadcrumb.Item icon={icon}>
+      {routeName ? (
+        <Link href={route(routeName)}>{lowerCaseTitle}</Link>
+      ) : (
+        lowerCaseTitle
+      )}
+    </Breadcrumb.Item>
+  )
 }
