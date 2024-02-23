@@ -27,6 +27,7 @@ export default function HeaderLeft({ title }) {
       <span
         className={twJoin(
           'self-center whitespace-nowrap',
+          'hidden sm:block',
           'text-xl font-semibold dark:text-white'
         )}>
         {title !== 'Painel' ? title : 'Bem-vindo(a)'}

@@ -5,8 +5,8 @@ export default function PanelInfoItem({ title, number, icon }) {
   return (
     <div
       className={twJoin(
-        'grid flex-1 grid-cols-2 items-center',
-        'gap-5 rounded-lg border-l-4 py-5',
+        'flex items-center gap-5',
+        'rounded-lg border-l-4 py-5',
         'border-yellow-300 bg-gray-50 text-gray-800',
         'dark:bg-gray-800 dark:text-gray-100'
       )}>
@@ -16,7 +16,7 @@ export default function PanelInfoItem({ title, number, icon }) {
         </div>
       </div>
       <div className='flex-col'>
-        <p className='text-2xl font-bold tracking-widest'>{number}</p>
+        <p className='text-xl font-bold tracking-widest'>{number}</p>
         <p className='text-lg'>{title}</p>
       </div>
     </div>

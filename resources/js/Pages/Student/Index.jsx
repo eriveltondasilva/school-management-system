@@ -3,7 +3,7 @@ import { Button } from 'flowbite-react'
 import { useMemo, useState } from 'react'
 
 import Searchbar from '@/Components/Searchbar'
-import Table from '@/Components/Table'
+// import Table from '@/Components/Table'
 import AuthLayout from '@/Layouts/AuthenticatedLayout'
 import { breadcrumbs, titles } from './pagesInfo'
 
@@ -33,21 +33,23 @@ export default function StudentIndex({ students }) {
         </Searchbar.Right>
       </Searchbar>
       {/* Tabela */}
-      <Table>
-        <Table.Header />
-        <Table.Body>
-          {filteredStudents?.map((item) => (
-            <Table.Row key={item.id} item={item} />
-          ))}
-        </Table.Body>
-      </Table>
+      <div className=''>
+        {/* <Table>
+          <Table.Header />
+          <Table.Body>
+            {filteredStudents?.map((item) => (
+              <Table.Row key={item.id} item={item} />
+            ))}
+          </Table.Body>
+        </Table> */}
+      </div>
     </>
   )
 }
 
 // ------------------------------------
 StudentIndex.layout = (page) => (
-  <AuthLayout title={titles.index} breadcrumbItems={breadcrumbs.index}>
+  <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>
     {page}
   </AuthLayout>
 )

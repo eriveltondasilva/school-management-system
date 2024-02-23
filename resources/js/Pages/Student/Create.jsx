@@ -33,7 +33,7 @@ function FormPersonalData() {
         id='name'
         type='text'
         placeholder='insira o nome do aluno...'
-        required
+        autoFocus
       />
 
       <br />
@@ -43,7 +43,7 @@ function FormPersonalData() {
       </div>
       <TextInput
         id='email'
-        type='text'
+        type='email'
         placeholder='insira o email do aluno...'
       />
 
@@ -66,7 +66,7 @@ function FormPersonalData() {
       <TextInput id='cpf' type='text' placeholder='insira o cpf do aluno...' />
 
       <br />
-      {/* cpf input */}
+      {/* birth place input */}
       <div className='mb-2 block'>
         <Label htmlFor='birth_place' value='Local de nascimento' />
       </div>
@@ -88,7 +88,7 @@ function FormPersonalData() {
 
 // ------------------------------------
 StudentCreate.layout = (page) => (
-  <AuthLayout title={titles.create} breadcrumbItems={breadcrumbs.create}>
+  <AuthLayout title={titles.create} breadcrumb={breadcrumbs.create}>
     {page}
   </AuthLayout>
 )

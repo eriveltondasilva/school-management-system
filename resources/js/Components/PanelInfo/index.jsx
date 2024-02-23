@@ -6,7 +6,7 @@ import PanelInfoRoot from './PanelInfoRoot'
 
 // ====================================
 export default function PanelInfo() {
-  const iconClass = 'h-8 w-8'
+  const iconClass = 'h-6 w-6'
   const items = [
     {
       title: 'Alunos',
@@ -23,6 +23,11 @@ export default function PanelInfo() {
       number: '5',
       icon: <BookCopy className={iconClass} />,
     },
+    // {
+    //   title: 'Ano Letivo',
+    //   number: '2024',
+    //   icon: <Calendar className={iconClass} />,
+    // },
   ]
 
   return (

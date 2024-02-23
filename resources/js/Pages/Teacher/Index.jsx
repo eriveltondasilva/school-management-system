@@ -8,7 +8,7 @@ export default function TeacherIndex() {
 
 // ------------------------------------
 TeacherIndex.layout = (page) => (
-  <AuthLayout title={titles.index} breadcrumbItems={breadcrumbs.index}>
+  <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>
     {page}
   </AuthLayout>
 )

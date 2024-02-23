@@ -8,7 +8,7 @@ export default function Calendar() {
 
 // -----------------------------------
 Calendar.layout = (page) => (
-  <AuthLayout title={titles.calendar} breadcrumbItems={breadcrumbs.calendar}>
+  <AuthLayout title={titles.calendar} breadcrumb={breadcrumbs.calendar}>
     {page}
   </AuthLayout>
 )

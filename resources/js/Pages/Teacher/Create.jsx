@@ -8,7 +8,7 @@ export default function TeacherCreate() {
 
 // ------------------------------------
 TeacherCreate.layout = (page) => (
-  <AuthLayout title={titles.create} breadcrumbItems={breadcrumbs.create}>
+  <AuthLayout title={titles.create} breadcrumb={breadcrumbs.create}>
     {page}
   </AuthLayout>
 )
