@@ -11,9 +11,7 @@ class StudentController extends Controller
     //
     public function index()
     {
-        // $students = Student::select('id')->get();
         $students = Student::with('user')->get();
-        DebugBar::info($students);
 
         return inertia('Student/Index', compact('students'));
     }

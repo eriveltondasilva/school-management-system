@@ -1,10 +1,8 @@
-import { Link } from '@inertiajs/react'
-import { Button, Table } from 'flowbite-react'
-import { Eye, Pencil } from 'lucide-react'
+import { Table } from 'flowbite-react'
 import { memo } from 'react'
 
 // ====================================
-export default memo(function TableRow({ item }) {
+export default memo(function TableRow({ item, children }) {
   if (!item) return null
 
   const { id, name, email, gender } = item.user
@@ -22,21 +20,7 @@ export default memo(function TableRow({ item }) {
       <Table.Cell>{genderLabel}</Table.Cell>
       <Table.Cell className='flex justify-center space-x-2'>
         {/* Botão de visualizar */}
-        <Button
-          as={Link}
-          href={route('student.show', item)}
-          color='blue'
-          size='xs'>
-          <Eye className='h-4 w-4' />
-        </Button>
-        {/* Botão de editar */}
-        <Button
-          as={Link}
-          href={route('student.edit', item)}
-          color='blue'
-          size='xs'>
-          <Pencil className='h-4 w-4' />
-        </Button>
+        {children}
       </Table.Cell>
     </Table.Row>
   )

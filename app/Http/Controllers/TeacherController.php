@@ -11,7 +11,9 @@ class TeacherController extends Controller
     //
     public function index()
     {
-        return inertia('Teacher/Index');
+        $teachers = Teacher::with('user')->get();
+
+        return inertia('Teacher/Index', compact('teachers'));
     }
 
     public function show(Teacher $teacher)
