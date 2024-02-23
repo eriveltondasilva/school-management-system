@@ -5,10 +5,10 @@ import { memo } from 'react'
 
 // ====================================
 export default memo(function TableRow({ item }) {
+  if (!item) return null
+
   const { id, name, email, gender } = item.user
   const genderLabel = gender === 'M' ? 'Masculino' : 'Feminino'
-
-  if (!item) return
 
   return (
     <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>

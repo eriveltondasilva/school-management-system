@@ -1,29 +1,21 @@
 import { Link } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
-import { useMemo, useState } from 'react'
 
 import Searchbar from '@/Components/Searchbar'
-// import Table from '@/Components/Table'
+import Table from '@/Components/Table'
 import AuthLayout from '@/Layouts/AuthenticatedLayout'
 import { breadcrumbs, titles } from './pagesInfo'
 
-// ====================================
+import useSearchbarFilteredItems from '@/Hooks/useSearchbarFilteredItems'
+
+// ============================================================================
 export default function StudentIndex({ students }) {
-  const [filter, setfilter] = useState('')
+  const { filter, filteredItems, handleFilterChange } =
+    useSearchbarFilteredItems(students)
 
-  // ------------------------------------
-  function handleFilterChange(e) {
-    setfilter(e.target.value)
-  }
-
-  const filteredStudents = useMemo(() => {
-    return students.filter((item) =>
-      item.user.name.toLowerCase().includes(filter.toLowerCase())
-    )
-  }, [filter, students])
   return (
     <>
-      {/* Searchbar */}
+      {/* Student Searchbar */}
       <Searchbar>
         <Searchbar.Left value={filter} onChange={handleFilterChange} />
         <Searchbar.Right>
@@ -32,18 +24,28 @@ export default function StudentIndex({ students }) {
           </Button>
         </Searchbar.Right>
       </Searchbar>
-      {/* Tabela */}
-      <div className=''>
-        {/* <Table>
-          <Table.Header />
-          <Table.Body>
-            {filteredStudents?.map((item) => (
-              <Table.Row key={item.id} item={item} />
-            ))}
-          </Table.Body>
-        </Table> */}
-      </div>
+
+      {/* Student Table */}
+      <StudentTable items={filteredItems} />
     </>
+  )
+}
+
+// ------------------------------------
+function StudentTable({ items }) {
+  if (!items?.length) {
+    return <Table.NotFoundItems text='Nenhum aluno encontrado...' />
+  }
+
+  return (
+    <Table>
+      <Table.Header />
+      <Table.Body>
+        {items.map((item) => (
+          <Table.Row key={item.id} item={item} />
+        ))}
+      </Table.Body>
+    </Table>
   )
 }
 
