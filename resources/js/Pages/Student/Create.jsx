@@ -2,7 +2,7 @@ import { Label, TextInput, Textarea } from 'flowbite-react'
 
 import Form from '@/Components/Form'
 import AuthLayout from '@/Layouts/AuthLayout'
-import { breadcrumbs, titles } from './pagesInfo'
+import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function StudentCreate() {

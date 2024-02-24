@@ -1,11 +1,7 @@
-import { Link } from '@inertiajs/react'
-import { Button } from 'flowbite-react'
-import { Eye, Pencil, UserRoundPlus } from 'lucide-react'
-
 import Searchbar from '@/Components/Searchbar'
 import Table from '@/Components/Table'
 import AuthLayout from '@/Layouts/AuthLayout'
-import { breadcrumbs, titles } from './pagesInfo'
+import { breadcrumbs, titles } from './data'
 
 import useSearchbarFilteredItems from '@/Hooks/useSearchbarFilteredItems'
 
@@ -19,12 +15,8 @@ export default function TeacherIndex({ teachers }) {
       {/* Teacher Searchbar */}
       <Searchbar>
         <Searchbar.Left value={filter} onChange={handleFilterChange} />
-        <Searchbar.Right>
-          {/* Botão de cadastrar */}
-          <Button as={Link} href={route('teacher.create')} color='blue'>
-            <UserRoundPlus className='mr-2 h-5 w-5' />
-            cadastrar professor
-          </Button>
+        <Searchbar.Right href={route('teacher.create')}>
+          cadastrar professor
         </Searchbar.Right>
       </Searchbar>
 
@@ -47,21 +39,9 @@ function TeacherTable({ items }) {
         {items.map((item) => (
           <Table.Row key={item.id} item={item}>
             {/* Botão de visualizar */}
-            <Button
-              as={Link}
-              href={route('teacher.show', item)}
-              color='blue'
-              size='xs'>
-              <Eye className='h-4 w-4' />
-            </Button>
+            <Table.RowButtonShow routeName='student.show' item={item} />
             {/* Botão de editar */}
-            <Button
-              as={Link}
-              href={route('teacher.edit', item)}
-              color='blue'
-              size='xs'>
-              <Pencil className='h-4 w-4' />
-            </Button>
+            <Table.RowButtonEdit routeName='student.edit' item={item} />
           </Table.Row>
         ))}
       </Table.Body>

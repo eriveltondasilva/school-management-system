@@ -1,7 +1,12 @@
 import { twJoin } from 'tailwind-merge'
 
 // ====================================
-export default function PanelInfoItem({ title, number, icon }) {
+export function PanelInfoRoot({ children }) {
+  return <div className='flex flex-col gap-4 lg:flex-row'>{children}</div>
+}
+
+// ====================================
+export function PanelInfoItem({ title, number, icon }) {
   return (
     <div
       className={twJoin(

@@ -1,4 +1,5 @@
 import { Navbar } from 'flowbite-react'
+import { twJoin } from 'tailwind-merge'
 
 // ====================================
 export default function HeaderRoot({ children }) {
@@ -6,7 +7,11 @@ export default function HeaderRoot({ children }) {
     <Navbar
       fluid
       rounded
-      className='sticky top-0 z-30 rounded-lg bg-slate-50 dark:text-white dark:drop-shadow-lg sm:relative'>
+      className={twJoin(
+        'sticky top-0 z-30 rounded-lg',
+        'dark:drop-shadow-lg sm:relative',
+        'bg-slate-50 dark:text-white'
+      )}>
       {children}
     </Navbar>
   )

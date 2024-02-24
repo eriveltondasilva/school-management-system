@@ -19,7 +19,6 @@ export default function HeaderLeft({ title }) {
           'text-gray-500 hover:bg-gray-100 focus:ring-gray-200 ',
           'dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
         )}>
-        <span className='sr-only'>Open sidebar</span>
         <Menu />
       </button>
 
@@ -30,7 +29,7 @@ export default function HeaderLeft({ title }) {
           'hidden sm:block',
           'text-xl font-semibold dark:text-white'
         )}>
-        {title !== 'Painel' ? title : 'Bem-vindo(a)'}
+        {title === 'Painel' ? 'Bem-vindo(a)' : title}
       </span>
     </Navbar.Brand>
   )

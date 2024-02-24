@@ -1,10 +1,7 @@
-import SearchbarLeft from './SearchbarLeft'
-import SearchbarRight from './SearchbarRight'
-import SearchbarRoot from './SearchbarRoot'
+import { SearchbarLeft, SearchbarRight, SearchbarRoot } from './Searchbar'
 
 // -----------------------------------
 const Searchbar = SearchbarRoot
-
 Searchbar.Right = SearchbarRight
 Searchbar.Left = SearchbarLeft
 
