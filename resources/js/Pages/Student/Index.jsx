@@ -15,19 +15,21 @@ export default function StudentIndex({ students }) {
       {/* Student Searchbar */}
       <Searchbar>
         <Searchbar.Left value={filter} onChange={handleFilterChange} />
-        <Searchbar.Right href={route('student.create')}>
-          cadastrar aluno
+        <Searchbar.Right>
+          <Searchbar.RightButton href={route('student.create')}>
+            cadastrar aluno
+          </Searchbar.RightButton>
         </Searchbar.Right>
       </Searchbar>
 
       {/* Student Table */}
-      <StudentTable items={filteredItems} />
+      <StudentTable items={filteredItems} filter={filter} />
     </>
   )
 }
 
 // ------------------------------------
-function StudentTable({ items }) {
+function StudentTable({ items, filter }) {
   if (!items?.length) {
     return <Table.NotFoundItems text='Nenhum aluno encontrado...' />
   }

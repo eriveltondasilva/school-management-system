@@ -1,13 +1,14 @@
 import '../sass/global.scss'
 import './bootstrap'
-import customTheme from './flowbiteTheme'
 
 import { createInertiaApp } from '@inertiajs/react'
-import { Flowbite } from 'flowbite-react'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { createRoot } from 'react-dom/client'
 
 import 'flowbite'
+import { Flowbite } from 'flowbite-react'
+
+import { customTheme } from './flowbiteTheme'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
 

@@ -10,6 +10,7 @@ export default function StudentCreate() {
     e.preventDefault()
     alert('submit')
   }
+
   return (
     <>
       <Form onSubmit={handleSubmit}>

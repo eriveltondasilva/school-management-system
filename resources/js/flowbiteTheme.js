@@ -1,4 +1,4 @@
-const customTheme = {
+export const customTheme = {
   textarea: {
     colors: {
       gray: 'bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500\
@@ -33,5 +33,3 @@ const customTheme = {
     },
   },
 }
-
-export default customTheme

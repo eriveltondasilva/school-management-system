@@ -1,5 +1,5 @@
 import { Footer } from 'flowbite-react'
-import { Facebook, Instagram, Youtube } from 'lucide-react'
+import { socialLinks } from './data'
 
 // ====================================
 export function FooterRoot({ children }) {
@@ -10,20 +10,23 @@ export function FooterRoot({ children }) {
 export function FooterRight() {
   return (
     <div className='mt-4 flex space-x-6 sm:mt-0 sm:justify-center'>
-      <Footer.Icon href='#' icon={Facebook} />
-      <Footer.Icon href='#' icon={Instagram} />
-      <Footer.Icon href='#' icon={Youtube} />
+      {/* Redes sociais */}
+      {socialLinks?.map(({ icon, link }, index) => (
+        <Footer.Icon key={`footer-social-${index}`} href={link} icon={icon} />
+      ))}
     </div>
   )
 }
 
 // ====================================
 export function FooterLeft() {
+  const year = new Date().getFullYear()
+
   return (
     <Footer.Copyright
       href='https://www.instagram.com/erivelton.dsilva/'
       by='by Erivelton'
-      year={2024}
+      year={year}
     />
   )
 }

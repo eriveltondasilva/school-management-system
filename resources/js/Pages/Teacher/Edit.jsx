@@ -8,7 +8,7 @@ export default function TeacherEdit() {
 
 // ------------------------------------
 TeacherEdit.layout = (page) => (
-  <AuthLayout title={titles.show} breadcrumb={breadcrumbs.show}>
+  <AuthLayout title={titles.edit} breadcrumb={breadcrumbs.edit}>
     {page}
   </AuthLayout>
 )

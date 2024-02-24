@@ -4,10 +4,10 @@ import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function Dashboard() {
-  return <>{/* <Calendar /> */}</>
+  return null
 }
 
-// -----------------------------------
+// ====================================
 Dashboard.layout = (page) => (
   <AuthLayout title={titles.dashboard} breadcrumb={breadcrumbs.dashboard}>
     {page}

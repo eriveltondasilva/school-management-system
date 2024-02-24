@@ -1,13 +1,13 @@
 import { useForm } from '@inertiajs/react'
-import { useId, useState } from 'react'
+import { Button } from 'flowbite-react'
+import { Trash2 } from 'lucide-react'
+import { useState } from 'react'
+import { twJoin } from 'tailwind-merge'
 
-import Button from '@/Components/Button'
-import * as Icon from '@/Components/Icons'
 import Input from '@/Components/Input'
 import Modal from '@/Components/Modal'
 
 export default function DeleteUserForm({ className = '' }) {
-  const ID = useId()
   const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false)
 
   const {
@@ -21,13 +21,13 @@ export default function DeleteUserForm({ className = '' }) {
     password: '',
   })
 
-  const confirmUserDeletion = () => {
+  // ----------------------------------------------
+  function confirmUserDeletion() {
     setConfirmingUserDeletion(true)
   }
 
-  const deleteUser = (e) => {
+  function deleteUser(e) {
     e.preventDefault()
-
     destroy(route('profile.destroy'), {
       preserveScroll: true,
       onSuccess: () => closeModal(),
@@ -35,56 +35,46 @@ export default function DeleteUserForm({ className = '' }) {
     })
   }
 
-  const closeModal = () => {
+  function closeModal() {
     setConfirmingUserDeletion(false)
-
     reset()
   }
 
+  function handleChange(e) {
+    setData(e.target.name, e.target.value)
+  }
+
   return (
-    <section className={`space-y-6 ${className}`}>
-      <header>
-        <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
-          Delete Account
-        </h2>
+    <section className={twJoin('space-y-6', className)}>
+      <Header />
 
-        <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
-          Once your account is deleted, all of its resources and data will be
-          permanently deleted. Before deleting your account, please download any
-          data or information that you wish to retain.
-        </p>
-      </header>
-
-      <Button variant='danger' onClick={confirmUserDeletion}>
-        <Icon.Delete className='h-5 w-5' />
-        Delete Account
+      <Button color='failure' onClick={confirmUserDeletion}>
+        <Trash2 className='mr-2 h-5 w-5' />
+        Deletar Conta
       </Button>
 
       <Modal show={confirmingUserDeletion} onClose={closeModal}>
         <form onSubmit={deleteUser} className='p-6'>
           <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
-            Are you sure you want to delete your account?
+            Você tem certeza que deseja deletar sua conta?
           </h2>
 
           <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
-            Once your account is deleted, all of its resources and data will be
-            permanently deleted. Please enter your password to confirm you would
-            like to permanently delete your account.
+            Depois que sua conta for excluída, todos os seus recursos e dados
+            serão excluído permanentemente. Por favor, digite sua senha para
+            confirmar que você faria gostaria de excluir permanentemente sua
+            conta.
           </p>
 
           <div className='mt-6'>
-            <Input.Label
-              htmlFor={`${ID}-password`}
-              value='Password'
-              // className='sr-only'
-            />
+            <Input.Label htmlFor='password' value='Password' />
 
             <Input
-              id={`${ID}-password`}
-              type='password'
+              id='password'
               name='password'
+              type='password'
               value={data.password}
-              onChange={(e) => setData('password', e.target.value)}
+              onChange={handleChange}
               className='mt-1 block w-3/4'
               placeholder='Password'
               autoFocus
@@ -94,12 +84,12 @@ export default function DeleteUserForm({ className = '' }) {
           </div>
 
           <div className='mt-6 flex justify-end'>
-            <Button variant='secondary' onClick={closeModal}>
+            <Button outline color='blue' onClick={closeModal}>
               Cancel
             </Button>
 
             <div className='ms-3'>
-              <Button type='submit' variant='danger' disabled={processing}>
+              <Button type='submit' color='failure' disabled={processing}>
                 Delete Account
               </Button>
             </div>
@@ -107,5 +97,22 @@ export default function DeleteUserForm({ className = '' }) {
         </form>
       </Modal>
     </section>
+  )
+}
+
+// ----------------------------------------------------------------------------
+function Header() {
+  return (
+    <header>
+      <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
+        Delete Account Deletar Conta
+      </h2>
+
+      <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
+        Depois que sua conta for excluída, todos os seus recursos e dados serão
+        excluído permanentemente. Antes de excluir sua conta, baixe qualquer
+        dados ou informações que você deseja reter.
+      </p>
+    </header>
   )
 }

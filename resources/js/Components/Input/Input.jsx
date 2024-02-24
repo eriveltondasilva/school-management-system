@@ -1,6 +1,7 @@
 import { twMerge } from 'tailwind-merge'
 
-export default function Input({ type, className, ...props }) {
+// ============================================================================
+export function Input({ type, className, ...props }) {
   return (
     <input
       type={type || 'text'}
@@ -16,7 +17,8 @@ export default function Input({ type, className, ...props }) {
   )
 }
 
-Input.Label = function ({ value, children, ...props }) {
+// ============================================================================
+export function InputLabel({ value, children, ...props }) {
   return (
     <label
       className='block text-sm font-medium text-gray-700 dark:text-gray-300'
@@ -26,11 +28,12 @@ Input.Label = function ({ value, children, ...props }) {
   )
 }
 
-Input.Error = function ({ message, ...props }) {
+// ============================================================================
+export function InputError({ message, ...props }) {
   if (!message) return null
 
   return (
-    <p {...props} className='mt-2 text-sm text-red-600 dark:text-red-400'>
+    <p className='mt-2 text-sm text-red-600 dark:text-red-400' {...props}>
       {message}
     </p>
   )

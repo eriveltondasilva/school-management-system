@@ -19,14 +19,10 @@ export function SearchbarRoot({ children }) {
 }
 
 // ====================================
-export function SearchbarRight({ href, children }) {
+export function SearchbarRight({ children }) {
   return (
     <div className='flex w-full items-center space-x-3 md:w-auto'>
-      {/* Botão de cadastrar */}
-      <Button as={Link} href={href} color='blue'>
-        <UserRoundPlus className='mr-2 h-5 w-5' />
-        {children}
-      </Button>
+      {children}
     </div>
   )
 }
@@ -51,5 +47,17 @@ export function SearchbarLeft({ value, onChange }) {
         </div>
       </div>
     </div>
+  )
+}
+
+export function SearchbarRightButton({ href, children }) {
+  return (
+    <>
+      {/* Botão de cadastrar */}
+      <Button as={Link} href={href} color='blue'>
+        <UserRoundPlus className='mr-2 h-5 w-5' />
+        {children}
+      </Button>
+    </>
   )
 }

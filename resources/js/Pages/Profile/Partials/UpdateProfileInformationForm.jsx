@@ -1,18 +1,17 @@
 import { Transition } from '@headlessui/react'
 import { Link, useForm, usePage } from '@inertiajs/react'
-import { useId } from 'react'
+import { Button } from 'flowbite-react'
+import { Save } from 'lucide-react'
 
-import Button from '@/Components/Button'
-import * as Icon from '@/Components/Icons'
 import Input from '@/Components/Input'
 
+// ============================================================================
 export default function UpdateProfileInformation({
   mustVerifyEmail,
   status,
-  className = '',
+  className,
 }) {
-  const ID = useId()
-  const user = usePage().props.auth.user
+  const user = usePage().props.auth.user || {}
 
   const { data, setData, patch, errors, processing, recentlySuccessful } =
     useForm({
@@ -20,33 +19,30 @@ export default function UpdateProfileInformation({
       email: user.email,
     })
 
-  const submit = (e) => {
+  // ----------------------------------------------
+  function handleSubmit(e) {
     e.preventDefault()
-
     patch(route('profile.update'))
   }
 
+  function handleChange(e) {
+    setData(e.target.name, e.target.value)
+  }
+
   return (
-    <section className={className}>
-      <header>
-        <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
-          Profile Information
-        </h2>
+    <section className={className || ''}>
+      <Header />
 
-        <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
-          Update your account's profile information and email address.
-        </p>
-      </header>
-
-      <form onSubmit={submit} className='mt-6 space-y-6'>
+      <form onSubmit={handleSubmit} className='mt-6 space-y-6'>
         <div>
-          <Input.Label htmlFor={`${ID}-name`} value='Name' />
+          <Input.Label htmlFor='name' value='Name' />
 
           <Input
-            id={`${ID}-name`}
+            id='name'
+            name='name'
             className='mt-1 block w-full'
             value={data.name}
-            onChange={(e) => setData('name', e.target.value)}
+            onChange={handleChange}
             autoComplete='name'
             autoFocus
             required
@@ -56,14 +52,15 @@ export default function UpdateProfileInformation({
         </div>
 
         <div>
-          <Input.Label htmlFor={`${ID}-email`} value='Email' />
+          <Input.Label htmlFor='email' value='Email' />
 
           <Input
-            id={`${ID}-email`}
+            id='email'
             type='email'
+            name='email'
             className='mt-1 block w-full'
             value={data.email}
-            onChange={(e) => setData('email', e.target.value)}
+            onChange={handleChange}
             required
             autoComplete='username'
           />
@@ -74,40 +71,67 @@ export default function UpdateProfileInformation({
         {mustVerifyEmail && user.email_verified_at === null && (
           <div>
             <p className='mt-2 text-sm text-gray-800 dark:text-gray-200'>
-              Your email address is unverified.
+              Seu email ainda não foi verificado.
               <Link
                 href={route('verification.send')}
                 method='post'
                 as='button'
                 className='rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800'>
-                Click here to re-send the verification email.
+                Clique aqui para enviar um novo link de verificação.
               </Link>
             </p>
 
             {status === 'verification-link-sent' && (
               <div className='mt-2 text-sm font-medium text-green-600 dark:text-green-400'>
-                A new verification link has been sent to your email address.
+                Um novo link de verificação foi enviado para seu email.
               </div>
             )}
           </div>
         )}
 
-        <div className='flex items-center gap-4'>
-          <Button type='submit' disabled={processing}>
-            <Icon.Save className='h-5 w-5' />
-            Save
-          </Button>
-
-          <Transition
-            show={recentlySuccessful}
-            enter='transition ease-in-out'
-            enterFrom='opacity-0'
-            leave='transition ease-in-out'
-            leaveTo='opacity-0'>
-            <p className='text-sm text-gray-600 dark:text-gray-400'>Saved.</p>
-          </Transition>
-        </div>
+        <Footer
+          processing={processing}
+          recentlySuccessful={recentlySuccessful}
+        />
       </form>
     </section>
+  )
+}
+
+// ----------------------------------------------
+function Header() {
+  return (
+    <header>
+      <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
+        Profile Information
+      </h2>
+
+      <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
+        Update your account's profile information and email address.
+      </p>
+    </header>
+  )
+}
+
+// ----------------------------------------------
+function Footer({ processing, recentlySuccessful }) {
+  return (
+    <footer className='flex items-center gap-4'>
+      {/* Botão de salvar */}
+
+      <Button type='submit' color='blue' disabled={processing}>
+        <Save className='mr-2 h-5 w-5' />
+        Salvar
+      </Button>
+
+      <Transition
+        show={recentlySuccessful}
+        enter='transition ease-in-out'
+        enterFrom='opacity-0'
+        leave='transition ease-in-out'
+        leaveTo='opacity-0'>
+        <p className='text-sm text-gray-600 dark:text-gray-400'>Salvo.</p>
+      </Transition>
+    </footer>
   )
 }

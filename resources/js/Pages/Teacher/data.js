@@ -8,8 +8,8 @@ export const titles = {
 
 // ------------------------------------
 const baseBreadcrumb = [
-  { title: 'Painel', route: 'dashboard' },
-  { title: titles.index, route: 'teacher.index' },
+  { title: 'Painel', routeName: 'dashboard' },
+  { title: titles.index, routeName: 'teacher.index' },
 ]
 
 // prettier-ignore

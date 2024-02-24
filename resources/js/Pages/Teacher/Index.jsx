@@ -15,8 +15,10 @@ export default function TeacherIndex({ teachers }) {
       {/* Teacher Searchbar */}
       <Searchbar>
         <Searchbar.Left value={filter} onChange={handleFilterChange} />
-        <Searchbar.Right href={route('teacher.create')}>
-          cadastrar professor
+        <Searchbar.Right>
+          <Searchbar.RightButton href={route('teacher.create')}>
+            cadastrar professor
+          </Searchbar.RightButton>
         </Searchbar.Right>
       </Searchbar>
 

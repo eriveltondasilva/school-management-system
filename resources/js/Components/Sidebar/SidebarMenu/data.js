@@ -3,11 +3,8 @@ import { Backpack, Briefcase, Calendar, Home } from 'lucide-react'
 // prettier-ignore
 export const sidebarItems = [
   [
-    { title: 'Painel', icon: Home, routeName: 'dashboard' }
-  ],
-  [
+    { title: 'Painel', icon: Home, routeName: 'dashboard' },
     { title: 'Calendário', icon: Calendar, routeName: 'calendar' },
-    { title: 'Documentos', icon: Calendar, routeName: 'calendar' },
   ],
   [
     { title: 'Alunos', icon: Backpack, routeName: 'student.index' },
@@ -15,7 +12,7 @@ export const sidebarItems = [
   ],
   [
     { title: 'Notas', icon: Backpack, routeName: 'dashboard' },
-    // { title: 'Frequências', icon: Briefcase, routeName: 'dashboard' },
+    { title: 'Frequências', icon: Briefcase, routeName: 'dashboard' },
   ],
 ]
 
