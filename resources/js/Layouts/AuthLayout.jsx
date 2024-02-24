@@ -3,10 +3,10 @@ import { twJoin } from 'tailwind-merge'
 
 import Breadcrumb from '@/Components/Breadcrumb'
 // import PanelInfo from '@/Components/PanelInfo'
-import Footer from './partials/Footer'
-import Header from './partials/Header'
+import Footer from '@/Components/Footer'
+import Header from '@/Components/Header'
+import Sidebar from '@/Components/Sidebar'
 import Main from './partials/Main'
-import Sidebar from './partials/Sidebar'
 
 // ====================================
 export default function AuthenticatedLayout({

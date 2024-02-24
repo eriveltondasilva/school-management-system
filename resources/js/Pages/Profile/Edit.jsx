@@ -1,6 +1,6 @@
 import { Head } from '@inertiajs/react'
 
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
+import AuthenticatedLayout from '@/Layouts/AuthLayout'
 import DeleteUserForm from './Partials/DeleteUserForm'
 import UpdatePasswordForm from './Partials/UpdatePasswordForm'
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm'

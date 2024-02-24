@@ -1,5 +1,5 @@
 // import Calendar from '@/Components/Calendar'
-import AuthLayout from '@/Layouts/AuthenticatedLayout'
+import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './pagesInfo'
 
 // ====================================

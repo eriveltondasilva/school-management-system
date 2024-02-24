@@ -4,7 +4,7 @@ import { Eye, Pencil, UserRoundPlus } from 'lucide-react'
 
 import Searchbar from '@/Components/Searchbar'
 import Table from '@/Components/Table'
-import AuthLayout from '@/Layouts/AuthenticatedLayout'
+import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './pagesInfo'
 
 import useSearchbarFilteredItems from '@/Hooks/useSearchbarFilteredItems'

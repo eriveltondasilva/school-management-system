@@ -1,7 +1,7 @@
 import { Label, TextInput, Textarea } from 'flowbite-react'
 
 import Form from '@/Components/Form'
-import AuthLayout from '@/Layouts/AuthenticatedLayout'
+import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './pagesInfo'
 
 // ====================================
