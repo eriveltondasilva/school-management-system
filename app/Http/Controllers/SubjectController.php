@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-// use Illuminate\Http\Request;
-// use App\Models\AcademicYear;
-
+// ========================================================================
 class SubjectController extends Controller
 {
-    //
     public function index()
     {
         // $user = auth()->user();
@@ -16,11 +13,10 @@ class SubjectController extends Controller
         // $group = $user->profile->groups->firstWhere('academic_year_id', $year->id ?? now()->year);
         // $subjects = $group->subjects ?? collect();
 
-        // ####
+        // ==>
         return inertia('Subject/Index');
     }
 
-    //
     public function show(int $id)
     {
         $user = auth()->user();
@@ -34,7 +30,7 @@ class SubjectController extends Controller
         //     abort(404);
         // }
 
-        // ####
+        // ==>
         return inertia('Subject/Show');
     }
 }

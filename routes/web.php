@@ -6,7 +6,8 @@ use App\Http\Controllers\{
     DashboardController,
     ProfileController,
     SocialiteController,
-    SubjectController
+    GroupsController,
+    AcademicYearController
 };
 
 /*
@@ -61,14 +62,10 @@ Route::middleware('auth')
     })->name('calendar');
 
     // #ACADEMIC_YEAR
-    Route::get('/ano-letivo', function () {
-        return inertia('AcademicYear');
-    })->name('academicYear');
+    Route::get('/ano-letivo', AcademicYearController::class)->name('academicYear');
 
     // #GROUPS
-    Route::get('/turmas', function () {
-        return inertia('Groups');
-    })->name('groups');
+    Route::get('/turmas', GroupsController::class)->name('groups');
 
     // #TEST
     Route::get('/teste', function () {

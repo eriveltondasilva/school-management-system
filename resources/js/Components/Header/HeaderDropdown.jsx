@@ -51,6 +51,8 @@ export function HeaderDropdownItem() {
       </Dropdown.Item>
       <Dropdown.Item
         as='button'
+        // TODO: refatorar
+        // as={Link}
         method='post'
         href={route('logout')}
         icon={LogOut}>

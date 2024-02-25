@@ -1,5 +1,3 @@
-import { Suspense } from 'react'
-
 import Searchbar from '@/Components/Searchbar'
 import Table from '@/Components/Table'
 import AuthLayout from '@/Layouts/AuthLayout'
@@ -26,9 +24,7 @@ export default function StudentIndexPage({ students }) {
       </Searchbar>
 
       {/* Student Table */}
-      <Suspense fallback={<div>Loading...</div>}>
-        <StudentTable items={filteredItems} filter={filter} />
-      </Suspense>
+      <StudentTable items={filteredItems} filter={filter} />
     </>
   )
 }
