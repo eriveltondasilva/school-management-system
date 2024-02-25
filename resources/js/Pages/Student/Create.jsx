@@ -5,8 +5,8 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function StudentCreate() {
-  function handleSubmit(e) {
+export default function StudentCreatePage() {
+  const handleSubmit = (e) => {
     e.preventDefault()
     alert('submit')
   }
@@ -88,7 +88,7 @@ function FormPersonalData() {
 }
 
 // ------------------------------------
-StudentCreate.layout = (page) => (
+StudentCreatePage.layout = (page) => (
   <AuthLayout title={titles.create} breadcrumb={breadcrumbs.create}>
     {page}
   </AuthLayout>

@@ -7,7 +7,7 @@ import UpdateProfileInformationForm from './Partials/UpdateProfileInformationFor
 import { breadcrumbs, titles } from './data'
 
 // ============================================================================
-export default function ProfileEdit({ mustVerifyEmail, status }) {
+export default function ProfileEditPage({ mustVerifyEmail, status }) {
   return (
     <div className='mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8'>
       <div className='p-4 sm:rounded-lg sm:p-8'>
@@ -30,7 +30,7 @@ export default function ProfileEdit({ mustVerifyEmail, status }) {
 }
 
 // ------------------------------------
-ProfileEdit.layout = (page) => (
+ProfileEditPage.layout = (page) => (
   <AuthLayout title={titles.profile} breadcrumb={breadcrumbs.profile}>
     {page}
   </AuthLayout>

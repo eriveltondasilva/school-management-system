@@ -2,12 +2,12 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function StudentShow() {
+export default function StudentShowPage() {
   return <div>Visualizar aluno</div>
 }
 
 // ------------------------------------
-StudentShow.layout = (page) => (
+StudentShowPage.layout = (page) => (
   <AuthLayout title={titles.show} breadcrumb={breadcrumbs.show}>
     {page}
   </AuthLayout>

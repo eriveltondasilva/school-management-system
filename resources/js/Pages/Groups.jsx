@@ -2,13 +2,13 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function CalendarPage() {
+export default function GroupsPage() {
   return null
 }
 
 // -----------------------------------
-CalendarPage.layout = (page) => (
-  <AuthLayout title={titles.calendar} breadcrumb={breadcrumbs.calendar}>
+GroupsPage.layout = (page) => (
+  <AuthLayout title={titles.groups} breadcrumb={breadcrumbs.groups}>
     {page}
   </AuthLayout>
 )

@@ -1,18 +1,25 @@
-import { Backpack, Briefcase, Calendar, Home } from 'lucide-react'
+import {
+  Backpack,
+  Briefcase,
+  Calendar,
+  CalendarDays,
+  Home,
+  UsersRound,
+} from 'lucide-react'
 
 // prettier-ignore
 export const sidebarItems = [
   [
     { title: 'Painel', icon: Home, routeName: 'dashboard' },
-    { title: 'Calendário', icon: Calendar, routeName: 'calendar' },
+    { title: 'Calendário', icon: CalendarDays, routeName: 'calendar' },
   ],
   [
     { title: 'Alunos', icon: Backpack, routeName: 'student.index' },
     { title: 'Professor', icon: Briefcase, routeName: 'teacher.index' },
   ],
   [
-    { title: 'Notas', icon: Backpack, routeName: 'dashboard' },
-    { title: 'Frequências', icon: Briefcase, routeName: 'dashboard' },
+    { title: 'Turmas', icon: UsersRound, routeName: 'groups' },
+    { title: 'Ano Letivo', icon: Calendar, routeName: 'academicYear' },
   ],
 ]
 

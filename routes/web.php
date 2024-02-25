@@ -1,14 +1,13 @@
 <?php
 
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     DashboardController,
     ProfileController,
     SocialiteController,
     SubjectController
 };
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,23 +16,24 @@ use Inertia\Inertia;
 */
 
 
-// ##########################
+//# WELCOME
 Route::get('/', function () {
-    // redireciona para a página painel caso esteja logado
+    //* redireciona para a página painel caso esteja logado
     if (auth()->user()) {
         return to_route('dashboard');
     }
 
-    return Inertia::render('Welcome', [
+    return inertia('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('welcome');
+// TODO: remover nome da rota
 
 
-// ##########################
+//# AUTH
 Route::middleware('auth')
 ->group(function () {
     // TODO: remover esta rota e configurar o HOME no arquivo auth.php
@@ -42,19 +42,42 @@ Route::middleware('auth')
     // #DASHBOARD
     Route::get('/painel', DashboardController::class)->name('dashboard');
 
+    // #CLASSROOMS
+    // Route::get('/turmas', function () {
+    //     return Inertia::render('Classrooms');
+    // })->name('classroom.index');
+
+    // Route::get('/turmas', function () {
+    //     return Inertia::render('Classrooms');
+    // })->name('classroom.show');
+
     // #SUBJECTS
     // Route::get('/disciplinas', [SubjectController::class, 'index'])->name('subject.index');
     // Route::get('/disciplinas/{id}', [SubjectController::class, 'show'])->name('subject.show');
 
     // #CALENDAR
     Route::get('/calendario', function () {
-        return Inertia::render('Calendar');
+        return inertia('Calendar');
     })->name('calendar');
 
+    // #ACADEMIC_YEAR
+    Route::get('/ano-letivo', function () {
+        return inertia('AcademicYear');
+    })->name('academicYear');
+
+    // #GROUPS
+    Route::get('/turmas', function () {
+        return inertia('Groups');
+    })->name('groups');
+
+    // #TEST
+    Route::get('/teste', function () {
+        return 'Hello, world!';
+    })->name('test');
 });
 
 
-// ##########################
+//# PROFILE
 Route::middleware('auth')
 ->controller(ProfileController::class)
 ->name('profile.')
@@ -65,7 +88,7 @@ Route::middleware('auth')
 });
 
 
-// ##########################
+//# SOCIALITE
 Route::controller(SocialiteController::class)
 ->prefix('auth/{provider}')
 ->name('auth.')
@@ -78,6 +101,7 @@ Route::controller(SocialiteController::class)
 });
 
 
+//# ROUTES
 require __DIR__.'/auth.php';
 require __DIR__.'/student.php';
 require __DIR__.'/teacher.php';

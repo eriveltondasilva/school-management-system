@@ -1,12 +1,15 @@
+import { Suspense } from 'react'
+
 import Searchbar from '@/Components/Searchbar'
 import Table from '@/Components/Table'
 import AuthLayout from '@/Layouts/AuthLayout'
+
 import { breadcrumbs, titles } from './data'
 
 import useSearchbarFilteredItems from '@/Hooks/useSearchbarFilteredItems'
 
 // ============================================================================
-export default function StudentIndex({ students }) {
+export default function StudentIndexPage({ students }) {
   const { filter, filteredItems, handleFilterChange } =
     useSearchbarFilteredItems(students)
 
@@ -23,13 +26,15 @@ export default function StudentIndex({ students }) {
       </Searchbar>
 
       {/* Student Table */}
-      <StudentTable items={filteredItems} filter={filter} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <StudentTable items={filteredItems} filter={filter} />
+      </Suspense>
     </>
   )
 }
 
 // ------------------------------------
-function StudentTable({ items, filter }) {
+function StudentTable({ items }) {
   if (!items?.length) {
     return <Table.NotFoundItems text='Nenhum aluno encontrado...' />
   }
@@ -52,7 +57,7 @@ function StudentTable({ items, filter }) {
 }
 
 // ------------------------------------
-StudentIndex.layout = (page) => (
+StudentIndexPage.layout = (page) => (
   <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>
     {page}
   </AuthLayout>

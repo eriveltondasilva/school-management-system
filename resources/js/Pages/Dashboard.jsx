@@ -3,12 +3,12 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function Dashboard() {
+export default function DashboardPage() {
   return null
 }
 
 // ====================================
-Dashboard.layout = (page) => (
+DashboardPage.layout = (page) => (
   <AuthLayout title={titles.dashboard} breadcrumb={breadcrumbs.dashboard}>
     {page}
   </AuthLayout>

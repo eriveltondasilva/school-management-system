@@ -2,12 +2,12 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function StudentEdit() {
+export default function StudentEditPage() {
   return null
 }
 
 // ------------------------------------
-StudentEdit.layout = (page) => (
+StudentEditPage.layout = (page) => (
   <AuthLayout title={titles.edit} breadcrumb={breadcrumbs.edit}>
     {page}
   </AuthLayout>

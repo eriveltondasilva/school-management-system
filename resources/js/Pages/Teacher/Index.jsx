@@ -6,7 +6,7 @@ import { breadcrumbs, titles } from './data'
 import useSearchbarFilteredItems from '@/Hooks/useSearchbarFilteredItems'
 
 // ====================================
-export default function TeacherIndex({ teachers }) {
+export default function TeacherIndexPage({ teachers }) {
   const { filter, filteredItems, handleFilterChange } =
     useSearchbarFilteredItems(teachers)
 
@@ -52,7 +52,7 @@ function TeacherTable({ items }) {
 }
 
 // ------------------------------------
-TeacherIndex.layout = (page) => (
+TeacherIndexPage.layout = (page) => (
   <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>
     {page}
   </AuthLayout>
