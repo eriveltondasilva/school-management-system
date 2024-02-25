@@ -5,24 +5,19 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class () extends Migration {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('abbr', 10)->nullable();
-            $table->unsignedBigInteger('teacher_id')->nullable();
-            $table->year('academic_year_id')->default(now()->year);
+            $table->string('name')->comment('Nome da matéria');
+            $table->string('abbr', 10)->nullable()->comment('Abreviação da matéria');
+            $table->unsignedBigInteger('teacher_id')->nullable()->comment('ID do professor responsável pela matéria');
+            $table->unsignedBigInteger('academic_year_id')->default(now()->year)->comment('Ano acadêmico da matéria');
+            //
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('subjects');

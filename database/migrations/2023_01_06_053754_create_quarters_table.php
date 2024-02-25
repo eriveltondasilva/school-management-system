@@ -5,24 +5,19 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class () extends Migration {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('quarters', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
-            $table->year('academic_year_id')->default(now()->year);
+            $table->string('name')->comment('Nome do trimestre');
+            $table->date('start_date')->nullable()->comment('Data de início do trimestre');
+            $table->date('end_date')->nullable()->comment('Data de término do trimestre');
+            $table->unsignedBigInteger('academic_year_id')->default(now()->year)->comment('ID do ano acadêmico');
+            //
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('quarters');

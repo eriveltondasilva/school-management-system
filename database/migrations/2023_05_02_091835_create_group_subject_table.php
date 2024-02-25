@@ -8,15 +8,13 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('group_subject', function (Blueprint $table) {
-            $table->foreignId('group_id')->constrained();
-            $table->foreignId('subject_id')->constrained();
+            $table->foreignId('group_id')->constrained()->comment('ID do grupo');
+            $table->foreignId('subject_id')->constrained()->comment('ID da disciplina');
+            //
             $table->timestamps();
-
             $table->primary(['group_id', 'subject_id']);
         });
     }
-
-    ####
 
     public function down(): void
     {

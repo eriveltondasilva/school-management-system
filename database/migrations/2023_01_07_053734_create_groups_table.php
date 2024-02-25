@@ -5,24 +5,19 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class () extends Migration {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('abbr', 10)->nullable();
+            $table->string('name')->comment('Nome do turma');
+            $table->unsignedBigInteger('academic_year_id')->default(now()->year)->comment('ID do ano escolar');
+            //
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('groups');
     }
 };
