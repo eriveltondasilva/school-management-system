@@ -3,10 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Enums\GenderEnum;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Student>
- */
 class StudentFactory extends Factory
 {
     /**
@@ -17,7 +15,22 @@ class StudentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
+            'cpf' => fake()->unique()->cpf(),
+            'rg' => fake()->unique()->rg(),
+            'gender' => fake()->randomElement(GenderEnum::values()),
+            'birthday' => fake()->date(),
+            'birthplace' => fake()->city(),
+            'phone' => fake()->cellphoneNumber(),
+            'address_street' => fake()->streetAddress(),
+            'address_city' => fake()->city(),
+            'address_state' => fake()->state(),
+            'address_zip_code' => fake()->postcode(),
+            'gov_benefits' => fake()->sentence(),
+            'health_problem' => fake()->sentence(),
+            'note' => fake()->text(),
+            'is_active' => true,
         ];
     }
 }

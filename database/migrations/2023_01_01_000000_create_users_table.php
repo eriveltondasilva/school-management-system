@@ -9,9 +9,9 @@ return new class () extends Migration {
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('nickname')->nullable()->comment('Apelido do usuário');
             $table->string('email')->unique()->comment('E-mail do usuário');
             $table->timestamp('email_verified_at')->nullable()->comment('Data e hora da verificação de e-mail');
-            $table->string('nickname')->nullable()->comment('Apelido do usuário');
             $table->string('password')->comment('Senha do usuário');
             $table->string('avatar_url')->nullable()->comment('URL do avatar do usuário');
             $table->string('provider_id')->nullable()->comment('ID do provedor de autenticação externo');
