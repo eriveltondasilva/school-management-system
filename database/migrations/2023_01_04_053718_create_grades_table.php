@@ -10,6 +10,7 @@ return new class () extends Migration {
         Schema::create('grades', function (Blueprint $table) {
             $table->id();
             $table->decimal('value', 4, 2)->comment('Valor da nota');
+            //
             $table->unsignedBigInteger('quarter_id')->comment('ID do trimestre');
             $table->unsignedBigInteger('student_id')->comment('ID do aluno');
             $table->unsignedBigInteger('subject_id')->comment('ID da disciplina');

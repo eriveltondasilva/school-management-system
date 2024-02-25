@@ -10,7 +10,8 @@ return new class () extends Migration {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->string('name')->comment('Nome do turma');
-            $table->unsignedBigInteger('academic_year_id')->default(now()->year)->comment('ID do ano escolar');
+            //
+            $table->unsignedBigInteger('academic_year_id')->nullable()->comment('ID do ano escolar');
             //
             $table->timestamps();
         });
