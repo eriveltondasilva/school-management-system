@@ -1,6 +1,4 @@
-import FormFooter from './FormFooter'
-import FormHeader from './FormHeader'
-import FormRoot from './FormRoot'
+import { FormFooter, FormHeader, FormRoot } from './Form'
 
 // ------------------------------------
 const Form = FormRoot

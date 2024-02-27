@@ -28,7 +28,7 @@ class StudentFactory extends Factory
             'address_state' => fake()->state(),
             'address_zip_code' => fake()->postcode(),
             'gov_benefits' => fake()->sentence(),
-            'health_problem' => fake()->sentence(),
+            'health_problems' => fake()->sentence(),
             'note' => fake()->text(),
             'is_active' => true,
         ];

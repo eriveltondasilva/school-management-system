@@ -15,17 +15,17 @@ export default function UpdateProfileInformation({
 
   const { data, setData, patch, errors, processing, recentlySuccessful } =
     useForm({
-      name: user.name,
+      nickname: user.nickname,
       email: user.email,
     })
 
   // ----------------------------------------------
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault()
     patch(route('profile.update'))
   }
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     setData(e.target.name, e.target.value)
   }
 
@@ -35,20 +35,20 @@ export default function UpdateProfileInformation({
 
       <form onSubmit={handleSubmit} className='mt-6 space-y-6'>
         <div>
-          <Input.Label htmlFor='name' value='Name' />
+          <Input.Label htmlFor='nickname' value='Apelido' />
 
           <Input
-            id='name'
-            name='name'
+            id='nickname'
+            name='nickname'
             className='mt-1 block w-full'
-            value={data.name}
+            value={data.nickname}
             onChange={handleChange}
-            autoComplete='name'
+            autoComplete='nickname'
             autoFocus
             required
           />
 
-          <Input.Error message={errors.name} />
+          <Input.Error message={errors.nickname} />
         </div>
 
         <div>
@@ -103,11 +103,11 @@ function Header() {
   return (
     <header>
       <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
-        Profile Information
+        Informação do Perfil
       </h2>
 
       <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
-        Update your account's profile information and email address.
+        Atualize sua informação do perfil e endereço de email.
       </p>
     </header>
   )

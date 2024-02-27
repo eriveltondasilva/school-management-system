@@ -4,7 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\{BelongsTo, MorphTo};
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -20,11 +20,10 @@ class User extends Authenticatable
     protected $table = 'users';
 
     protected $fillable = [
-        'name',
+        'nickname',
         'email',
-        'gender',
         'password',
-        'status',
+        'is_active',
         'avatar_url',
         'provider_id',
         'provider_name',
@@ -36,21 +35,14 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'status'            => 'boolean',
+        'is_active'         => 'boolean',
         'email_verified_at' => 'datetime',
         'password'          => 'hashed',
     ];
 
-    protected $with = ['role'];
-
     // ------------------------------
     // #Relationships
     // ------------------------------
-
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(Role::class);
-    }
 
     public function profile(): MorphTo
     {

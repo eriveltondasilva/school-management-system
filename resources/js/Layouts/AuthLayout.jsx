@@ -33,7 +33,10 @@ export default function AuthenticatedLayout({ title, breadcrumb, children }) {
           <Header.Left title={title} />
           <Header.Right>
             <Header.Dropdown>
-              <Header.DropdownHeader name={user.name} email={user.email} />
+              <Header.DropdownHeader
+                nickname={user.nickname}
+                email={user.email}
+              />
               <Header.DropdownItem />
             </Header.Dropdown>
           </Header.Right>

@@ -34,7 +34,7 @@ export function TableBody({ children }) {
 export const TableRow = memo(function TableRow({ item, children }) {
   if (!item) return null
 
-  const { id, name, email, gender } = item.user
+  const { id, name, email, gender } = item
   const genderLabel = gender === 'M' ? 'Masculino' : 'Feminino'
 
   return (

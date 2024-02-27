@@ -1,11 +1,9 @@
+import { HeaderLeft, HeaderRight, HeaderRoot } from './Header'
 import {
   HeaderDropdown,
   HeaderDropdownHeader,
   HeaderDropdownItem,
 } from './HeaderDropdown'
-import HeaderLeft from './HeaderLeft'
-import HeaderRight from './HeaderRight'
-import HeaderRoot from './HeaderRoot'
 
 // ====================================
 const Header = HeaderRoot

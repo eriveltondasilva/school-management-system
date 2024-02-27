@@ -1,9 +1,25 @@
-import { Navbar } from 'flowbite-react'
+import { DarkThemeToggle, Navbar } from 'flowbite-react'
 import { Menu } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
 // ====================================
-export default function HeaderLeft({ title }) {
+export function HeaderRoot({ children }) {
+  return (
+    <Navbar
+      fluid
+      rounded
+      className={twJoin(
+        'sticky top-0 z-30 rounded-lg',
+        'dark:drop-shadow-lg sm:relative',
+        'bg-slate-50 dark:text-white'
+      )}>
+      {children}
+    </Navbar>
+  )
+}
+
+// ====================================
+export function HeaderLeft({ title }) {
   return (
     <Navbar.Brand>
       {/* Botão de menu */}
@@ -32,5 +48,16 @@ export default function HeaderLeft({ title }) {
         {title === 'Painel' ? 'Bem-vindo(a)' : title}
       </span>
     </Navbar.Brand>
+  )
+}
+
+// ====================================
+export function HeaderRight({ children }) {
+  return (
+    <div className='mr-2 flex space-x-2'>
+      {/* Botão tema escuro */}
+      <DarkThemeToggle />
+      {children}
+    </div>
   )
 }

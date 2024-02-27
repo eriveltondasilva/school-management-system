@@ -41,9 +41,9 @@ function TeacherTable({ items }) {
         {items.map((item) => (
           <Table.Row key={item.id} item={item}>
             {/* Botão de visualizar */}
-            <Table.RowButtonShow routeName='student.show' item={item} />
+            <Table.RowButtonShow routeName='teacher.show' item={item} />
             {/* Botão de editar */}
-            <Table.RowButtonEdit routeName='student.edit' item={item} />
+            <Table.RowButtonEdit routeName='teacher.edit' item={item} />
           </Table.Row>
         ))}
       </Table.Body>

@@ -12,7 +12,7 @@ export default function useSearchbarFilteredItems(items) {
 
   const filteredItems = useMemo(() => {
     return items.filter((item) =>
-      item.user.name.toLowerCase().startsWith(filter.toLowerCase())
+      item.name.toLowerCase().startsWith(filter.toLowerCase())
     )
   }, [filter, items])
 

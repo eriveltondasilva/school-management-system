@@ -2,8 +2,13 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function TeacherShowPage() {
-  return null
+export default function TeacherShowPage({ teacher }) {
+  return (
+    <>
+      <h2>Visualizar professor</h2>
+      {JSON.stringify(teacher)}
+    </>
+  )
 }
 
 // ------------------------------------

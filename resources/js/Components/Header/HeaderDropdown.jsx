@@ -4,34 +4,27 @@ import { LogOut, UserRoundCog } from 'lucide-react'
 
 // ====================================
 export function HeaderDropdown({ children }) {
+  const image = 'https://flowbite.com/docs/images/people/profile-picture-5.jpg'
+  const DropdownAvatar = <Avatar alt='User settings' img={image} rounded />
+
   return (
     <>
       {/* Trigger */}
-      <Dropdown inline label={<DropdownAvatar />} className='w-48'>
+      <Dropdown inline label={DropdownAvatar} className='w-48'>
         {children}
       </Dropdown>
     </>
   )
 }
 
-function DropdownAvatar() {
-  return (
-    <Avatar
-      alt='User settings'
-      img='https://flowbite.com/docs/images/people/profile-picture-5.jpg'
-      rounded
-    />
-  )
-}
-
 // ====================================
-export function HeaderDropdownHeader({ name, email }) {
+export function HeaderDropdownHeader({ nickname, email }) {
   return (
     <Dropdown.Header>
       <span
         className='block truncate text-sm font-semibold'
-        title={name || 'Nome'}>
-        {name || 'Usuário'}
+        title={nickname || 'Nome'}>
+        {nickname || 'Usuário'}
       </span>
       <span
         className='block truncate text-sm text-gray-400'

@@ -9,7 +9,7 @@ class TeacherController extends Controller
 {
     public function index()
     {
-        $teachers = Teacher::with('user')->get();
+        $teachers = Teacher::all();
 
         // ==>
         return inertia('Teacher/Index', compact('teachers'));
@@ -18,7 +18,7 @@ class TeacherController extends Controller
     public function show(Teacher $teacher)
     {
         // ==>
-        return inertia('Teacher/Show');
+        return inertia('Teacher/Show', compact('teacher'));
     }
 
     public function create()

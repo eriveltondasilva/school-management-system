@@ -9,7 +9,7 @@ class GroupsController extends Controller
 {
     public function __invoke()
     {
-        $groups = Group::where('academic_year_id', 2024)->get();
+        $groups = Group::all();
 
         // ==>
         return inertia('Groups', compact('groups'));

@@ -10,10 +10,10 @@ class AcademicYearController extends Controller
 {
     public function __invoke()
     {
-        $academicYear = AcademicYear::get();
+        $academicYears = AcademicYear::all();
 
         // ==>
-        return inertia('Groups', compact('academicYear'));
+        return inertia('AcademicYear', compact('academicYears'));
     }
 
     // #API
