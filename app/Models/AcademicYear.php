@@ -18,6 +18,10 @@ class AcademicYear extends Model
     // #Relationships
     // ------------------------------
 
+    public function scopeIsCurrent($query) {
+        return $query->where('is_current', 1);
+    }
+
     public function quarters(): HasMany
     {
         return $this->hasMany(Quarter::class);

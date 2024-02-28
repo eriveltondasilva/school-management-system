@@ -18,16 +18,6 @@ class Subject extends Model
     // #Relationships
     // ------------------------------
 
-    public function academic_year(): BelongsTo
-    {
-        return $this->belongsTo(AcademicYear::class);
-    }
-
-    public function latest_academic_year(): BelongsTo
-    {
-        return $this->belongsTo(AcademicYear::class)->latestOfMany();
-    }
-
     public function groups(): BelongsToMany
     {
         return $this->belongsToMany(Group::class);

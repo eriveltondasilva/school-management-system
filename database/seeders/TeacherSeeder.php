@@ -3,55 +3,18 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
 use App\Models\Teacher;
+use App\Models\Group;
 
 class TeacherSeeder extends Seeder
 {
     public function run(): void
     {
-        Teacher::factory()->count(10)->create();
+        $teachers = Teacher::factory()->count(10)->create();
 
-        // User::factory()
-        // ->count(5)
-        // ->create([
-        //     'role_id' => '3'
-        // ])->each(function ($user) {
-        //     $teacher = Teacher::factory()->create();
-        //     $user->profile()->associate($teacher);
-        //     $user->save();
-        // });
-
-        //
-        // $subject = Subject::find(1);
-        // $group = Group::find(1);
-
-        // $subject->update(['teacher_id' => $erivelton->id]);
-        // $subject->groups()->attach($group);
-        // $erivelton->profile->groups()->attach($group);
-
-        // //
-        // $professor2 = User::find(2);
-        // $subject2 = Subject::find(2);
-
-        // $subject2->update(['teacher_id' => $professor2->id]);
-        // $subject2->groups()->attach($group);
-        // $professor2->profile->groups()->attach($group);
-
-        // //
-        // $professor3 = User::find(3);
-        // $subject3 = Subject::find(3);
-
-        // $subject3->update(['teacher_id' => $professor3->id]);
-        // $subject3->groups()->attach($group);
-        // $professor3->profile->groups()->attach($group);
-
-        // //
-        // $professor4 = User::find(4);
-        // $subject4 = Subject::find(4);
-
-        // $subject4->update(['teacher_id' => $professor4->id]);
-        // $subject4->groups()->attach($group);
-        // $professor4->profile->groups()->attach($group);
+        $teachersIds = $teachers->take(6)->pluck('id');
+        Group::find(1)->teachers()->attach($teachers);
     }
 }

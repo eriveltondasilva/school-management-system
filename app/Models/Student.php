@@ -36,6 +36,12 @@ class Student extends Model
     // #Relationships
     // ------------------------------
 
+    public function scopeIsActive($query) {
+        return $query->where('is_active', 1);
+    }
+
+    //
+
     public function user(): MorphOne
     {
         return $this->morphOne(User::class, 'profile');

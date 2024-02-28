@@ -44,6 +44,13 @@ class User extends Authenticatable
     // #Relationships
     // ------------------------------
 
+    public function scopeIsActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
+
+    //
+
     public function profile(): MorphTo
     {
         return $this->morphTo();
