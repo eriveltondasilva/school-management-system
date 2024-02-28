@@ -8,11 +8,11 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('group_student', function (Blueprint $table) {
-            $table->foreignId('group_id')->constrained()->comment('ID do grupo');
-            $table->foreignId('student_id')->constrained()->comment('ID do estudante');
+            $table->id();
+            $table->unsignedBigInteger('group_id')->comment('ID do grupo');
+            $table->unsignedBigInteger('student_id')->comment('ID do aluno');
             //
             $table->timestamps();
-            $table->primary(['group_id','student_id']);
         });
     }
 

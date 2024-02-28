@@ -11,7 +11,7 @@ return new class () extends Migration {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->string('name')->comment('Nome do professor');
-            $table->enum('gender', GenderEnum::values())->default(GenderEnum::DEFAULT)->comment('Gênero do professor');
+            $table->enum('gender', GenderEnum::values())->nullable()->default(GenderEnum::DEFAULT)->comment('Gênero do professor');
             $table->string('rg')->unique()->nullable()->comment('RG do professor');
             $table->string('cpf')->unique()->nullable()->comment('CPF do professor');
             $table->date('birthday')->nullable()->comment('Data de nascimento do professor');

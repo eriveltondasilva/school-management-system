@@ -13,12 +13,13 @@ return new class () extends Migration {
             $table->string('email')->unique()->comment('E-mail do usuário');
             $table->timestamp('email_verified_at')->nullable()->comment('Data e hora da verificação de e-mail');
             $table->string('password')->comment('Senha do usuário');
+            $table->boolean('is_active')->default(true)->comment('Indica se o usuário está ativo');
+            //
             $table->string('avatar_url')->nullable()->comment('URL do avatar do usuário');
             $table->string('provider_id')->nullable()->comment('ID do provedor de autenticação externo');
             $table->string('provider_name')->nullable()->comment('Nome do provedor de autenticação externo');
-            $table->boolean('is_active')->default(true)->comment('Indica se o usuário está ativo');
-            //
             $table->nullableMorphs('profile');
+            //
             $table->rememberToken();
             $table->timestamps();
         });

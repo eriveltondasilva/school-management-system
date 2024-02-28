@@ -11,13 +11,13 @@ return new class () extends Migration {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('name')->comment('Nome do aluno');
-            $table->enum('gender', GenderEnum::values())->default(GenderEnum::DEFAULT)->comment('Gênero do aluno');
+            $table->enum('gender', GenderEnum::values())->nullable()->default(GenderEnum::DEFAULT)->comment('Gênero do aluno');
+            $table->string('email')->nullable()->comment('E-mail do aluno');
             $table->string('rg')->nullable()->comment('RG do aluno');
             $table->string('cpf')->nullable()->comment('CPF do aluno');
             $table->date('birthday')->nullable()->comment('Data de nascimento do aluno');
             $table->string('birthplace')->nullable()->comment('Local de nascimento do aluno');
             $table->string('phone')->nullable()->comment('Telefone do aluno');
-            $table->string('email')->nullable()->comment('E-mail do aluno');
             // #TODO: remove student address fields
             $table->string('address_street')->nullable()->comment('Endereço do aluno');
             $table->string('address_city')->nullable()->comment('Cidade do aluno');

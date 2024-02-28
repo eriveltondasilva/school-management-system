@@ -12,9 +12,6 @@ return new class () extends Migration {
             $table->string('name')->comment('Nome da matéria');
             $table->string('abbr', 10)->nullable()->comment('Abreviação da matéria');
             //
-            $table->unsignedBigInteger('teacher_id')->nullable()->comment('ID do professor responsável pela matéria');
-            $table->unsignedBigInteger('academic_year_id')->nullable()->comment('Ano acadêmico da matéria');
-            //
             $table->timestamps();
         });
     }
