@@ -4,11 +4,10 @@ import { Eye, Pencil, UserRoundPlus } from 'lucide-react'
 
 import Searchbar from '@/Components/Searchbar'
 import Table from '@/Components/Table'
+import useSearchbarFilteredItems from '@/Hooks/useSearchbarFilteredItems'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
-
-import useSearchbarFilteredItems from '@/Hooks/useSearchbarFilteredItems'
 
 // ============================================================================
 export default function StudentIndexPage({ students }) {

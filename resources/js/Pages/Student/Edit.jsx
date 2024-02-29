@@ -2,26 +2,25 @@ import { Button } from 'flowbite-react'
 import { Save, Trash2 } from 'lucide-react'
 
 import Form from '@/Components/Form'
+import useFormDate from '@/Hooks/useFormDate'
 import AuthLayout from '@/Layouts/AuthLayout'
 
-import useFormStudent from '@/Hooks/useFormInertiaHelper'
 import StudentFormData from './Partials/StudentFormData'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function StudentEditPage({ student }) {
-  const { handleSubmit, handleChange, data, processing } =
-    useFormStudent(student) || {}
+  const { errors, handleSubmit, isLoading } = useFormDate('student', student)
 
   return (
     <>
       <Form onSubmit={handleSubmit}>
         <Form.Header>{titles.edit}</Form.Header>
-        <StudentFormData data={data} onChange={handleChange} />
+        <StudentFormData data={student} errors={errors} />
         <Form.Footer>
           <Button
             type='reset'
-            disabled={processing}
+            disabled={isLoading}
             color='light'
             className='uppercase'
             fullSized>
@@ -30,7 +29,7 @@ export default function StudentEditPage({ student }) {
           </Button>
           <Button
             type='submit'
-            disabled={processing}
+            disabled={isLoading}
             color='blue'
             className='uppercase'
             fullSized>

@@ -1,13 +1,7 @@
 import { Label, Radio, TextInput, Textarea } from 'flowbite-react'
 
 // ================================================
-export default function StudentFormData({
-  data = {},
-  errors = {},
-  onChange = () => {},
-  readOnly,
-}) {
-  console.log(data.gender)
+export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
   return (
     <section className='mb-4'>
       {/* NOME DO ALUNO */}
@@ -16,9 +10,7 @@ export default function StudentFormData({
         type='text'
         label='Nome completo'
         placeholder='insira o nome do aluno...'
-        errors={errors}
-        value={data.name}
-        onChange={onChange}
+        defaultValue={data.name}
         readOnly={readOnly}
       />
       {errors.name && <p className='text-sm text-red-500'>{errors.name}</p>}
@@ -30,8 +22,7 @@ export default function StudentFormData({
         type='email'
         label='Email'
         placeholder='insira o email do aluno...'
-        value={data.email}
-        onChange={onChange}
+        defaultValue={data.email}
         readOnly={readOnly}
       />
       <br />
@@ -42,8 +33,7 @@ export default function StudentFormData({
         type='tel'
         label='Telefone celular'
         placeholder='insira o telefone do aluno...'
-        value={data.phone}
-        onChange={onChange}
+        defaultValue={data.phone}
         readOnly={readOnly}
       />
       {errors.phone && <p className='text-sm text-red-500'>{errors.phone}</p>}
@@ -57,9 +47,8 @@ export default function StudentFormData({
           <Radio
             id='gender-male'
             name='gender'
-            value='Mmmm'
+            defaultValue='M'
             defaultChecked={data.gender === 'M'}
-            onClick={onChange}
             disabled={readOnly}
           />
           <Label htmlFor='gender-male'>Masculino</Label>
@@ -68,9 +57,8 @@ export default function StudentFormData({
           <Radio
             id='gender-female'
             name='gender'
-            value='F'
+            defaultValue='F'
             defaultChecked={data.gender === 'F'}
-            onClick={onChange}
             disabled={readOnly}
           />
           <Label htmlFor='gender-female'>Feminino</Label>
@@ -84,8 +72,7 @@ export default function StudentFormData({
         type='text'
         label='CPF'
         placeholder='insira o cpf do aluno...'
-        value={data.cpf}
-        onChange={onChange}
+        defaultValue={data.cpf}
         readOnly={readOnly}
       />
       {errors.email && <p className='text-sm text-red-500'>{errors.name}</p>}
@@ -98,8 +85,7 @@ export default function StudentFormData({
         type='text'
         label='RG'
         placeholder='insira o rg do aluno...'
-        value={data.rg}
-        onChange={onChange}
+        defaultValue={data.rg}
         readOnly={readOnly}
       />
       {errors.cpf && <p className='text-sm text-red-500'>{errors.cpf}</p>}
@@ -112,8 +98,7 @@ export default function StudentFormData({
         type='date'
         label='Data de nascimento'
         // placeholder='insira a data de nascimento do aluno...'
-        value={data.birthday}
-        onChange={onChange}
+        defaultValue={data.birthday}
         readOnly={readOnly}
       />
       {errors.birthday && (
@@ -128,8 +113,7 @@ export default function StudentFormData({
         type='text'
         label='Local de nascimento'
         placeholder='insira o local de nascimento do aluno...'
-        value={data.birthplace}
-        onChange={onChange}
+        defaultValue={data.birthplace}
         readOnly={readOnly}
       />
       {errors.birthplace && (
@@ -144,8 +128,7 @@ export default function StudentFormData({
         type='text'
         label='Endereço'
         placeholder='insira o endereço do aluno...'
-        value={data.address_street}
-        onChange={onChange}
+        defaultValue={data.address_street}
         readOnly={readOnly}
       />
       {errors.address_street && (
@@ -160,8 +143,7 @@ export default function StudentFormData({
         type='text'
         label='Cidade'
         placeholder='insira a cidade do aluno...'
-        value={data.address_city}
-        onChange={onChange}
+        defaultValue={data.address_city}
         readOnly={readOnly}
       />
       {errors.address_city && (
@@ -176,8 +158,7 @@ export default function StudentFormData({
         type='text'
         label='Estado'
         placeholder='insira o estado do aluno...'
-        value={data.address_state}
-        onChange={onChange}
+        defaultValue={data.address_state}
         readOnly={readOnly}
       />
       {errors.address_state && (
@@ -192,8 +173,7 @@ export default function StudentFormData({
         type='text'
         label='CEP'
         placeholder='insira o cep do aluno...'
-        value={data.address_zip_code}
-        onChange={onChange}
+        defaultValue={data.address_zip_code}
         readOnly={readOnly}
       />
       {errors.address_zip_code && (
@@ -208,8 +188,7 @@ export default function StudentFormData({
         type='text'
         label='Benefício'
         placeholder='insira os benefícios do governo do aluno...'
-        value={data.gov_benefits}
-        onChange={onChange}
+        defaultValue={data.gov_benefits}
         readOnly={readOnly}
       />
       {errors.gov_benefits && (
@@ -224,8 +203,7 @@ export default function StudentFormData({
         type='text'
         label='Problemas de saúde'
         placeholder='insira os problemas de saúde do aluno...'
-        value={data.health_problems}
-        onChange={onChange}
+        defaultValue={data.health_problems}
         readOnly={readOnly}
       />
       {errors.health_problems && (
@@ -243,8 +221,7 @@ export default function StudentFormData({
         name='note'
         placeholder='insira as observações...'
         rows={4}
-        value={data.note}
-        onChange={onChange}
+        defaultValue={data.note}
         readOnly={readOnly}
       />
       {errors.note && <p className='text-sm text-red-500'>{errors.note}</p>}

@@ -3,20 +3,17 @@ import { Alert, Button } from 'flowbite-react'
 import { CheckCircle, Save, Trash2 } from 'lucide-react'
 
 import Form from '@/Components/Form'
+import useFormDate from '@/Hooks/useFormDate'
 import AuthLayout from '@/Layouts/AuthLayout'
 
-import useFormStudent from '@/Hooks/useFormInertiaHelper'
 import StudentFormData from './Partials/StudentFormData'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
 export default function StudentCreatePage() {
   const { flash } = usePage().props || {}
-  const { handleSubmit, handleChange, errors, processing } =
-    useFormStudent() || {}
-
-  console.log(flash)
-
+  const { errors, handleChange, handleSubmit, processing } =
+    useFormDate('student')
   return (
     <>
       <Form onSubmit={handleSubmit}>
