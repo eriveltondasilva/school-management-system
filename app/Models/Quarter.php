@@ -15,7 +15,7 @@ class Quarter extends Model
     protected $table = 'quarters';
 
     // ------------------------------
-    // #Relationships
+    // ### Relationships ###
     // ------------------------------
 
     public function academic_year(): BelongsTo

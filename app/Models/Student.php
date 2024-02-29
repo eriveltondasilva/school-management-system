@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\IsActiveScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\{BelongsToMany, MorphOne};
@@ -33,14 +34,17 @@ class Student extends Model
     ];
 
     // ------------------------------
-    // #Relationships
+    // ### Scope ###
     // ------------------------------
 
-    public function scopeIsActive($query) {
-        return $query->where('is_active', 1);
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new IsActiveScope());
     }
 
-    //
+    // ------------------------------
+    // ### Relationships ###
+    // ------------------------------
 
     public function user(): MorphOne
     {

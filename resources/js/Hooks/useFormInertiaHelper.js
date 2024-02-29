@@ -6,7 +6,7 @@ export default function useFormStudent(student = {}) {
     name: student.name || '',
     email: student.email || '',
     phone: student.phone || '',
-    gender: student.gender || 'M',
+    gender: student.gender || '',
     cpf: student.cpf || '',
     rg: student.rg || '',
     birthday: student.birthday || '',

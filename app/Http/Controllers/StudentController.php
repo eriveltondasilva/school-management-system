@@ -11,6 +11,7 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::all();
+
         return inertia('Student/Index', compact('students'));
     }
 
@@ -29,18 +30,22 @@ class StudentController extends Controller
         return inertia('Student/Edit', compact('student'));
     }
 
-    // #API
+    // ### API ###
     public function store(StudentRequest $request)
     {
         $validated = $request->validated();
-        Student::create($validated);
-        return to_route('student.create');
+        $savedStudent = Student::create($validated);
+
+        return back()
+            ->with('message', 'Cadastro do aluno criado com sucesso!')
+            ->with('id', $savedStudent->id);
     }
 
     public function update(StudentRequest $request, Student $student)
     {
         $validated = $request->validated();
         $student->update($validated);
+
         return to_route('student.show', $student->id);
     }
 

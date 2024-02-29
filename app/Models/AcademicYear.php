@@ -15,10 +15,11 @@ class AcademicYear extends Model
     protected $table = 'academic_years';
 
     // ------------------------------
-    // #Relationships
+    // ### Relationships ###
     // ------------------------------
 
-    public function scopeIsCurrent($query) {
+    public function scopeIsCurrent($query)
+    {
         return $query->where('is_current', 1);
     }
 

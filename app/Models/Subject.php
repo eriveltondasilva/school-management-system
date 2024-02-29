@@ -15,7 +15,11 @@ class Subject extends Model
     protected $table = 'subjects';
 
     // ------------------------------
-    // #Relationships
+    // ### Scopes ###
+    // ------------------------------
+
+    // ------------------------------
+    // ### Relationships ###
     // ------------------------------
 
     public function groups(): BelongsToMany
@@ -27,4 +31,6 @@ class Subject extends Model
     {
         return $this->belongsTo(Teacher::class);
     }
+
+
 }

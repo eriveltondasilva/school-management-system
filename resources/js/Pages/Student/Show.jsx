@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react'
-import { Button } from 'flowbite-react'
-import { Pencil } from 'lucide-react'
+import { Button, Tooltip } from 'flowbite-react'
+import { Pencil, Plus } from 'lucide-react'
 
 import Form from '@/Components/Form'
 import AuthLayout from '@/Layouts/AuthLayout'
@@ -11,32 +11,37 @@ import StudentFormData from './Partials/StudentFormData'
 // ====================================
 export default function StudentShowPage({ student }) {
   return (
-    <>
-      <Form>
-        <Form.Header>
-          <span className='flex gap-6'>
-            {titles.show}
-            <ButtonEdit id={student.id} />
-          </span>
-        </Form.Header>
-        <StudentFormData data={student} readOnly />
-      </Form>
-    </>
+    <Form>
+      <Form.Header>
+        <span className='flex gap-4'>
+          {titles.show}
+          <EditPageButton
+            href={route('student.edit', student.id)}
+            text='Editar aluno'>
+            <Pencil className='h-4 w-4' />
+          </EditPageButton>
+
+          <EditPageButton
+            href={route('student.create')}
+            text='Cadastrar novo aluno'>
+            <Plus className='h-4 w-4' />
+          </EditPageButton>
+        </span>
+      </Form.Header>
+
+      <StudentFormData data={student} readOnly />
+    </Form>
   )
 }
 
 // ----------------------------------------------
-function ButtonEdit({ id }) {
+function EditPageButton({ text, href, children }) {
   return (
-    <Button
-      href={route('student.edit', id)}
-      color='blue'
-      size='xs'
-      as={Link}
-      pill>
-      <Pencil className='mr-2 h-4 w-4' />
-      editar
-    </Button>
+    <Tooltip content={text}>
+      <Button href={href} color='blue' size='xs' as={Link}>
+        {children}
+      </Button>
+    </Tooltip>
   )
 }
 

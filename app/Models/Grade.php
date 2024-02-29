@@ -14,7 +14,7 @@ class Grade extends Model
     protected $table = 'grades';
 
     // ------------------------------
-    // #Relationships
+    // ### Relationships ###
     // ------------------------------
 
 }

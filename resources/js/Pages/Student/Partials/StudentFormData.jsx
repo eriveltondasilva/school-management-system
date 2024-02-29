@@ -7,6 +7,7 @@ export default function StudentFormData({
   onChange = () => {},
   readOnly,
 }) {
+  console.log(data.gender)
   return (
     <section className='mb-4'>
       {/* NOME DO ALUNO */}
@@ -56,10 +57,10 @@ export default function StudentFormData({
           <Radio
             id='gender-male'
             name='gender'
-            value='M'
+            value='Mmmm'
             defaultChecked={data.gender === 'M'}
-            onChange={onChange}
-            readOnly={readOnly}
+            onClick={onChange}
+            disabled={readOnly}
           />
           <Label htmlFor='gender-male'>Masculino</Label>
         </div>
@@ -69,8 +70,8 @@ export default function StudentFormData({
             name='gender'
             value='F'
             defaultChecked={data.gender === 'F'}
-            onChange={onChange}
-            readOnly={readOnly}
+            onClick={onChange}
+            disabled={readOnly}
           />
           <Label htmlFor='gender-female'>Feminino</Label>
         </div>
@@ -256,9 +257,14 @@ function InputField({ id, label, type, errors, ...props }) {
   return (
     <>
       <div className='mb-2 block'>
-        <Label htmlFor={id} value={label} />
+        <Label htmlFor={id || ''} value={label || ''} />
       </div>
-      <TextInput id={id} name={id} type={type} {...props} />
+      <TextInput
+        id={id || ''}
+        name={id || ''}
+        type={type || 'text'}
+        {...props}
+      />
     </>
   )
 }

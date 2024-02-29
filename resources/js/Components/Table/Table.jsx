@@ -1,6 +1,4 @@
-import { Link } from '@inertiajs/react'
-import { Button, Table } from 'flowbite-react'
-import { Eye, Pencil } from 'lucide-react'
+import { Table } from 'flowbite-react'
 import { memo } from 'react'
 
 // ====================================
@@ -53,24 +51,6 @@ export const TableRow = memo(function TableRow({ item, children }) {
     </Table.Row>
   )
 })
-
-// ====================================
-export function TableRowButtonShow({ routeName, item }) {
-  return (
-    <Button as={Link} href={route(routeName, item)} color='blue' size='xs'>
-      <Eye className='h-4 w-4' />
-    </Button>
-  )
-}
-
-// ====================================
-export function TableRowButtonEdit({ routeName, item }) {
-  return (
-    <Button as={Link} href={route(routeName, item)} color='blue' size='xs'>
-      <Pencil className='h-4 w-4' />
-    </Button>
-  )
-}
 
 // <Button
 //           as={Link}

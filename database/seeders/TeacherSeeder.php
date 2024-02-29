@@ -13,8 +13,9 @@ class TeacherSeeder extends Seeder
     public function run(): void
     {
         $teachers = Teacher::factory()->count(10)->create();
+        Teacher::factory()->count(5)->create(['is_active' => false]);
 
         $teachersIds = $teachers->take(6)->pluck('id');
-        Group::find(1)->teachers()->attach($teachers);
+        Group::find(1)->teachers()->attach($teachersIds);
     }
 }

@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react'
+import { Link, usePage } from '@inertiajs/react'
 import { Alert, Button } from 'flowbite-react'
 import { CheckCircle, Save, Trash2 } from 'lucide-react'
 
@@ -11,13 +11,18 @@ import { breadcrumbs, titles } from './data'
 
 // ==============================================
 export default function StudentCreatePage() {
+  const { flash } = usePage().props || {}
   const { handleSubmit, handleChange, errors, processing } =
     useFormStudent() || {}
+
+  console.log(flash)
 
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <AlertCreate />
+        {flash?.message && (
+          <AlertCreate id={flash.id} message={flash.message} />
+        )}
         <Form.Header>{titles.create}</Form.Header>
         <StudentFormData onChange={handleChange} errors={errors} />
         <Form.Footer>
@@ -46,15 +51,13 @@ export default function StudentCreatePage() {
 }
 
 // ----------------------------------------------
-function AlertCreate() {
+function AlertCreate({ id, message }) {
   return (
-    <Alert color='success' icon={CheckCircle} className='flex flex-row'>
-      <span className='font-medium'>Aluno salvo! </span>
-      Clique{' '}
-      <Link href={route('student.show', 1)} className='underline'>
-        aqui
-      </Link>{' '}
-      para visualizar
+    <Alert color='success' icon={CheckCircle}>
+      <div>{message}</div>
+      <Link href={route('student.show', id)} className='font-medium underline'>
+        Clique aqui para vê-lo.
+      </Link>
     </Alert>
   )
 }

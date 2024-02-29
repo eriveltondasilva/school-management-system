@@ -15,7 +15,7 @@ class Group extends Model
     protected $table = 'groups';
 
     // ------------------------------
-    // #Relationships
+    // ### Relationships ###
     // ------------------------------
 
     public function students(): BelongsToMany

@@ -16,22 +16,20 @@ use App\Http\Controllers\{
 |--------------------------------------------------------------------------
 */
 
-
 //# WELCOME
 Route::get('/', function () {
-    //* redireciona para a página painel caso esteja logado
+    //* redireciona para a página painel caso usuário esteja logado
     if (auth()->user()) {
         return to_route('dashboard');
     }
 
-    return inertia('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    $canLogin = Route::has('login');
+    $canRegister = Route::has('register');
+    $laravelVersion = Application::VERSION;
+    $phpVersion = PHP_VERSION;
+
+    return inertia('Welcome', compact('canLogin', 'canRegister', 'laravelVersion', 'phpVersion'));
 })->name('welcome');
-// TODO: remover nome da rota
 
 
 //# AUTH
@@ -42,6 +40,23 @@ Route::middleware('auth')
 
     // #DASHBOARD
     Route::get('/painel', DashboardController::class)->name('dashboard');
+
+    // #CALENDAR
+    Route::get('/calendario', function () {
+        return inertia('Calendar');
+    })->name('calendar');
+
+    // #ACADEMIC_YEAR
+    Route::get('/ano-letivo', [AcademicYearController::class, 'index'])->name('academicYear');
+
+    // #GROUPS
+    Route::get('/turmas', GroupsController::class)->name('groups');
+
+    // #TEST
+    Route::get('/teste', function () {
+        return 'Hello, world!';
+    })->name('test');
+
 
     // #CLASSROOMS
     // Route::get('/turmas', function () {
@@ -56,28 +71,12 @@ Route::middleware('auth')
     // Route::get('/disciplinas', [SubjectController::class, 'index'])->name('subject.index');
     // Route::get('/disciplinas/{id}', [SubjectController::class, 'show'])->name('subject.show');
 
-    // #CALENDAR
-    Route::get('/calendario', function () {
-        return inertia('Calendar');
-    })->name('calendar');
-
-    // #ACADEMIC_YEAR
-    Route::get('/ano-letivo', AcademicYearController::class)->name('academicYear');
-
-    // #GROUPS
-    Route::get('/turmas', GroupsController::class)->name('groups');
-
-    // #TEST
-    Route::get('/teste', function () {
-        return 'Hello, world!';
-    })->name('test');
 });
 
 
 //# PROFILE
 Route::middleware('auth')
-->controller(ProfileController::class)
-->name('profile.')
+->controller(ProfileController::class)->name('profile.')
 ->group(function () {
     Route::get('/perfil', 'edit')->name('edit');
     Route::patch('/perfil', 'update')->name('update');
@@ -87,8 +86,7 @@ Route::middleware('auth')
 
 //# SOCIALITE
 Route::controller(SocialiteController::class)
-->prefix('auth/{provider}')
-->name('auth.')
+->prefix('auth/{provider}')->name('auth.')
 ->group(function () {
     Route::get('/redirect', 'redirect')->name('redirect');
     Route::get('/callback', 'callback')->name('callback');

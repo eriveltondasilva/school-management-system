@@ -8,6 +8,7 @@ export default function AcademicYearPage({ academicYears }) {
       {academicYears?.map((academicYear) => (
         <div key={academicYear.id}>
           <h1>{academicYear.year}</h1>
+          <p>{academicYear.is_current ? 'Ano Ativo' : 'Ano Inativo'}</p>
           <br />
         </div>
       ))}

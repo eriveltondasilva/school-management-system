@@ -1,6 +1,5 @@
-import { Link } from '@inertiajs/react'
-import { Button, TextInput } from 'flowbite-react'
-import { Search, UserRoundPlus } from 'lucide-react'
+import { TextInput } from 'flowbite-react'
+import { Search } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
 // ====================================
@@ -47,17 +46,5 @@ export function SearchbarLeft({ value, onChange }) {
         </div>
       </div>
     </div>
-  )
-}
-
-export function SearchbarRightButton({ href, children }) {
-  return (
-    <>
-      {/* Botão de cadastrar */}
-      <Button as={Link} href={href} color='blue'>
-        <UserRoundPlus className='mr-2 h-5 w-5' />
-        {children}
-      </Button>
-    </>
   )
 }
