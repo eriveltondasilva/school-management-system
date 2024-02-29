@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TeacherRequest;
 use App\Models\Teacher;
 
 // ========================================================================
@@ -24,20 +25,28 @@ class TeacherController extends Controller
         return inertia('Teacher/Create');
     }
 
-    public function edit()
+    public function edit(Teacher $teacher)
     {
-        return inertia('Teacher/Edit');
+        return inertia('Teacher/Edit', compact('teacher'));
     }
 
     // ### API ###
-    public function store()
+    public function store(TeacherRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $savedTeacher = Teacher::create($validated);
+
+        return back()
+            ->with('message', 'Cadastro do professor criado com sucesso!')
+            ->with('id', $savedTeacher->id);
     }
 
-    public function update()
+    public function update(TeacherRequest $request, Teacher $teacher)
     {
-        //
+        $validated = $request->validated();
+        $teacher->update($validated);
+
+        return to_route('teacher.show', $teacher->id);
     }
 
     public function destroy()

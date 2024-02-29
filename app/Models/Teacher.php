@@ -15,6 +15,22 @@ class Teacher extends Model
 
     protected $table = 'teachers';
 
+    protected $fillable = [
+        'name',
+        'gender',
+        'cpf',
+        'rg',
+        'birthday',
+        'email',
+        'phone',
+        // Address
+        'address_street',
+        'address_city',
+        'address_state',
+        'address_zip_code',
+    ];
+
+
     // ------------------------------
     // ### Scope ###
     // ------------------------------

@@ -12,20 +12,33 @@ import { breadcrumbs, titles } from './data'
 // ==============================================
 export default function StudentCreatePage() {
   const { flash } = usePage().props || {}
-  const { errors, handleChange, handleSubmit, processing } =
-    useFormDate('student')
+  const { errors, handleSubmit, isLoading } = useFormDate('student')
   return (
     <>
       <Form onSubmit={handleSubmit}>
+        {/* flash message */}
         {flash?.message && (
-          <AlertCreate id={flash.id} message={flash.message} />
+          <Alert color='success' icon={CheckCircle}>
+            <div>{flash.message}</div>
+            <Link
+              href={route('student.show', flash.id)}
+              className='font-medium underline'>
+              Clique aqui para vê-lo.
+            </Link>
+          </Alert>
         )}
+
+        {/* header student */}
         <Form.Header>{titles.create}</Form.Header>
-        <StudentFormData onChange={handleChange} errors={errors} />
+
+        {/*  */}
+        <StudentFormData errors={errors} />
+
+        {/* footer student */}
         <Form.Footer>
           <Button
             type='reset'
-            disabled={processing}
+            disabled={isLoading}
             color='light'
             className='uppercase'
             fullSized>
@@ -34,7 +47,7 @@ export default function StudentCreatePage() {
           </Button>
           <Button
             type='submit'
-            disabled={processing}
+            disabled={isLoading}
             color='blue'
             className='uppercase'
             fullSized>
@@ -44,18 +57,6 @@ export default function StudentCreatePage() {
         </Form.Footer>
       </Form>
     </>
-  )
-}
-
-// ----------------------------------------------
-function AlertCreate({ id, message }) {
-  return (
-    <Alert color='success' icon={CheckCircle}>
-      <div>{message}</div>
-      <Link href={route('student.show', id)} className='font-medium underline'>
-        Clique aqui para vê-lo.
-      </Link>
-    </Alert>
   )
 }
 

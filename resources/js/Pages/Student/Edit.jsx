@@ -15,8 +15,13 @@ export default function StudentEditPage({ student }) {
   return (
     <>
       <Form onSubmit={handleSubmit}>
+        {/* header student */}
         <Form.Header>{titles.edit}</Form.Header>
+
+        {/*  */}
         <StudentFormData data={student} errors={errors} />
+
+        {/* footer student */}
         <Form.Footer>
           <Button
             type='reset'

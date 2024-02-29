@@ -12,6 +12,7 @@ import StudentFormData from './Partials/StudentFormData'
 export default function StudentShowPage({ student }) {
   return (
     <Form>
+      {/* header student */}
       <Form.Header>
         <span className='flex gap-4'>
           {titles.show}
@@ -29,6 +30,7 @@ export default function StudentShowPage({ student }) {
         </span>
       </Form.Header>
 
+      {/*  */}
       <StudentFormData data={student} readOnly />
     </Form>
   )
