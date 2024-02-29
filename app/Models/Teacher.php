@@ -23,6 +23,7 @@ class Teacher extends Model
         'birthday',
         'email',
         'phone',
+        'is_active',
         // Address
         'address_street',
         'address_city',
@@ -30,6 +31,11 @@ class Teacher extends Model
         'address_zip_code',
     ];
 
+    protected $casts = [
+        'is_active' => 'boolean',
+        'birthday' => 'date',
+        // 'gender' => 'enum:M,F',
+    ];
 
     // ------------------------------
     // ### Scope ###

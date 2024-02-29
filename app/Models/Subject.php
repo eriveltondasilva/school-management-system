@@ -14,6 +14,11 @@ class Subject extends Model
 
     protected $table = 'subjects';
 
+    protected $fillable = [
+        'name',
+        'abbr',
+    ];
+
     // ------------------------------
     // ### Scopes ###
     // ------------------------------
@@ -22,9 +27,9 @@ class Subject extends Model
     // ### Relationships ###
     // ------------------------------
 
-    public function groups(): BelongsToMany
+    public function grades(): BelongsToMany
     {
-        return $this->belongsToMany(Group::class);
+        return $this->belongsToMany(Grade::class);
     }
 
     public function teacher(): BelongsTo

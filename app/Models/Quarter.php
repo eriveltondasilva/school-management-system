@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 
 // ====================================
 
@@ -14,13 +14,30 @@ class Quarter extends Model
 
     protected $table = 'quarters';
 
+    protected $fillable = [
+        'name',
+        'start_date',
+        'end_date',
+        'academic_year_id',
+    ];
+
+    protected $casts = [
+        'start_date' => 'date',
+        'end_date' => 'date',
+    ];
+
     // ------------------------------
     // ### Relationships ###
     // ------------------------------
 
-    public function academic_year(): BelongsTo
+    public function academicYear(): BelongsTo
     {
         return $this->belongsTo(AcademicYear::class);
+    }
+
+    public function grades(): HasMany
+    {
+        return $this->hasMany(Grade::class);
     }
 
 }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\{BelongsToMany, BelongsTo};
 
 // ====================================
 
@@ -14,9 +14,26 @@ class Group extends Model
 
     protected $table = 'groups';
 
+    protected $fillable = [
+        'name',
+        'classroom',
+        'shift',
+        'academic_year_id',
+    ];
+
+    // ------------------------------
+    // ### Scopes ###
+    // ------------------------------
+
+
     // ------------------------------
     // ### Relationships ###
     // ------------------------------
+
+    public function academicYear(): BelongsTo
+    {
+        return $this->belongsTo(AcademicYear::class);
+    }
 
     public function students(): BelongsToMany
     {
@@ -27,4 +44,5 @@ class Group extends Model
     {
         return $this->belongsToMany(Teacher::class);
     }
+
 }

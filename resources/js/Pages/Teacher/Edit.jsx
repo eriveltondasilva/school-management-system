@@ -34,7 +34,7 @@ export default function TeacherEditPage({ teacher }) {
             className='uppercase'
             fullSized>
             <Trash2 className='mr-2 h-5 w-5' />
-            Limpar campos
+            Resetar campos
           </Button>
           <Button
             type='submit'

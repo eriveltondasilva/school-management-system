@@ -24,13 +24,19 @@ class Student extends Model
         'gender',
         'birthday',
         'birthplace',
+        'gov_benefits',
+        'health_problems',
+        'note',
+        //
         'address_street',
         'address_city',
         'address_state',
         'address_zip_code',
-        'gov_benefits',
-        'health_problems',
-        'note',
+    ];
+
+    protected $casts = [
+        'birthday' => 'date',
+        'is_active' => 'boolean',
     ];
 
     // ------------------------------
@@ -54,5 +60,10 @@ class Student extends Model
     public function groups(): BelongsToMany
     {
         return $this->belongsToMany(Group::class);
+    }
+
+    public function grades(): BelongsToMany
+    {
+        return $this->belongsToMany(Grade::class);
     }
 }

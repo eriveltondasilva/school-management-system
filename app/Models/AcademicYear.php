@@ -14,8 +14,26 @@ class AcademicYear extends Model
 
     protected $table = 'academic_years';
 
+    protected $fillable = [
+        'year',
+        'start_date',
+        'end_date',
+        'is_current',
+    ];
+
+    protected $casts = [
+        'is_current' => 'boolean',
+        'start_date' => 'date',
+        'end_date' => 'date',
+    ];
+
+    // protected $dates = [
+    //     'start_date',
+    //     'end_date',
+    // ];
+
     // ------------------------------
-    // ### Relationships ###
+    // ### Scopes ###
     // ------------------------------
 
     public function scopeIsCurrent($query)
@@ -23,14 +41,18 @@ class AcademicYear extends Model
         return $query->where('is_current', 1);
     }
 
+    // ------------------------------
+    // ### Relationships ###
+    // ------------------------------
+
     public function quarters(): HasMany
     {
         return $this->hasMany(Quarter::class);
     }
 
-    public function subjects(): HasMany
+    public function groups(): HasMany
     {
-        return $this->hasMany(Subject::class);
+        return $this->hasMany(Group::class);
     }
 
 }

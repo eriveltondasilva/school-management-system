@@ -50,7 +50,7 @@ Route::middleware('auth')
     Route::get('/ano-letivo', [AcademicYearController::class, 'index'])->name('academicYear');
 
     // #GROUPS
-    Route::get('/turmas', GroupsController::class)->name('groups');
+    Route::get('/turmas', [GroupsController::class, 'index'])->name('groups');
 
     // #TEST
     Route::get('/teste', function () {

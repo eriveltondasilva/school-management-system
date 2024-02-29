@@ -49,8 +49,6 @@ class User extends Authenticatable
         return $query->where('is_active', 1);
     }
 
-    //
-
     public function profile(): MorphTo
     {
         return $this->morphTo();
