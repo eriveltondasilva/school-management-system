@@ -46,7 +46,8 @@ class StudentController extends Controller
         $validated = $request->validated();
         $student->update($validated);
 
-        return to_route('student.show', $student->id);
+        return to_route('student.show', $student->id)
+            ->with('message', 'Aluno atualizado com sucesso!');
     }
 
     public function destroy()

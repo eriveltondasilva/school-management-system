@@ -6,8 +6,9 @@ import Form from '@/Components/Form'
 import useFormDate from '@/Hooks/useFormDate'
 import AuthLayout from '@/Layouts/AuthLayout'
 
-import { breadcrumbs, titles } from './data'
+import AddressFormData from './Partials/AddressFormData'
 import TeacherFormData from './Partials/TeacherFormData'
+import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function TeacherCreatePage() {
@@ -32,8 +33,11 @@ export default function TeacherCreatePage() {
         {/* header teacher */}
         <Form.Header>{titles.create}</Form.Header>
 
-        {/*  */}
+        {/* form */}
         <TeacherFormData errors={errors} />
+
+        {/* address teacher */}
+        <AddressFormData errors={errors} />
 
         {/* footer teacher */}
         <Form.Footer>

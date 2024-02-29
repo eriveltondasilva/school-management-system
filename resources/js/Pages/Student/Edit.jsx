@@ -18,7 +18,7 @@ export default function StudentEditPage({ student }) {
         {/* header student */}
         <Form.Header>{titles.edit}</Form.Header>
 
-        {/*  */}
+        {/* form student */}
         <StudentFormData data={student} errors={errors} />
 
         {/* footer student */}

@@ -46,7 +46,8 @@ class TeacherController extends Controller
         $validated = $request->validated();
         $teacher->update($validated);
 
-        return to_route('teacher.show', $teacher->id);
+        return to_route('teacher.show', $teacher->id)
+            ->with('message', 'Professor atualizado com sucesso!');
     }
 
     public function destroy()

@@ -14,6 +14,7 @@ export default function TeacherFormData({ data = {}, errors = {}, readOnly }) {
         readOnly={readOnly}
       />
       {errors.name && <p className='text-sm text-red-500'>{errors.name}</p>}
+
       <br />
 
       {/* EMAIL DO PROFESSOR */}
@@ -25,9 +26,11 @@ export default function TeacherFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.email}
         readOnly={readOnly}
       />
+      {errors.email && <p className='text-sm text-red-500'>{errors.email}</p>}
+
       <br />
 
-      {/* TELEFONE CELULAR DO ALUNO */}
+      {/* TELEFONE CELULAR DO PROFESSOR */}
       <InputField
         id='phone'
         type='tel'
@@ -64,35 +67,36 @@ export default function TeacherFormData({ data = {}, errors = {}, readOnly }) {
           <Label htmlFor='gender-female'>Feminino</Label>
         </div>
       </fieldset>
+
       <br />
 
-      {/* CPF DO ALUNO */}
+      {/* CPF DO PROFESSOR */}
       <InputField
         id='cpf'
         type='text'
         label='CPF'
-        placeholder='insira o cpf do aluno...'
+        placeholder='insira o cpf do PROFESSOR...'
         defaultValue={data.cpf}
-        readOnly={readOnly}
-      />
-      {errors.email && <p className='text-sm text-red-500'>{errors.name}</p>}
-
-      <br />
-
-      {/* RG DO ALUNO */}
-      <InputField
-        id='rg'
-        type='text'
-        label='RG'
-        placeholder='insira o rg do aluno...'
-        defaultValue={data.rg}
         readOnly={readOnly}
       />
       {errors.cpf && <p className='text-sm text-red-500'>{errors.cpf}</p>}
 
       <br />
 
-      {/* DATA DE NASCIMENTO DO ALUNO */}
+      {/* RG DO PROFESSOR */}
+      <InputField
+        id='rg'
+        type='text'
+        label='RG'
+        placeholder='insira o rg do PROFESSOR...'
+        defaultValue={data.rg}
+        readOnly={readOnly}
+      />
+      {errors.rg && <p className='text-sm text-red-500'>{errors.rg}</p>}
+
+      <br />
+
+      {/* DATA DE NASCIMENTO DO PROFESSOR */}
       <InputField
         id='birthday'
         type='date'
@@ -105,84 +109,19 @@ export default function TeacherFormData({ data = {}, errors = {}, readOnly }) {
         <p className='text-sm text-red-500'>{errors.birthday}</p>
       )}
 
-      {/* ENDEREÇO DO ALUNO */}
-      <InputField
-        id='address_street'
-        type='text'
-        label='Endereço'
-        placeholder='insira o endereço do aluno...'
-        defaultValue={data.address_street}
-        readOnly={readOnly}
-      />
-      {errors.address_street && (
-        <p className='text-sm text-red-500'>{errors.address_street}</p>
-      )}
-
-      <br />
-
-      {/* CIDADE DO ALUNO */}
-      <InputField
-        id='address_city'
-        type='text'
-        label='Cidade'
-        placeholder='insira a cidade do aluno...'
-        defaultValue={data.address_city}
-        readOnly={readOnly}
-      />
-      {errors.address_city && (
-        <p className='text-sm text-red-500'>{errors.address_city}</p>
-      )}
-
-      <br />
-
-      {/* ESTADO DO ALUNO */}
-      <InputField
-        id='address_state'
-        type='text'
-        label='Estado'
-        placeholder='insira o estado do aluno...'
-        defaultValue={data.address_state}
-        readOnly={readOnly}
-      />
-      {errors.address_state && (
-        <p className='text-sm text-red-500'>{errors.address_state}</p>
-      )}
-
-      <br />
-
-      {/* CEP DO ALUNO */}
-      <InputField
-        id='address_zip_code'
-        type='text'
-        label='CEP'
-        placeholder='insira o cep do aluno...'
-        defaultValue={data.address_zip_code}
-        readOnly={readOnly}
-      />
-      {errors.address_zip_code && (
-        <p className='text-sm text-red-500'>{errors.address_zip_code}</p>
-      )}
-
-      <br />
-
       <br />
     </section>
   )
 }
 
 // ----------------------------------------------
-function InputField({ id, label, type, errors, ...props }) {
+function InputField({ id = '', label = '', type = 'text', ...props }) {
   return (
     <>
       <div className='mb-2 block'>
-        <Label htmlFor={id || ''} value={label || ''} />
+        <Label htmlFor={id} value={label} />
       </div>
-      <TextInput
-        id={id || ''}
-        name={id || ''}
-        type={type || 'text'}
-        {...props}
-      />
+      <TextInput id={id} name={id} type={type} {...props} />
     </>
   )
 }

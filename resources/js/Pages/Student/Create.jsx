@@ -13,6 +13,7 @@ import { breadcrumbs, titles } from './data'
 export default function StudentCreatePage() {
   const { flash } = usePage().props || {}
   const { errors, handleSubmit, isLoading } = useFormDate('student')
+
   return (
     <>
       <Form onSubmit={handleSubmit}>

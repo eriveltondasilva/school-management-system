@@ -14,6 +14,7 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
         readOnly={readOnly}
       />
       {errors.name && <p className='text-sm text-red-500'>{errors.name}</p>}
+
       <br />
 
       {/* EMAIL DO ALUNO */}
@@ -25,6 +26,8 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.email}
         readOnly={readOnly}
       />
+      {errors.email && <p className='text-sm text-red-500'>{errors.email}</p>}
+
       <br />
 
       {/* TELEFONE CELULAR DO ALUNO */}
@@ -64,6 +67,7 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
           <Label htmlFor='gender-female'>Feminino</Label>
         </div>
       </fieldset>
+
       <br />
 
       {/* CPF DO ALUNO */}
@@ -75,7 +79,7 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.cpf}
         readOnly={readOnly}
       />
-      {errors.email && <p className='text-sm text-red-500'>{errors.name}</p>}
+      {errors.cpf && <p className='text-sm text-red-500'>{errors.cpf}</p>}
 
       <br />
 
@@ -88,7 +92,7 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.rg}
         readOnly={readOnly}
       />
-      {errors.cpf && <p className='text-sm text-red-500'>{errors.cpf}</p>}
+      {errors.rg && <p className='text-sm text-red-500'>{errors.rg}</p>}
 
       <br />
 
@@ -97,7 +101,6 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
         id='birthday'
         type='date'
         label='Data de nascimento'
-        // placeholder='insira a data de nascimento do aluno...'
         defaultValue={data.birthday}
         readOnly={readOnly}
       />
@@ -118,66 +121,6 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
       />
       {errors.birthplace && (
         <p className='text-sm text-red-500'>{errors.birthplace}</p>
-      )}
-
-      <br />
-
-      {/* ENDEREÇO DO ALUNO */}
-      <InputField
-        id='address_street'
-        type='text'
-        label='Endereço'
-        placeholder='insira o endereço do aluno...'
-        defaultValue={data.address_street}
-        readOnly={readOnly}
-      />
-      {errors.address_street && (
-        <p className='text-sm text-red-500'>{errors.address_street}</p>
-      )}
-
-      <br />
-
-      {/* CIDADE DO ALUNO */}
-      <InputField
-        id='address_city'
-        type='text'
-        label='Cidade'
-        placeholder='insira a cidade do aluno...'
-        defaultValue={data.address_city}
-        readOnly={readOnly}
-      />
-      {errors.address_city && (
-        <p className='text-sm text-red-500'>{errors.address_city}</p>
-      )}
-
-      <br />
-
-      {/* ESTADO DO ALUNO */}
-      <InputField
-        id='address_state'
-        type='text'
-        label='Estado'
-        placeholder='insira o estado do aluno...'
-        defaultValue={data.address_state}
-        readOnly={readOnly}
-      />
-      {errors.address_state && (
-        <p className='text-sm text-red-500'>{errors.address_state}</p>
-      )}
-
-      <br />
-
-      {/* CEP DO ALUNO */}
-      <InputField
-        id='address_zip_code'
-        type='text'
-        label='CEP'
-        placeholder='insira o cep do aluno...'
-        defaultValue={data.address_zip_code}
-        readOnly={readOnly}
-      />
-      {errors.address_zip_code && (
-        <p className='text-sm text-red-500'>{errors.address_zip_code}</p>
       )}
 
       <br />
@@ -230,18 +173,13 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
 }
 
 // ----------------------------------------------
-function InputField({ id, label, type, errors, ...props }) {
+function InputField({ id = '', label = '', type = 'text', ...props }) {
   return (
     <>
       <div className='mb-2 block'>
-        <Label htmlFor={id || ''} value={label || ''} />
+        <Label htmlFor={id} value={label} />
       </div>
-      <TextInput
-        id={id || ''}
-        name={id || ''}
-        type={type || 'text'}
-        {...props}
-      />
+      <TextInput id={id} name={id} type={type} {...props} />
     </>
   )
 }

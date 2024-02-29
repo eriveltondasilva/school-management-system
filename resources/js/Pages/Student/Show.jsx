@@ -1,6 +1,7 @@
-import { Link } from '@inertiajs/react'
-import { Button, Tooltip } from 'flowbite-react'
-import { Pencil, Plus } from 'lucide-react'
+import { Link, usePage } from '@inertiajs/react'
+import { Alert, Button, Tooltip } from 'flowbite-react'
+import { Check, Pencil, Plus } from 'lucide-react'
+import { useState } from 'react'
 
 import Form from '@/Components/Form'
 import AuthLayout from '@/Layouts/AuthLayout'
@@ -10,8 +11,13 @@ import StudentFormData from './Partials/StudentFormData'
 
 // ====================================
 export default function StudentShowPage({ student }) {
+  const { flash } = usePage().props || {}
+
   return (
     <Form>
+      {/* flash message */}
+      {flash?.message && <ShowPageAlert>{flash.message}</ShowPageAlert>}
+
       {/* header student */}
       <Form.Header>
         <span className='flex gap-4'>
@@ -33,6 +39,23 @@ export default function StudentShowPage({ student }) {
       {/*  */}
       <StudentFormData data={student} readOnly />
     </Form>
+  )
+}
+
+function ShowPageAlert({ children }) {
+  const [isShowed, setIsShowed] = useState(true)
+
+  return (
+    <>
+      {isShowed && (
+        <Alert
+          color='success'
+          icon={Check}
+          onDismiss={() => setIsShowed(!isShowed)}>
+          <span className='font-medium'>{children}</span>
+        </Alert>
+      )}
+    </>
   )
 }
 
