@@ -9,7 +9,7 @@ return new class () extends Migration {
     {
         Schema::create('academic_years', function (Blueprint $table) {
             $table->id();
-            $table->year('year')->unique()->comment('ID do ano acadêmico');
+            $table->integer('year')->unique()->comment('ID do ano acadêmico');
             $table->date('start_date')->nullable()->comment('Data de início do ano acadêmico');
             $table->date('end_date')->nullable()->comment('Data de término do ano acadêmico');
             $table->boolean('is_current')->default(false)->comment('Indica se é o ano atual');

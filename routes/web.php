@@ -47,7 +47,17 @@ Route::middleware('auth')
     })->name('calendar');
 
     // #ACADEMIC_YEAR
-    Route::get('/ano-letivo', [AcademicYearController::class, 'index'])->name('academicYear');
+    Route::controller(AcademicYearController::class)
+    ->prefix('/ano-letivo')->name('academicYear.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/cadastrar', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        //
+        Route::get('/{academicYear}', 'show')->name('show');
+        Route::put('/{academicYear}', 'update')->name('update');
+        Route::get('/{academicYear}/editar', 'edit')->name('edit');
+    });
 
     // #GROUPS
     Route::get('/turmas', [GroupsController::class, 'index'])->name('groups');

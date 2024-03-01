@@ -6,17 +6,12 @@ use App\Http\Controllers\StudentController;
 //# STUDENTS
 Route::middleware('auth')
 ->controller(StudentController::class)
-->name('student.')
+->prefix('/alunos')->name('student.')
 ->group(function () {
-    Route::get('/alunos', 'index')->name('index');
-
-    Route::get('/alunos/cadastrar', 'create')->name('create');
-
-    Route::post('/alunos', 'store')->name('store');
-
-    Route::get('/alunos/{student}', 'show')->name('show');
-
-    Route::get('/alunos/{student}/editar', 'edit')->name('edit');
-
-    Route::put('/alunos/{student}', 'update')->name('update');
+    Route::get('/', 'index')->name('index');
+    Route::get('/cadastrar', 'create')->name('create');
+    Route::post('/', 'store')->name('store');
+    Route::get('/{student}', 'show')->name('show');
+    Route::get('/{student}/editar', 'edit')->name('edit');
+    Route::put('/{student}', 'update')->name('update');
 });
