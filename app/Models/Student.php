@@ -35,7 +35,7 @@ class Student extends Model
     ];
 
     protected $casts = [
-        'birthday' => 'date',
+        'birthday' => 'datetime:Y-m-d',
         'is_active' => 'boolean',
     ];
 

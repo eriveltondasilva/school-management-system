@@ -33,7 +33,7 @@ class Teacher extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
-        'birthday' => 'date',
+        'birthday' => 'datetime:Y-m-d',
         // 'gender' => 'enum:M,F',
     ];
 

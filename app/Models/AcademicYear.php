@@ -23,8 +23,8 @@ class AcademicYear extends Model
 
     protected $casts = [
         'is_current' => 'boolean',
-        'start_date' => 'date',
-        'end_date' => 'date',
+        'start_date' => 'datetime:Y-m-d',
+        'end_date' => 'datetime:Y-m-d',
     ];
 
     // protected $dates = [

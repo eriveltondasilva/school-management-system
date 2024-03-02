@@ -35,12 +35,17 @@ class AcademicYearController extends Controller
     {
         $validated = $request->validate([
             'year' => 'required|integer|min:1900|max:2999|unique:academic_years,year',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after:start_date',
         ]);
 
-        AcademicYear::create($validated);
+        $currentAcademicYear = AcademicYear::create($validated);
+
+        return to_route('academic-year.edit', $currentAcademicYear->id)
+            ->with('message', 'Ano letivo criado com sucesso.');
     }
 
-    public function update(Request $request): void
+    public function update(Request $request, AcademicYear $academicYear)
     {
         $validated = $request->validate([
             'is_current' => 'nullable|boolean',
@@ -52,12 +57,8 @@ class AcademicYearController extends Controller
             AcademicYear::where('is_current', true)->update(['is_current' => false]);
         }
 
-        $academicYear = AcademicYear::find($request->id);
-
-        if (! $academicYear) {
-            return;
-        }
-
         $academicYear->update($validated);
+
+        return back()->with('message', "Ano letivo {$academicYear->year} atualizado com sucesso.");
     }
 }
