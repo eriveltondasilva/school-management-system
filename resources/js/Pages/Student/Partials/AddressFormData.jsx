@@ -1,7 +1,11 @@
-import { Label, TextInput } from 'flowbite-react'
+import Input from '@/Components/Input'
 
 // ================================================
-export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
+export default function StudentFormData({
+  data = {},
+  errors = {},
+  readOnly = false,
+}) {
   return (
     <section className='mb-4'>
       <h2 className='mb-5 text-lg font-medium text-gray-900 dark:text-gray-100'>
@@ -9,7 +13,7 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
       </h2>
 
       {/* ENDEREÇO DO ALUNO */}
-      <InputField
+      <Input.Text
         id='address_street'
         type='text'
         label='Endereço'
@@ -17,14 +21,12 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.address_street}
         readOnly={readOnly}
       />
-      {errors.address_street && (
-        <p className='text-sm text-red-500'>{errors.address_street}</p>
-      )}
+      <Input.Error message={errors.address_street} />
 
       <br />
 
       {/* CIDADE DO ALUNO */}
-      <InputField
+      <Input.Text
         id='address_city'
         type='text'
         label='Cidade'
@@ -32,14 +34,12 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.address_city}
         readOnly={readOnly}
       />
-      {errors.address_city && (
-        <p className='text-sm text-red-500'>{errors.address_city}</p>
-      )}
+      <Input.Error message={errors.address_city} />
 
       <br />
 
       {/* ESTADO DO ALUNO */}
-      <InputField
+      <Input.Text
         id='address_state'
         type='text'
         label='Estado'
@@ -47,14 +47,12 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.address_state}
         readOnly={readOnly}
       />
-      {errors.address_state && (
-        <p className='text-sm text-red-500'>{errors.address_state}</p>
-      )}
+      <Input.Error message={errors.address_state} />
 
       <br />
 
       {/* CEP DO ALUNO */}
-      <InputField
+      <Input.Text
         id='address_zip_code'
         type='text'
         label='CEP'
@@ -62,23 +60,9 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.address_zip_code}
         readOnly={readOnly}
       />
-      {errors.address_zip_code && (
-        <p className='text-sm text-red-500'>{errors.address_zip_code}</p>
-      )}
+      <Input.Error message={errors.address_zip_code} />
 
       <br />
     </section>
-  )
-}
-
-// ----------------------------------------------
-function InputField({ id = '', label = '', type = 'text', ...props }) {
-  return (
-    <>
-      <div className='mb-2 block'>
-        <Label htmlFor={id} value={label} />
-      </div>
-      <TextInput id={id} name={id} type={type} {...props} />
-    </>
   )
 }

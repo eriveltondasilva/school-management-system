@@ -1,5 +1,5 @@
 import { Head, Link, useForm } from '@inertiajs/react'
-import { useEffect, useId } from 'react'
+import { useEffect } from 'react'
 
 import Button from '@/Components/Button'
 import Checkbox from '@/Components/Checkbox'
@@ -7,7 +7,6 @@ import Input from '@/Components/Input'
 import GuestLayout from '@/Layouts/GuestLayout'
 
 export default function Login({ status, canResetPassword }) {
-  const ID = useId()
   const { data, setData, post, processing, errors, reset } = useForm({
     email: '',
     password: '',
@@ -20,9 +19,12 @@ export default function Login({ status, canResetPassword }) {
     }
   }, [])
 
+  const handleChange = (e) => {
+    setData(e.target.name, e.target.value)
+  }
+
   const submit = (e) => {
     e.preventDefault()
-
     post(route('login'))
   }
 
@@ -36,16 +38,14 @@ export default function Login({ status, canResetPassword }) {
 
       <form onSubmit={submit}>
         <div>
-          <Input.Label htmlFor={`${ID}-email`} value='Email' />
-
           <Input
-            id={`${ID}-email`}
+            id='email'
             type='email'
-            name='email'
+            label='Email'
             value={data.email}
             className='mt-1 block w-full'
             autoComplete='username'
-            onChange={(e) => setData('email', e.target.value)}
+            onChange={handleChange}
             autoFocus
           />
 
@@ -53,16 +53,14 @@ export default function Login({ status, canResetPassword }) {
         </div>
 
         <div className='mt-4'>
-          <Input.Label htmlFor={`${ID}-password`} value='Password' />
-
-          <Input
-            id={`${ID}-password`}
+          <Input.Text
+            id='password'
             type='password'
-            name='password'
+            label='Senha'
             value={data.password}
             className='mt-1 block w-full'
             autoComplete='current-password'
-            onChange={(e) => setData('password', e.target.value)}
+            onChange={handleChange}
           />
 
           <Input.Error message={errors.password} />
@@ -73,10 +71,10 @@ export default function Login({ status, canResetPassword }) {
             <Checkbox
               name='remember'
               checked={data.remember}
-              onChange={(e) => setData('remember', e.target.checked)}
+              onChange={handleChange}
             />
             <span className='ms-2 text-sm text-gray-600 dark:text-gray-400'>
-              Remember me
+              Lembre-me
             </span>
           </label>
         </div>
@@ -86,7 +84,7 @@ export default function Login({ status, canResetPassword }) {
             <Link
               href={route('password.request')}
               className='rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800'>
-              Forgot your password?
+              Esqueceu sua senha?
             </Link>
           )}
 

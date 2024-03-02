@@ -1,6 +1,10 @@
-import { Input, InputError, InputLabel } from './Input'
+import { InputError, InputText, InputTextarea } from './Input'
 
 // ---------------------------------------------------------------------------
-Input.Error = InputError
-Input.Label = InputLabel
+const Input = {
+  Text: InputText,
+  Textarea: InputTextarea,
+  Error: InputError,
+}
+
 export default Input

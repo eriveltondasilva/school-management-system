@@ -1,12 +1,11 @@
 import { Head, useForm } from '@inertiajs/react'
-import { useEffect, useId } from 'react'
+import { useEffect } from 'react'
 
 import Button from '@/Components/Button'
 import Input from '@/Components/Input'
 import GuestLayout from '@/Layouts/GuestLayout'
 
 export default function ResetPassword({ token, email }) {
-  const ID = useId()
   const { data, setData, post, processing, errors, reset } = useForm({
     token: token,
     email: email,
@@ -20,6 +19,10 @@ export default function ResetPassword({ token, email }) {
     }
   }, [])
 
+  const handleChange = (e) => {
+    setData(e.target.name, e.target.value)
+  }
+
   const submit = (e) => {
     e.preventDefault()
 
@@ -32,32 +35,28 @@ export default function ResetPassword({ token, email }) {
 
       <form onSubmit={submit}>
         <div>
-          <Input.Label htmlFor={`${ID}-email`} value='Email' />
-
-          <Input
-            id={`${ID}-email`}
+          <Input.Text
+            id='email'
             type='email'
-            name='email'
+            label='Email'
             value={data.email}
             className='mt-1 block w-full'
             autoComplete='username'
-            onChange={(e) => setData('email', e.target.value)}
+            onChange={handleChange}
           />
 
           <Input.Error message={errors.email} />
         </div>
 
         <div className='mt-4'>
-          <Input.Label htmlFor={`${ID}-password`} value='Password' />
-
-          <Input
-            id={`${ID}-password`}
+          <Input.Text
+            id='password'
             type='password'
-            name='password'
+            label='Senha'
             value={data.password}
             className='mt-1 block w-full'
             autoComplete='new-password'
-            onChange={(e) => setData('password', e.target.value)}
+            onChange={handleChange}
             autoFocus
           />
 
@@ -65,19 +64,14 @@ export default function ResetPassword({ token, email }) {
         </div>
 
         <div className='mt-4'>
-          <Input.Label
-            htmlFor={`${ID}-password_confirmation`}
-            value='Confirm Password'
-          />
-
-          <Input
-            id={`${ID}-password_confirmation`}
+          <Input.Text
+            id='password_confirmation'
             type='password'
-            name='password_confirmation'
+            label='Confirmar senha'
             value={data.password_confirmation}
             className='mt-1 block w-full'
             autoComplete='new-password'
-            onChange={(e) => setData('password_confirmation', e.target.value)}
+            onChange={handleChange}
           />
 
           <Input.Error message={errors.password_confirmation} />
@@ -86,7 +80,7 @@ export default function ResetPassword({ token, email }) {
         <div className='mt-4 flex items-center justify-end'>
           <div className='ms-4'>
             <Button type='submit' disabled={processing}>
-              Reset Password
+              Resetar sua senha
             </Button>
           </div>
         </div>

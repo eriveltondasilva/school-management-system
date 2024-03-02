@@ -9,7 +9,7 @@ import Input from '@/Components/Input'
 export default function UpdateProfileInformation({
   mustVerifyEmail,
   status,
-  className,
+  className = '',
 }) {
   const user = usePage().props.auth.user || {}
 
@@ -30,16 +30,15 @@ export default function UpdateProfileInformation({
   }
 
   return (
-    <section className={className || ''}>
+    <section className={className}>
       <Header />
 
       <form onSubmit={handleSubmit} className='mt-6 space-y-6'>
         <div>
-          <Input.Label htmlFor='nickname' value='Apelido' />
-
-          <Input
+          <Input.Text
             id='nickname'
-            name='nickname'
+            type='text'
+            label='Nickname'
             className='mt-1 block w-full'
             value={data.nickname}
             onChange={handleChange}
@@ -52,12 +51,10 @@ export default function UpdateProfileInformation({
         </div>
 
         <div>
-          <Input.Label htmlFor='email' value='Email' />
-
-          <Input
+          <Input.Text
             id='email'
             type='email'
-            name='email'
+            label='Email'
             className='mt-1 block w-full'
             value={data.email}
             onChange={handleChange}

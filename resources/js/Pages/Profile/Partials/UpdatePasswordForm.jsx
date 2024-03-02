@@ -6,7 +6,7 @@ import { Save } from 'lucide-react'
 import Input from '@/Components/Input'
 
 // ============================================================================
-export default function UpdatePasswordForm({ className }) {
+export default function UpdatePasswordForm({ className = '' }) {
   const { data, setData, errors, put, reset, processing, recentlySuccessful } =
     useForm({
       current_password: '',
@@ -15,33 +15,30 @@ export default function UpdatePasswordForm({ className }) {
     })
 
   // ----------------------------------------------
+  function handleChange(e) {
+    setData(e.target.name, e.target.value)
+  }
+
   function handleSubmit(e) {
     e.preventDefault()
-
     put(route('password.update'), {
       preserveScroll: true,
       onSuccess: () => reset(),
     })
   }
 
-  function handleChange(e) {
-    setData(e.target.name, e.target.value)
-  }
-
   return (
-    <section className={className || ''}>
+    <section className={className}>
       <Header />
 
       <form onSubmit={handleSubmit} className='mt-6 space-y-6'>
         <div>
-          <Input.Label htmlFor='current_password' value='Senha atual' />
-
-          <Input
+          <Input.Text
             id='current_password'
-            name='current_password'
+            type='password'
+            label='Senha atual'
             value={data.current_password}
             onChange={handleChange}
-            type='password'
             className='mt-1 block w-full'
             autoComplete='current-password'
           />
@@ -50,14 +47,12 @@ export default function UpdatePasswordForm({ className }) {
         </div>
 
         <div>
-          <Input.Label htmlFor='password' value='Nova senha' />
-
-          <Input
+          <Input.Text
             id='password'
-            name='password'
+            type='password'
+            label='Nova senha'
             value={data.password}
             onChange={handleChange}
-            type='password'
             className='mt-1 block w-full'
             autoComplete='new-password'
           />
@@ -66,17 +61,12 @@ export default function UpdatePasswordForm({ className }) {
         </div>
 
         <div>
-          <Input.Label
-            htmlFor='password_confirmation'
-            value='Confirme a nova senha'
-          />
-
-          <Input
+          <Input.Text
             id='password_confirmation'
-            name='password_confirmation'
+            label='Confirme a nova senha'
+            type='password'
             value={data.password_confirmation}
             onChange={handleChange}
-            type='password'
             className='mt-1 block w-full'
             autoComplete='new-password'
           />

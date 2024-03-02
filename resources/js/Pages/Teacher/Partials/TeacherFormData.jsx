@@ -1,11 +1,12 @@
-import { Label, Radio, TextInput } from 'flowbite-react'
+import Input from '@/Components/Input'
+import { Label, Radio } from 'flowbite-react'
 
 // ================================================
 export default function TeacherFormData({ data = {}, errors = {}, readOnly }) {
   return (
     <section className='mb-4'>
       {/* NOME DO PROFESSOR */}
-      <InputField
+      <Input.Text
         id='name'
         type='text'
         label='Nome completo'
@@ -13,12 +14,12 @@ export default function TeacherFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.name}
         readOnly={readOnly}
       />
-      {errors.name && <p className='text-sm text-red-500'>{errors.name}</p>}
+      <Input.Error message={errors.name} />
 
       <br />
 
       {/* EMAIL DO PROFESSOR */}
-      <InputField
+      <Input.Text
         id='email'
         type='email'
         label='Email'
@@ -26,12 +27,12 @@ export default function TeacherFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.email}
         readOnly={readOnly}
       />
-      {errors.email && <p className='text-sm text-red-500'>{errors.email}</p>}
+      <Input.Error message={errors.email} />
 
       <br />
 
       {/* TELEFONE CELULAR DO PROFESSOR */}
-      <InputField
+      <Input.Text
         id='phone'
         type='tel'
         label='Telefone celular'
@@ -39,7 +40,7 @@ export default function TeacherFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.phone}
         readOnly={readOnly}
       />
-      {errors.phone && <p className='text-sm text-red-500'>{errors.phone}</p>}
+      <Input.Error message={errors.phone} />
 
       <br />
 
@@ -71,7 +72,7 @@ export default function TeacherFormData({ data = {}, errors = {}, readOnly }) {
       <br />
 
       {/* CPF DO PROFESSOR */}
-      <InputField
+      <Input.Text
         id='cpf'
         type='text'
         label='CPF'
@@ -79,12 +80,12 @@ export default function TeacherFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.cpf}
         readOnly={readOnly}
       />
-      {errors.cpf && <p className='text-sm text-red-500'>{errors.cpf}</p>}
+      <Input.Error message={errors.cpf} />
 
       <br />
 
       {/* RG DO PROFESSOR */}
-      <InputField
+      <Input.Text
         id='rg'
         type='text'
         label='RG'
@@ -92,36 +93,21 @@ export default function TeacherFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.rg}
         readOnly={readOnly}
       />
-      {errors.rg && <p className='text-sm text-red-500'>{errors.rg}</p>}
+      <Input.Error message={errors.rg} />
 
       <br />
 
       {/* DATA DE NASCIMENTO DO PROFESSOR */}
-      <InputField
+      <Input.Text
         id='birthday'
         type='date'
         label='Data de nascimento'
-        // placeholder='insira a data de nascimento do professor...'
         defaultValue={data.birthday}
         readOnly={readOnly}
       />
-      {errors.birthday && (
-        <p className='text-sm text-red-500'>{errors.birthday}</p>
-      )}
+      <Input.Error message={errors.birthday} />
 
       <br />
     </section>
-  )
-}
-
-// ----------------------------------------------
-function InputField({ id = '', label = '', type = 'text', ...props }) {
-  return (
-    <>
-      <div className='mb-2 block'>
-        <Label htmlFor={id} value={label} />
-      </div>
-      <TextInput id={id} name={id} type={type} {...props} />
-    </>
   )
 }

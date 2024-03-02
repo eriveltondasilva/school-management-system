@@ -53,49 +53,39 @@ export default function DeleteUserForm({ className = '' }) {
         Deletar Conta
       </Button>
 
-      <Modal show={confirmingUserDeletion} onClose={closeModal}>
-        <form onSubmit={deleteUser} className='p-6'>
-          <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
-            Você tem certeza que deseja deletar sua conta?
-          </h2>
+      {/* model */}
+      <DeleteUserModel
+        deleteUser={deleteUser}
+        closeModal={closeModal}
+        confirmingUserDeletion={confirmingUserDeletion}>
+        {/*  */}
+        <div className='mt-6'>
+          <Input.Text
+            id='password'
+            type='password'
+            label='Senha'
+            value={data.password}
+            onChange={handleChange}
+            className='mt-1 block w-3/4'
+            placeholder='sua senha...'
+            autoFocus
+          />
 
-          <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
-            Depois que sua conta for excluída, todos os seus recursos e dados
-            serão excluído permanentemente. Por favor, digite sua senha para
-            confirmar que você faria gostaria de excluir permanentemente sua
-            conta.
-          </p>
+          <Input.Error message={errors.password} />
+        </div>
 
-          <div className='mt-6'>
-            <Input.Label htmlFor='password' value='Password' />
+        <div className='mt-6 flex justify-end'>
+          <Button outline color='blue' onClick={closeModal}>
+            Cancelar
+          </Button>
 
-            <Input
-              id='password'
-              name='password'
-              type='password'
-              value={data.password}
-              onChange={handleChange}
-              className='mt-1 block w-3/4'
-              placeholder='Password'
-              autoFocus
-            />
-
-            <Input.Error message={errors.password} />
-          </div>
-
-          <div className='mt-6 flex justify-end'>
-            <Button outline color='blue' onClick={closeModal}>
-              Cancel
+          <div className='ms-3'>
+            <Button type='submit' color='failure' disabled={processing}>
+              Deletar Conta
             </Button>
-
-            <div className='ms-3'>
-              <Button type='submit' color='failure' disabled={processing}>
-                Delete Account
-              </Button>
-            </div>
           </div>
-        </form>
-      </Modal>
+        </div>
+      </DeleteUserModel>
     </section>
   )
 }
@@ -105,7 +95,7 @@ function Header() {
   return (
     <header>
       <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
-        Delete Account Deletar Conta
+        Deletar Conta
       </h2>
 
       <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
@@ -114,5 +104,30 @@ function Header() {
         dados ou informações que você deseja reter.
       </p>
     </header>
+  )
+}
+
+function DeleteUserModel({
+  confirmingUserDeletion,
+  closeModal,
+  deleteUser,
+  children,
+}) {
+  return (
+    <Modal show={confirmingUserDeletion} onClose={closeModal}>
+      <form onSubmit={deleteUser} className='p-6'>
+        <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
+          Você tem certeza que deseja deletar sua conta?
+        </h2>
+
+        <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
+          Depois que sua conta for excluída, todos os seus recursos e dados
+          serão excluído permanentemente. Por favor, digite sua senha para
+          confirmar que você faria gostaria de excluir permanentemente sua
+          conta.
+        </p>
+        {children}
+      </form>
+    </Modal>
   )
 }

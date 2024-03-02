@@ -1,11 +1,16 @@
-import { Label, Radio, TextInput, Textarea } from 'flowbite-react'
+import Input from '@/Components/Input'
+import { Label, Radio, Textarea } from 'flowbite-react'
 
 // ================================================
-export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
+export default function StudentFormData({
+  data = {},
+  errors = {},
+  readOnly = false,
+}) {
   return (
     <section className='mb-4'>
       {/* NOME DO ALUNO */}
-      <InputField
+      <Input.Text
         id='name'
         type='text'
         label='Nome completo'
@@ -13,12 +18,12 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.name}
         readOnly={readOnly}
       />
-      {errors.name && <p className='text-sm text-red-500'>{errors.name}</p>}
+      <Input.Error message={errors.name} />
 
       <br />
 
       {/* EMAIL DO ALUNO */}
-      <InputField
+      <Input.Text
         id='email'
         type='email'
         label='Email'
@@ -26,12 +31,12 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.email}
         readOnly={readOnly}
       />
-      {errors.email && <p className='text-sm text-red-500'>{errors.email}</p>}
+      <Input.Error message={errors.email} />
 
       <br />
 
       {/* TELEFONE CELULAR DO ALUNO */}
-      <InputField
+      <Input.Text
         id='phone'
         type='tel'
         label='Telefone celular'
@@ -39,12 +44,12 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.phone}
         readOnly={readOnly}
       />
-      {errors.phone && <p className='text-sm text-red-500'>{errors.phone}</p>}
+      <Input.Error message={errors.phone} />
 
       <br />
 
       {/* GÊNERO DO ALUNO */}
-      <fieldset className='flex max-w-md flex-col gap-3'>
+      <section className='flex max-w-md flex-col gap-3'>
         <Label htmlFor='gender'>Gênero do aluno</Label>
         <div className='flex items-center gap-2'>
           <Radio
@@ -66,12 +71,12 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
           />
           <Label htmlFor='gender-female'>Feminino</Label>
         </div>
-      </fieldset>
+      </section>
 
       <br />
 
       {/* CPF DO ALUNO */}
-      <InputField
+      <Input.Text
         id='cpf'
         type='text'
         label='CPF'
@@ -79,12 +84,12 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.cpf}
         readOnly={readOnly}
       />
-      {errors.cpf && <p className='text-sm text-red-500'>{errors.cpf}</p>}
+      <Input.Error message={errors.cpf} />
 
       <br />
 
       {/* RG DO ALUNO */}
-      <InputField
+      <Input.Text
         id='rg'
         type='text'
         label='RG'
@@ -92,26 +97,24 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.rg}
         readOnly={readOnly}
       />
-      {errors.rg && <p className='text-sm text-red-500'>{errors.rg}</p>}
+      <Input.Error message={errors.rg} />
 
       <br />
 
       {/* DATA DE NASCIMENTO DO ALUNO */}
-      <InputField
+      <Input.Text
         id='birthday'
         type='date'
         label='Data de nascimento'
         defaultValue={data.birthday}
         readOnly={readOnly}
       />
-      {errors.birthday && (
-        <p className='text-sm text-red-500'>{errors.birthday}</p>
-      )}
+      <Input.Error message={errors.birthday} />
 
       <br />
 
       {/* LOCAL DE NASCIMENTO DO ALUNO */}
-      <InputField
+      <Input.Text
         id='birthplace'
         type='text'
         label='Local de nascimento'
@@ -119,14 +122,12 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.birthplace}
         readOnly={readOnly}
       />
-      {errors.birthplace && (
-        <p className='text-sm text-red-500'>{errors.birthplace}</p>
-      )}
+      <Input.Error message={errors.birthplace} />
 
       <br />
 
       {/* BENEFíCIO DO GOVERNO DO ALUNO */}
-      <InputField
+      <Input.Text
         id='gov_benefits'
         type='text'
         label='Benefício'
@@ -134,14 +135,12 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.gov_benefits}
         readOnly={readOnly}
       />
-      {errors.gov_benefits && (
-        <p className='text-sm text-red-500'>{errors.gov_benefits}</p>
-      )}
+      <Input.Error message={errors.gov_benefits} />
 
       <br />
 
       {/* PROBLEMAS DE SAúDE DO ALUNO */}
-      <InputField
+      <Input.Text
         id='health_problems'
         type='text'
         label='Problemas de saúde'
@@ -149,9 +148,7 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.health_problems}
         readOnly={readOnly}
       />
-      {errors.health_problems && (
-        <p className='text-sm text-red-500'>{errors.health_problems}</p>
-      )}
+      <Input.Error message={errors.health_problems} />
 
       <br />
 
@@ -167,19 +164,7 @@ export default function StudentFormData({ data = {}, errors = {}, readOnly }) {
         defaultValue={data.note}
         readOnly={readOnly}
       />
-      {errors.note && <p className='text-sm text-red-500'>{errors.note}</p>}
+      <Input.Error message={errors.note} />
     </section>
-  )
-}
-
-// ----------------------------------------------
-function InputField({ id = '', label = '', type = 'text', ...props }) {
-  return (
-    <>
-      <div className='mb-2 block'>
-        <Label htmlFor={id} value={label} />
-      </div>
-      <TextInput id={id} name={id} type={type} {...props} />
-    </>
   )
 }

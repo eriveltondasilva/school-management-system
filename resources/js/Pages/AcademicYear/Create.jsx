@@ -1,4 +1,4 @@
-import { Button, Label, TextInput } from 'flowbite-react'
+import { Button } from 'flowbite-react'
 import { Save } from 'lucide-react'
 
 import Form from '@/Components/Form'
@@ -6,6 +6,7 @@ import useFormDate from '@/Hooks/useFormDate'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
+import AcademicYearFormData from './Partials/AcademicYearFormData'
 
 export default function CreatePage({ academicYear }) {
   const { handleSubmit, isLoading, errors } = useFormDate('academicYear')
@@ -16,18 +17,11 @@ export default function CreatePage({ academicYear }) {
         {/* <TitleAcademicYearPage>Criar Ano Letivo</TitleAcademicYearPage> */}
 
         <Form onSubmit={handleSubmit}>
-          <InputField
-            id='year'
-            name='year'
-            type='number'
-            label='Ano Letivo'
-            placeholder='insira o ano letivo...'
-            defaultValue={new Date().getFullYear()}
-            pattern='[0-9]{4}'
-            maxLength='4'
-            minLength='4'
-          />
-          {errors.year && <p className='text-sm text-red-500'>{errors.year}</p>}
+          {/* header teacher */}
+          <Form.Header>{titles.create}</Form.Header>
+
+          {/* form */}
+          <AcademicYearFormData data={academicYear} errors={errors} />
 
           {/* footer teacher */}
           <Form.Footer>
@@ -43,17 +37,6 @@ export default function CreatePage({ academicYear }) {
           </Form.Footer>
         </Form>
       </section>
-    </>
-  )
-}
-
-function InputField({ id = '', label = '', type = 'text', ...props }) {
-  return (
-    <>
-      <div className='mb-2 block'>
-        <Label htmlFor={id} value={label} />
-      </div>
-      <TextInput id={id} name={id} type={type} {...props} />
     </>
   )
 }

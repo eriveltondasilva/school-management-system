@@ -1,20 +1,22 @@
 import { Head, useForm } from '@inertiajs/react'
-import { useId } from 'react'
 
 import Button from '@/Components/Button'
 import Input from '@/Components/Input'
 import GuestLayout from '@/Layouts/GuestLayout'
 
+// ==============================
 export default function ForgotPassword({ status }) {
-  const ID = useId()
   const { data, setData, post, processing, errors } = useForm({
     email: '',
   })
 
   const submit = (e) => {
     e.preventDefault()
-
     post(route('password.email'))
+  }
+
+  const handleChange = (e) => {
+    setData(e.target.name, e.target.value)
   }
 
   return (
@@ -22,9 +24,9 @@ export default function ForgotPassword({ status }) {
       <Head title='Forgot Password' />
 
       <div className='mb-4 text-sm text-gray-600 dark:text-gray-400'>
-        Forgot your password? No problem. Just let us know your email address
-        and we will email you a password reset link that will allow you to
-        choose a new one.
+        Esqueceu sua senha? Sem problemas. Basta nos informar seu endereço de
+        e-mail e enviaremos por e-mail um link de redefinição de senha que
+        permitirá que você escolha um novo.
       </div>
 
       {status && (
@@ -34,13 +36,12 @@ export default function ForgotPassword({ status }) {
       )}
 
       <form onSubmit={submit}>
-        <Input
-          id={`${ID}-email`}
+        <Input.Text
+          id='email'
           type='email'
-          name='email'
           value={data.email}
           className='mt-1 block w-full'
-          onChange={(e) => setData('email', e.target.value)}
+          onChange={handleChange}
           autoFocus
         />
 
@@ -49,7 +50,7 @@ export default function ForgotPassword({ status }) {
         <div className='mt-4 flex items-center justify-end'>
           <div className='ms-4'>
             <Button type='submit' disabled={processing}>
-              Email Password Reset Link
+              Link de redefinição de senha de e-mail
             </Button>
           </div>
         </div>
