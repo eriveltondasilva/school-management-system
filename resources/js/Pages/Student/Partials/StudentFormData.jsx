@@ -1,5 +1,5 @@
 import Input from '@/Components/Input'
-import { Label, Radio, Textarea } from 'flowbite-react'
+import { Label, Radio } from 'flowbite-react'
 
 // ================================================
 export default function StudentFormData({
@@ -50,7 +50,7 @@ export default function StudentFormData({
 
       {/* GÊNERO DO ALUNO */}
       <section className='flex max-w-md flex-col gap-3'>
-        <Label htmlFor='gender'>Gênero do aluno</Label>
+        <Label>Gênero do aluno</Label>
         <div className='flex items-center gap-2'>
           <Radio
             id='gender-male'
@@ -153,12 +153,9 @@ export default function StudentFormData({
       <br />
 
       {/* OBSERVAÇÕES REFERENTES AO ALUNO */}
-      <div className='mb-2 block'>
-        <Label htmlFor='note' value='Observações' />
-      </div>
-      <Textarea
+      <Input.Textarea
         id='note'
-        name='note'
+        label='Observações'
         placeholder='insira as observações...'
         rows={4}
         defaultValue={data.note}

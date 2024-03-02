@@ -9,13 +9,11 @@ import { breadcrumbs, titles } from './data'
 import AcademicYearFormData from './Partials/AcademicYearFormData'
 
 export default function CreatePage({ academicYear }) {
-  const { handleSubmit, isLoading, errors } = useFormDate('academicYear')
+  const { handleSubmit, isLoading, errors } = useFormDate('academic-year')
   return (
     <>
       {/*  CRIAR ANO LETIVO */}
       <section>
-        {/* <TitleAcademicYearPage>Criar Ano Letivo</TitleAcademicYearPage> */}
-
         <Form onSubmit={handleSubmit}>
           {/* header teacher */}
           <Form.Header>{titles.create}</Form.Header>

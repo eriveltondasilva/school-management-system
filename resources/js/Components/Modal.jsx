@@ -5,7 +5,7 @@ import { twJoin } from 'tailwind-merge'
 export default function Modal({
   children,
   show = false,
-  maxWidth = '2xl',
+  maxWidth = 'lg',
   closeable = true,
   onClose = () => {},
 }) {

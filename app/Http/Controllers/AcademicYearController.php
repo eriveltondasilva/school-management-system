@@ -43,14 +43,21 @@ class AcademicYearController extends Controller
     public function update(Request $request): void
     {
         $validated = $request->validate([
-            'is_current' => 'required|boolean',
+            'is_current' => 'nullable|boolean',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after:start_date',
         ]);
 
-        if ($validated['is_current']) {
+        if ($request->has('is_current') && $request->is_current) {
             AcademicYear::where('is_current', true)->update(['is_current' => false]);
         }
 
         $academicYear = AcademicYear::find($request->id);
+
+        if (! $academicYear) {
+            return;
+        }
+
         $academicYear->update($validated);
     }
 }

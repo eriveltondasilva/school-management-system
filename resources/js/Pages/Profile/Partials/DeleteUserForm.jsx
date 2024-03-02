@@ -1,6 +1,6 @@
 import { useForm } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
-import { Trash2 } from 'lucide-react'
+import { Lock, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 import { twJoin } from 'tailwind-merge'
 
@@ -64,9 +64,10 @@ export default function DeleteUserForm({ className = '' }) {
             id='password'
             type='password'
             label='Senha'
+            icon={Lock}
             value={data.password}
             onChange={handleChange}
-            className='mt-1 block w-3/4'
+            className='mt-1 block'
             placeholder='sua senha...'
             autoFocus
           />

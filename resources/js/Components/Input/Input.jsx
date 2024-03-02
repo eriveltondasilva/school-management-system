@@ -1,4 +1,4 @@
-import { Label, TextInput, Textarea } from 'flowbite-react'
+import { Label, TextInput, Textarea, ToggleSwitch } from 'flowbite-react'
 
 // ============================================================================
 export function InputText({
@@ -28,6 +28,15 @@ export function InputTextarea({ id = '', label = '', ...props }) {
       {label && <LabelText id={id} label={label} />}
       <Textarea id={id} name={id} {...props} />
     </section>
+  )
+}
+
+export function InputSwitch({ id = '', text = '', ...props }) {
+  return (
+    <>
+      <LabelText id={id} label={text} />
+      <ToggleSwitch id={id} name={id} {...props} />
+    </>
   )
 }
 
