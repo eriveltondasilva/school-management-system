@@ -8,6 +8,7 @@ use App\Models\Student;
 // ========================================================================
 class DashboardController extends Controller
 {
+    /** xxx */
     public function __invoke()
     {
         return inertia('Dashboard');

@@ -52,9 +52,18 @@ export function HeaderLeft({ title }) {
 }
 
 // ====================================
-export function HeaderRight({ children }) {
+export function HeaderRight({ year, children }) {
   return (
-    <div className='mr-2 flex space-x-2'>
+    <div className='mr-2 flex items-center space-x-2'>
+      {/*  */}
+      <div
+        className={twJoin(
+          'text-sm font-medium',
+          'text-gray-900 dark:text-gray-400'
+        )}>
+        Ano Letivo: {year.year}
+      </div>
+
       {/* Botão tema escuro */}
       <DarkThemeToggle />
       {children}

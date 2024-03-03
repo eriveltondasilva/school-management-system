@@ -11,7 +11,10 @@ import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function TeacherEditPage({ teacher }) {
-  const { errors, handleSubmit, isLoading } = useFormDate('teacher', teacher)
+  const { handleSubmit, errors, isLoading } = useFormDate(
+    'teacher.update',
+    teacher
+  )
 
   return (
     <>

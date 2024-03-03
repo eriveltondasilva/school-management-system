@@ -13,7 +13,7 @@ import { breadcrumbs, titles } from './data'
 // ====================================
 export default function TeacherCreatePage() {
   const { flash } = usePage().props || {}
-  const { errors, handleSubmit, isLoading } = useFormDate('teacher')
+  const { handleSubmit, errors, isLoading } = useFormDate('teacher.store')
 
   return (
     <>

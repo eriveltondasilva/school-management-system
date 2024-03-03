@@ -1,4 +1,5 @@
 import { Head, Link, useForm } from '@inertiajs/react'
+import { Lock, Mail } from 'lucide-react'
 import { useEffect } from 'react'
 
 import Button from '@/Components/Button'
@@ -37,14 +38,17 @@ export default function Login({ status, canResetPassword }) {
       )}
 
       <form onSubmit={submit}>
-        <div>
-          <Input
+        <div className='max-w-md'>
+          {/* Email Address */}
+          <Input.Text
             id='email'
             type='email'
             label='Email'
+            icon={Mail}
             value={data.email}
             className='mt-1 block w-full'
             autoComplete='username'
+            placeholder='name@exemplo.com'
             onChange={handleChange}
             autoFocus
           />
@@ -53,11 +57,14 @@ export default function Login({ status, canResetPassword }) {
         </div>
 
         <div className='mt-4'>
+          {/* Password */}
           <Input.Text
             id='password'
             type='password'
             label='Senha'
+            icon={Lock}
             value={data.password}
+            placeholder='********'
             className='mt-1 block w-full'
             autoComplete='current-password'
             onChange={handleChange}
@@ -70,7 +77,7 @@ export default function Login({ status, canResetPassword }) {
           <label className='flex items-center'>
             <Checkbox
               name='remember'
-              checked={data.remember}
+              defaultChecked={data.remember}
               onChange={handleChange}
             />
             <span className='ms-2 text-sm text-gray-600 dark:text-gray-400'>

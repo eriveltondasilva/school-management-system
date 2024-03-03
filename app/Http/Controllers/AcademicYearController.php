@@ -8,33 +8,39 @@ use Illuminate\Http\Request;
 // ========================================================================
 class AcademicYearController extends Controller
 {
+    /** xxx */
     public function index()
     {
-        $academicYears = AcademicYear::orderBy('year', 'desc')->take(8)->get();
+        $academicYears = AcademicYear::latest('year')->take(8)->withCount('groups')->get();
 
         return inertia('AcademicYear/Index', compact('academicYears'));
     }
 
+    /** xxx */
     public function create()
     {
         return inertia('AcademicYear/Create');
     }
 
+    /** xxx */
     public function edit(AcademicYear $academicYear)
     {
         return inertia('AcademicYear/Edit', compact('academicYear'));
     }
 
+    /** xxx */
     public function show(AcademicYear $academicYear)
     {
-        // return inertia('AcademicYear/Show', compact('academicYear'));
+        //
     }
 
-    // ### API ###
+    // ### Actions ###
+
+    /** xxx */
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'year' => 'required|integer|min:1900|max:2999|unique:academic_years,year',
+            'year' => 'required|integer|between:2000,2100|unique:academic_years,year',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date|after:start_date',
         ]);
@@ -45,20 +51,32 @@ class AcademicYearController extends Controller
             ->with('message', 'Ano letivo criado com sucesso.');
     }
 
+    /** xxx */
     public function update(Request $request, AcademicYear $academicYear)
     {
         $validated = $request->validate([
-            'is_current' => 'nullable|boolean',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date|after:start_date',
         ]);
 
-        if ($request->has('is_current') && $request->is_current) {
-            AcademicYear::where('is_current', true)->update(['is_current' => false]);
-        }
-
         $academicYear->update($validated);
 
-        return back()->with('message', "Ano letivo {$academicYear->year} atualizado com sucesso.");
+        return back()
+            ->with('message', "Ano letivo {$academicYear->year} atualizado com sucesso.");
     }
+
+    /** xxx */
+    public function updateIsCurrent(AcademicYear $academicYear)
+    {
+        if ($academicYear->is_current) {
+            return back();
+        }
+
+        AcademicYear::where('is_current', true)->update(['is_current' => false]);
+
+        $academicYear->update(['is_current' => true]);
+
+        return back();
+    }
+    //
 }

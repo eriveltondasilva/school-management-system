@@ -8,6 +8,7 @@ use App\Http\Requests\StudentRequest;
 // ============================================================================
 class StudentController extends Controller
 {
+    /** xxx */
     public function index()
     {
         $students = Student::all();
@@ -15,22 +16,27 @@ class StudentController extends Controller
         return inertia('Student/Index', compact('students'));
     }
 
+    /** xxx */
     public function show(Student $student)
     {
         return inertia('Student/Show', compact('student'));
     }
 
+    /** xxx */
     public function create()
     {
         return inertia('Student/Create');
     }
 
+    /** xxx */
     public function edit(Student $student)
     {
         return inertia('Student/Edit', compact('student'));
     }
 
-    // ### API ###
+    // ### Actions ###
+
+    /** xxx */
     public function store(StudentRequest $request)
     {
         $validated = $request->validated();
@@ -41,6 +47,7 @@ class StudentController extends Controller
             ->with('id', $savedStudent->id);
     }
 
+    /** xxx */
     public function update(StudentRequest $request, Student $student)
     {
         $validated = $request->validated();
@@ -50,6 +57,7 @@ class StudentController extends Controller
             ->with('message', 'Aluno atualizado com sucesso!');
     }
 
+    /** xxx */
     public function destroy()
     {
         //

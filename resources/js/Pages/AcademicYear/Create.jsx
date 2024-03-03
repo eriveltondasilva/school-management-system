@@ -8,8 +8,9 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './data'
 import AcademicYearFormData from './Partials/AcademicYearFormData'
 
-export default function CreatePage({ academicYear }) {
-  const { handleSubmit, isLoading, errors } = useFormDate('academic-year')
+// ====================================
+export default function AcademicYearCreatePage({ academicYear }) {
+  const { handleSubmit, errors, isLoading } = useFormDate('academic-year.store')
   return (
     <>
       {/*  CRIAR ANO LETIVO */}
@@ -40,7 +41,7 @@ export default function CreatePage({ academicYear }) {
 }
 
 // -----------------------------------
-CreatePage.layout = (page) => (
+AcademicYearCreatePage.layout = (page) => (
   <AuthLayout title={titles.create} breadcrumb={breadcrumbs.create}>
     {page}
   </AuthLayout>

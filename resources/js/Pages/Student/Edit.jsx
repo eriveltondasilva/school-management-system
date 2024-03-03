@@ -10,7 +10,10 @@ import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function StudentEditPage({ student }) {
-  const { errors, handleSubmit, isLoading } = useFormDate('student', student)
+  const { handleSubmit, errors, isLoading } = useFormDate(
+    'student.update',
+    student
+  )
 
   return (
     <>
@@ -42,7 +45,6 @@ export default function StudentEditPage({ student }) {
             Atualizar aluno
           </Button>
         </Form.Footer>
-        <Form.Footer />
       </Form>
     </>
   )

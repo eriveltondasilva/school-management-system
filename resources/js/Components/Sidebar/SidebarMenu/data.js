@@ -18,7 +18,7 @@ export const sidebarItems = [
     { title: 'Professor', icon: Briefcase, routeName: 'teacher.index' },
   ],
   [
-    { title: 'Turmas', icon: UsersRound, routeName: 'groups' },
+    { title: 'Turmas', icon: UsersRound, routeName: 'group.index' },
     { title: 'Ano Letivo', icon: Calendar, routeName: 'academic-year.index' },
   ],
 ]

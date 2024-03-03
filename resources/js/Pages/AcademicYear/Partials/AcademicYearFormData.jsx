@@ -4,17 +4,6 @@ import Input from '@/Components/Input'
 export default function AcademicYearFormData({ data = {}, errors = {} }) {
   return (
     <>
-      {route().current('academic-year.edit') && (
-        <Input.Switch
-          id='is_current'
-          text='Status do Ano letivo'
-          label={data.is_current ? 'Ativo' : 'Inativo'}
-          checked={data.is_current}
-          onClick={() => (!data.is_current ? alert('clicou') : undefined)}
-          readOnly
-        />
-      )}
-
       <Input.Text
         id='year'
         type='number'
@@ -27,12 +16,10 @@ export default function AcademicYearFormData({ data = {}, errors = {} }) {
       />
       <Input.Error message={errors.year} />
 
-      <br />
-
       <Input.Text
         id='start_date'
         type='date'
-        label='Data do início do ano letivo'
+        label='Início do ano letivo'
         placeholder='insira o início do ano letivo...'
         defaultValue={data.start_date}
       />
@@ -41,7 +28,7 @@ export default function AcademicYearFormData({ data = {}, errors = {} }) {
       <Input.Text
         id='end_date'
         type='date'
-        label='Data do fim do ano letivo'
+        label='Fim do ano letivo'
         placeholder='insira o fim do ano letivo...'
         defaultValue={data.end_date}
       />

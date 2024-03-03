@@ -70,7 +70,7 @@ return [
     |
     */
 
-    'timezone' => 'America/Maceio',
+    'timezone' => 'America/Sao_Paulo',
 
     /*
     |--------------------------------------------------------------------------

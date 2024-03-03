@@ -6,7 +6,7 @@ use App\Http\Controllers\{
     DashboardController,
     ProfileController,
     SocialiteController,
-    GroupsController,
+    GroupController,
     AcademicYearController
 };
 
@@ -54,33 +54,27 @@ Route::middleware('auth')
         Route::get('/cadastrar', 'create')->name('create');
         Route::post('/', 'store')->name('store');
         //
-        Route::get('/{academicYear}', 'show')->name('show');
-        Route::put('/{academicYear}', 'update')->name('update');
         Route::get('/{academicYear}/editar', 'edit')->name('edit');
+        Route::put('/{academicYear}', 'update')->name('update');
+        Route::put('/{academicYear}/atualizar-status', 'updateIsCurrent')->name('update-is-current');
     });
 
     // #GROUPS
-    Route::get('/turmas', [GroupsController::class, 'index'])->name('groups');
+    Route::controller(GroupController::class)
+    ->prefix('/turmas')->name('group.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/cadastrar', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        //
+        Route::get('/{group}/editar', 'edit')->name('edit');
+        Route::put('/{group}', 'update')->name('update');
+    });
 
     // #TEST
     Route::get('/teste', function () {
         return 'Hello, world!';
     })->name('test');
-
-
-    // #CLASSROOMS
-    // Route::get('/turmas', function () {
-    //     return Inertia::render('Classrooms');
-    // })->name('classroom.index');
-
-    // Route::get('/turmas', function () {
-    //     return Inertia::render('Classrooms');
-    // })->name('classroom.show');
-
-    // #SUBJECTS
-    // Route::get('/disciplinas', [SubjectController::class, 'index'])->name('subject.index');
-    // Route::get('/disciplinas/{id}', [SubjectController::class, 'show'])->name('subject.show');
-
 });
 
 

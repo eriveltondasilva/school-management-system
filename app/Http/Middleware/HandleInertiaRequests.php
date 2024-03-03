@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\AcademicYear;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -34,6 +35,7 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
+                'currentAcademicYear' => AcademicYear::isCurrent()->first(),
             ],
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),

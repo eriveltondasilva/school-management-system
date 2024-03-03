@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react'
-import { Alert, Button, Tooltip } from 'flowbite-react'
+import { Alert, Badge, Button, Tooltip } from 'flowbite-react'
 import { Check, Plus, Save } from 'lucide-react'
 import { useState } from 'react'
 
@@ -8,17 +8,17 @@ import useFormDate from '@/Hooks/useFormDate'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import AcademicYearFormData from './Partials/AcademicYearFormData'
+import AcademicYearModel from './Partials/AcademicYearModel'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function EditPage({ academicYear }) {
+export default function AcademicYearEditPage({ academicYear }) {
   const { handleSubmit, errors, isLoading } = useFormDate(
-    'academic-year',
+    'academic-year.update',
     academicYear
   )
   const { flash } = usePage().props || {}
 
-  console.log(academicYear)
   return (
     <Form onSubmit={handleSubmit}>
       {/* flash message */}
@@ -37,6 +37,19 @@ export default function EditPage({ academicYear }) {
       </Form.Header>
 
       {/*  */}
+      <div className='text-sm font-medium text-gray-900 dark:text-white'>
+        Status do Ano Letivo
+      </div>
+      <div className='flex'>
+        <Badge
+          color={academicYear.is_current ? 'success' : 'gray'}
+          className='text-lg'
+          size='sm'>
+          {academicYear.is_current ? 'Ativo' : 'Inativo'}
+        </Badge>
+      </div>
+
+      {/*  */}
       <AcademicYearFormData data={academicYear} errors={errors} />
 
       {/*  */}
@@ -48,9 +61,11 @@ export default function EditPage({ academicYear }) {
           className='uppercase'
           fullSized>
           <Save className='mr-2 h-5 w-5' />
-          Salvar
+          Salvar ano letivo
         </Button>
       </Form.Footer>
+
+      <AcademicYearModel academicYear={academicYear} />
     </Form>
   )
 }
@@ -72,7 +87,6 @@ function ShowPageAlert({ children }) {
   )
 }
 
-// ----------------------------------------------
 function EditPageButton({ text, href, children }) {
   return (
     <Tooltip content={text}>
@@ -84,7 +98,7 @@ function EditPageButton({ text, href, children }) {
 }
 
 // -----------------------------------
-EditPage.layout = (page) => (
+AcademicYearEditPage.layout = (page) => (
   <AuthLayout title={titles.edit} breadcrumb={breadcrumbs.edit}>
     {page}
   </AuthLayout>
