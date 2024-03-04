@@ -10,11 +10,7 @@ import formatDate from '@/Utils/formatDate'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-/*
- * @param {Array} academicYears
- */
 export default function AcademicYearIndexPage({ academicYears = [] }) {
-  console.log(academicYears)
   return (
     <>
       {/*  CRIAR ANO LETIVO */}
@@ -34,13 +30,11 @@ export default function AcademicYearIndexPage({ academicYears = [] }) {
 
       {/*  CARDS DOS ANOS LETIVOS */}
       <section className='grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4'>
-        {academicYears.length ? (
-          academicYears.map((item) => (
-            <AcademicYearCard key={item.id} item={item} />
-          ))
-        ) : (
-          <NotFoundCard />
-        )}
+        {academicYears.length
+          ? academicYears.map((item) => (
+              <AcademicYearCard key={item.id} item={item} />
+            ))
+          : 'Não existem anos letivos criados.'}
       </section>
     </>
   )
@@ -70,10 +64,6 @@ function AcademicYearCard({ item }) {
       </Card>
     </Link>
   )
-}
-
-function NotFoundCard() {
-  return <div>Not Found Card...</div>
 }
 
 // -----------------------------------

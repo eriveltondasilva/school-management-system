@@ -1,7 +1,6 @@
 import { Link, usePage } from '@inertiajs/react'
-import { Alert } from 'flowbite-react'
-import { CheckCircle } from 'lucide-react'
 
+import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
 import useFormDate from '@/Hooks/useFormDate'
 import AuthLayout from '@/Layouts/AuthLayout'
@@ -22,7 +21,7 @@ export default function TeacherCreatePage() {
       <Form onSubmit={handleSubmit}>
         {/* flash message */}
         {flash?.message && (
-          <Alert color='success' icon={CheckCircle}>
+          <Alert color='success'>
             <div>{flash.message}</div>
             <Link
               href={route('teacher.show', flash.id)}

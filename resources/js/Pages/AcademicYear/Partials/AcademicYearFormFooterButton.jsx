@@ -10,7 +10,8 @@ export default function AcademicYearFormFooterButton({ disabled }) {
       type='submit'
       disabled={disabled}
       color='blue'
-      className='uppercase'>
+      className='uppercase'
+      fullSized>
       <Save className='mr-2 h-5 w-5' />
       {isCreate ? 'cadastrar' : 'atualizar'} ano letivo
     </Button>

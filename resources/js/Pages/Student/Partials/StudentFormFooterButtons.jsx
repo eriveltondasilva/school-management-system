@@ -9,17 +9,19 @@ export default function StudentFormFooterButtons({ disabled }) {
     <>
       <Button
         type='reset'
-        disabled={isLoading}
+        disabled={disabled}
         color='light'
-        className='uppercase'>
+        className='uppercase'
+        fullSized>
         <Trash2 className='mr-2 h-5 w-5' />
         {isCreate ? 'limpar' : 'resetar'} campos
       </Button>
       <Button
         type='submit'
-        disabled={isLoading}
+        disabled={disabled}
         color='blue'
-        className='uppercase'>
+        className='uppercase'
+        fullSized>
         <Save className='mr-2 h-5 w-5' />
         {isCreate ? 'salvar' : 'Atualizar'} aluno
       </Button>

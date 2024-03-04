@@ -11,7 +11,8 @@ export default function TeacherFormFooterButtons({ disabled }) {
         type='reset'
         disabled={disabled}
         color='light'
-        className='uppercase'>
+        className='uppercase'
+        fullSized>
         <Trash2 className='mr-2 h-5 w-5' />
         {isCreate ? 'limpar' : 'resetar'} campos
       </Button>
@@ -19,7 +20,8 @@ export default function TeacherFormFooterButtons({ disabled }) {
         type='submit'
         disabled={disabled}
         color='blue'
-        className='uppercase'>
+        className='uppercase'
+        fullSized>
         <Save className='mr-2 h-5 w-5' />
         {isCreate ? 'salvar' : 'atualizar'} professor
       </Button>

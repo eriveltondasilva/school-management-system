@@ -1,13 +1,14 @@
 import { Link, usePage } from '@inertiajs/react'
-import { Alert, Button, Tooltip } from 'flowbite-react'
-import { Check, Pencil, Plus } from 'lucide-react'
-import { useState } from 'react'
+import { Button, Tooltip } from 'flowbite-react'
+import { Pencil, Plus } from 'lucide-react'
 
+import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import AddressFormData from './Partials/AddressFormData'
 import TeacherFormData from './Partials/TeacherFormData'
+
 import { breadcrumbs, titles } from './data'
 
 // ====================================
@@ -18,7 +19,11 @@ export default function TeacherShowPage({ teacher }) {
     <>
       <Form>
         {/* flash message */}
-        {flash?.message && <ShowPageAlert>{flash.message}</ShowPageAlert>}
+        {flash?.message && (
+          <Alert color='success'>
+            <span className='font-medium'>{flash.message}</span>
+          </Alert>
+        )}
 
         {/* header teacher */}
         <Form.Header>
@@ -44,23 +49,6 @@ export default function TeacherShowPage({ teacher }) {
         {/* address teacher */}
         <AddressFormData data={teacher} readOnly />
       </Form>
-    </>
-  )
-}
-
-function ShowPageAlert({ children }) {
-  const [isShowed, setIsShowed] = useState(true)
-
-  return (
-    <>
-      {isShowed && (
-        <Alert
-          color='success'
-          icon={Check}
-          onDismiss={() => setIsShowed(!isShowed)}>
-          <span className='font-medium'>{children}</span>
-        </Alert>
-      )}
     </>
   )
 }

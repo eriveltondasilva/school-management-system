@@ -1,8 +1,8 @@
 import { Link, usePage } from '@inertiajs/react'
-import { Alert, Badge, Button, Tooltip } from 'flowbite-react'
-import { Check, Plus } from 'lucide-react'
-import { useState } from 'react'
+import { Badge, Button, Tooltip } from 'flowbite-react'
+import { Plus } from 'lucide-react'
 
+import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
 import useFormDate from '@/Hooks/useFormDate'
 import AuthLayout from '@/Layouts/AuthLayout'
@@ -15,16 +15,20 @@ import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function AcademicYearEditPage({ academicYear }) {
+  const { flash } = usePage().props || {}
   const { handleSubmit, errors, isLoading } = useFormDate(
     'academic-year.update',
     academicYear
   )
-  const { flash } = usePage().props || {}
 
   return (
     <Form onSubmit={handleSubmit}>
       {/* flash message */}
-      {flash?.message && <ShowPageAlert>{flash.message}</ShowPageAlert>}
+      {flash?.message && (
+        <Alert color='success'>
+          <span className='font-medium'>{flash.message}</span>
+        </Alert>
+      )}
 
       {/*  */}
       <Form.Header>
@@ -61,23 +65,6 @@ export default function AcademicYearEditPage({ academicYear }) {
 
       <AcademicYearModel academicYear={academicYear} />
     </Form>
-  )
-}
-
-function ShowPageAlert({ children }) {
-  const [isShowed, setIsShowed] = useState(true)
-
-  return (
-    <>
-      {isShowed && (
-        <Alert
-          color='success'
-          icon={Check}
-          onDismiss={() => setIsShowed(!isShowed)}>
-          <span className='font-medium'>{children}</span>
-        </Alert>
-      )}
-    </>
   )
 }
 

@@ -61,7 +61,7 @@ class GroupController extends Controller
         $group->save();
 
         return back()
-            ->with('message', 'Turma criado com sucesso!')
+            ->with('message', 'Turma criada com sucesso!')
             ->with('id', $group->id);
     }
 
@@ -75,6 +75,7 @@ class GroupController extends Controller
 
         $group->update($validated);
 
-        return back()->with('message', 'Turma atualizado com sucesso!');
+        return back()
+            ->with('message', 'Turma atualizada com sucesso!');
     }
 }

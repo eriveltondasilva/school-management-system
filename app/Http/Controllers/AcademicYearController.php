@@ -45,10 +45,11 @@ class AcademicYearController extends Controller
             'end_date' => 'nullable|date|after:start_date',
         ]);
 
-        $currentAcademicYear = AcademicYear::create($validated);
+        $academicYear = AcademicYear::create($validated);
 
-        return to_route('academic-year.edit', $currentAcademicYear->id)
-            ->with('message', 'Ano letivo criado com sucesso.');
+        return back()
+            ->with('message', 'Ano letivo criado com sucesso!')
+            ->with('id', $academicYear->id);
     }
 
     /** xxx */
@@ -62,7 +63,7 @@ class AcademicYearController extends Controller
         $academicYear->update($validated);
 
         return back()
-            ->with('message', "Ano letivo {$academicYear->year} atualizado com sucesso.");
+            ->with('message', 'Ano letivo atualizado com sucesso!');
     }
 
     /** xxx */

@@ -8,7 +8,6 @@ import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function GroupIndexPage({ groups }) {
-  console.log(groups)
   return (
     <>
       {/*  CRIAR TURMA */}

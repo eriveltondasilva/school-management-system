@@ -1,14 +1,18 @@
+import { Link, usePage } from '@inertiajs/react'
+
+import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
 import useFormDate from '@/Hooks/useFormDate'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import GroupFormData from './Partials/GroupFormData'
-import GroupFormFooterButtons from './Partials/GroupFormFooterButtons'
+import GroupFormFooterButton from './Partials/GroupFormFooterButton'
 
 import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function GroupCreatePage() {
+  const { flash } = usePage().props || {}
   const { handleSubmit, errors, isLoading } = useFormDate('group.store')
 
   return (
@@ -16,6 +20,18 @@ export default function GroupCreatePage() {
       {/*  CRIAR ANO LETIVO */}
       <section>
         <Form onSubmit={handleSubmit}>
+          {/* flash message */}
+          {flash?.message && (
+            <Alert color='success'>
+              <div>{flash.message}</div>
+              <Link
+                href={route('group.edit', flash.id)}
+                className='font-medium underline'>
+                Clique aqui para vê-lo.
+              </Link>
+            </Alert>
+          )}
+
           {/* header teacher */}
           <Form.Header>{titles.create}</Form.Header>
 
@@ -24,7 +40,7 @@ export default function GroupCreatePage() {
 
           {/* footer teacher */}
           <Form.Footer>
-            <GroupFormFooterButtons disabled={isLoading} />
+            <GroupFormFooterButton disabled={isLoading} />
           </Form.Footer>
         </Form>
       </section>
