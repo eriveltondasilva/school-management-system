@@ -1,6 +1,6 @@
 import Input from '@/Components/Input'
 
-// ================================================
+// ===============================================
 export default function AcademicYearFormData({ data = {}, errors = {} }) {
   return (
     <>

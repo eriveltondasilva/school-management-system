@@ -1,4 +1,4 @@
-import { Label, TextInput, Textarea, ToggleSwitch } from 'flowbite-react'
+import { Label, Select, TextInput, Textarea } from 'flowbite-react'
 
 // ============================================================================
 export function InputText({
@@ -31,13 +31,35 @@ export function InputTextarea({ id = '', label = '', ...props }) {
   )
 }
 
-export function InputSwitch({ id = '', text = '', ...props }) {
+export function InputSelect({ id = '', label = '', values = [], ...props }) {
   return (
-    <>
-      <LabelText id={id} label={text} />
-      <ToggleSwitch id={id} name={id} {...props} />
-    </>
+    <section>
+      {label && <LabelText id={id} label={label} />}
+
+      <Select id={id} name={id} {...props}>
+        {values.map((value) => (
+          <option key={value} value={value}>
+            {value}
+          </option>
+        ))}
+      </Select>
+    </section>
   )
+}
+
+{
+  /* <section>
+<div className='mb-2 block'>
+  <Label htmlFor='name' value='Turma' />
+</div>
+<Select id='name' defaultValue='8° Ano' required>
+  <option>6° Ano</option>
+  <option>7° Ano</option>
+  <option>8° Ano</option>
+  <option>9° Ano</option>
+</Select>
+</section>
+<Input.Error message={errors.name} /> */
 }
 
 export function InputError({ message = '' }) {

@@ -16,26 +16,34 @@ class GroupSeeder extends Seeder
 
         DB::table('groups')->insert([
             [
-                'name' => '6° ano',
+                'name' => '6° Ano',
                 'academic_year_id' => $currentAcademicYear->id,
+                'classroom' => 'Sala 1',
+                'shift' => 'Vespertino',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'name' => '7° ano',
+                'name' => '7° Ano',
                 'academic_year_id' => $currentAcademicYear->id,
+                'classroom' => 'Sala 2',
+                'shift' => 'Vespertino',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'name' => '8° ano',
+                'name' => '8° Ano',
                 'academic_year_id' => $currentAcademicYear->id,
+                'classroom' => 'Sala 3',
+                'shift' => 'Vespertino',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'name' => '9° ano',
+                'name' => '9° Ano',
                 'academic_year_id' => $currentAcademicYear->id,
+                'classroom' => 'Sala 4',
+                'shift' => 'Vespertino',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AcademicYear;
 use App\Models\Group;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 // ========================================================================
 class GroupController extends Controller
@@ -10,20 +13,21 @@ class GroupController extends Controller
     /** xxx */
     public function index()
     {
-        $groups = Group::with('academicYear')->get();
-        return inertia('Group/Index', compact('groups'));
-    }
+        $groups = Group::currentAcademicYear()->with('academicYear:id,year')->get();
 
-    /** xxx */
-    public function show(Group $group)
-    {
-        return inertia('Group/Show', compact('group'));
+        return inertia('Group/Index', compact('groups'));
     }
 
     /** xxx */
     public function create()
     {
         return inertia('Group/Create');
+    }
+
+    /** xxx */
+    public function show(Group $group)
+    {
+        //
     }
 
     /** xxx */
@@ -35,14 +39,42 @@ class GroupController extends Controller
     // ### Actions ###
 
     /** xxx */
-    public function store()
+    public function store(Request $request)
     {
-        return redirect()->route('groups.index');
+        $currentAcademicYear = AcademicYear::current()->first();
+
+        $validated = $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('groups')->where(function ($query) use ($currentAcademicYear) {
+                    return $query->where('academic_year_id', $currentAcademicYear->id);
+                }),
+            ],
+            'classroom' => 'nullable|string|max:255',
+            'shift' => 'nullable|string|max:255',
+        ]);
+
+        $group = Group::create($validated);
+        $group->academic_year_id = $currentAcademicYear->id;
+        $group->save();
+
+        return back()
+            ->with('message', 'Turma criado com sucesso!')
+            ->with('id', $group->id);
     }
 
     /** xxx */
-    public function update()
+    public function update(Request $request, Group $group)
     {
-        return redirect()->route('groups.index');
+        $validated = $request->validate([
+            'classroom' => 'nullable|string|max:255',
+            'shift' => 'nullable|string|max:255',
+        ]);
+
+        $group->update($validated);
+
+        return back()->with('message', 'Turma atualizado com sucesso!');
     }
 }

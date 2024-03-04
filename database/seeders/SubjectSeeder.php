@@ -12,7 +12,7 @@ class SubjectSeeder extends Seeder
 {
     public function run(): void
     {
-        $currentAcademicYear = AcademicYear::isCurrent()->get();
+        $currentAcademicYear = AcademicYear::current()->get();
 
         DB::table('subjects')->insert([
             [

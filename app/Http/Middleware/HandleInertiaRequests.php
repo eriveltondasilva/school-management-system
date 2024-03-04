@@ -35,7 +35,7 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
-                'currentAcademicYear' => AcademicYear::isCurrent()->first(),
+                'currentAcademicYear' => AcademicYear::current()->first(),
             ],
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),

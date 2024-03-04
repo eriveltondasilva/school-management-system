@@ -1,12 +1,14 @@
 import { Link, usePage } from '@inertiajs/react'
-import { Alert, Button } from 'flowbite-react'
-import { CheckCircle, Save, Trash2 } from 'lucide-react'
+import { Alert } from 'flowbite-react'
+import { CheckCircle } from 'lucide-react'
 
 import Form from '@/Components/Form'
 import useFormDate from '@/Hooks/useFormDate'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import StudentFormData from './Partials/StudentFormData'
+import StudentFormFooterButtons from './Partials/StudentFormFooterButtons'
+
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
@@ -37,24 +39,7 @@ export default function StudentCreatePage() {
 
         {/* footer student */}
         <Form.Footer>
-          <Button
-            type='reset'
-            disabled={isLoading}
-            color='light'
-            className='uppercase'
-            fullSized>
-            <Trash2 className='mr-2 h-5 w-5' />
-            Limpar campos
-          </Button>
-          <Button
-            type='submit'
-            disabled={isLoading}
-            color='blue'
-            className='uppercase'
-            fullSized>
-            <Save className='mr-2 h-5 w-5' />
-            Salvar aluno
-          </Button>
+          <StudentFormFooterButtons disabled={isLoading} />
         </Form.Footer>
       </Form>
     </>

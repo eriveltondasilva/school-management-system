@@ -1,10 +1,10 @@
-import { InputError, InputSwitch, InputText, InputTextarea } from './Input'
+import { InputError, InputSelect, InputText, InputTextarea } from './Input'
 
 // ---------------------------------------------------------------------------
 const Input = {
   Text: InputText,
   Textarea: InputTextarea,
-  Switch: InputSwitch,
+  Select: InputSelect,
   Error: InputError,
 }
 

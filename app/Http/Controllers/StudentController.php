@@ -17,15 +17,15 @@ class StudentController extends Controller
     }
 
     /** xxx */
-    public function show(Student $student)
-    {
-        return inertia('Student/Show', compact('student'));
-    }
-
-    /** xxx */
     public function create()
     {
         return inertia('Student/Create');
+    }
+
+    /** xxx */
+    public function show(Student $student)
+    {
+        return inertia('Student/Show', compact('student'));
     }
 
     /** xxx */

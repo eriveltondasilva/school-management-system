@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react'
 import { Alert, Badge, Button, Tooltip } from 'flowbite-react'
-import { Check, Plus, Save } from 'lucide-react'
+import { Check, Plus } from 'lucide-react'
 import { useState } from 'react'
 
 import Form from '@/Components/Form'
@@ -8,7 +8,9 @@ import useFormDate from '@/Hooks/useFormDate'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import AcademicYearFormData from './Partials/AcademicYearFormData'
+import AcademicYearFormFooterButton from './Partials/AcademicYearFormFooterButton'
 import AcademicYearModel from './Partials/AcademicYearModel'
+
 import { breadcrumbs, titles } from './data'
 
 // ====================================
@@ -27,7 +29,7 @@ export default function AcademicYearEditPage({ academicYear }) {
       {/*  */}
       <Form.Header>
         <span className='flex gap-4'>
-          {titles.show}
+          {titles.edit}
           <EditPageButton
             href={route('academic-year.create')}
             text='Cadastrar novo ano letivo'>
@@ -54,15 +56,7 @@ export default function AcademicYearEditPage({ academicYear }) {
 
       {/*  */}
       <Form.Footer>
-        <Button
-          type='submit'
-          disabled={isLoading}
-          color='blue'
-          className='uppercase'
-          fullSized>
-          <Save className='mr-2 h-5 w-5' />
-          Salvar ano letivo
-        </Button>
+        <AcademicYearFormFooterButton disabled={isLoading} />
       </Form.Footer>
 
       <AcademicYearModel academicYear={academicYear} />

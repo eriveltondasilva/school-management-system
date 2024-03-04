@@ -1,16 +1,16 @@
-import { Button } from 'flowbite-react'
-import { Save } from 'lucide-react'
-
 import Form from '@/Components/Form'
 import useFormDate from '@/Hooks/useFormDate'
 import AuthLayout from '@/Layouts/AuthLayout'
 
-import { breadcrumbs, titles } from './data'
 import AcademicYearFormData from './Partials/AcademicYearFormData'
+import AcademicYearFormFooterButton from './Partials/AcademicYearFormFooterButton'
+
+import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function AcademicYearCreatePage({ academicYear }) {
+export default function AcademicYearCreatePage() {
   const { handleSubmit, errors, isLoading } = useFormDate('academic-year.store')
+
   return (
     <>
       {/*  CRIAR ANO LETIVO */}
@@ -20,19 +20,11 @@ export default function AcademicYearCreatePage({ academicYear }) {
           <Form.Header>{titles.create}</Form.Header>
 
           {/* form */}
-          <AcademicYearFormData data={academicYear} errors={errors} />
+          <AcademicYearFormData errors={errors} />
 
           {/* footer teacher */}
           <Form.Footer>
-            <Button
-              type='submit'
-              disabled={isLoading}
-              color='blue'
-              className='uppercase'
-              fullSized>
-              <Save className='mr-2 h-5 w-5' />
-              Criar Ano Letivo
-            </Button>
+            <AcademicYearFormFooterButton disabled={isLoading} />
           </Form.Footer>
         </Form>
       </section>

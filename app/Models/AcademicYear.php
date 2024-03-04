@@ -27,16 +27,11 @@ class AcademicYear extends Model
         'end_date' => 'datetime:Y-m-d',
     ];
 
-    // protected $dates = [
-    //     'start_date',
-    //     'end_date',
-    // ];
-
     // ------------------------------
     // ### Scopes ###
     // ------------------------------
 
-    public function scopeIsCurrent($query)
+    public function scopeCurrent($query)
     {
         return $query->where('is_current', 1);
     }

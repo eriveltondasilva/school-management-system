@@ -31,7 +31,7 @@ export default function AuthenticatedLayout({ title, breadcrumb, children }) {
         {/* #header */}
         <Header>
           <Header.Left title={title} />
-          <Header.Right year={currentAcademicYear}>
+          <Header.Right currentAcademicYear={currentAcademicYear}>
             <Header.Dropdown>
               <Header.DropdownHeader
                 nickname={user.nickname}

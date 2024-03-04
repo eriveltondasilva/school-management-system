@@ -10,6 +10,9 @@ import formatDate from '@/Utils/formatDate'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
+/*
+ * @param {Array} academicYears
+ */
 export default function AcademicYearIndexPage({ academicYears = [] }) {
   console.log(academicYears)
   return (

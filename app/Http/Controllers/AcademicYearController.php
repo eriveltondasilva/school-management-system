@@ -23,15 +23,15 @@ class AcademicYearController extends Controller
     }
 
     /** xxx */
-    public function edit(AcademicYear $academicYear)
-    {
-        return inertia('AcademicYear/Edit', compact('academicYear'));
-    }
-
-    /** xxx */
     public function show(AcademicYear $academicYear)
     {
         //
+    }
+
+    /** xxx */
+    public function edit(AcademicYear $academicYear)
+    {
+        return inertia('AcademicYear/Edit', compact('academicYear'));
     }
 
     // ### Actions ###

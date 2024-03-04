@@ -17,15 +17,15 @@ class TeacherController extends Controller
     }
 
     /** xxx */
-    public function show(Teacher $teacher)
-    {
-        return inertia('Teacher/Show', compact('teacher'));
-    }
-
-    /** xxx */
     public function create()
     {
         return inertia('Teacher/Create');
+    }
+
+    /** xxx */
+    public function show(Teacher $teacher)
+    {
+        return inertia('Teacher/Show', compact('teacher'));
     }
 
     /** xxx */
