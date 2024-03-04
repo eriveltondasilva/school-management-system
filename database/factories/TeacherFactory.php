@@ -7,11 +7,6 @@ use App\Enums\GenderEnum;
 
 class TeacherFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
@@ -22,11 +17,12 @@ class TeacherFactory extends Factory
             'gender' => fake()->randomElement(GenderEnum::values()),
             'birthday' => fake()->date(),
             'phone' => fake()->cellphoneNumber(),
+            'is_active' => true,
+            //
             'address_street' => fake()->streetAddress(),
             'address_city' => fake()->city(),
             'address_state' => fake()->state(),
             'address_zip_code' => fake()->postcode(),
-            'is_active' => true,
         ];
     }
 }

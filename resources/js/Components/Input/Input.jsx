@@ -47,26 +47,11 @@ export function InputSelect({ id = '', label = '', values = [], ...props }) {
   )
 }
 
-{
-  /* <section>
-<div className='mb-2 block'>
-  <Label htmlFor='name' value='Turma' />
-</div>
-<Select id='name' defaultValue='8° Ano' required>
-  <option>6° Ano</option>
-  <option>7° Ano</option>
-  <option>8° Ano</option>
-  <option>9° Ano</option>
-</Select>
-</section>
-<Input.Error message={errors.name} /> */
-}
-
 export function InputError({ message = '' }) {
   if (!message) return null
 
   return (
-    <p className='mt-2 text-sm text-red-600 dark:text-red-400'>{message}</p>
+    <p className='mb-2 text-sm text-red-600 dark:text-red-400'>{message}</p>
   )
 }
 

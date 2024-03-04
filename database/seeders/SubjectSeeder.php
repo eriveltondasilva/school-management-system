@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Enums\SubjectEnum;
-use App\Models\AcademicYear;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -12,8 +11,6 @@ class SubjectSeeder extends Seeder
 {
     public function run(): void
     {
-        $currentAcademicYear = AcademicYear::current()->get();
-
         DB::table('subjects')->insert([
             [
                 'name' => SubjectEnum::PORTUGUESE->label(),

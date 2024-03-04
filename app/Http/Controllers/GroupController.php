@@ -13,7 +13,7 @@ class GroupController extends Controller
     /** xxx */
     public function index()
     {
-        $groups = Group::currentAcademicYear()->with('academicYear:id,year')->get();
+        $groups = Group::activeAcademicYear()->with('academicYear:id,year')->get();
 
         return inertia('Group/Index', compact('groups'));
     }
@@ -41,23 +41,31 @@ class GroupController extends Controller
     /** xxx */
     public function store(Request $request)
     {
-        $currentAcademicYear = AcademicYear::current()->first();
+        $activeAcademicYear = AcademicYear::isActive()->first();
+
+        if (!$activeAcademicYear) {
+            return back()
+                ->with('message', 'Ano letivo atual não existe!');
+        }
 
         $validated = $request->validate([
             'name' => [
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('groups')->where(function ($query) use ($currentAcademicYear) {
-                    return $query->where('academic_year_id', $currentAcademicYear->id);
+                Rule::unique('groups')->where(function ($query) use ($activeAcademicYear) {
+                    return $query->where('academic_year_id', $activeAcademicYear->id);
                 }),
             ],
             'classroom' => 'nullable|string|max:255',
             'shift' => 'nullable|string|max:255',
+        ], [
+            'name.required' => 'O nome da turma é obrigatório.',
+            'name.unique' => 'A turma informada já existe.',
         ]);
 
         $group = Group::create($validated);
-        $group->academic_year_id = $currentAcademicYear->id;
+        $group->academic_year_id = $activeAcademicYear->id;
         $group->save();
 
         return back()

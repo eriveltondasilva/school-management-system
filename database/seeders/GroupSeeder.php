@@ -12,40 +12,40 @@ class GroupSeeder extends Seeder
 {
     public function run(): void
     {
-        $currentAcademicYear = AcademicYear::where('is_current', true)->first();
+        $activeAcademicYear = AcademicYear::isActive()->get();
 
         DB::table('groups')->insert([
             [
                 'name' => '6° Ano',
-                'academic_year_id' => $currentAcademicYear->id,
                 'classroom' => 'Sala 1',
                 'shift' => 'Vespertino',
                 'created_at' => now(),
                 'updated_at' => now(),
+                'academic_year_id' => $activeAcademicYear->id,
             ],
             [
                 'name' => '7° Ano',
-                'academic_year_id' => $currentAcademicYear->id,
                 'classroom' => 'Sala 2',
                 'shift' => 'Vespertino',
                 'created_at' => now(),
                 'updated_at' => now(),
+                'academic_year_id' => $activeAcademicYear->id,
             ],
             [
                 'name' => '8° Ano',
-                'academic_year_id' => $currentAcademicYear->id,
                 'classroom' => 'Sala 3',
                 'shift' => 'Vespertino',
                 'created_at' => now(),
                 'updated_at' => now(),
+                'academic_year_id' => $activeAcademicYear->id,
             ],
             [
                 'name' => '9° Ano',
-                'academic_year_id' => $currentAcademicYear->id,
                 'classroom' => 'Sala 4',
                 'shift' => 'Vespertino',
                 'created_at' => now(),
                 'updated_at' => now(),
+                'academic_year_id' => $activeAcademicYear->id,
             ],
         ]);
     }

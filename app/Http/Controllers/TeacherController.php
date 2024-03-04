@@ -40,11 +40,11 @@ class TeacherController extends Controller
     public function store(TeacherRequest $request)
     {
         $validated = $request->validated();
-        $savedTeacher = Teacher::create($validated);
+        $teacher = Teacher::create($validated);
 
         return back()
             ->with('message', 'Cadastro do professor criado com sucesso!')
-            ->with('id', $savedTeacher->id);
+            ->with('id', $teacher->id);
     }
 
     /** xxx */
@@ -56,10 +56,5 @@ class TeacherController extends Controller
         return to_route('teacher.show', $teacher->id)
             ->with('message', 'Professor atualizado com sucesso!');
     }
-
-    /** xxx */
-    public function destroy()
-    {
-        //
-    }
+    //
 }

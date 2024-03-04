@@ -6,19 +6,18 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class UserSeeder extends Seeder
 {
     public function run(): void
     {
         User::factory()->create([
-            'nickname' => 'erivelton',
+            'username' => 'erivelton',
             'email' => 'eriveltondasilva13@gmail.com',
             'password' => '12345678',
         ]);
         User::factory()->create([
-            'nickname' => 'maria',
+            'username' => 'maria',
             'email' => 'maria@gmail.com',
             'password' => '12345678',
         ]);

@@ -24,10 +24,10 @@ class Group extends Model
     // ### Scopes ###
     // ------------------------------
 
-    public function scopeCurrentAcademicYear($query)
+    public function scopeActiveAcademicYear($query)
     {
         return $query->whereHas('academicYear', function ($query) {
-            $query->where('is_current', true);
+            $query->where('is_active', true);
         });
     }
 

@@ -20,7 +20,7 @@ class User extends Authenticatable
     protected $table = 'users';
 
     protected $fillable = [
-        'nickname',
+        'username',
         'email',
         'password',
         'is_active',
@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function scopeIsActive($query)
     {
-        return $query->where('is_active', 1);
+        return $query->where('is_active', true);
     }
 
     public function profile(): MorphTo

@@ -40,11 +40,11 @@ class StudentController extends Controller
     public function store(StudentRequest $request)
     {
         $validated = $request->validated();
-        $savedStudent = Student::create($validated);
+        $student = Student::create($validated);
 
         return back()
             ->with('message', 'Cadastro do aluno criado com sucesso!')
-            ->with('id', $savedStudent->id);
+            ->with('id', $student->id);
     }
 
     /** xxx */
@@ -56,10 +56,5 @@ class StudentController extends Controller
         return to_route('student.show', $student->id)
             ->with('message', 'Aluno atualizado com sucesso!');
     }
-
-    /** xxx */
-    public function destroy()
-    {
-        //
-    }
+    //
 }

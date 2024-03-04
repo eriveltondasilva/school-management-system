@@ -18,11 +18,11 @@ class AcademicYear extends Model
         'year',
         'start_date',
         'end_date',
-        'is_current',
+        'is_active',
     ];
 
     protected $casts = [
-        'is_current' => 'boolean',
+        'is_active' => 'boolean',
         'start_date' => 'datetime:Y-m-d',
         'end_date' => 'datetime:Y-m-d',
     ];
@@ -31,9 +31,9 @@ class AcademicYear extends Model
     // ### Scopes ###
     // ------------------------------
 
-    public function scopeCurrent($query)
+    public function scopeIsActive($query)
     {
-        return $query->where('is_current', 1);
+        return $query->where('is_active', true);
     }
 
     // ------------------------------
