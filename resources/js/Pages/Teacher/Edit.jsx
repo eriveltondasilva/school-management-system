@@ -9,7 +9,7 @@ import TeacherFormFooterButtons from './Partials/TeacherFormFooterButtons'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function TeacherEditPage({ teacher }) {
+export default function TeacherEditPage({ teacher = {} }) {
   const { handleSubmit, errors, isLoading } = useFormDate(
     'teacher.update',
     teacher

@@ -12,7 +12,7 @@ import schoolImg from '/resources/images/school.png'
 
 // ============================================================================
 export default function AuthenticatedLayout({ title, breadcrumb, children }) {
-  const { user, currentAcademicYear } = usePage().props.auth || {}
+  const { user, activeAcademicYear } = usePage().props.auth || {}
 
   return (
     <>
@@ -31,10 +31,10 @@ export default function AuthenticatedLayout({ title, breadcrumb, children }) {
         {/* #header */}
         <Header>
           <Header.Left title={title} />
-          <Header.Right currentAcademicYear={currentAcademicYear}>
+          <Header.Right activeAcademicYear={activeAcademicYear}>
             <Header.Dropdown>
               <Header.DropdownHeader
-                nickname={user.nickname}
+                username={user.username}
                 email={user.email}
               />
               <Header.DropdownItem />

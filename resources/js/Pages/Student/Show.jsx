@@ -10,7 +10,7 @@ import { breadcrumbs, titles } from './data'
 import StudentFormData from './Partials/StudentFormData'
 
 // ====================================
-export default function StudentShowPage({ student }) {
+export default function StudentShowPage({ student = {} }) {
   const { flash } = usePage().props || {}
 
   return (
@@ -47,7 +47,7 @@ export default function StudentShowPage({ student }) {
 }
 
 // ----------------------------------------------
-function EditPageButton({ text, href, children }) {
+function EditPageButton({ text = '', href = '', children }) {
   return (
     <Tooltip content={text}>
       <Button href={href} color='blue' size='xs' as={Link}>

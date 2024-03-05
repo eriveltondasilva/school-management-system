@@ -2,6 +2,7 @@ import { Link } from '@inertiajs/react'
 import { Button, Tooltip } from 'flowbite-react'
 import { Eye, Pencil, UserRoundPlus } from 'lucide-react'
 
+import NotFound from '@/Components/NotFound'
 import Searchbar from '@/Components/Searchbar'
 import Table from '@/Components/Table'
 import useSearchbarFilteredItems from '@/Hooks/useSearchbarFilteredItems'
@@ -10,7 +11,7 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './data'
 
 // ============================================================================
-export default function StudentIndexPage({ students }) {
+export default function StudentIndexPage({ students = [] }) {
   const { filter, filteredItems, handleFilterChange } =
     useSearchbarFilteredItems(students)
 
@@ -34,9 +35,9 @@ export default function StudentIndexPage({ students }) {
 }
 
 // ------------------------------------
-function StudentTable({ items }) {
+function StudentTable({ items = [] }) {
   if (!items?.length) {
-    return <Table.NotFoundItems text='Nenhum aluno encontrado...' />
+    return <NotFound icon>Nenhum aluno encontrado...</NotFound>
   }
 
   return (
@@ -63,7 +64,7 @@ function StudentTable({ items }) {
   )
 }
 
-function ButtonIndex({ text, href, children }) {
+function ButtonIndex({ text = '', href = '', children }) {
   return (
     <Tooltip content={text}>
       <Button href={href} color='blue' size='xs' as={Link}>

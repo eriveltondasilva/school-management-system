@@ -3,7 +3,7 @@ import { usePage } from '@inertiajs/react'
 
 // ================================================
 export default function GroupFormData({ data = {}, errors = {} }) {
-  const { currentAcademicYear } = usePage().props.auth || {}
+  const { activeAcademicYear } = usePage().props.auth || {}
 
   return (
     <>
@@ -11,7 +11,7 @@ export default function GroupFormData({ data = {}, errors = {} }) {
         id='academicYear'
         type='text'
         label='Ano Letivo'
-        value={currentAcademicYear.year}
+        value={activeAcademicYear.year}
         disabled
       />
 

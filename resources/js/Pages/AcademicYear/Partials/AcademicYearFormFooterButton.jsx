@@ -2,7 +2,7 @@ import { Button } from 'flowbite-react'
 import { Save } from 'lucide-react'
 
 // ====================================
-export default function AcademicYearFormFooterButton({ disabled }) {
+export default function AcademicYearFormFooterButton({ disabled = false }) {
   const isCreate = route().current('*.create')
 
   return (

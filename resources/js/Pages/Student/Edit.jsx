@@ -8,7 +8,7 @@ import StudentFormFooterButtons from './Partials/StudentFormFooterButtons'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function StudentEditPage({ student }) {
+export default function StudentEditPage({ student = {} }) {
   const { handleSubmit, errors, isLoading } = useFormDate(
     'student.update',
     student

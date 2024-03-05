@@ -12,7 +12,7 @@ import TeacherFormData from './Partials/TeacherFormData'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function TeacherShowPage({ teacher }) {
+export default function TeacherShowPage({ teacher = {} }) {
   const { flash } = usePage().props || {}
 
   return (
@@ -53,7 +53,7 @@ export default function TeacherShowPage({ teacher }) {
   )
 }
 
-function EditPageButton({ text, href, children }) {
+function EditPageButton({ text = '', href = '', children }) {
   return (
     <Tooltip content={text}>
       <Button href={href} color='blue' size='xs' as={Link}>

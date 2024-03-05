@@ -2,11 +2,12 @@ import { router } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
 import { AlertCircle, X } from 'lucide-react'
 import { useState } from 'react'
+import { twJoin } from 'tailwind-merge'
 
 import Modal from '@/Components/Modal'
 
 // ====================================
-export default function AcademicYearModel({ academicYear }) {
+export default function AcademicYearModel({ academicYear = {} }) {
   const [isShowed, setIsShowed] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -16,9 +17,7 @@ export default function AcademicYearModel({ academicYear }) {
     try {
       setIsLoading(true)
 
-      await router.put(
-        route('academic-year.update-is-current', academicYear.id)
-      )
+      await router.put(route('academic-year.update-status', academicYear.id))
 
       setIsShowed(false)
     } catch (error) {
@@ -34,7 +33,7 @@ export default function AcademicYearModel({ academicYear }) {
     <>
       <Button
         color='failure'
-        disabled={academicYear.is_current}
+        disabled={academicYear.is_active}
         onClick={handleToggleModal}
         className='uppercase'>
         <AlertCircle className='mr-2 h-5 w-5' />
@@ -71,11 +70,16 @@ export default function AcademicYearModel({ academicYear }) {
 function ModelHeader() {
   return (
     <>
-      <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
+      <h2
+        className={twJoin(
+          'text-lg font-medium',
+          'text-gray-900 dark:text-gray-100'
+        )}>
         Título
       </h2>
-
-      <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>subtítulo</p>
+      <p className={twJoin('mt-1 text-sm', 'text-gray-600 dark:text-gray-400')}>
+        subtítulo
+      </p>
     </>
   )
 }

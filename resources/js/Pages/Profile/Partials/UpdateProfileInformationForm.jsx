@@ -15,7 +15,7 @@ export default function UpdateProfileInformation({
 
   const { data, setData, patch, errors, processing, recentlySuccessful } =
     useForm({
-      nickname: user.nickname,
+      username: user.username,
       email: user.email,
     })
 
@@ -36,18 +36,18 @@ export default function UpdateProfileInformation({
       <form onSubmit={handleSubmit} className='mt-6 space-y-6'>
         <div>
           <Input.Text
-            id='nickname'
+            id='username'
             type='text'
-            label='Nickname'
+            label='username'
             className='mt-1 block w-full'
-            value={data.nickname}
+            value={data.username}
             onChange={handleChange}
-            autoComplete='nickname'
+            autoComplete='username'
             autoFocus
             required
           />
 
-          <Input.Error message={errors.nickname} />
+          <Input.Error message={errors.username} />
         </div>
 
         <div>

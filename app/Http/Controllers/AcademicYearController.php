@@ -27,7 +27,7 @@ class AcademicYearController extends Controller
     }
 
     /** xxx */
-    public function show(AcademicYear $academicYear)
+    public function show()
     {
         //
     }
@@ -91,7 +91,7 @@ class AcademicYearController extends Controller
     }
 
     /** xxx */
-    public function updateActiveYear(AcademicYear $academicYear)
+    public function updateStatus(AcademicYear $academicYear)
     {
         if ($academicYear->is_active) {
             return back();

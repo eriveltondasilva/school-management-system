@@ -1,9 +1,10 @@
 import { Link } from '@inertiajs/react'
 import { Button, Card } from 'flowbite-react'
-import { Plus } from 'lucide-react'
+import { Plus, XCircle } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
 import Indicator from '@/Components/Indicator'
+import NotFound from '@/Components/NotFound'
 import AuthLayout from '@/Layouts/AuthLayout'
 import formatDate from '@/Utils/formatDate'
 
@@ -29,25 +30,33 @@ export default function AcademicYearIndexPage({ academicYears = [] }) {
       <br />
 
       {/*  CARDS DOS ANOS LETIVOS */}
-      <section className='grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4'>
-        {academicYears.length
-          ? academicYears.map((item) => (
-              <AcademicYearCard key={item.id} item={item} />
-            ))
-          : 'Não existem anos letivos criados.'}
-      </section>
+      {academicYears.length ? (
+        <section className='grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4'>
+          {academicYears.map((academicYear) => (
+            <AcademicYearCard
+              key={academicYear.id}
+              academicYear={academicYear}
+            />
+          ))}
+        </section>
+      ) : (
+        <NotFound>
+          <XCircle />
+          Não existem anos letivos criados...
+        </NotFound>
+      )}
     </>
   )
 }
 
-function AcademicYearCard({ item }) {
-  const { id, year, is_current, start_date, end_date, groups_count } =
-    item || {}
+function AcademicYearCard({ academicYear = {} }) {
+  const { id, year, is_active, start_date, end_date, groups_count } =
+    academicYear
 
   return (
     <Link href={route('academic-year.edit', id)}>
       <Card className='relative max-w-sm'>
-        <Indicator type={is_current ? 'success' : 'secondary'} />
+        <Indicator type={is_active ? 'success' : 'secondary'} />
         <h5
           className={twJoin(
             'text-2xl font-bold tracking-tight',
@@ -59,7 +68,7 @@ function AcademicYearCard({ item }) {
           <li>Início: {formatDate(start_date)}</li>
           <li>Fim: {formatDate(end_date)}</li>
           <br />
-          <li className='font-semibold'>Turmas: {groups_count || '0'}</li>
+          <li className='font-semibold'>Turmas: {groups_count}</li>
         </ul>
       </Card>
     </Link>

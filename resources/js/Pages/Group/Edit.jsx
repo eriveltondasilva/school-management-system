@@ -13,7 +13,7 @@ import GroupFormFooterButton from './Partials/GroupFormFooterButton'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function GroupEditPage({ group }) {
+export default function GroupEditPage({ group = {} }) {
   const { flash } = usePage().props || {}
   const { handleSubmit, errors, isLoading } = useFormDate('group.update', group)
 

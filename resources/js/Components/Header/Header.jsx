@@ -52,12 +52,12 @@ export function HeaderLeft({ title }) {
 }
 
 // ====================================
-export function HeaderRight({ currentAcademicYear, children }) {
+export function HeaderRight({ activeAcademicYear, children }) {
   return (
     <div className='mr-2 flex items-center space-x-2'>
       {/*  */}
       <div className='text-sm font-medium text-gray-600 dark:text-gray-400 '>
-        Ano Letivo: {currentAcademicYear.year}
+        Ano Letivo: {activeAcademicYear.year}
       </div>
 
       {/* Botão tema escuro */}

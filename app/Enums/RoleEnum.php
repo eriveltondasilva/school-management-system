@@ -4,15 +4,15 @@ namespace App\Enums;
 
 use App\Traits\EnumAttributesTrait;
 
-enum RoleEnum: int
+enum RoleEnum: string
 {
     use EnumAttributesTrait;
 
-    case ADMINISTRATOR = 1;  // administrador(a)
-    case COORDINATOR   = 2;  // coordenador(a)
-    case TEACHER       = 3;  // professor(a)
-    case STUDENT       = 4;  // estudante
-    case USER          = 5;  // usuário(a)
+    case ADMIN   = 'administrator';  // administrador(a)
+    case COORD   = 'coordinator';    // coordenador(a)
+    case TEACHER = 'teacher';        // professor(a)
+    case STUDENT = 'student';        // estudante
+    case USER    = 'user';           // usuário(a)
 
     public const DEFAULT = self::USER;
 
@@ -23,11 +23,11 @@ enum RoleEnum: int
     public function label(): string
     {
         return match($this) {
-            self::ADMINISTRATOR => 'administrador(a)',
-            self::COORDINATOR   => 'coordenador(a)',
-            self::TEACHER       => 'professor(a)',
-            self::STUDENT       => 'estudante',
-            self::USER          => 'usuário(a)',
+            static::ADMIN   => 'administrador(a)',
+            static::COORD   => 'coordenador(a)',
+            static::TEACHER => 'professor(a)',
+            static::STUDENT => 'estudante',
+            static::USER    => 'usuário(a)',
         };
     }
 };

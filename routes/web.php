@@ -6,8 +6,6 @@ use App\Http\Controllers\{
     DashboardController,
     ProfileController,
     SocialiteController,
-    GroupController,
-    AcademicYearController
 };
 
 /*
@@ -39,37 +37,12 @@ Route::middleware('auth')
     Route::redirect('/dashboard', '/painel');
 
     // #DASHBOARD
-    Route::get('/painel', DashboardController::class)->name('dashboard');
+    Route::get('/painel', [DashboardController::class, 'index'])->name('dashboard');
 
     // #CALENDAR
     Route::get('/calendario', function () {
         return inertia('Calendar');
     })->name('calendar');
-
-    // #ACADEMIC_YEAR
-    Route::controller(AcademicYearController::class)
-    ->prefix('/ano-letivo')->name('academic-year.')
-    ->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/cadastrar', 'create')->name('create');
-        Route::post('/', 'store')->name('store');
-        //
-        Route::get('/{academicYear}/editar', 'edit')->name('edit');
-        Route::put('/{academicYear}', 'update')->name('update');
-        Route::put('/{academicYear}/atualizar-status', 'updateIsCurrent')->name('update-is-current');
-    });
-
-    // #GROUPS
-    Route::controller(GroupController::class)
-    ->prefix('/turmas')->name('group.')
-    ->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/cadastrar', 'create')->name('create');
-        Route::post('/', 'store')->name('store');
-        //
-        Route::get('/{group}/editar', 'edit')->name('edit');
-        Route::put('/{group}', 'update')->name('update');
-    });
 
     // #TEST
     Route::get('/teste', function () {
@@ -80,11 +53,12 @@ Route::middleware('auth')
 
 //# PROFILE
 Route::middleware('auth')
-->controller(ProfileController::class)->name('profile.')
+->controller(ProfileController::class)
+->prefix('perfil')->name('profile.')
 ->group(function () {
-    Route::get('/perfil', 'edit')->name('edit');
-    Route::patch('/perfil', 'update')->name('update');
-    Route::delete('/perfil', 'destroy')->name('destroy');
+    Route::get('/', 'edit')->name('edit');
+    Route::patch('/', 'update')->name('update');
+    Route::delete('/', 'destroy')->name('destroy');
 });
 
 
@@ -104,3 +78,5 @@ Route::controller(SocialiteController::class)
 require __DIR__.'/auth.php';
 require __DIR__.'/student.php';
 require __DIR__.'/teacher.php';
+require __DIR__.'/group.php';
+require __DIR__.'/academicYear.php';

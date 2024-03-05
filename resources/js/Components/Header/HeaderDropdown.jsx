@@ -18,13 +18,13 @@ export function HeaderDropdown({ children }) {
 }
 
 // ====================================
-export function HeaderDropdownHeader({ nickname, email }) {
+export function HeaderDropdownHeader({ username, email }) {
   return (
     <Dropdown.Header>
       <span
         className='block truncate text-sm font-semibold'
-        title={nickname || 'Nome'}>
-        {nickname || 'Usuário'}
+        title={username || 'Nome'}>
+        {username || 'Usuário'}
       </span>
       <span
         className='block truncate text-sm text-gray-400'

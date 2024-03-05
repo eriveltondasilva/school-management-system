@@ -8,7 +8,7 @@ import GuestLayout from '@/Layouts/GuestLayout'
 // ==============================
 export default function Register() {
   const { data, setData, post, processing, errors, reset } = useForm({
-    nickname: '',
+    username: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -36,10 +36,10 @@ export default function Register() {
       <form onSubmit={submit}>
         <div>
           <Input.Text
-            id='nickname'
+            id='username'
             type='text'
-            label='Nickname'
-            value={data.nickname}
+            label='username'
+            value={data.username}
             className='mt-1 block w-full'
             autoComplete='name'
             onChange={handleChange}
@@ -47,7 +47,7 @@ export default function Register() {
             required
           />
 
-          <Input.Error message={errors.nickname} />
+          <Input.Error message={errors.username} />
         </div>
 
         <div className='mt-4'>

@@ -14,7 +14,7 @@ import AcademicYearModel from './Partials/AcademicYearModel'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function AcademicYearEditPage({ academicYear }) {
+export default function AcademicYearEditPage({ academicYear = {} }) {
   const { flash } = usePage().props || {}
   const { handleSubmit, errors, isLoading } = useFormDate(
     'academic-year.update',
@@ -48,10 +48,10 @@ export default function AcademicYearEditPage({ academicYear }) {
       </div>
       <div className='flex'>
         <Badge
-          color={academicYear.is_current ? 'success' : 'gray'}
+          color={academicYear.is_active ? 'success' : 'gray'}
           className='text-lg'
           size='sm'>
-          {academicYear.is_current ? 'Ativo' : 'Inativo'}
+          {academicYear.is_active ? 'Ativo' : 'Inativo'}
         </Badge>
       </div>
 
@@ -68,7 +68,7 @@ export default function AcademicYearEditPage({ academicYear }) {
   )
 }
 
-function EditPageButton({ text, href, children }) {
+function EditPageButton({ text = '', href = '', children }) {
   return (
     <Tooltip content={text}>
       <Button href={href} color='blue' size='xs' as={Link}>

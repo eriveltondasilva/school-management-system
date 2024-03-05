@@ -2,7 +2,11 @@ import Input from '@/Components/Input'
 import { Label, Radio } from 'flowbite-react'
 
 // ================================================
-export default function TeacherFormData({ data = {}, errors = {}, readOnly }) {
+export default function TeacherFormData({
+  data = {},
+  errors = {},
+  readOnly = false,
+}) {
   return (
     <section className='mb-4'>
       {/* NOME DO PROFESSOR */}
