@@ -3,6 +3,7 @@ import { Button, Card } from 'flowbite-react'
 import { Plus, XCircle } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
+import HorizontalLine from '@/Components/HorizontalLine'
 import Indicator from '@/Components/Indicator'
 import NotFound from '@/Components/NotFound'
 import AuthLayout from '@/Layouts/AuthLayout'
@@ -12,9 +13,11 @@ import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function AcademicYearIndexPage({ academicYears = [] }) {
+  const hasAcademicYears = academicYears.length > 0
+
   return (
     <>
-      {/*  CRIAR ANO LETIVO */}
+      {/* Botão para criar um novo ano letivo */}
       <div className='mb-8 flex'>
         <Button as={Link} href={route('academic-year.create')} color='blue'>
           <Plus className='mr-2 h-5 w-5' />
@@ -22,15 +25,23 @@ export default function AcademicYearIndexPage({ academicYears = [] }) {
         </Button>
       </div>
 
-      {/*  */}
+      {/* Título */}
       <h2 className='mb-3 text-lg font-medium text-gray-900 dark:text-gray-100'>
         Anos Letivos
       </h2>
-      <div className='border-b border-gray-300 dark:border-gray-700'></div>
+      <HorizontalLine />
       <br />
 
-      {/*  CARDS DOS ANOS LETIVOS */}
-      {academicYears.length ? (
+      {/* Exibe mensagem se não houver anos letivos */}
+      {!hasAcademicYears && (
+        <NotFound>
+          <XCircle />
+          Não existem anos letivos criados...
+        </NotFound>
+      )}
+
+      {/* Exibe os cards dos anos letivos */}
+      {hasAcademicYears && (
         <section className='grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4'>
           {academicYears.map((academicYear) => (
             <AcademicYearCard
@@ -39,11 +50,6 @@ export default function AcademicYearIndexPage({ academicYears = [] }) {
             />
           ))}
         </section>
-      ) : (
-        <NotFound>
-          <XCircle />
-          Não existem anos letivos criados...
-        </NotFound>
       )}
     </>
   )

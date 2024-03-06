@@ -13,7 +13,10 @@ import { breadcrumbs, titles } from './data'
 // ==============================================
 export default function StudentCreatePage() {
   const { flash } = usePage().props || {}
-  const { handleSubmit, errors, isLoading } = useFormDate('student.store')
+  const formDataOptions = {
+    routeName: 'student.store',
+  }
+  const { handleSubmit, errors, isLoading } = useFormDate(formDataOptions)
 
   return (
     <>

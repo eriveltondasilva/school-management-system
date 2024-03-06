@@ -4,14 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TeacherRequest;
 use App\Models\Teacher;
+use Illuminate\Http\Request;
 
 // ========================================================================
 class TeacherController extends Controller
 {
     /** xxx */
-    public function index()
+    public function index(Request $request)
     {
-        $teachers = Teacher::all();
+        $search = $request->get('search', '');
+
+        $teachers = Teacher::oldest('id')
+            ->where('id', $search)
+            ->orWhere('name', 'like', "%{$search}%")
+            ->paginate(15);
 
         return inertia('Teacher/Index', compact('teachers'));
     }

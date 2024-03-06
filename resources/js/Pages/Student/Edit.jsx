@@ -9,10 +9,11 @@ import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function StudentEditPage({ student = {} }) {
-  const { handleSubmit, errors, isLoading } = useFormDate(
-    'student.update',
-    student
-  )
+  const formDataOptions = {
+    routeName: 'student.update',
+    id: student.id,
+  }
+  const { handleSubmit, errors, isLoading } = useFormDate(formDataOptions)
 
   return (
     <>

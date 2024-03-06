@@ -15,7 +15,11 @@ import { breadcrumbs, titles } from './data'
 // ====================================
 export default function GroupEditPage({ group = {} }) {
   const { flash } = usePage().props || {}
-  const { handleSubmit, errors, isLoading } = useFormDate('group.update', group)
+  const formDataOptions = {
+    routeName: 'group.update',
+    id: group.id,
+  }
+  const { handleSubmit, errors, isLoading } = useFormDate(formDataOptions)
 
   return (
     <Form onSubmit={handleSubmit}>

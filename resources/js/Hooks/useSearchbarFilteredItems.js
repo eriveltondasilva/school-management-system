@@ -1,17 +1,15 @@
 import { useMemo, useState } from 'react'
 
 // ====================================
-export default function useSearchbarFilteredItems(items) {
-  if (!items) return {}
-
-  const [filter, setfilter] = useState('')
+export default function useSearchbarFilteredItems(items = []) {
+  const [filter, setFilter] = useState('')
 
   function handleFilterChange(e) {
-    setfilter(e.target.value)
+    setFilter(e.target.value)
   }
 
   const filteredItems = useMemo(() => {
-    return items.filter((item) =>
+    return items?.filter((item) =>
       item.name.toLowerCase().startsWith(filter.toLowerCase())
     )
   }, [filter, items])

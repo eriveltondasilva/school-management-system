@@ -10,10 +10,11 @@ import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function TeacherEditPage({ teacher = {} }) {
-  const { handleSubmit, errors, isLoading } = useFormDate(
-    'teacher.update',
-    teacher
-  )
+  const formDataOptions = {
+    routeName: 'teacher.update',
+    id: teacher.id,
+  }
+  const { handleSubmit, errors, isLoading } = useFormDate(formDataOptions)
 
   return (
     <>

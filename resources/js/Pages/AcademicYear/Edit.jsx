@@ -16,10 +16,11 @@ import { breadcrumbs, titles } from './data'
 // ====================================
 export default function AcademicYearEditPage({ academicYear = {} }) {
   const { flash } = usePage().props || {}
-  const { handleSubmit, errors, isLoading } = useFormDate(
-    'academic-year.update',
-    academicYear
-  )
+  const formDataOptions = {
+    routeName: 'academic-year.update',
+    id: academicYear.id,
+  }
+  const { handleSubmit, errors, isLoading } = useFormDate(formDataOptions)
 
   return (
     <Form onSubmit={handleSubmit}>

@@ -13,7 +13,10 @@ import { breadcrumbs, titles } from './data'
 // ====================================
 export default function GroupCreatePage() {
   const { flash } = usePage().props || {}
-  const { handleSubmit, errors, isLoading } = useFormDate('group.store')
+  const formDataOptions = {
+    routeName: 'group.store',
+  }
+  const { handleSubmit, errors, isLoading } = useFormDate(formDataOptions)
 
   return (
     <>
