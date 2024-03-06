@@ -3,7 +3,7 @@ import { Table } from 'flowbite-react'
 // ====================================
 export function TableRoot({ children }) {
   return (
-    <div className='overflow-x-auto'>
+    <div className='overflow-x-auto shadow-md'>
       <Table hoverable>{children}</Table>
     </div>
   )
@@ -36,21 +36,3 @@ export function TableRow({ children }) {
 export function TableRowCell({ children, ...props }) {
   return <Table.Cell {...props}>{children}</Table.Cell>
 }
-// export const TableRow = memo(function TableRow({ teacher = {}, children }) {
-//   const { id, name, email } = teacher
-
-//   return (
-//     <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-//       <Table.Cell className='whitespace-nowrap font-medium text-gray-900/50 dark:text-white/50'>
-//         {id}
-//       </Table.Cell>
-//       <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
-//         {name}
-//       </Table.Cell>
-//       <Table.Cell>{email}</Table.Cell>
-//       <Table.Cell className='flex justify-center space-x-2'>
-//         {children}
-//       </Table.Cell>
-//     </Table.Row>
-//   )
-// })

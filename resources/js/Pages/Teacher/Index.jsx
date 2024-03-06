@@ -5,6 +5,7 @@ import { useState } from 'react'
 
 import Input from '@/Components/Input'
 import NotFound from '@/Components/NotFound'
+import Pagination from '@/Components/Pagination'
 import Searchbar from '@/Components/Searchbar'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
@@ -24,7 +25,7 @@ export default function TeacherIndexPage({ teachers = [] }) {
   }
   const { handleSubmit, isLoading } = useFormDate(formDataOptions)
 
-  console.log(search)
+  console.log(teachers)
   return (
     <>
       {/* título */}
@@ -73,6 +74,9 @@ export default function TeacherIndexPage({ teachers = [] }) {
 
       {/* Teacher Table */}
       {hasTeachers && <TeacherTable teachers={teachers.data} />}
+
+      {/* Pagination */}
+      {hasTeachers && <TeacherPagination links={teachers.links} />}
     </>
   )
 }
@@ -82,7 +86,7 @@ function TeacherTable({ teachers = [] }) {
   return (
     <Table>
       <Table.Header>
-        <Table.HeaderCell>Id</Table.HeaderCell>
+        <Table.HeaderCell className='w-0'>Id</Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
         <Table.HeaderCell>Email</Table.HeaderCell>
         <Table.HeaderCell className='text-center'>AÇÃO</Table.HeaderCell>
@@ -91,7 +95,7 @@ function TeacherTable({ teachers = [] }) {
       <Table.Body>
         {teachers.map((teacher) => (
           <Table.Row key={teacher.id}>
-            <Table.RowCell>{teacher.id}</Table.RowCell>
+            <Table.RowCell className='font-bold'>{teacher.id}</Table.RowCell>
             <Table.RowCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
               {teacher.name}
             </Table.RowCell>
@@ -110,6 +114,14 @@ function TeacherTable({ teachers = [] }) {
         ))}
       </Table.Body>
     </Table>
+  )
+}
+
+function TeacherPagination() {
+  return (
+    <Pagination>
+      <Pagination.Trigger />
+    </Pagination>
   )
 }
 

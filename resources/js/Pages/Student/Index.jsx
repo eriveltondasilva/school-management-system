@@ -80,7 +80,7 @@ function StudentTable({ students = [] }) {
   return (
     <Table>
       <Table.Header>
-        <Table.HeaderCell>Id</Table.HeaderCell>
+        <Table.HeaderCell className='w-0'>Id</Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
         <Table.HeaderCell>Email</Table.HeaderCell>
         <Table.HeaderCell className='text-center'>AÇÃO</Table.HeaderCell>
@@ -89,7 +89,7 @@ function StudentTable({ students = [] }) {
       <Table.Body>
         {students.map((student) => (
           <Table.Row key={student.id}>
-            <Table.RowCell>{student.id}</Table.RowCell>
+            <Table.RowCell className='font-bold'>{student.id}</Table.RowCell>
             <Table.RowCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
               {student.name}
             </Table.RowCell>
