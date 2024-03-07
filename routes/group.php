@@ -24,7 +24,7 @@ Route::middleware('auth')
 ->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/cadastrar', 'create')->name('create');
-    Route::post('/', 'store')->name('studentStore');
+    Route::post('/', 'store')->name('student-store');
     Route::get('/{student}', 'edit')->name('edit');
     Route::put('/{student}', 'update')->name('update');
     Route::delete('/{student}', 'destroy')->name('destroy');

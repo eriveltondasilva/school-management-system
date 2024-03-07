@@ -17,6 +17,8 @@ export default function StudentFormData({
         placeholder='insira o nome do aluno...'
         defaultValue={data.name}
         readOnly={readOnly}
+        autoFocus
+        required
       />
       <Input.Error message={errors.name} />
 

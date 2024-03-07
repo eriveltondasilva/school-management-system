@@ -17,7 +17,9 @@ export function TitleLeft({ title = '', subtitle = '' }) {
     <div>
       <h2 className='mr-3 text-xl font-semibold dark:text-white'>{title}</h2>
       {subtitle && (
-        <p className='text-gray-500 dark:text-gray-400'>{subtitle}</p>
+        <p className='font-semibold text-gray-500 dark:text-gray-400'>
+          {subtitle}
+        </p>
       )}
     </div>
   )

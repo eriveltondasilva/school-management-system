@@ -1,9 +1,9 @@
-import { Link } from '@inertiajs/react'
-import { Button, Card } from 'flowbite-react'
-import { Plus, XCircle } from 'lucide-react'
+import { Link, usePage } from '@inertiajs/react'
+import { Button, Card, Tooltip } from 'flowbite-react'
+import { Pencil, Plus, XCircle } from 'lucide-react'
 
-import HorizontalLine from '@/Components/HorizontalLine'
 import NotFound from '@/Components/NotFound'
+import Title from '@/Components/Title'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
@@ -11,22 +11,25 @@ import { breadcrumbs, titles } from './data'
 // ====================================
 export default function GroupIndexPage({ groups = [] }) {
   const hasGroups = groups.length > 0
+  const year = usePage().props.auth.activeAcademicYear.year || ''
 
   return (
     <>
-      {/* Botão para criar uma nova turma */}
-      <div className='mb-8 flex'>
-        <Button as={Link} href={route('group.create')} color='blue'>
-          <Plus className='mr-2 h-5 w-5' />
-          Cadastrar Novo Turma
-        </Button>
-      </div>
+      {/* título */}
+      <Title>
+        <Title.Left title={titles.index + ': ' + year} />
+        <Title.Right>
+          <Button
+            as={Link}
+            href={route('group.create')}
+            color='blue'
+            className=''>
+            <Plus className='mr-2 h-5 w-5' />
+            Cadastrar Turma
+          </Button>
+        </Title.Right>
+      </Title>
 
-      {/* Título */}
-      <h2 className='mb-3 text-lg font-medium text-gray-900 dark:text-gray-100'>
-        Turmas
-      </h2>
-      <HorizontalLine />
       <br />
 
       {/* Exibe mensagem se não houver grupos */}
@@ -39,7 +42,7 @@ export default function GroupIndexPage({ groups = [] }) {
 
       {/* Exibe os cards das turmas */}
       {hasGroups && (
-        <section className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4'>
+        <section className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
           {groups.map((group) => (
             <GroupCard group={group} key={group.id} />
           ))}
@@ -50,19 +53,44 @@ export default function GroupIndexPage({ groups = [] }) {
 }
 
 function GroupCard({ group = {} }) {
-  const { id, name, academic_year } = group
+  const { id, name, academic_year, students_count } = group
 
   return (
-    <Link href={route('group.edit', id)}>
-      <Card className='max-w-sm'>
+    // <Link href={route('group.edit', id)}>
+    <Card className='max-w-sm'>
+      <header className='flex justify-between'>
         <h5 className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
           {name}
         </h5>
-        <p className='font-normal text-gray-700 dark:text-gray-400'>
-          {academic_year.year}
-        </p>
-      </Card>
-    </Link>
+        <EditPageButton href={route('group.edit', id)} text='Editar Turma'>
+          <Pencil className='h-3 w-3' />
+        </EditPageButton>
+      </header>
+      <p className='font-normal text-gray-700 dark:text-gray-400'>
+        Alunos: {students_count}
+      </p>
+      <footer>
+        <Button
+          as={Link}
+          href={route('group-students.index', id)}
+          color='blue'
+          className=''
+          fullSized>
+          Ver Alunos
+        </Button>
+      </footer>
+    </Card>
+    // </Link>
+  )
+}
+
+function EditPageButton({ text = '', href = '', children }) {
+  return (
+    <Tooltip content={text}>
+      <Button href={href} color='light' size='xs' as={Link}>
+        {children}
+      </Button>
+    </Tooltip>
   )
 }
 

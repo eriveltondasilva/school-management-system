@@ -13,7 +13,7 @@ class GroupController extends Controller
     /** xxx */
     public function index()
     {
-        $groups = Group::activeAcademicYear()->with('academicYear:id,year')->get();
+        $groups = Group::activeAcademicYear()->withCount('students')->get();
 
         return inertia('Group/Index', compact('groups'));
     }

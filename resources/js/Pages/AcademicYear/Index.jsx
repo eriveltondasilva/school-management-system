@@ -3,12 +3,12 @@ import { Button, Card } from 'flowbite-react'
 import { Plus, XCircle } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
-import HorizontalLine from '@/Components/HorizontalLine'
 import Indicator from '@/Components/Indicator'
 import NotFound from '@/Components/NotFound'
 import AuthLayout from '@/Layouts/AuthLayout'
 import formatDate from '@/Utils/formatDate'
 
+import Title from '@/Components/Title'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
@@ -17,19 +17,21 @@ export default function AcademicYearIndexPage({ academicYears = [] }) {
 
   return (
     <>
-      {/* Botão para criar um novo ano letivo */}
-      <div className='mb-8 flex'>
-        <Button as={Link} href={route('academic-year.create')} color='blue'>
-          <Plus className='mr-2 h-5 w-5' />
-          Cadastrar Novo Ano Letivo
-        </Button>
-      </div>
+      {/* título */}
+      <Title>
+        <Title.Left title={titles.index} />
+        <Title.Right>
+          <Button
+            as={Link}
+            href={route('academic-year.create')}
+            color='blue'
+            className=''>
+            <Plus className='mr-2 h-5 w-5' />
+            Cadastrar Ano Letivo
+          </Button>
+        </Title.Right>
+      </Title>
 
-      {/* Título */}
-      <h2 className='mb-3 text-lg font-medium text-gray-900 dark:text-gray-100'>
-        Anos Letivos
-      </h2>
-      <HorizontalLine />
       <br />
 
       {/* Exibe mensagem se não houver anos letivos */}

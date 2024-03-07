@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
-import { Eye, Search, Undo2, UserRoundPlus } from 'lucide-react'
+import { Eye, Search, Undo2, UserPlus } from 'lucide-react'
 import { useState } from 'react'
 
 import Input from '@/Components/Input'
@@ -20,6 +20,10 @@ export default function TeacherIndexPage({ teachers = [] }) {
   const hasTeachers = teachers.data?.length > 0
   const [search, setSearch] = useState(paramsSearch)
 
+  const handleChange = (e) => {
+    setSearch(e.target.value)
+  }
+
   const formDataOptions = {
     routeName: 'teacher.index',
   }
@@ -31,6 +35,16 @@ export default function TeacherIndexPage({ teachers = [] }) {
       {/* título */}
       <Title>
         <Title.Left title={titles.index} />
+        <Title.Right>
+          <Button
+            as={Link}
+            href={route('teacher.create')}
+            color='blue'
+            className=''>
+            <UserPlus className='mr-2 h-5 w-5' />
+            Cadastrar Professor
+          </Button>
+        </Title.Right>
         {/* TODO: implementar PDF */}
       </Title>
 
@@ -42,7 +56,8 @@ export default function TeacherIndexPage({ teachers = [] }) {
             type='search'
             placeholder='Pesquisar professor...'
             defaultValue={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={handleChange}
+            autoFocus
           />
           <Button.Group>
             <Button type='submit' color='blue' disabled={isLoading || !search}>
@@ -57,17 +72,6 @@ export default function TeacherIndexPage({ teachers = [] }) {
             </Button>
           </Button.Group>
         </Searchbar.Left>
-
-        <Searchbar.Right>
-          <Button
-            as={Link}
-            href={route('teacher.create')}
-            color='blue'
-            className='uppercase'>
-            <UserRoundPlus className='mr-2 h-5 w-5' />
-            cadastrar professor
-          </Button>
-        </Searchbar.Right>
       </Searchbar>
 
       {!hasTeachers && <NotFound icon>Nenhum professor encontrado...</NotFound>}
@@ -76,7 +80,7 @@ export default function TeacherIndexPage({ teachers = [] }) {
       {hasTeachers && <TeacherTable teachers={teachers.data} />}
 
       {/* Pagination */}
-      {hasTeachers && <TeacherPagination links={teachers.links} />}
+      {/* {hasTeachers && <TeacherPagination links={teachers.links} />} */}
     </>
   )
 }

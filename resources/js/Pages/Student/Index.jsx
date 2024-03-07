@@ -19,6 +19,10 @@ export default function StudentIndexPage({ students = [] }) {
   const hasStudents = students.data?.length > 0
   const [search, setSearch] = useState(paramsSearch)
 
+  const handleChange = (e) => {
+    setSearch(e.target.value)
+  }
+
   const formDataOptions = {
     routeName: 'student.index',
   }
@@ -28,6 +32,16 @@ export default function StudentIndexPage({ students = [] }) {
     <>
       <Title>
         <Title.Left title={titles.index} />
+        <Title.Right>
+          <Button
+            as={Link}
+            href={route('student.create')}
+            color='blue'
+            className=''>
+            <UserRoundPlus className='mr-2 h-5 w-5' />
+            Cadastrar Aluno
+          </Button>
+        </Title.Right>
         {/* TODO: implementar PDF */}
       </Title>
 
@@ -39,7 +53,8 @@ export default function StudentIndexPage({ students = [] }) {
             type='search'
             placeholder='Pesquisar aluno...'
             defaultValue={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={handleChange}
+            autoFocus
           />
           <Button.Group>
             <Button type='submit' color='blue' disabled={isLoading || !search}>
@@ -54,17 +69,6 @@ export default function StudentIndexPage({ students = [] }) {
             </Button>
           </Button.Group>
         </Searchbar.Left>
-
-        <Searchbar.Right>
-          <Button
-            as={Link}
-            href={route('student.create')}
-            color='blue'
-            className='uppercase'>
-            <UserRoundPlus className='mr-2 h-5 w-5' />
-            cadastrar aluno
-          </Button>
-        </Searchbar.Right>
       </Searchbar>
 
       {!hasStudents && <NotFound icon>Nenhum aluno encontrado...</NotFound>}

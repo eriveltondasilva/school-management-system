@@ -2,6 +2,8 @@ import Input from '@/Components/Input'
 
 // ===============================================
 export default function AcademicYearFormData({ data = {}, errors = {} }) {
+  const isCreateRoute = route().current('*.create')
+
   return (
     <>
       <Input.Text
@@ -12,7 +14,9 @@ export default function AcademicYearFormData({ data = {}, errors = {} }) {
         defaultValue={data.year}
         maxLength='4'
         minLength='4'
-        readOnly={!route().current('academic-year.create')}
+        readOnly={!isCreateRoute}
+        autoFocus
+        required
       />
       <Input.Error message={errors.year} />
 

@@ -21,6 +21,7 @@ export default function GroupFormData({ data = {}, errors = {} }) {
         defaultValue={data.name}
         disabled={data.name}
         values={['6° Ano', '7° Ano', '8° Ano', '9° Ano']}
+        autoFocus
         required
       />
       <Input.Error message={errors.name} />

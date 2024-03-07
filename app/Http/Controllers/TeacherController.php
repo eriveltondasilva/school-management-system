@@ -4,20 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TeacherRequest;
 use App\Models\Teacher;
+use App\Services\SearchServices;
 use Illuminate\Http\Request;
 
 // ========================================================================
 class TeacherController extends Controller
 {
+    public function __construct(
+        protected SearchServices $searchServices
+    ) {
+    }
+
     /** xxx */
     public function index(Request $request)
     {
         $search = $request->get('search', '');
 
-        $teachers = Teacher::oldest('id')
-            ->where('id', $search)
-            ->orWhere('name', 'like', "%{$search}%")
-            ->paginate(15);
+        $teachers = $this->searchServices->searchPerson(new Teacher(), $search);
 
         return inertia('Teacher/Index', compact('teachers'));
     }

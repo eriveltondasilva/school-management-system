@@ -17,6 +17,7 @@ export default function TeacherFormData({
         placeholder='insira o nome do professor...'
         defaultValue={data.name}
         readOnly={readOnly}
+        autoFocus
         required
       />
       <Input.Error message={errors.name} />
