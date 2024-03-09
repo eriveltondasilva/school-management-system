@@ -35,51 +35,51 @@ export default function AcademicYearIndexPage({ academicYears = [] }) {
       <br />
 
       {/* Exibe mensagem se não houver anos letivos */}
-      {!hasAcademicYears && (
-        <NotFound>
-          <XCircle />
-          Não existem anos letivos criados...
-        </NotFound>
-      )}
+      {!hasAcademicYears && <AcademicYearNotFound />}
 
       {/* Exibe os cards dos anos letivos */}
-      {hasAcademicYears && (
-        <section className='grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4'>
-          {academicYears.map((academicYear) => (
-            <AcademicYearCard
-              key={academicYear.id}
-              academicYear={academicYear}
-            />
-          ))}
-        </section>
-      )}
+      {hasAcademicYears && <AcademicYearCard academicYears={academicYears} />}
     </>
   )
 }
 
-function AcademicYearCard({ academicYear = {} }) {
-  const { id, year, is_active, start_date, end_date, groups_count } =
-    academicYear
-
+function AcademicYearCard({ academicYears = [] }) {
   return (
-    <Link href={route('academic-year.edit', id)}>
-      <Card className='relative max-w-sm'>
-        <Indicator type={is_active ? 'success' : 'secondary'} />
-        <h5
-          className={twJoin(
-            'text-2xl font-bold tracking-tight',
-            'text-gray-900 dark:text-white'
-          )}>
-          {year}
-        </h5>
-        <ul className='font-normal text-gray-700 dark:text-gray-400'>
-          <li>Início: {formatDate(start_date)}</li>
-          <li>Fim: {formatDate(end_date)}</li>
-          <br />
-          <li className='font-semibold'>Turmas: {groups_count}</li>
-        </ul>
-      </Card>
-    </Link>
+    <section className='grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4'>
+      {academicYears.map(
+        ({ id, year, is_active, start_date, end_date, groups_count }) => (
+          <Link href={route('academic-year.edit', id)}>
+            <Card className='relative max-w-sm'>
+              <Indicator type={is_active ? 'success' : 'secondary'} />
+              <h5
+                className={twJoin(
+                  'text-2xl font-bold tracking-tight',
+                  'text-gray-900 dark:text-white'
+                )}>
+                {year}
+              </h5>
+              <ul className='font-normal text-gray-700 dark:text-gray-400'>
+                <li>Início: {formatDate(start_date)}</li>
+                <li>Fim: {formatDate(end_date)}</li>
+                <br />
+                <li className='font-semibold'>
+                  Turmas: {groups_count || 'sem turmas'}
+                </li>
+              </ul>
+            </Card>
+          </Link>
+        )
+      )}
+    </section>
+  )
+}
+
+function AcademicYearNotFound() {
+  return (
+    <NotFound>
+      <XCircle />
+      Não existem anos letivos criados...
+    </NotFound>
   )
 }
 

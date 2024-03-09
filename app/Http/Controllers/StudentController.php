@@ -20,7 +20,9 @@ class StudentController extends Controller
     {
         $search = $request->get('search', '');
 
-        $students = $this->searchServices->searchPerson(new Student(), $search);
+        $students = $this
+            ->searchServices
+            ->searchPerson(new Student(), $search);
 
         return inertia('Student/Index', compact('students'));
     }

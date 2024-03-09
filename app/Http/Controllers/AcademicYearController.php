@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AcademicYearRequest;
 use App\Models\AcademicYear;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -41,29 +42,9 @@ class AcademicYearController extends Controller
     // ### Actions ###
 
     /** xxx */
-    public function store(Request $request)
+    public function store(AcademicYearRequest $request)
     {
-        $currentYear = date('Y');
-        $nextYear = $currentYear + 1;
-
-        $validated = $request->validate([
-            'year' => [
-            'required',
-            'integer',
-            'between:' . $currentYear . ',' . $nextYear,
-            Rule::unique('academic_years', 'year'),
-        ],
-            'start_date' => 'nullable|date',
-            'end_date' => 'nullable|date|after:start_date',
-        ], [
-            'year.required' => 'O ano letivo é obrigatório.',
-            'year.integer' => 'O ano letivo deve ser um número.',
-            'year.between' => 'O ano letivo deve ser o próximo ano.',
-            'year.unique' => 'O ano letivo já existe.',
-            'start_date.date' => 'A data de início deve ser uma data válida.',
-            'end_date.date' => 'A data de término deve ser uma data válida.',
-            'end_date.after' => 'A data de término deve ser posterior à data de início.'
-        ]);
+        $validated = $request->validated();
 
         $academicYear = AcademicYear::create($validated);
 
@@ -73,16 +54,9 @@ class AcademicYearController extends Controller
     }
 
     /** xxx */
-    public function update(Request $request, AcademicYear $academicYear)
+    public function update(AcademicYearRequest $request, AcademicYear $academicYear)
     {
-        $validated = $request->validate([
-            'start_date' => 'nullable|date',
-            'end_date' => 'nullable|date|after:start_date',
-        ], [
-            'start_date.date' => 'A data de início deve ser uma data válida.',
-            'end_date.date' => 'A data de fim deve ser uma data válida.',
-            'end_date.after' => 'A data de término deve ser posterior à data de início.'
-        ]);
+        $validated = $request->validated();
 
         $academicYear->update($validated);
 

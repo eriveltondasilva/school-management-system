@@ -9,7 +9,11 @@ class GroupStudentController extends Controller
 {
     public function index(Group $group)
     {
-        $students = $group->students()->get();
+        $students = $group
+            ->students()
+            ->select('students.id', 'students.name')
+            ->oldest('students.name')
+            ->get();
 
         return inertia('GroupStudent/Index', compact('group', 'students'));
     }

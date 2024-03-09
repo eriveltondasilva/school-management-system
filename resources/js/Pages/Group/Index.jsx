@@ -33,54 +33,52 @@ export default function GroupIndexPage({ groups = [] }) {
       <br />
 
       {/* Exibe mensagem se não houver grupos */}
-      {!hasGroups && (
-        <NotFound>
-          <XCircle />
-          Não existem turmas criadas para o ano letivo atual.
-        </NotFound>
-      )}
+      {!hasGroups && <GroupNotFound />}
 
       {/* Exibe os cards das turmas */}
-      {hasGroups && (
-        <section className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
-          {groups.map((group) => (
-            <GroupCard group={group} key={group.id} />
-          ))}
-        </section>
-      )}
+      {hasGroups && <GroupCard groups={groups} />}
     </>
   )
 }
 
-function GroupCard({ group = {} }) {
-  const { id, name, academic_year, students_count } = group
-
+function GroupCard({ groups = [] }) {
   return (
-    // <Link href={route('group.edit', id)}>
-    <Card className='max-w-sm'>
-      <header className='flex justify-between'>
-        <h5 className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
-          {name}
-        </h5>
-        <EditPageButton href={route('group.edit', id)} text='Editar Turma'>
-          <Pencil className='h-3 w-3' />
-        </EditPageButton>
-      </header>
-      <p className='font-normal text-gray-700 dark:text-gray-400'>
-        Alunos: {students_count}
-      </p>
-      <footer>
-        <Button
-          as={Link}
-          href={route('group-students.index', id)}
-          color='blue'
-          className=''
-          fullSized>
-          Ver Alunos
-        </Button>
-      </footer>
-    </Card>
-    // </Link>
+    <section className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
+      {groups.map(({ id, name, students_count }) => (
+        <Card className='max-w-sm'>
+          <header className='flex justify-between'>
+            <h5 className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
+              {name}
+            </h5>
+            <EditPageButton href={route('group.edit', id)} text='Editar Turma'>
+              <Pencil className='h-3 w-3' />
+            </EditPageButton>
+          </header>
+          <p className='font-normal text-gray-700 dark:text-gray-400'>
+            Alunos: {students_count || 'sem alunos'}
+          </p>
+          <footer>
+            <Button
+              as={Link}
+              href={route('group-students.index', id)}
+              color='blue'
+              className=''
+              fullSized>
+              Ver Alunos
+            </Button>
+          </footer>
+        </Card>
+      ))}
+    </section>
+  )
+}
+
+function GroupNotFound() {
+  return (
+    <NotFound>
+      <XCircle />
+      Não existem turmas criadas para o ano letivo atual.
+    </NotFound>
   )
 }
 

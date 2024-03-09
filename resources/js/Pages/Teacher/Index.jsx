@@ -74,7 +74,7 @@ export default function TeacherIndexPage({ teachers = [] }) {
         </Searchbar.Left>
       </Searchbar>
 
-      {!hasTeachers && <NotFound icon>Nenhum professor encontrado...</NotFound>}
+      {!hasTeachers && <TeacherNotFound />}
 
       {/* Teacher Table */}
       {hasTeachers && <TeacherTable teachers={teachers.data} />}
@@ -93,21 +93,21 @@ function TeacherTable({ teachers = [] }) {
         <Table.HeaderCell className='w-0'>Id</Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
         <Table.HeaderCell>Email</Table.HeaderCell>
-        <Table.HeaderCell className='text-center'>AÇÃO</Table.HeaderCell>
+        <Table.HeaderCell></Table.HeaderCell>
       </Table.Header>
 
       <Table.Body>
-        {teachers.map((teacher) => (
-          <Table.Row key={teacher.id}>
-            <Table.RowCell className='font-bold'>{teacher.id}</Table.RowCell>
+        {teachers.map(({ id, name, email }) => (
+          <Table.Row key={id}>
+            <Table.RowCell className='font-bold'>{id}</Table.RowCell>
             <Table.RowCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
-              {teacher.name}
+              {name}
             </Table.RowCell>
-            <Table.RowCell>{teacher.email}</Table.RowCell>
+            <Table.RowCell>{email}</Table.RowCell>
             <Table.RowCell className='flex justify-center'>
               <Button
                 as={Link}
-                href={route('teacher.show', teacher.id)}
+                href={route('teacher.show', id)}
                 color='blue'
                 size='xs'>
                 <Eye className='mr-1 h-4 w-4' />
@@ -119,6 +119,10 @@ function TeacherTable({ teachers = [] }) {
       </Table.Body>
     </Table>
   )
+}
+
+function TeacherNotFound() {
+  return <NotFound icon>Nenhum professor encontrado...</NotFound>
 }
 
 function TeacherPagination() {

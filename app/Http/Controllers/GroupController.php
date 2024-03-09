@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GroupRequest;
 use App\Models\AcademicYear;
 use App\Models\Group;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+
+// use Illuminate\Http\Request;
 
 // ========================================================================
 class GroupController extends Controller
@@ -13,7 +14,9 @@ class GroupController extends Controller
     /** xxx */
     public function index()
     {
-        $groups = Group::activeAcademicYear()->withCount('students')->get();
+        $groups = Group::activeAcademicYear()
+            ->withCount('students')
+            ->get();
 
         return inertia('Group/Index', compact('groups'));
     }
@@ -39,33 +42,19 @@ class GroupController extends Controller
     // ### Actions ###
 
     /** xxx */
-    public function store(Request $request)
+    public function store(GroupRequest $request)
     {
-        $activeAcademicYear = AcademicYear::isActive()->first();
+        $activeAcademicYearId = AcademicYear::isActive()->value('id');
 
-        if (!$activeAcademicYear) {
+        if (!$activeAcademicYearId) {
             return back()
                 ->with('message', 'Ano letivo atual não existe!');
         }
 
-        $validated = $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('groups')->where(function ($query) use ($activeAcademicYear) {
-                    return $query->where('academic_year_id', $activeAcademicYear->id);
-                }),
-            ],
-            'classroom' => 'nullable|string|max:255',
-            'shift' => 'nullable|string|max:255',
-        ], [
-            'name.required' => 'O nome da turma é obrigatório.',
-            'name.unique' => 'A turma informada já existe.',
-        ]);
+        $validated = $request->validated();
 
         $group = Group::create($validated);
-        $group->academic_year_id = $activeAcademicYear->id;
+        $group->academic_year_id = $activeAcademicYearId;
         $group->save();
 
         return back()
@@ -74,12 +63,9 @@ class GroupController extends Controller
     }
 
     /** xxx */
-    public function update(Request $request, Group $group)
+    public function update(GroupRequest $request, Group $group)
     {
-        $validated = $request->validate([
-            'classroom' => 'nullable|string|max:255',
-            'shift' => 'nullable|string|max:255',
-        ]);
+        $validated = $request->validated();
 
         $group->update($validated);
 

@@ -71,7 +71,7 @@ export default function StudentIndexPage({ students = [] }) {
         </Searchbar.Left>
       </Searchbar>
 
-      {!hasStudents && <NotFound icon>Nenhum aluno encontrado...</NotFound>}
+      {!hasStudents && <StudentNotFound />}
 
       {/* Student Table */}
       {hasStudents && <StudentTable students={students.data} />}
@@ -87,21 +87,21 @@ function StudentTable({ students = [] }) {
         <Table.HeaderCell className='w-0'>Id</Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
         <Table.HeaderCell>Email</Table.HeaderCell>
-        <Table.HeaderCell className='text-center'>AÇÃO</Table.HeaderCell>
+        <Table.HeaderCell></Table.HeaderCell>
       </Table.Header>
 
       <Table.Body>
-        {students.map((student) => (
-          <Table.Row key={student.id}>
-            <Table.RowCell className='font-bold'>{student.id}</Table.RowCell>
+        {students.map(({ id, name, email }) => (
+          <Table.Row key={id}>
+            <Table.RowCell className='font-bold'>{id}</Table.RowCell>
             <Table.RowCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
-              {student.name}
+              {name}
             </Table.RowCell>
-            <Table.RowCell>{student.email}</Table.RowCell>
+            <Table.RowCell>{email}</Table.RowCell>
             <Table.RowCell className='flex justify-center'>
               <Button
                 as={Link}
-                href={route('student.show', student.id)}
+                href={route('student.show', id)}
                 color='blue'
                 size='xs'>
                 <Eye className='mr-1 h-4 w-4' />
@@ -113,6 +113,10 @@ function StudentTable({ students = [] }) {
       </Table.Body>
     </Table>
   )
+}
+
+function StudentNotFound() {
+  return <NotFound icon>Nenhum aluno encontrado...</NotFound>
 }
 
 // ------------------------------------

@@ -20,7 +20,9 @@ class TeacherController extends Controller
     {
         $search = $request->get('search', '');
 
-        $teachers = $this->searchServices->searchPerson(new Teacher(), $search);
+        $teachers = $this
+            ->searchServices
+            ->searchPerson(new Teacher(), $search);
 
         return inertia('Teacher/Index', compact('teachers'));
     }
