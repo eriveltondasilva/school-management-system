@@ -28,7 +28,7 @@ class GroupController extends Controller
     }
 
     /** xxx */
-    public function show(Group $group)
+    public function show()
     {
         //
     }

@@ -5,15 +5,17 @@ import { twJoin } from 'tailwind-merge'
 
 import Indicator from '@/Components/Indicator'
 import NotFound from '@/Components/NotFound'
+import Title from '@/Components/Title'
 import AuthLayout from '@/Layouts/AuthLayout'
 import formatDate from '@/Utils/formatDate'
 
-import Title from '@/Components/Title'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function AcademicYearIndexPage({ academicYears = [] }) {
   const hasAcademicYears = academicYears.length > 0
+
+  console.log(academicYears)
 
   return (
     <>
@@ -48,26 +50,32 @@ function AcademicYearCard({ academicYears = [] }) {
     <section className='grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4'>
       {academicYears.map(
         ({ id, year, is_active, start_date, end_date, groups_count }) => (
-          <Link href={route('academic-year.edit', id)}>
-            <Card className='relative max-w-sm'>
-              <Indicator type={is_active ? 'success' : 'secondary'} />
-              <h5
-                className={twJoin(
-                  'text-2xl font-bold tracking-tight',
-                  'text-gray-900 dark:text-white'
-                )}>
-                {year}
-              </h5>
-              <ul className='font-normal text-gray-700 dark:text-gray-400'>
-                <li>Início: {formatDate(start_date)}</li>
-                <li>Fim: {formatDate(end_date)}</li>
-                <br />
-                <li className='font-semibold'>
-                  Turmas: {groups_count || 'sem turmas'}
-                </li>
-              </ul>
-            </Card>
-          </Link>
+          <Card key={id} className='relative max-w-sm'>
+            <Indicator type={is_active ? 'success' : 'secondary'} />
+            <h5
+              className={twJoin(
+                'text-2xl font-bold tracking-tight',
+                'text-gray-900 dark:text-white'
+              )}>
+              {year}
+            </h5>
+            <ul className='font-normal text-gray-700 dark:text-gray-400'>
+              <li>Início: {formatDate(start_date)}</li>
+              <li>Fim: {formatDate(end_date)}</li>
+              <br />
+              <li className='font-semibold'>Turmas: {groups_count}</li>
+            </ul>
+            <footer>
+              <Button
+                as={Link}
+                href={route('academic-year.edit', id)}
+                color='blue'
+                className=''
+                fullSized>
+                Ver Ano Letivo
+              </Button>
+            </footer>
+          </Card>
         )
       )}
     </section>

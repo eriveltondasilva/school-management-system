@@ -34,7 +34,7 @@ Route::get('/', function () {
 Route::middleware('auth')
 ->group(function () {
     // TODO: remover esta rota e configurar o HOME no arquivo auth.php
-    Route::redirect('/dashboard', '/painel');
+    // Route::redirect('/dashboard', '/painel');
 
     // #DASHBOARD
     Route::get('/painel', [DashboardController::class, 'index'])->name('dashboard');

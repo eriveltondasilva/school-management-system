@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
-use App\Http\Requests\StudentRequest;
+use App\Http\Requests\PersonRequest;
 use App\Services\SearchServices;
 use Illuminate\Http\Request;
 
@@ -12,8 +12,7 @@ class StudentController extends Controller
 {
     public function __construct(
         protected SearchServices $searchServices
-    ) {
-    }
+    ) { }
 
     /** xxx */
     public function index(Request $request)
@@ -48,7 +47,7 @@ class StudentController extends Controller
     // ### Actions ###
 
     /** xxx */
-    public function store(StudentRequest $request)
+    public function store(PersonRequest $request)
     {
         $validated = $request->validated();
         $student = Student::create($validated);
@@ -59,7 +58,7 @@ class StudentController extends Controller
     }
 
     /** xxx */
-    public function update(StudentRequest $request, Student $student)
+    public function update(PersonRequest $request, Student $student)
     {
         $validated = $request->validated();
         $student->update($validated);

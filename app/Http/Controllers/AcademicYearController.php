@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AcademicYearRequest;
 use App\Models\AcademicYear;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+
+// use Illuminate\Http\Request;
 
 // ========================================================================
 class AcademicYearController extends Controller
@@ -36,6 +36,8 @@ class AcademicYearController extends Controller
     /** xxx */
     public function edit(AcademicYear $academicYear)
     {
+        $academicYear->load('quarters');
+
         return inertia('AcademicYear/Edit', compact('academicYear'));
     }
 
@@ -44,9 +46,18 @@ class AcademicYearController extends Controller
     /** xxx */
     public function store(AcademicYearRequest $request)
     {
+        $quarters = [
+            ['name' => '1° Bimestre'],
+            ['name' => '2° Bimestre'],
+            ['name' => '3° Bimestre'],
+            ['name' => '4° Bimestre'],
+        ];
+
         $validated = $request->validated();
 
         $academicYear = AcademicYear::create($validated);
+
+        $academicYear->groups()->createMany($quarters);
 
         return back()
             ->with('message', 'Ano letivo criado com sucesso!')

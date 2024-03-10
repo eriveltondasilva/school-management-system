@@ -22,6 +22,8 @@ export default function AcademicYearEditPage({ academicYear = {} }) {
   }
   const { handleSubmit, errors, isLoading } = useFormDate(formDataOptions)
 
+  console.log(academicYear)
+
   return (
     <Form onSubmit={handleSubmit}>
       {/* flash message */}

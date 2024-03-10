@@ -12,7 +12,7 @@ class GroupSeeder extends Seeder
 {
     public function run(): void
     {
-        $activeAcademicYear = AcademicYear::isActive()->first();
+        $activeAcademicYearId = AcademicYear::isActive()->value('id');
 
         DB::table('groups')->insert([
             [
@@ -22,7 +22,7 @@ class GroupSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
                 //
-                'academic_year_id' => $activeAcademicYear->id,
+                'academic_year_id' => $activeAcademicYearId,
             ],
             [
                 'name' => '7° Ano',
@@ -31,7 +31,7 @@ class GroupSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
                 //
-                'academic_year_id' => $activeAcademicYear->id,
+                'academic_year_id' => $activeAcademicYearId,
             ],
             [
                 'name' => '8° Ano',
@@ -40,7 +40,7 @@ class GroupSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
                 //
-                'academic_year_id' => $activeAcademicYear->id,
+                'academic_year_id' => $activeAcademicYearId,
             ],
             [
                 'name' => '9° Ano',
@@ -49,7 +49,7 @@ class GroupSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
                 //
-                'academic_year_id' => $activeAcademicYear->id,
+                'academic_year_id' => $activeAcademicYearId,
             ],
         ]);
     }

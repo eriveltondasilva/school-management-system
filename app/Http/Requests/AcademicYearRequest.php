@@ -39,7 +39,7 @@ class AcademicYearRequest extends FormRequest
         return [
             'year.required'   => 'O ano letivo é obrigatório.',
             'year.integer'    => 'O ano letivo deve ser um número.',
-            'year.between'    => 'O ano letivo deve ser o próximo ano.',
+            'year.between'    => 'O ano letivo deve estar entre o ano atual, :min, e o próximo, :max.',
             'year.unique'     => 'O ano letivo já informado existe.',
             'start_date.date' => 'A data de início deve ser uma data válida.',
             'end_date.date'   => 'A data de término deve ser uma data válida.',

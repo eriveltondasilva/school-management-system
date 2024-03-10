@@ -24,7 +24,6 @@ export default function AcademicYearFormData({ data = {}, errors = {} }) {
         id='start_date'
         type='date'
         label='Início do ano letivo'
-        placeholder='insira o início do ano letivo...'
         defaultValue={data.start_date}
       />
       <Input.Error message={errors.start_date} />
@@ -33,7 +32,6 @@ export default function AcademicYearFormData({ data = {}, errors = {} }) {
         id='end_date'
         type='date'
         label='Fim do ano letivo'
-        placeholder='insira o fim do ano letivo...'
         defaultValue={data.end_date}
       />
       <Input.Error message={errors.end_date} />

@@ -11,6 +11,7 @@ import Title from '@/Components/Title'
 import useFormDate from '@/Hooks/useFormDate'
 import AuthLayout from '@/Layouts/AuthLayout'
 
+import Pagination from '@/Components/Pagination'
 import { breadcrumbs, titles } from './data'
 
 // ============================================================================
@@ -26,7 +27,10 @@ export default function StudentIndexPage({ students = [] }) {
   const formDataOptions = {
     routeName: 'student.index',
   }
+
   const { handleSubmit, isLoading } = useFormDate(formDataOptions)
+
+  console.log(students)
 
   return (
     <>
@@ -75,6 +79,9 @@ export default function StudentIndexPage({ students = [] }) {
 
       {/* Student Table */}
       {hasStudents && <StudentTable students={students.data} />}
+
+      {/* Student Pagination */}
+      {hasStudents && <StudentPagination students={students} />}
     </>
   )
 }
@@ -117,6 +124,20 @@ function StudentTable({ students = [] }) {
 
 function StudentNotFound() {
   return <NotFound icon>Nenhum aluno encontrado...</NotFound>
+}
+
+function StudentPagination({ students = {} }) {
+  const { links, total, current_page, next_page_url, prev_page_url } = students
+
+  return (
+    <Pagination>
+      <Pagination.Left />
+      <Pagination.Right>
+        <Pagination.Previous href={prev_page_url} />
+        <Pagination.Next href={next_page_url} />
+      </Pagination.Right>
+    </Pagination>
+  )
 }
 
 // ------------------------------------

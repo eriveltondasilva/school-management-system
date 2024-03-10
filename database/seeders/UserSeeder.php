@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             'email' => 'eriveltondasilva13@gmail.com',
             'password' => '12345678',
         ]);
-        $erivelton->assignRole(RoleEnum::TEACHER);
+        $erivelton->assignRole(RoleEnum::ADMIN);
 
 
         $maria = User::factory()->create([

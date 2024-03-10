@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TeacherRequest;
+use App\Http\Requests\PersonRequest;
 use App\Models\Teacher;
 use App\Services\SearchServices;
 use Illuminate\Http\Request;
@@ -12,8 +12,7 @@ class TeacherController extends Controller
 {
     public function __construct(
         protected SearchServices $searchServices
-    ) {
-    }
+    ) { }
 
     /** xxx */
     public function index(Request $request)
@@ -48,7 +47,7 @@ class TeacherController extends Controller
     // ### Actions ###
 
     /** xxx */
-    public function store(TeacherRequest $request)
+    public function store(PersonRequest $request)
     {
         $validated = $request->validated();
         $teacher = Teacher::create($validated);
@@ -59,7 +58,7 @@ class TeacherController extends Controller
     }
 
     /** xxx */
-    public function update(TeacherRequest $request, Teacher $teacher)
+    public function update(PersonRequest $request, Teacher $teacher)
     {
         $validated = $request->validated();
         $teacher->update($validated);
