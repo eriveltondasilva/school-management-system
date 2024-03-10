@@ -127,11 +127,11 @@ function StudentNotFound() {
 }
 
 function StudentPagination({ students = {} }) {
-  const { links, total, current_page, next_page_url, prev_page_url } = students
+  const { total, from, to, next_page_url, prev_page_url } = students
 
   return (
     <Pagination>
-      <Pagination.Left />
+      <Pagination.Left to={to} from={from} total={total} />
       <Pagination.Right>
         <Pagination.Previous href={prev_page_url} />
         <Pagination.Next href={next_page_url} />

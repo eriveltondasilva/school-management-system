@@ -13,7 +13,7 @@ class SearchServices
             ->orWhere('name', 'like', "%{$search}%")
             ->orWhere('email', 'like', "%{$search}%")
             ->oldest('id')
-            ->simplePaginate(10);
+            ->paginate(10);
 
         return $query;
     }

@@ -80,7 +80,7 @@ export default function TeacherIndexPage({ teachers = [] }) {
       {hasTeachers && <TeacherTable teachers={teachers.data} />}
 
       {/* Pagination */}
-      {/* {hasTeachers && <TeacherPagination links={teachers.links} />} */}
+      {hasTeachers && <TeacherPagination teachers={teachers} />}
     </>
   )
 }
@@ -125,14 +125,19 @@ function TeacherNotFound() {
   return <NotFound icon>Nenhum professor encontrado...</NotFound>
 }
 
-function TeacherPagination() {
+function TeacherPagination({ teachers = {} }) {
+  const { total, from, to, next_page_url, prev_page_url } = teachers
+
   return (
     <Pagination>
-      <Pagination.Trigger />
+      <Pagination.Left to={to} from={from} total={total} />
+      <Pagination.Right>
+        <Pagination.Previous href={prev_page_url} />
+        <Pagination.Next href={next_page_url} />
+      </Pagination.Right>
     </Pagination>
   )
 }
-
 // ------------------------------------
 TeacherIndexPage.layout = (page) => (
   <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>

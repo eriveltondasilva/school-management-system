@@ -13,13 +13,17 @@ export function PaginationRoot({ children }) {
   )
 }
 
-export function PaginationLeft() {
+export function PaginationLeft({ from = 0, to = 0, total = 0 }) {
   return (
     <span className='text-sm font-normal text-gray-500 dark:text-gray-400'>
-      Showing{' '}
-      <span className='font-semibold text-gray-900 dark:text-white'>1-10</span>{' '}
-      of{' '}
-      <span className='font-semibold text-gray-900 dark:text-white'>1000</span>
+      Exibindo{' '}
+      <span className='font-semibold text-gray-900 dark:text-white'>
+        {from}-{to}{' '}
+      </span>
+      de{' '}
+      <span className='font-semibold text-gray-900 dark:text-white'>
+        {total}
+      </span>
     </span>
   )
 }
