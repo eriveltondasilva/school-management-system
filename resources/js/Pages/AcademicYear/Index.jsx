@@ -15,8 +15,6 @@ import { breadcrumbs, titles } from './data'
 export default function AcademicYearIndexPage({ academicYears = [] }) {
   const hasAcademicYears = academicYears.length > 0
 
-  console.log(academicYears)
-
   return (
     <>
       {/* título */}
@@ -69,7 +67,7 @@ function AcademicYearCard({ academicYears = [] }) {
               <Button
                 as={Link}
                 href={route('academic-year.edit', id)}
-                color='blue'
+                color='light'
                 className=''
                 fullSized>
                 Ver Ano Letivo

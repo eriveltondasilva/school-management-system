@@ -29,7 +29,6 @@ export default function TeacherIndexPage({ teachers = [] }) {
   }
   const { handleSubmit, isLoading } = useFormDate(formDataOptions)
 
-  console.log(teachers)
   return (
     <>
       {/* título */}

@@ -14,28 +14,28 @@ export default function useFormDate({ routeName = '', id = '', method = '' }) {
       const formData = new FormData(e.target)
       const requestData = Object.fromEntries(formData.entries())
 
-      if (method === 'get' || route().current('*.index')) {
-        await router.get(route(routeName), requestData)
+      if (method === 'GET' || route().current('*.index')) {
+        await router.get(route(routeName, id), requestData)
         return
       }
 
-      if (method === 'post' || route().current('*.create')) {
+      if (method === 'POST' || route().current('*.create')) {
         await router.post(route(routeName), requestData)
         e.target.reset()
         return
       }
 
-      if (method === 'put' || route().current('*.edit')) {
+      if (method === 'PUT' || route().current('*.edit')) {
         await router.put(route(routeName, id), requestData)
         return
       }
 
-      if (method === 'delete' || route().current('*.destroy')) {
+      if (method === 'DELETE' || route().current('*.destroy')) {
         await router.delete(route(routeName, id))
         return
       }
 
-      return console.error('Método de envio inválido')
+      throw new Error('Método de envio inválido')
     } catch (error) {
       console.error('Erro ao enviar formulário:', error)
     } finally {

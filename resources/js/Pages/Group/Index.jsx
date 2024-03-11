@@ -45,7 +45,7 @@ function GroupCard({ groups = [] }) {
   return (
     <section className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
       {groups.map(({ id, name, students_count }) => (
-        <Card className='max-w-sm'>
+        <Card key={id} className='max-w-sm'>
           <header className='flex justify-between'>
             <h5 className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
               {name}
@@ -61,7 +61,7 @@ function GroupCard({ groups = [] }) {
             <Button
               as={Link}
               href={route('group-students.index', id)}
-              color='blue'
+              color='light'
               className=''
               fullSized>
               Ver Alunos
@@ -85,7 +85,7 @@ function GroupNotFound() {
 function EditPageButton({ text = '', href = '', children }) {
   return (
     <Tooltip content={text}>
-      <Button href={href} color='light' size='xs' as={Link}>
+      <Button href={href} color='blue' size='xs' as={Link}>
         {children}
       </Button>
     </Tooltip>

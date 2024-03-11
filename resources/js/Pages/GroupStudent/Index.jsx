@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
-import { Eye, XCircle } from 'lucide-react'
+import { Eye, Plus, XCircle } from 'lucide-react'
 
 import NotFound from '@/Components/NotFound'
 import Table from '@/Components/Table'
@@ -13,13 +13,21 @@ import { breadcrumbs, titles } from './data'
 export default function GroupStudentIndexPage({ group = {}, students = [] }) {
   const hasStudents = students?.length > 0
 
-  console.log(group)
-  console.log(students)
   return (
     <>
       {/* título */}
       <Title>
-        <Title.Left title={titles.index} />
+        <Title.Left title={`${titles.index}: ${group.name}`} />
+        <Title.Right>
+          <Button
+            as={Link}
+            href={route('group-students.add-students', group.id)}
+            color='blue'
+            className=''>
+            <Plus className='mr-2 h-5 w-5' />
+            Adicionar alunos
+          </Button>
+        </Title.Right>
         {/* TODO: implementar PDF */}
       </Title>
 

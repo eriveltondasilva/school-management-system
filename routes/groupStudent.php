@@ -10,10 +10,12 @@ Route::middleware('auth')
 ->prefix('turmas/{group}/alunos')->name('group-students.')
 ->group(function () {
     Route::get('/', 'index')->name('index');
+    Route::get('/adicionar', 'addStudents')->name('add-students');
+    // #####
+    Route::post('/', 'store')->name('store');
+
     // TODO: implementar
     Route::get('/cadastrar', 'create')->name('create');
-    Route::post('/', 'store')->name('student-store');
-    // #####
     Route::get('/{student}', 'edit')->name('edit');
     Route::put('/{student}', 'update')->name('update');
     Route::delete('/{student}', 'destroy')->name('destroy');
