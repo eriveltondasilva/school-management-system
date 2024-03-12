@@ -82,7 +82,7 @@ export default function TeacherFormData({
         id='cpf'
         type='text'
         label='CPF'
-        placeholder='insira o cpf do PROFESSOR...'
+        placeholder='insira o cpf do professor...'
         defaultValue={data.cpf}
         readOnly={readOnly}
       />
@@ -95,7 +95,7 @@ export default function TeacherFormData({
         id='rg'
         type='text'
         label='RG'
-        placeholder='insira o rg do PROFESSOR...'
+        placeholder='insira o rg do professor...'
         defaultValue={data.rg}
         readOnly={readOnly}
       />

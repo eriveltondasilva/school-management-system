@@ -13,10 +13,10 @@ Route::middleware('auth')
     Route::get('/adicionar', 'addStudents')->name('add-students');
     // #####
     Route::post('/', 'store')->name('store');
+    Route::delete('/{student}', 'destroy')->name('destroy');
 
     // TODO: implementar
     Route::get('/cadastrar', 'create')->name('create');
     Route::get('/{student}', 'edit')->name('edit');
     Route::put('/{student}', 'update')->name('update');
-    Route::delete('/{student}', 'destroy')->name('destroy');
 });

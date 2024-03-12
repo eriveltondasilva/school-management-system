@@ -71,8 +71,7 @@ class AcademicYearController extends Controller
 
         $academicYear->update($validated);
 
-        return back()
-            ->with('message', 'Ano letivo atualizado com sucesso!');
+        return back()->with('message', 'Ano letivo atualizado com sucesso!');
     }
 
     /** xxx */
@@ -82,13 +81,11 @@ class AcademicYearController extends Controller
             return back();
         }
 
-        AcademicYear::where('is_active', true)
-            ->update(['is_active' => false]);
+        AcademicYear::where('is_active', true)->update(['is_active' => false]);
 
         $academicYear->update(['is_active' => true]);
 
-        return back()
-            ->with('message', 'Ano letivo ativo!');
+        return back()->with('message', 'Ano letivo ativo!');
     }
     //
 }

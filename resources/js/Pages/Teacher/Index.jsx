@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
-import { Eye, Search, Undo2, UserPlus } from 'lucide-react'
+import { Eye, PencilLine, Search, Undo2, UserPlus } from 'lucide-react'
 import { useState } from 'react'
 
 import Input from '@/Components/Input'
@@ -104,14 +104,7 @@ function TeacherTable({ teachers = [] }) {
             </Table.RowCell>
             <Table.RowCell>{email}</Table.RowCell>
             <Table.RowCell className='flex justify-center'>
-              <Button
-                as={Link}
-                href={route('teacher.show', id)}
-                color='blue'
-                size='xs'>
-                <Eye className='mr-1 h-4 w-4' />
-                visualizar
-              </Button>
+              <TableButtons id={id} />
             </Table.RowCell>
           </Table.Row>
         ))}
@@ -120,10 +113,30 @@ function TeacherTable({ teachers = [] }) {
   )
 }
 
+// ------------------------------------
 function TeacherNotFound() {
   return <NotFound icon>Nenhum professor encontrado...</NotFound>
 }
 
+// ------------------------------------
+function TableButtons({ id }) {
+  return (
+    <Button.Group>
+      <Button as={Link} href={route('teacher.show', id)} color='blue' size='xs'>
+        <Eye className='h-4 w-4' />
+      </Button>
+      <Button
+        as={Link}
+        href={route('teacher.edit', id)}
+        color='green'
+        size='xs'>
+        <PencilLine className='h-4 w-4' />
+      </Button>
+    </Button.Group>
+  )
+}
+
+// ------------------------------------
 function TeacherPagination({ teachers = {} }) {
   const { total, from, to, next_page_url, prev_page_url } = teachers
 
@@ -137,6 +150,7 @@ function TeacherPagination({ teachers = {} }) {
     </Pagination>
   )
 }
+
 // ------------------------------------
 TeacherIndexPage.layout = (page) => (
   <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>

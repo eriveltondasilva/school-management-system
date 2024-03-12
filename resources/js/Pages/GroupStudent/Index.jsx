@@ -1,7 +1,8 @@
-import { Link } from '@inertiajs/react'
+import { Link, usePage } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
-import { Eye, Plus, XCircle } from 'lucide-react'
+import { Eye, Plus, Trash2, XCircle } from 'lucide-react'
 
+import Alert from '@/Components/Alert'
 import NotFound from '@/Components/NotFound'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
@@ -12,9 +13,17 @@ import { breadcrumbs, titles } from './data'
 // ====================================
 export default function GroupStudentIndexPage({ group = {}, students = [] }) {
   const hasStudents = students?.length > 0
+  const { flash = {} } = usePage().props || {}
 
   return (
     <>
+      {/* flash message */}
+      {flash?.message && (
+        <Alert color='success' className='mb-4'>
+          <span className='font-medium'>{flash.message}</span>
+        </Alert>
+      )}
+
       {/* título */}
       <Title>
         <Title.Left title={`${titles.index}: ${group.name}`} />
@@ -37,12 +46,12 @@ export default function GroupStudentIndexPage({ group = {}, students = [] }) {
       {!hasStudents && <GroupStudentNotFound />}
 
       {/* student Table */}
-      {hasStudents && <StudentTable students={students} />}
+      {hasStudents && <StudentTable students={students} group={group} />}
     </>
   )
 }
 
-function StudentTable({ students = [] }) {
+function StudentTable({ students = [], group = {} }) {
   return (
     <Table>
       <Table.Header>
@@ -59,14 +68,7 @@ function StudentTable({ students = [] }) {
               {name}
             </Table.RowCell>
             <Table.RowCell className='flex justify-end'>
-              <Button
-                as={Link}
-                href={route('student.show', id)}
-                color='blue'
-                size='xs'>
-                <Eye className='mr-1 h-4 w-4' />
-                visualizar
-              </Button>
+              <TableButtons studentId={id} groupId={group.id} />
             </Table.RowCell>
           </Table.Row>
         ))}
@@ -81,6 +83,31 @@ function GroupStudentNotFound() {
       <XCircle />
       Nenhum aluno na turma...
     </NotFound>
+  )
+}
+
+function TableButtons({ studentId = 0, groupId = 0 }) {
+  return (
+    <Button.Group>
+      <Button
+        as={Link}
+        href={route('student.show', studentId)}
+        color='blue'
+        size='xs'>
+        <Eye className='h-4 w-4' />
+      </Button>
+      <Button
+        as={Link}
+        method='delete'
+        href={route('group-students.destroy', {
+          group: groupId,
+          student: studentId,
+        })}
+        color='red'
+        size='xs'>
+        <Trash2 className='h-4 w-4' />
+      </Button>
+    </Button.Group>
   )
 }
 

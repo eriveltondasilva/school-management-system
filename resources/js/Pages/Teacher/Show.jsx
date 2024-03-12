@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react'
-import { Button, Tooltip } from 'flowbite-react'
-import { Pencil, Plus } from 'lucide-react'
+import { Button } from 'flowbite-react'
+import { PencilLine, Plus } from 'lucide-react'
 
 import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
@@ -29,17 +29,7 @@ export default function TeacherShowPage({ teacher = {} }) {
         <Form.Header>
           <span className='flex gap-4'>
             {titles.show}
-            <EditPageButton
-              href={route('teacher.edit', teacher.id)}
-              text='Editar aluno'>
-              <Pencil className='h-4 w-4' />
-            </EditPageButton>
-
-            <EditPageButton
-              href={route('teacher.create')}
-              text='Cadastrar novo aluno'>
-              <Plus className='h-4 w-4' />
-            </EditPageButton>
+            <TitleButton id={teacher.id} />
           </span>
         </Form.Header>
 
@@ -53,13 +43,26 @@ export default function TeacherShowPage({ teacher = {} }) {
   )
 }
 
-function EditPageButton({ text = '', href = '', children }) {
+function TitleButton({ id = '' }) {
   return (
-    <Tooltip content={text}>
-      <Button href={href} color='blue' size='xs' as={Link}>
-        {children}
+    <Button.Group>
+      <Button
+        title='Editar professor'
+        href={route('teacher.edit', id)}
+        color='blue'
+        size='xs'
+        as={Link}>
+        <PencilLine className='h-4 w-4' />
       </Button>
-    </Tooltip>
+      <Button
+        title='Cadastrar novo professor'
+        href={route('teacher.create')}
+        color='green'
+        size='xs'
+        as={Link}>
+        <Plus className='h-4 w-4' />
+      </Button>
+    </Button.Group>
   )
 }
 

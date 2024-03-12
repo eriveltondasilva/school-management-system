@@ -26,9 +26,7 @@ class Group extends Model
 
     public function scopeActiveAcademicYear($query)
     {
-        return $query->whereHas('academicYear', function ($query) {
-            $query->where('is_active', true);
-        });
+        return $query->whereHas('academicYear', fn ($query) => $query->where('is_active', true));
     }
 
     // ------------------------------

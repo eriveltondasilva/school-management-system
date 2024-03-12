@@ -12,16 +12,15 @@ class TeacherController extends Controller
 {
     public function __construct(
         protected SearchServices $searchServices
-    ) { }
+    ) {
+    }
 
     /** xxx */
     public function index(Request $request)
     {
         $search = $request->get('search', '');
 
-        $teachers = $this
-            ->searchServices
-            ->searchPerson(new Teacher(), $search);
+        $teachers = $this->searchServices->searchPerson(new Teacher(), $search);
 
         return inertia('Teacher/Index', compact('teachers'));
     }

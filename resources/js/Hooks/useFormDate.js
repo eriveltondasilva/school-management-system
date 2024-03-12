@@ -20,7 +20,7 @@ export default function useFormDate({ routeName = '', id = '', method = '' }) {
       }
 
       if (method === 'POST' || route().current('*.create')) {
-        await router.post(route(routeName), requestData)
+        await router.post(route(routeName, id), requestData)
         e.target.reset()
         return
       }

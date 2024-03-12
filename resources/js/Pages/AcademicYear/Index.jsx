@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react'
 import { Button, Card } from 'flowbite-react'
-import { Plus, XCircle } from 'lucide-react'
+import { Eye, Plus, XCircle } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
 import Indicator from '@/Components/Indicator'
@@ -45,7 +45,7 @@ export default function AcademicYearIndexPage({ academicYears = [] }) {
 
 function AcademicYearCard({ academicYears = [] }) {
   return (
-    <section className='grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4'>
+    <section className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
       {academicYears.map(
         ({ id, year, is_active, start_date, end_date, groups_count }) => (
           <Card key={id} className='relative max-w-sm'>
@@ -70,7 +70,8 @@ function AcademicYearCard({ academicYears = [] }) {
                 color='light'
                 className=''
                 fullSized>
-                Ver Ano Letivo
+                <Eye className='mr-2 h-5 w-5' />
+                Visualizar
               </Button>
             </footer>
           </Card>

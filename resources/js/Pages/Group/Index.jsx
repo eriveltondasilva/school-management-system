@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react'
 import { Button, Card, Tooltip } from 'flowbite-react'
-import { Pencil, Plus, XCircle } from 'lucide-react'
+import { Eye, PencilLine, Plus, XCircle } from 'lucide-react'
 
 import NotFound from '@/Components/NotFound'
 import Title from '@/Components/Title'
@@ -43,7 +43,7 @@ export default function GroupIndexPage({ groups = [] }) {
 
 function GroupCard({ groups = [] }) {
   return (
-    <section className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4'>
+    <section className='grid max-w-6xl grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
       {groups.map(({ id, name, students_count }) => (
         <Card key={id} className='max-w-sm'>
           <header className='flex justify-between'>
@@ -51,11 +51,11 @@ function GroupCard({ groups = [] }) {
               {name}
             </h5>
             <EditPageButton href={route('group.edit', id)} text='Editar Turma'>
-              <Pencil className='h-3 w-3' />
+              <PencilLine className='h-4 w-4' />
             </EditPageButton>
           </header>
           <p className='font-normal text-gray-700 dark:text-gray-400'>
-            Alunos: {students_count || 'sem alunos'}
+            Alunos: {students_count || 'sem aluno'}
           </p>
           <footer>
             <Button
@@ -64,6 +64,7 @@ function GroupCard({ groups = [] }) {
               color='light'
               className=''
               fullSized>
+              <Eye className='mr-2 h-5 w-5' />
               Ver Alunos
             </Button>
           </footer>

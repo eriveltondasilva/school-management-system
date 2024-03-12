@@ -14,7 +14,7 @@ class StudentSeeder extends Seeder
     {
         $group1Students = Student::factory()->count(10)->create();
         $group2Students = Student::factory()->count(10)->create();
-        Student::factory()->count(10)->create(['is_active' => false]);
+        Student::factory()->count(10)->create();
 
         $group1StudentsIds = $group1Students->pluck('id');
         $group2StudentsIds = $group2Students->pluck('id');

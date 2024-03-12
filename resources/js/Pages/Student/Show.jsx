@@ -1,13 +1,14 @@
 import { Link, usePage } from '@inertiajs/react'
-import { Button, Tooltip } from 'flowbite-react'
-import { Pencil, Plus } from 'lucide-react'
+import { Button } from 'flowbite-react'
+import { PencilLine, Plus } from 'lucide-react'
 
 import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
 import AuthLayout from '@/Layouts/AuthLayout'
 
-import { breadcrumbs, titles } from './data'
 import StudentFormData from './Partials/StudentFormData'
+
+import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function StudentShowPage({ student = {} }) {
@@ -26,34 +27,37 @@ export default function StudentShowPage({ student = {} }) {
       <Form.Header>
         <span className='flex gap-4'>
           {titles.show}
-          <EditPageButton
-            href={route('student.edit', student.id)}
-            text='Editar aluno'>
-            <Pencil className='h-4 w-4' />
-          </EditPageButton>
-
-          <EditPageButton
-            href={route('student.create')}
-            text='Cadastrar novo aluno'>
-            <Plus className='h-4 w-4' />
-          </EditPageButton>
+          <TitleButton id={student.id} />
         </span>
       </Form.Header>
 
-      {/*  */}
+      {/* student form data */}
       <StudentFormData data={student} readOnly />
     </Form>
   )
 }
 
 // ----------------------------------------------
-function EditPageButton({ text = '', href = '', children }) {
+function TitleButton({ id = '' }) {
   return (
-    <Tooltip content={text}>
-      <Button href={href} color='blue' size='xs' as={Link}>
-        {children}
+    <Button.Group>
+      <Button
+        title='Editar aluno'
+        href={route('student.edit', id)}
+        color='blue'
+        size='xs'
+        as={Link}>
+        <PencilLine className='h-4 w-4' />
       </Button>
-    </Tooltip>
+      <Button
+        title='Cadastrar novo aluno'
+        href={route('student.create')}
+        color='green'
+        size='xs'
+        as={Link}>
+        <Plus className='h-4 w-4' />
+      </Button>
+    </Button.Group>
   )
 }
 

@@ -14,9 +14,7 @@ class GroupController extends Controller
     /** xxx */
     public function index()
     {
-        $groups = Group::activeAcademicYear()
-            ->withCount('students')
-            ->get();
+        $groups = Group::activeAcademicYear()->withCount('students')->get();
 
         return inertia('Group/Index', compact('groups'));
     }
@@ -47,8 +45,7 @@ class GroupController extends Controller
         $activeAcademicYearId = AcademicYear::isActive()->value('id');
 
         if (!$activeAcademicYearId) {
-            return back()
-                ->with('message', 'Ano letivo atual não existe!');
+            return back()->with('message', 'Ano letivo atual não existe!');
         }
 
         $validated = $request->validated();
@@ -69,7 +66,6 @@ class GroupController extends Controller
 
         $group->update($validated);
 
-        return back()
-            ->with('message', 'Turma atualizada com sucesso!');
+        return back()->with('message', 'Turma atualizada com sucesso!');
     }
 }

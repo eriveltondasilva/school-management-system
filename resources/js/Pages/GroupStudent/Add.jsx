@@ -1,6 +1,8 @@
+import { usePage } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
 import { Save, Search } from 'lucide-react'
 
+import Alert from '@/Components/Alert'
 import Input from '@/Components/Input'
 import Searchbar from '@/Components/Searchbar'
 import Title from '@/Components/Title'
@@ -12,19 +14,30 @@ import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function GroupStudentAddPage({ group = {}, student = {} }) {
+  const param = route().params
+  const { flash = {} } = usePage().props || {}
+  const title = `${titles.add}: ${group.name}`
+
   const formDataOptions = {
     routeName: 'group-students.add-students',
     method: 'GET',
     id: group.id,
   }
+
   const { handleSubmit, isLoading } = useFormDate(formDataOptions)
 
-  console.log(student)
   return (
     <>
+      {/* flash message */}
+      {flash?.message && (
+        <Alert color={'success'} className='mb-4'>
+          <span className='font-medium'>{flash.message}</span>
+        </Alert>
+      )}
+
       {/* título */}
       <Title>
-        <Title.Left title={titles.add} />
+        <Title.Left title={title} />
         {/* TODO: implementar PDF */}
       </Title>
 
@@ -33,7 +46,8 @@ export default function GroupStudentAddPage({ group = {}, student = {} }) {
         <Searchbar.Left>
           <Input.Text
             id='search'
-            type='search'
+            type='text'
+            defaultValue={param?.search}
             placeholder='Pesquisar pelo id do aluno...'
             autoFocus
           />
@@ -54,26 +68,30 @@ function GroupStudentForm({ student = {}, group = {} }) {
   const { name, id, cpf } = student
 
   const formDataOptions = {
-    routeName: 'group-students.add-students',
+    routeName: 'group-students.store',
+    method: 'POST',
     id: group.id,
   }
-  const { handleSubmit } = useFormDate(formDataOptions)
+
+  const { handleSubmit, isLoading, errors } = useFormDate(formDataOptions)
+  console.log(errors.id)
 
   return (
     <Form className='sm:mx-0 md:mx-0' onSubmit={handleSubmit}>
+      {/* <Alert color='failure'></Alert> */}
       <Form.Header>Aluno pesquisado:</Form.Header>
 
       <Input.Text
-        id='student_id'
+        id='id'
         type='number'
-        label='Id'
+        label='Id do aluno'
         value={id}
         className='w-16'
         readOnly
       />
 
       <Input.Text
-        id='student_id'
+        id='name'
         type='text'
         label='Nome do aluno'
         value={name}
@@ -81,7 +99,7 @@ function GroupStudentForm({ student = {}, group = {} }) {
       />
 
       <Input.Text
-        id='student_id'
+        id='cpf'
         type='text'
         label='CPF do aluno'
         value={cpf}
@@ -91,7 +109,7 @@ function GroupStudentForm({ student = {}, group = {} }) {
       <br />
 
       <Form.Footer>
-        <Button color='blue' type='submit' fullSized>
+        <Button color='blue' type='submit' disabled={isLoading} fullSized>
           <Save className='mr-2 h-5 w-5' />
           Adicionar
         </Button>

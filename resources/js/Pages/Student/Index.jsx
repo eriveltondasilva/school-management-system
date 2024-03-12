@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
-import { Eye, Search, Undo2, UserRoundPlus } from 'lucide-react'
+import { Eye, PencilLine, Search, Undo2, UserRoundPlus } from 'lucide-react'
 import { useState } from 'react'
 
 import Input from '@/Components/Input'
@@ -29,8 +29,6 @@ export default function StudentIndexPage({ students = [] }) {
   }
 
   const { handleSubmit, isLoading } = useFormDate(formDataOptions)
-
-  console.log(students)
 
   return (
     <>
@@ -93,27 +91,18 @@ function StudentTable({ students = [] }) {
       <Table.Header>
         <Table.HeaderCell className='w-0'>Id</Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
-        <Table.HeaderCell>Email</Table.HeaderCell>
         <Table.HeaderCell></Table.HeaderCell>
       </Table.Header>
 
       <Table.Body>
-        {students.map(({ id, name, email }) => (
+        {students.map(({ id, name }) => (
           <Table.Row key={id}>
             <Table.RowCell className='font-bold'>{id}</Table.RowCell>
             <Table.RowCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
               {name}
             </Table.RowCell>
-            <Table.RowCell>{email}</Table.RowCell>
             <Table.RowCell className='flex justify-center'>
-              <Button
-                as={Link}
-                href={route('student.show', id)}
-                color='blue'
-                size='xs'>
-                <Eye className='mr-1 h-4 w-4' />
-                visualizar
-              </Button>
+              <TableButtons id={id} />
             </Table.RowCell>
           </Table.Row>
         ))}
@@ -122,10 +111,30 @@ function StudentTable({ students = [] }) {
   )
 }
 
+// ------------------------------------
+function TableButtons({ id }) {
+  return (
+    <Button.Group>
+      <Button as={Link} href={route('student.show', id)} color='blue' size='xs'>
+        <Eye className='h-4 w-4' />
+      </Button>
+      <Button
+        as={Link}
+        href={route('student.edit', id)}
+        color='green'
+        size='xs'>
+        <PencilLine className='h-4 w-4' />
+      </Button>
+    </Button.Group>
+  )
+}
+
+// ------------------------------------
 function StudentNotFound() {
   return <NotFound icon>Nenhum aluno encontrado...</NotFound>
 }
 
+// ------------------------------------
 function StudentPagination({ students = {} }) {
   const { total, from, to, next_page_url, prev_page_url } = students
 
