@@ -54,6 +54,7 @@ export default function StudentIndexPage({ students = [] }) {
           <Input.Text
             id='search'
             type='search'
+            className='mb-0'
             placeholder='Pesquisar aluno...'
             defaultValue={search}
             onChange={handleChange}
@@ -128,7 +129,7 @@ function TableButtons({ id }) {
         href={route('student.edit', id)}
         color='green'
         size='xs'>
-        <PencilLine className='h-4 w-4' />
+        <PencilLine className='ml-2 h-4 w-4' />
       </Button>
     </Button.Group>
   )

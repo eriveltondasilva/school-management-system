@@ -50,6 +50,7 @@ export default function GroupStudentCreatePage({ group = {}, student = {} }) {
           <Input.Text
             id='search'
             type='text'
+            className='mb-0'
             defaultValue={searchId}
             placeholder='Pesquisar pelo id do aluno...'
             autoFocus

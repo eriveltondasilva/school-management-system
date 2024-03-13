@@ -7,8 +7,21 @@ export default function StudentFormData({
   errors = {},
   readOnly = false,
 }) {
+  const isCreateRoute = route().current('*.create')
+
   return (
     <section className='mb-4'>
+      {/* ID DO ALUNO */}
+      {!isCreateRoute && (
+        <Input.Text
+          id='display-id'
+          label='Matrícula'
+          className='w-24'
+          value={data.id}
+          readOnly
+        />
+      )}
+
       {/* NOME DO ALUNO */}
       <Input.Text
         id='name'

@@ -54,6 +54,7 @@ export default function TeacherIndexPage({ teachers = [] }) {
           <Input.Text
             id='search'
             type='search'
+            className='mb-0'
             placeholder='Pesquisar professor...'
             defaultValue={search}
             onChange={handleChange}
@@ -121,7 +122,7 @@ function TeacherTable({ teachers = [] }) {
                   href={route('teacher.edit', id)}
                   color='green'
                   size='xs'>
-                  <PencilLine className='h-4 w-4' />
+                  <PencilLine className='ml-2 h-4 w-4' />
                 </Button>
               </Button.Group>
             </Table.RowCell>

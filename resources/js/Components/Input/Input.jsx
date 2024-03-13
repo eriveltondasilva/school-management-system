@@ -1,4 +1,5 @@
 import { Label, Select, TextInput, Textarea } from 'flowbite-react'
+import { twMerge } from 'tailwind-merge'
 
 // ==============================================
 export function InputText({
@@ -10,15 +11,9 @@ export function InputText({
   ...props
 }) {
   return (
-    <section className='mb-6'>
+    <section className={twMerge('mb-6', className)}>
       {label && <LabelText id={id} label={label} />}
-      <TextInput
-        id={id}
-        name={id}
-        type={type}
-        className={className}
-        {...props}
-      />
+      <TextInput id={id} name={id} type={type} {...props} />
       {error && <InputError message={error} />}
     </section>
   )
@@ -32,9 +27,9 @@ export function InputTextarea({
   ...props
 }) {
   return (
-    <section className='mb-6'>
+    <section className={twMerge('mb-6', className)}>
       {label && <LabelText id={id} label={label} />}
-      <Textarea id={id} name={id} className={className} {...props} />
+      <Textarea id={id} name={id} {...props} />
       {error && <InputError message={error} />}
     </section>
   )

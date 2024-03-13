@@ -7,7 +7,7 @@ export default function GroupStudentFormData({ data = {} }) {
       <Input.Text
         id='id'
         type='number'
-        label='Id do aluno'
+        label='Id'
         value={data.id}
         className='w-16'
         readOnly
