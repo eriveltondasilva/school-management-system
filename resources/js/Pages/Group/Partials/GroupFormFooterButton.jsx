@@ -1,8 +1,10 @@
 import { Button } from 'flowbite-react'
 import { Save } from 'lucide-react'
 
+// ==============================================
 export default function GroupFormFooterButton({ disabled = false }) {
   const isCreate = route().current('*.create')
+  const buttonText = isCreate ? 'Cadastrar' : 'Atualizar'
 
   return (
     <Button
@@ -12,7 +14,7 @@ export default function GroupFormFooterButton({ disabled = false }) {
       className='uppercase'
       fullSized>
       <Save className='mr-2 h-5 w-5' />
-      {isCreate ? 'cadastrar' : 'atualizar'} turma
+      {buttonText} Turma
     </Button>
   )
 }

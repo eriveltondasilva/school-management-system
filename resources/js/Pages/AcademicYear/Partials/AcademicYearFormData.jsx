@@ -1,6 +1,6 @@
 import Input from '@/Components/Input'
 
-// ===============================================
+// ==============================================
 export default function AcademicYearFormData({ data = {}, errors = {} }) {
   const isCreateRoute = route().current('*.create')
 
@@ -10,7 +10,7 @@ export default function AcademicYearFormData({ data = {}, errors = {} }) {
         id='year'
         type='number'
         label='Ano Letivo'
-        placeholder='insira o ano letivo...'
+        placeholder='Insira o ano letivo...'
         defaultValue={data.year}
         maxLength='4'
         minLength='4'
@@ -35,8 +35,6 @@ export default function AcademicYearFormData({ data = {}, errors = {} }) {
         defaultValue={data.end_date}
       />
       <Input.Error message={errors.end_date} />
-
-      <br />
     </>
   )
 }

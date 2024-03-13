@@ -43,9 +43,7 @@ export function HeaderDropdownItem() {
         Perfil
       </Dropdown.Item>
       <Dropdown.Item
-        as='button'
-        // TODO: refatorar
-        // as={Link}
+        as={Link}
         method='post'
         href={route('logout')}
         icon={LogOut}>

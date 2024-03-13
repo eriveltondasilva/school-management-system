@@ -4,6 +4,7 @@ import { Plus } from 'lucide-react'
 
 import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
+
 import useFormDate from '@/Hooks/useFormDate'
 import AuthLayout from '@/Layouts/AuthLayout'
 
@@ -12,9 +13,10 @@ import GroupFormFooterButton from './Partials/GroupFormFooterButton'
 
 import { breadcrumbs, titles } from './data'
 
-// ====================================
+// ==============================================
 export default function GroupEditPage({ group = {} }) {
-  const { flash } = usePage().props || {}
+  const flash = usePage().props.flash || {}
+
   const formDataOptions = {
     routeName: 'group.update',
     id: group.id,
@@ -23,19 +25,14 @@ export default function GroupEditPage({ group = {} }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      {/* flash message */}
-      {flash?.message && (
-        <Alert color='success'>
-          <span className='font-medium'>{flash.message}</span>
-        </Alert>
-      )}
+      {/* Mensagem flash */}
+      {flash.message && <Alert color='success'>{flash.message}</Alert>}
 
-      {/*  */}
+      {/* Form header */}
       <Form.Header>
         <span className='flex gap-4'>
           {titles.edit}
-          {/*  */}
-          <Tooltip content='Cadastrar novo turma'>
+          <Tooltip content='Cadastrar nova turma'>
             <Button
               href={route('group.create')}
               color='blue'
@@ -47,8 +44,8 @@ export default function GroupEditPage({ group = {} }) {
         </span>
       </Form.Header>
 
-      {/*  */}
-      <GroupFormData data={group} errors={errors} />
+      {/* Formulário */}
+      <GroupFormData {...{ data: group, errors }} />
 
       {/*  */}
       <Form.Footer>
@@ -58,7 +55,7 @@ export default function GroupEditPage({ group = {} }) {
   )
 }
 
-// -----------------------------------
+// ==============================================
 GroupEditPage.layout = (page) => (
   <AuthLayout title={titles.edit} breadcrumb={breadcrumbs.edit}>
     {page}

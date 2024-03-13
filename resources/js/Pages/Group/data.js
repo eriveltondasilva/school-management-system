@@ -1,6 +1,6 @@
 // prettier-ignore
 export const titles = {
-  index   : 'Listar turmas',
+  index : 'Listar turmas',
   create: 'Cadastrar turma',
   edit  : 'Editar turma',
   // show  : 'Visualizar ano letivo',

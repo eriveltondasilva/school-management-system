@@ -8,16 +8,17 @@ import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
 
-// ====================================
+// ==============================================
 export default function GroupIndexPage({ groups = [] }) {
   const hasGroups = groups.length > 0
   const year = usePage().props.auth.activeAcademicYear.year || ''
 
   return (
     <>
-      {/* título */}
+      {/* Título */}
       <Title>
-        <Title.Left title={titles.index + ': ' + year} />
+        <Title.Left title={titles.index + ' - ' + year} />
+
         <Title.Right>
           <Button
             as={Link}
@@ -41,6 +42,7 @@ export default function GroupIndexPage({ groups = [] }) {
   )
 }
 
+// ----------------------------------------------
 function GroupCard({ groups = [] }) {
   return (
     <section className='grid max-w-6xl grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
@@ -50,19 +52,27 @@ function GroupCard({ groups = [] }) {
             <h5 className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
               {name}
             </h5>
-            <EditPageButton href={route('group.edit', id)} text='Editar Turma'>
-              <PencilLine className='h-4 w-4' />
-            </EditPageButton>
+
+            <Tooltip content='Editar Turma'>
+              <Button
+                href={route('group.edit', id)}
+                color='blue'
+                size='xs'
+                as={Link}>
+                <PencilLine className='h-4 w-4' />
+              </Button>
+            </Tooltip>
           </header>
+
           <p className='font-normal text-gray-700 dark:text-gray-400'>
             Alunos: {students_count || 'sem aluno'}
           </p>
+
           <footer>
             <Button
               as={Link}
               href={route('group-students.index', id)}
               color='light'
-              className=''
               fullSized>
               <Eye className='mr-2 h-5 w-5' />
               Ver Alunos
@@ -74,6 +84,7 @@ function GroupCard({ groups = [] }) {
   )
 }
 
+// ----------------------------------------------
 function GroupNotFound() {
   return (
     <NotFound>
@@ -83,17 +94,7 @@ function GroupNotFound() {
   )
 }
 
-function EditPageButton({ text = '', href = '', children }) {
-  return (
-    <Tooltip content={text}>
-      <Button href={href} color='blue' size='xs' as={Link}>
-        {children}
-      </Button>
-    </Tooltip>
-  )
-}
-
-// -----------------------------------
+// ==============================================
 GroupIndexPage.layout = (page) => (
   <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>
     {page}

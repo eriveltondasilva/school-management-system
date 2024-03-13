@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\{AcademicYear, Group, Student};
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class GroupStudentController extends Controller
 {
@@ -19,20 +18,13 @@ class GroupStudentController extends Controller
         return inertia('GroupStudent/Index', compact('group', 'students'));
     }
 
-    public function add(Group $group)
-    {
-        return inertia('GroupStudent/Add', compact('group'));
-    }
-
-    // ### Actions ###
-
-    public function getStudentById(Request $request, Group $group)
+    public function create(Request $request, Group $group)
     {
         $validated = $request->validate([
             'search' => 'nullable|integer|min:1',
         ]);
 
-        $searchId = $validated['search'] ?? null;
+        $searchId = $request->get('search', '');
         $student = null;
 
         if ($searchId) {
@@ -43,8 +35,10 @@ class GroupStudentController extends Controller
                 ->find($searchId);
         }
 
-        return back()->with('student', $student);
+        return inertia('GroupStudent/Create', compact('group', 'student'));
     }
+
+    // ### Actions ###
 
     public function store(Request $request, Group $group)
     {
@@ -57,8 +51,7 @@ class GroupStudentController extends Controller
         $group->students()->attach($studentId);
 
         return back()
-            ->with('message', "Aluno com matrícula {$studentId} adicionado com sucesso.")
-            ->with('id', $studentId);
+            ->with('message', "Aluno com matrícula {$studentId} adicionado a turma do {$group->name} com sucesso.");
     }
 
     public function destroy(Group $group, Student $student)

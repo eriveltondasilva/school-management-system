@@ -6,12 +6,13 @@ import { twJoin } from 'tailwind-merge'
 import Indicator from '@/Components/Indicator'
 import NotFound from '@/Components/NotFound'
 import Title from '@/Components/Title'
+
 import AuthLayout from '@/Layouts/AuthLayout'
 import formatDate from '@/Utils/formatDate'
 
 import { breadcrumbs, titles } from './data'
 
-// ====================================
+// ==============================================
 export default function AcademicYearIndexPage({ academicYears = [] }) {
   const hasAcademicYears = academicYears.length > 0
 
@@ -20,6 +21,7 @@ export default function AcademicYearIndexPage({ academicYears = [] }) {
       {/* título */}
       <Title>
         <Title.Left title={titles.index} />
+
         <Title.Right>
           <Button
             as={Link}
@@ -43,6 +45,7 @@ export default function AcademicYearIndexPage({ academicYears = [] }) {
   )
 }
 
+// ----------------------------------------------
 function AcademicYearCard({ academicYears = [] }) {
   return (
     <section className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
@@ -50,6 +53,7 @@ function AcademicYearCard({ academicYears = [] }) {
         ({ id, year, is_active, start_date, end_date, groups_count }) => (
           <Card key={id} className='relative max-w-sm'>
             <Indicator type={is_active ? 'success' : 'secondary'} />
+
             <h5
               className={twJoin(
                 'text-2xl font-bold tracking-tight',
@@ -57,12 +61,13 @@ function AcademicYearCard({ academicYears = [] }) {
               )}>
               {year}
             </h5>
+
             <ul className='font-normal text-gray-700 dark:text-gray-400'>
               <li>Início: {formatDate(start_date)}</li>
               <li>Fim: {formatDate(end_date)}</li>
-              <br />
               <li className='font-semibold'>Turmas: {groups_count}</li>
             </ul>
+
             <footer>
               <Button
                 as={Link}
@@ -81,6 +86,7 @@ function AcademicYearCard({ academicYears = [] }) {
   )
 }
 
+// ----------------------------------------------
 function AcademicYearNotFound() {
   return (
     <NotFound>
@@ -90,7 +96,7 @@ function AcademicYearNotFound() {
   )
 }
 
-// -----------------------------------
+// ==============================================
 AcademicYearIndexPage.layout = (page) => (
   <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>
     {page}

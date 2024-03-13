@@ -4,6 +4,7 @@ import { Plus } from 'lucide-react'
 
 import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
+
 import useFormDate from '@/Hooks/useFormDate'
 import AuthLayout from '@/Layouts/AuthLayout'
 
@@ -15,7 +16,8 @@ import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function AcademicYearEditPage({ academicYear = {} }) {
-  const { flash } = usePage().props || {}
+  const flash = usePage().props.flash || {}
+
   const formDataOptions = {
     routeName: 'academic-year.update',
     id: academicYear.id,
@@ -25,25 +27,25 @@ export default function AcademicYearEditPage({ academicYear = {} }) {
   return (
     <Form onSubmit={handleSubmit}>
       {/* flash message */}
-      {flash?.message && (
-        <Alert color='success'>
-          <span className='font-medium'>{flash.message}</span>
-        </Alert>
-      )}
+      {flash.message && <Alert color='success'>{flash.message}</Alert>}
 
-      {/*  */}
+      {/* Form header */}
       <Form.Header>
         <span className='flex gap-4'>
           {titles.edit}
-          <EditPageButton
-            href={route('academic-year.create')}
-            text='Cadastrar novo ano letivo'>
-            <Plus className='h-4 w-4' />
-          </EditPageButton>
+          <Tooltip content='Cadastrar novo ano letivo'>
+            <Button
+              href={route('academic-year.create')}
+              color='blue'
+              size='xs'
+              as={Link}>
+              <Plus className='h-4 w-4' />
+            </Button>
+          </Tooltip>
         </span>
       </Form.Header>
 
-      {/*  */}
+      {/* Academic year status */}
       <div className='text-sm font-medium text-gray-900 dark:text-white'>
         Status do Ano Letivo
       </div>
@@ -56,10 +58,10 @@ export default function AcademicYearEditPage({ academicYear = {} }) {
         </Badge>
       </div>
 
-      {/*  */}
-      <AcademicYearFormData data={academicYear} errors={errors} />
+      {/* Academic year form data */}
+      <AcademicYearFormData {...{ data: academicYear, errors }} />
 
-      {/*  */}
+      {/* Form footer */}
       <Form.Footer>
         <AcademicYearFormFooterButton disabled={isLoading} />
       </Form.Footer>
@@ -69,17 +71,7 @@ export default function AcademicYearEditPage({ academicYear = {} }) {
   )
 }
 
-function EditPageButton({ text = '', href = '', children }) {
-  return (
-    <Tooltip content={text}>
-      <Button href={href} color='blue' size='xs' as={Link}>
-        {children}
-      </Button>
-    </Tooltip>
-  )
-}
-
-// -----------------------------------
+// ==============================================
 AcademicYearEditPage.layout = (page) => (
   <AuthLayout title={titles.edit} breadcrumb={breadcrumbs.edit}>
     {page}

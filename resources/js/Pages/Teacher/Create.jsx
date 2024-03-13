@@ -2,6 +2,7 @@ import { Link, usePage } from '@inertiajs/react'
 
 import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
+
 import useFormDate from '@/Hooks/useFormDate'
 import AuthLayout from '@/Layouts/AuthLayout'
 
@@ -13,17 +14,16 @@ import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function TeacherCreatePage() {
-  const { flash } = usePage().props || {}
-  const formDataOptions = {
-    routeName: 'teacher.store',
-  }
+  const flash = usePage().props.flash || {}
+
+  const formDataOptions = { routeName: 'teacher.store' }
   const { handleSubmit, errors, isLoading } = useFormDate(formDataOptions)
 
   return (
     <>
       <Form onSubmit={handleSubmit}>
         {/* flash message */}
-        {flash?.message && (
+        {flash.message && (
           <Alert color='success'>
             <div>{flash.message}</div>
             <Link

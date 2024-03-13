@@ -5,35 +5,36 @@ import { useState } from 'react'
 
 import Input from '@/Components/Input'
 import NotFound from '@/Components/NotFound'
+import Pagination from '@/Components/Pagination'
 import Searchbar from '@/Components/Searchbar'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
+
 import useFormDate from '@/Hooks/useFormDate'
 import AuthLayout from '@/Layouts/AuthLayout'
 
-import Pagination from '@/Components/Pagination'
 import { breadcrumbs, titles } from './data'
 
-// ============================================================================
+// ==============================================
 export default function StudentIndexPage({ students = [] }) {
   const paramsSearch = route().params.search || ''
-  const hasStudents = students.data?.length > 0
   const [search, setSearch] = useState(paramsSearch)
+
+  const hasStudents = students.data?.length > 0
 
   const handleChange = (e) => {
     setSearch(e.target.value)
   }
 
-  const formDataOptions = {
-    routeName: 'student.index',
-  }
-
+  const formDataOptions = { routeName: 'student.index' }
   const { handleSubmit, isLoading } = useFormDate(formDataOptions)
 
   return (
     <>
+      {/* Título */}
       <Title>
         <Title.Left title={titles.index} />
+
         <Title.Right>
           <Button
             as={Link}
@@ -58,10 +59,12 @@ export default function StudentIndexPage({ students = [] }) {
             onChange={handleChange}
             autoFocus
           />
+
           <Button.Group>
             <Button type='submit' color='blue' disabled={isLoading || !search}>
               <Search className='h-5 w-5' />
             </Button>
+
             <Button
               as={Link}
               href={route('student.index')}
@@ -73,6 +76,7 @@ export default function StudentIndexPage({ students = [] }) {
         </Searchbar.Left>
       </Searchbar>
 
+      {/* Student Not Found */}
       {!hasStudents && <StudentNotFound />}
 
       {/* Student Table */}
@@ -84,7 +88,7 @@ export default function StudentIndexPage({ students = [] }) {
   )
 }
 
-// ------------------------------------
+// ----------------------------------------------
 function StudentTable({ students = [] }) {
   return (
     <Table>
@@ -111,13 +115,14 @@ function StudentTable({ students = [] }) {
   )
 }
 
-// ------------------------------------
+// ----------------------------------------------
 function TableButtons({ id }) {
   return (
     <Button.Group>
       <Button as={Link} href={route('student.show', id)} color='blue' size='xs'>
         <Eye className='h-4 w-4' />
       </Button>
+
       <Button
         as={Link}
         href={route('student.edit', id)}
@@ -129,12 +134,12 @@ function TableButtons({ id }) {
   )
 }
 
-// ------------------------------------
+// ----------------------------------------------
 function StudentNotFound() {
   return <NotFound icon>Nenhum aluno encontrado...</NotFound>
 }
 
-// ------------------------------------
+// ----------------------------------------------
 function StudentPagination({ students = {} }) {
   const { total, from, to, next_page_url, prev_page_url } = students
 
@@ -149,7 +154,7 @@ function StudentPagination({ students = {} }) {
   )
 }
 
-// ------------------------------------
+// ==============================================
 StudentIndexPage.layout = (page) => (
   <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>
     {page}

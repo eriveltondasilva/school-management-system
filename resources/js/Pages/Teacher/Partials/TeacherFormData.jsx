@@ -14,7 +14,7 @@ export default function TeacherFormData({
         id='name'
         type='text'
         label='Nome completo'
-        placeholder='insira o nome do professor...'
+        placeholder='Insira o nome do professor...'
         defaultValue={data.name}
         readOnly={readOnly}
         autoFocus
@@ -22,33 +22,27 @@ export default function TeacherFormData({
       />
       <Input.Error message={errors.name} />
 
-      <br />
-
       {/* EMAIL DO PROFESSOR */}
       <Input.Text
         id='email'
         type='email'
         label='Email'
-        placeholder='insira o email do professor...'
+        placeholder='Insira o email do professor...'
         defaultValue={data.email}
         readOnly={readOnly}
       />
       <Input.Error message={errors.email} />
-
-      <br />
 
       {/* TELEFONE CELULAR DO PROFESSOR */}
       <Input.Text
         id='phone'
         type='tel'
         label='Telefone celular'
-        placeholder='insira o telefone do professor...'
+        placeholder='Insira o telefone do professor...'
         defaultValue={data.phone}
         readOnly={readOnly}
       />
       <Input.Error message={errors.phone} />
-
-      <br />
 
       {/* GÊNERO DO PROFESSOR */}
       <fieldset className='flex max-w-md flex-col gap-3'>
@@ -75,33 +69,27 @@ export default function TeacherFormData({
         </div>
       </fieldset>
 
-      <br />
-
       {/* CPF DO PROFESSOR */}
       <Input.Text
         id='cpf'
         type='text'
         label='CPF'
-        placeholder='insira o cpf do professor...'
+        placeholder='Insira o cpf do professor...'
         defaultValue={data.cpf}
         readOnly={readOnly}
       />
       <Input.Error message={errors.cpf} />
-
-      <br />
 
       {/* RG DO PROFESSOR */}
       <Input.Text
         id='rg'
         type='text'
         label='RG'
-        placeholder='insira o rg do professor...'
+        placeholder='Insira o rg do professor...'
         defaultValue={data.rg}
         readOnly={readOnly}
       />
       <Input.Error message={errors.rg} />
-
-      <br />
 
       {/* DATA DE NASCIMENTO DO PROFESSOR */}
       <Input.Text
@@ -112,8 +100,6 @@ export default function TeacherFormData({
         readOnly={readOnly}
       />
       <Input.Error message={errors.birthday} />
-
-      <br />
     </section>
   )
 }

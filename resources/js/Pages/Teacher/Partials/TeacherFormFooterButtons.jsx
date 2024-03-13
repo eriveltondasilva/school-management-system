@@ -4,6 +4,8 @@ import { Save, Trash2 } from 'lucide-react'
 // ====================================
 export default function TeacherFormFooterButtons({ disabled = false }) {
   const isCreate = route().current('*.create')
+  const submitButtonText = isCreate ? 'Cadastrar' : 'Atualizar'
+  const resetButtonText = isCreate ? 'Limpar' : 'Resetar'
 
   return (
     <>
@@ -14,7 +16,7 @@ export default function TeacherFormFooterButtons({ disabled = false }) {
         className='uppercase'
         fullSized>
         <Trash2 className='mr-2 h-5 w-5' />
-        {isCreate ? 'limpar' : 'resetar'} campos
+        {resetButtonText} Campos
       </Button>
       <Button
         type='submit'
@@ -23,7 +25,7 @@ export default function TeacherFormFooterButtons({ disabled = false }) {
         className='uppercase'
         fullSized>
         <Save className='mr-2 h-5 w-5' />
-        {isCreate ? 'salvar' : 'atualizar'} professor
+        {submitButtonText} Professor
       </Button>
     </>
   )

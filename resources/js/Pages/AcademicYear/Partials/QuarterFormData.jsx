@@ -21,8 +21,6 @@ export default function QuarterFormData({ data = {}, errors = {} }) {
         defaultValue={data.end_date}
       />
       <Input.Error message={errors.end_date} />
-
-      <br />
     </>
   )
 }

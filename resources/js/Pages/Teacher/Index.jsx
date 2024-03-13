@@ -9,24 +9,24 @@ import Pagination from '@/Components/Pagination'
 import Searchbar from '@/Components/Searchbar'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
+
 import useFormDate from '@/Hooks/useFormDate'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
 
-// ====================================
+// ==============================================
 export default function TeacherIndexPage({ teachers = [] }) {
   const paramsSearch = route().params.search || ''
-  const hasTeachers = teachers.data?.length > 0
   const [search, setSearch] = useState(paramsSearch)
+
+  const hasTeachers = teachers.data?.length > 0
 
   const handleChange = (e) => {
     setSearch(e.target.value)
   }
 
-  const formDataOptions = {
-    routeName: 'teacher.index',
-  }
+  const formDataOptions = { routeName: 'teacher.index' }
   const { handleSubmit, isLoading } = useFormDate(formDataOptions)
 
   return (
@@ -34,6 +34,7 @@ export default function TeacherIndexPage({ teachers = [] }) {
       {/* título */}
       <Title>
         <Title.Left title={titles.index} />
+
         <Title.Right>
           <Button
             as={Link}
@@ -58,10 +59,12 @@ export default function TeacherIndexPage({ teachers = [] }) {
             onChange={handleChange}
             autoFocus
           />
+
           <Button.Group>
             <Button type='submit' color='blue' disabled={isLoading || !search}>
               <Search className='h-5 w-5' />
             </Button>
+
             <Button
               as={Link}
               href={route('teacher.index')}
@@ -104,7 +107,23 @@ function TeacherTable({ teachers = [] }) {
             </Table.RowCell>
             <Table.RowCell>{email}</Table.RowCell>
             <Table.RowCell className='flex justify-center'>
-              <TableButtons id={id} />
+              <Button.Group>
+                <Button
+                  as={Link}
+                  href={route('teacher.show', id)}
+                  color='blue'
+                  size='xs'>
+                  <Eye className='h-4 w-4' />
+                </Button>
+
+                <Button
+                  as={Link}
+                  href={route('teacher.edit', id)}
+                  color='green'
+                  size='xs'>
+                  <PencilLine className='h-4 w-4' />
+                </Button>
+              </Button.Group>
             </Table.RowCell>
           </Table.Row>
         ))}
@@ -116,24 +135,6 @@ function TeacherTable({ teachers = [] }) {
 // ------------------------------------
 function TeacherNotFound() {
   return <NotFound icon>Nenhum professor encontrado...</NotFound>
-}
-
-// ------------------------------------
-function TableButtons({ id }) {
-  return (
-    <Button.Group>
-      <Button as={Link} href={route('teacher.show', id)} color='blue' size='xs'>
-        <Eye className='h-4 w-4' />
-      </Button>
-      <Button
-        as={Link}
-        href={route('teacher.edit', id)}
-        color='green'
-        size='xs'>
-        <PencilLine className='h-4 w-4' />
-      </Button>
-    </Button.Group>
-  )
 }
 
 // ------------------------------------

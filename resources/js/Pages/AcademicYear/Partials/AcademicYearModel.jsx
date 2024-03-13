@@ -6,9 +6,10 @@ import { twJoin } from 'tailwind-merge'
 import Modal from '@/Components/Modal'
 import useFormDate from '@/Hooks/useFormDate'
 
-// ====================================
+// ==============================================
 export default function AcademicYearModel({ academicYear = {} }) {
   const [isShowed, setIsShowed] = useState(false)
+
   const formDataOptions = {
     routeName: 'academic-year.update-status',
     method: 'put',
@@ -26,12 +27,13 @@ export default function AcademicYearModel({ academicYear = {} }) {
         onClick={handleToggleModal}
         className='uppercase'>
         <AlertCircle className='mr-2 h-5 w-5' />
-        ativar ano letivo
+        Ativar ano letivo
       </Button>
 
       {/* modal */}
       <Modal show={isShowed} onClose={handleToggleModal}>
         <form onSubmit={handleSubmit} className='p-6'>
+          {/* model header */}
           <ModelHeader />
 
           <div className='mt-6 flex justify-end'>
@@ -60,6 +62,7 @@ export default function AcademicYearModel({ academicYear = {} }) {
   )
 }
 
+// ----------------------------------------------
 function ModelHeader() {
   return (
     <>
