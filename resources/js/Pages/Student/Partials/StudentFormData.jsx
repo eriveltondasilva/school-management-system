@@ -15,12 +15,12 @@ export default function StudentFormData({
         type='text'
         label='Nome completo'
         placeholder='Insira o nome do aluno...'
+        error={errors.name}
         defaultValue={data.name}
         readOnly={readOnly}
         autoFocus
         required
       />
-      <Input.Error message={errors.name} />
 
       {/* EMAIL DO ALUNO */}
       <Input.Text
@@ -28,10 +28,10 @@ export default function StudentFormData({
         type='email'
         label='Email'
         placeholder='Insira o email do aluno...'
+        error={errors.email}
         defaultValue={data.email}
         readOnly={readOnly}
       />
-      <Input.Error message={errors.email} />
 
       {/* TELEFONE CELULAR DO ALUNO */}
       <Input.Text
@@ -39,13 +39,13 @@ export default function StudentFormData({
         type='tel'
         label='Telefone celular'
         placeholder='Insira o telefone do aluno...'
+        error={errors.phone}
         defaultValue={data.phone}
         readOnly={readOnly}
       />
-      <Input.Error message={errors.phone} />
 
       {/* GÊNERO DO ALUNO */}
-      <section className='flex max-w-md flex-col gap-3'>
+      <section className='mb-6 flex max-w-md flex-col gap-3'>
         <Label>Gênero do aluno</Label>
         <div className='flex items-center gap-2'>
           <Radio
@@ -75,10 +75,10 @@ export default function StudentFormData({
         type='text'
         label='CPF'
         placeholder='Insira o cpf do aluno...'
+        error={errors.cpf}
         defaultValue={data.cpf}
         readOnly={readOnly}
       />
-      <Input.Error message={errors.cpf} />
 
       {/* RG DO ALUNO */}
       <Input.Text
@@ -86,20 +86,20 @@ export default function StudentFormData({
         type='text'
         label='RG'
         placeholder='Insira o rg do aluno...'
+        error={errors.rg}
         defaultValue={data.rg}
         readOnly={readOnly}
       />
-      <Input.Error message={errors.rg} />
 
       {/* DATA DE NASCIMENTO DO ALUNO */}
       <Input.Text
         id='birthday'
         type='date'
         label='Data de nascimento'
+        error={errors.birthday}
         defaultValue={data.birthday}
         readOnly={readOnly}
       />
-      <Input.Error message={errors.birthday} />
 
       {/* LOCAL DE NASCIMENTO DO ALUNO */}
       <Input.Text
@@ -107,10 +107,10 @@ export default function StudentFormData({
         type='text'
         label='Local de nascimento'
         placeholder='Insira o local de nascimento do aluno...'
+        error={errors.birthplace}
         defaultValue={data.birthplace}
         readOnly={readOnly}
       />
-      <Input.Error message={errors.birthplace} />
 
       {/* BENEFíCIO DO GOVERNO DO ALUNO */}
       <Input.Text
@@ -118,10 +118,10 @@ export default function StudentFormData({
         type='text'
         label='Benefício'
         placeholder='Insira os benefícios do governo do aluno...'
+        error={errors.gov_benefits}
         defaultValue={data.gov_benefits}
         readOnly={readOnly}
       />
-      <Input.Error message={errors.gov_benefits} />
 
       {/* PROBLEMAS DE SAúDE DO ALUNO */}
       <Input.Text
@@ -129,10 +129,10 @@ export default function StudentFormData({
         type='text'
         label='Problemas de saúde'
         placeholder='Insira os problemas de saúde do aluno...'
+        error={errors.health_problems}
         defaultValue={data.health_problems}
         readOnly={readOnly}
       />
-      <Input.Error message={errors.health_problems} />
 
       {/* OBSERVAÇÕES REFERENTES AO ALUNO */}
       <Input.Textarea
@@ -140,10 +140,10 @@ export default function StudentFormData({
         label='Observações'
         placeholder='Insira as observações...'
         rows={4}
+        error={errors.note}
         defaultValue={data.note}
         readOnly={readOnly}
       />
-      <Input.Error message={errors.note} />
     </section>
   )
 }

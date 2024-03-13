@@ -20,11 +20,11 @@ export default function GroupFormData({ data = {}, errors = {} }) {
         label='Turma'
         defaultValue={data.name || '6° Ano'}
         disabled={!!data.name}
+        error={errors.name}
         values={['6° Ano', '7° Ano', '8° Ano', '9° Ano']}
         autoFocus
         required
       />
-      <Input.Error message={errors.name} />
 
       <Input.Text
         id='classroom'
@@ -32,16 +32,16 @@ export default function GroupFormData({ data = {}, errors = {} }) {
         label='Sala'
         placeholder='insira a sala...'
         defaultValue={data.classroom || ''}
+        error={errors.classroom}
       />
-      <Input.Error message={errors.classroom} />
 
       <Input.Select
         id='shift'
         label='Turno'
         defaultValue={data.shift || 'Vespertino'}
         values={['Matutino', 'Vespertino']}
+        error={errors.shift}
       />
-      <Input.Error message={errors.shift} />
     </>
   )
 }

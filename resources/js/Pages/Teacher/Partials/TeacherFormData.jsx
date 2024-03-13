@@ -17,10 +17,10 @@ export default function TeacherFormData({
         placeholder='Insira o nome do professor...'
         defaultValue={data.name}
         readOnly={readOnly}
+        error={errors.name}
         autoFocus
         required
       />
-      <Input.Error message={errors.name} />
 
       {/* EMAIL DO PROFESSOR */}
       <Input.Text
@@ -28,10 +28,10 @@ export default function TeacherFormData({
         type='email'
         label='Email'
         placeholder='Insira o email do professor...'
+        error={errors.email}
         defaultValue={data.email}
         readOnly={readOnly}
       />
-      <Input.Error message={errors.email} />
 
       {/* TELEFONE CELULAR DO PROFESSOR */}
       <Input.Text
@@ -39,13 +39,13 @@ export default function TeacherFormData({
         type='tel'
         label='Telefone celular'
         placeholder='Insira o telefone do professor...'
+        error={errors.phone}
         defaultValue={data.phone}
         readOnly={readOnly}
       />
-      <Input.Error message={errors.phone} />
 
       {/* GÊNERO DO PROFESSOR */}
-      <fieldset className='flex max-w-md flex-col gap-3'>
+      <fieldset className='mb-6 flex max-w-md flex-col gap-3'>
         <Label htmlFor='gender'>Gênero do Professor</Label>
         <div className='flex items-center gap-2'>
           <Radio
@@ -75,10 +75,10 @@ export default function TeacherFormData({
         type='text'
         label='CPF'
         placeholder='Insira o cpf do professor...'
+        error={errors.cpf}
         defaultValue={data.cpf}
         readOnly={readOnly}
       />
-      <Input.Error message={errors.cpf} />
 
       {/* RG DO PROFESSOR */}
       <Input.Text
@@ -86,20 +86,20 @@ export default function TeacherFormData({
         type='text'
         label='RG'
         placeholder='Insira o rg do professor...'
+        error={errors.rg}
         defaultValue={data.rg}
         readOnly={readOnly}
       />
-      <Input.Error message={errors.rg} />
 
       {/* DATA DE NASCIMENTO DO PROFESSOR */}
       <Input.Text
         id='birthday'
         type='date'
         label='Data de nascimento'
+        error={errors.birthday}
         defaultValue={data.birthday}
         readOnly={readOnly}
       />
-      <Input.Error message={errors.birthday} />
     </section>
   )
 }
