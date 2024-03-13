@@ -30,7 +30,7 @@ export default function AuthenticatedLayout({ title, breadcrumb, children }) {
       <Wrapper>
         {/* #header */}
         <Header>
-          <Header.Left title={title} />
+          <Header.Left />
           <Header.Right activeAcademicYear={activeAcademicYear}>
             <Header.Dropdown>
               <Header.DropdownHeader

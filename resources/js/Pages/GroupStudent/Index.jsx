@@ -30,7 +30,7 @@ export default function GroupStudentIndexPage({ group = {}, students = [] }) {
         <Title.Right>
           <Button
             as={Link}
-            href={route('group-students.add-students', group.id)}
+            href={route('group-students.add', group.id)}
             color='blue'
             className=''>
             <Plus className='mr-2 h-5 w-5' />
@@ -55,15 +55,15 @@ function StudentTable({ students = [], group = {} }) {
   return (
     <Table>
       <Table.Header>
-        <Table.HeaderCell className='w-0'>ID</Table.HeaderCell>
+        <Table.HeaderCell className='w-0'></Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
         <Table.HeaderCell></Table.HeaderCell>
       </Table.Header>
 
       <Table.Body>
-        {students.map(({ id, name }) => (
+        {students.map(({ id, name }, index) => (
           <Table.Row key={id}>
-            <Table.RowCell className='font-medium'>{id}</Table.RowCell>
+            <Table.RowCell className='font-medium'>{++index}</Table.RowCell>
             <Table.RowCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
               {name}
             </Table.RowCell>

@@ -19,7 +19,14 @@ class GroupStudentController extends Controller
         return inertia('GroupStudent/Index', compact('group', 'students'));
     }
 
-    public function addStudents(Request $request, Group $group)
+    public function add(Group $group)
+    {
+        return inertia('GroupStudent/Add', compact('group'));
+    }
+
+    // ### Actions ###
+
+    public function getStudentById(Request $request, Group $group)
     {
         $validated = $request->validate([
             'search' => 'nullable|integer|min:1',
@@ -36,15 +43,8 @@ class GroupStudentController extends Controller
                 ->find($searchId);
         }
 
-        if (!$student) {
-            return inertia('GroupStudent/Add', compact('group', 'student'))
-                ->with('message', 'Estudante não encontrado.');
-        }
-
-        return inertia('GroupStudent/Add', compact('group', 'student'));
+        return back()->with('student', $student);
     }
-
-    // ### Actions ###
 
     public function store(Request $request, Group $group)
     {
@@ -56,10 +56,8 @@ class GroupStudentController extends Controller
 
         $group->students()->attach($studentId);
 
-        $group->refresh();
-
         return back()
-            ->with('message', 'Estudante adicionado com sucesso.')
+            ->with('message', "Aluno com matrícula {$studentId} adicionado com sucesso.")
             ->with('id', $studentId);
     }
 
@@ -69,7 +67,7 @@ class GroupStudentController extends Controller
 
         $group->refresh();
 
-        $matriculation = Str::padLeft($student->id, 3, 0);
+        $matriculation = $student->id;
         $studentName = $student->name;
 
         return back()

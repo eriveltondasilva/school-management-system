@@ -14,14 +14,13 @@ import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function GroupStudentAddPage({ group = {}, student = {} }) {
-  const param = route().params
   const { flash = {} } = usePage().props || {}
   const title = `${titles.add}: ${group.name}`
 
   const formDataOptions = {
-    routeName: 'group-students.add-students',
+    routeName: 'group-students.get-student-by-id',
     method: 'GET',
-    id: group.id,
+    id: { group: group.id, student: student.id },
   }
 
   const { handleSubmit, isLoading } = useFormDate(formDataOptions)
@@ -30,9 +29,11 @@ export default function GroupStudentAddPage({ group = {}, student = {} }) {
     <>
       {/* flash message */}
       {flash?.message && (
-        <Alert color={'success'} className='mb-4'>
-          <span className='font-medium'>{flash.message}</span>
-        </Alert>
+        <div className='max-w-96'>
+          <Alert color={'success'} className='mb-4' time='1'>
+            <span className='font-medium'>{flash.message}</span>
+          </Alert>
+        </div>
       )}
 
       {/* título */}
@@ -47,7 +48,7 @@ export default function GroupStudentAddPage({ group = {}, student = {} }) {
           <Input.Text
             id='search'
             type='text'
-            defaultValue={param?.search}
+            // defaultValue={param?.search}
             placeholder='Pesquisar pelo id do aluno...'
             autoFocus
           />
@@ -73,8 +74,7 @@ function GroupStudentForm({ student = {}, group = {} }) {
     id: group.id,
   }
 
-  const { handleSubmit, isLoading, errors } = useFormDate(formDataOptions)
-  console.log(errors.id)
+  const { handleSubmit, isLoading } = useFormDate(formDataOptions)
 
   return (
     <Form className='sm:mx-0 md:mx-0' onSubmit={handleSubmit}>
