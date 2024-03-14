@@ -1,4 +1,5 @@
 import Input from '@/Components/Input'
+import formatId from '@/Utils/formatId'
 import { Label, Radio } from 'flowbite-react'
 
 // ==============================================
@@ -17,7 +18,7 @@ export default function StudentFormData({
           id='display-id'
           label='Matrícula'
           className='w-24'
-          value={data.id}
+          value={formatId(data.id)}
           readOnly
         />
       )}

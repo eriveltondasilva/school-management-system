@@ -69,7 +69,7 @@ export default function TeacherIndexPage({ teachers = [] }) {
             <Button
               as={Link}
               href={route('teacher.index')}
-              color='blue'
+              color='light'
               disabled={isLoading}>
               <Undo2 className='h-5 w-5' />
             </Button>

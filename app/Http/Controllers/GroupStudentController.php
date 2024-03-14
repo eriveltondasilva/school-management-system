@@ -11,7 +11,7 @@ class GroupStudentController extends Controller
     {
         $students = $group
             ->students()
-            ->select('students.id', 'students.name')
+            ->select('students.id', 'students.name', 'students.gender')
             ->oldest('students.name')
             ->get();
 

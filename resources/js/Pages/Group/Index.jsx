@@ -56,7 +56,7 @@ function GroupCard({ groups = [] }) {
             <Tooltip content='Editar Turma'>
               <Button
                 href={route('group.edit', id)}
-                color='blue'
+                color='green'
                 size='xs'
                 as={Link}>
                 <PencilLine className='h-4 w-4' />
@@ -72,7 +72,7 @@ function GroupCard({ groups = [] }) {
             <Button
               as={Link}
               href={route('group-students.index', id)}
-              color='light'
+              color='blue'
               fullSized>
               <Eye className='mr-2 h-5 w-5' />
               Ver Alunos

@@ -69,7 +69,7 @@ export default function StudentIndexPage({ students = [] }) {
             <Button
               as={Link}
               href={route('student.index')}
-              color='blue'
+              color='light'
               disabled={isLoading}>
               <Undo2 className='h-5 w-5' />
             </Button>
@@ -107,31 +107,28 @@ function StudentTable({ students = [] }) {
               {name}
             </Table.RowCell>
             <Table.RowCell className='flex justify-center'>
-              <TableButtons id={id} />
+              <Button.Group>
+                <Button
+                  as={Link}
+                  href={route('student.show', id)}
+                  color='blue'
+                  size='xs'>
+                  <Eye className='h-4 w-4' />
+                </Button>
+
+                <Button
+                  as={Link}
+                  href={route('student.edit', id)}
+                  color='green'
+                  size='xs'>
+                  <PencilLine className='ml-2 h-4 w-4' />
+                </Button>
+              </Button.Group>
             </Table.RowCell>
           </Table.Row>
         ))}
       </Table.Body>
     </Table>
-  )
-}
-
-// ----------------------------------------------
-function TableButtons({ id }) {
-  return (
-    <Button.Group>
-      <Button as={Link} href={route('student.show', id)} color='blue' size='xs'>
-        <Eye className='h-4 w-4' />
-      </Button>
-
-      <Button
-        as={Link}
-        href={route('student.edit', id)}
-        color='green'
-        size='xs'>
-        <PencilLine className='ml-2 h-4 w-4' />
-      </Button>
-    </Button.Group>
   )
 }
 

@@ -9,12 +9,19 @@ class StudentFactory extends Factory
 {
     public function definition(): array
     {
+        $gender = fake()->randomElement([GenderEnum::MALE, GenderEnum::FEMALE]);
+
+        $firstName = $gender === GenderEnum::MALE ? fake()->firstNameMale() : fake()->firstNameFemale();
+        $fullName = $firstName . ' ' . fake()->lastName() . ' ' . fake()->lastName();
+
+        $email = strtolower($firstName) . '@' . fake()->safeEmailDomain();
+
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => $fullName,
+            'email' => $email,
             'cpf' => fake()->unique()->cpf(),
             'rg' => fake()->unique()->rg(),
-            'gender' => fake()->randomElement(GenderEnum::values()),
+            'gender' => $gender,
             'birthday' => fake()->date(),
             'birthplace' => fake()->city(),
             'phone' => fake()->cellphoneNumber(),

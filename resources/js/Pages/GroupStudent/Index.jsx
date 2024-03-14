@@ -1,4 +1,4 @@
-import { Link, usePage } from '@inertiajs/react'
+import { Link, router, usePage } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
 import { Eye, Plus, Trash2, XCircle } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
@@ -9,6 +9,7 @@ import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
+import formatId from '@/Utils/formatId'
 
 import { breadcrumbs, titles } from './data'
 
@@ -55,6 +56,16 @@ export default function GroupStudentIndexPage({ group = {}, students = [] }) {
 
 // ----------------------------------------------
 function StudentTable({ group = {}, students = [] }) {
+  const handleDestroyStudent = (id, name, gender) => {
+    const genderName = gender === 'M' ? 'o aluno' : 'a aluna'
+    const message = `Tem certeza que deseja remover ${genderName}\n${name}, matrícula ${formatId(id)}?`
+
+    router.delete(
+      route('group-students.destroy', { group: group.id, student: id }),
+      { onBefore: () => confirm(message) }
+    )
+  }
+
   return (
     <Table>
       <Table.Header>
@@ -64,7 +75,7 @@ function StudentTable({ group = {}, students = [] }) {
       </Table.Header>
 
       <Table.Body>
-        {students.map(({ id, name }, index) => (
+        {students.map(({ id, name, gender }, index) => (
           <Table.Row key={id}>
             <Table.RowCell className='font-medium'>{++index}</Table.RowCell>
             <Table.RowCell
@@ -75,7 +86,22 @@ function StudentTable({ group = {}, students = [] }) {
               {name}
             </Table.RowCell>
             <Table.RowCell className='flex justify-end'>
-              <TableButtons {...{ studentId: id, groupId: group.id }} />
+              <Button.Group>
+                <Button
+                  as={Link}
+                  href={route('student.show', id)}
+                  color='blue'
+                  size='xs'>
+                  <Eye className='h-4 w-4' />
+                </Button>
+                <Button
+                  as='button'
+                  color='failure'
+                  onClick={() => handleDestroyStudent(id, name, gender)}
+                  size='xs'>
+                  <Trash2 className='mx-1 h-4 w-4' />
+                </Button>
+              </Button.Group>
             </Table.RowCell>
           </Table.Row>
         ))}
@@ -91,32 +117,6 @@ function GroupStudentNotFound() {
       <XCircle />
       Nenhum aluno na turma...
     </NotFound>
-  )
-}
-
-// ----------------------------------------------
-function TableButtons({ studentId = '', groupId = '' }) {
-  return (
-    <Button.Group>
-      <Button
-        as={Link}
-        href={route('student.show', studentId)}
-        color='blue'
-        size='xs'>
-        <Eye className='h-4 w-4' />
-      </Button>
-      <Button
-        as={Link}
-        method='delete'
-        href={route('group-students.destroy', {
-          group: groupId,
-          student: studentId,
-        })}
-        color='red'
-        size='xs'>
-        <Trash2 className='ml-2 h-4 w-4' />
-      </Button>
-    </Button.Group>
   )
 }
 
