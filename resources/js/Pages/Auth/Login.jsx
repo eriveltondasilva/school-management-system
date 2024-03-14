@@ -97,9 +97,9 @@ export default function Login({ status, canResetPassword }) {
 
           <div className='ms-4'>
             <Button
-              type='submit'
-              method='post'
               as='button'
+              method='post'
+              type='submit'
               disabled={processing}>
               Log in
             </Button>

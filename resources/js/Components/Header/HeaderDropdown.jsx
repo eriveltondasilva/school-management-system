@@ -1,8 +1,9 @@
-import { Link } from '@inertiajs/react'
+import { Link, router } from '@inertiajs/react'
 import { Avatar, Dropdown } from 'flowbite-react'
 import { LogOut, UserRoundCog } from 'lucide-react'
+import { useState } from 'react'
 
-// ====================================
+// ==============================================
 export function HeaderDropdown({ children }) {
   const image = 'https://flowbite.com/docs/images/people/profile-picture-5.jpg'
   const DropdownAvatar = <Avatar alt='User settings' img={image} rounded />
@@ -17,7 +18,7 @@ export function HeaderDropdown({ children }) {
   )
 }
 
-// ====================================
+// ----------------------------------------------
 export function HeaderDropdownHeader({ username, email }) {
   return (
     <Dropdown.Header>
@@ -35,21 +36,32 @@ export function HeaderDropdownHeader({ username, email }) {
   )
 }
 
-// ====================================
+// ----------------------------------------------
 export function HeaderDropdownItem() {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleLogout = () => {
+    setIsLoading(true)
+
+    router.post(route('logout'), {
+      onFinish: () => {
+        setIsLoading(false)
+      },
+    })
+  }
+
   return (
     <>
       <Dropdown.Item as={Link} href={route('profile.edit')} icon={UserRoundCog}>
         Perfil
       </Dropdown.Item>
       <Dropdown.Item
-        as={Link}
-        method='post'
-        href={route('logout')}
+        as='button'
+        disabled={isLoading}
+        onClick={handleLogout}
         icon={LogOut}>
         Sair
       </Dropdown.Item>
-      {/* <Dropdown.Divider /> */}
     </>
   )
 }
