@@ -12,6 +12,7 @@ import Title from '@/Components/Title'
 
 import useFormDate from '@/Hooks/useFormDate'
 import AuthLayout from '@/Layouts/AuthLayout'
+import getGenderName from '@/Utils/getGenderName'
 
 import { breadcrumbs, titles } from './data'
 
@@ -96,17 +97,19 @@ function StudentTable({ students = [] }) {
       <Table.Header>
         <Table.HeaderCell className='w-0'>Id</Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
+        <Table.HeaderCell>Gênero</Table.HeaderCell>
         <Table.HeaderCell></Table.HeaderCell>
       </Table.Header>
 
       <Table.Body>
-        {students.map(({ id, name }) => (
+        {students.map(({ id, name, gender }) => (
           <Table.Row key={id}>
             <Table.RowCell className='font-bold'>{id}</Table.RowCell>
             <Table.RowCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
               {name}
             </Table.RowCell>
-            <Table.RowCell className='flex justify-center'>
+            <Table.RowCell>{getGenderName(gender)}</Table.RowCell>
+            <Table.RowCell className='flex justify-end'>
               <Button.Group>
                 <Button
                   as={Link}

@@ -18,9 +18,11 @@ class StudentController extends Controller
     /** xxx */
     public function index(Request $request)
     {
-        $search = $request->get('search', '');
+        $searchTerm = $request->get('search', '');
+        $columns = ['id', 'name', 'gender'];
 
-        $students = $this->searchServices->searchPerson(new Student(), $search);
+        $students = $this->searchServices
+            ->searchPerson(new Student(), $searchTerm, $columns);
 
         return inertia('Student/Index', compact('students'));
     }

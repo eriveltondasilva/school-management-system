@@ -18,9 +18,11 @@ class TeacherController extends Controller
     /** xxx */
     public function index(Request $request)
     {
-        $search = $request->get('search', '');
+        $searchTerm = $request->get('search', '');
+        $columns = ['id', 'name', 'email'];
 
-        $teachers = $this->searchServices->searchPerson(new Teacher(), $search);
+        $teachers = $this->searchServices
+            ->searchPerson(new Teacher(), $searchTerm, $columns);
 
         return inertia('Teacher/Index', compact('teachers'));
     }

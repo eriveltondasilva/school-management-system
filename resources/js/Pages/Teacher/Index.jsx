@@ -107,7 +107,7 @@ function TeacherTable({ teachers = [] }) {
               {name}
             </Table.RowCell>
             <Table.RowCell>{email}</Table.RowCell>
-            <Table.RowCell className='flex justify-center'>
+            <Table.RowCell className='flex justify-end'>
               <Button.Group>
                 <Button
                   as={Link}

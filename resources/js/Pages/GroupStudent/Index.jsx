@@ -10,6 +10,7 @@ import Title from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 import formatId from '@/Utils/formatId'
+import getGenderName from '@/Utils/getGenderName'
 
 import { breadcrumbs, titles } from './data'
 
@@ -57,8 +58,8 @@ export default function GroupStudentIndexPage({ group = {}, students = [] }) {
 // ----------------------------------------------
 function StudentTable({ group = {}, students = [] }) {
   const handleDestroyStudent = (id, name, gender) => {
-    const genderName = gender === 'M' ? 'o aluno' : 'a aluna'
-    const message = `Tem certeza que deseja remover ${genderName}\n${name}, matrícula ${formatId(id)}?`
+    const genderText = gender === 'M' ? 'o aluno' : 'a aluna'
+    const message = `Tem certeza que deseja remover ${genderText}\n${name}, matrícula ${formatId(id)}?`
 
     router.delete(
       route('group-students.destroy', { group: group.id, student: id }),
@@ -71,6 +72,7 @@ function StudentTable({ group = {}, students = [] }) {
       <Table.Header>
         <Table.HeaderCell className='w-0'></Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
+        <Table.HeaderCell>Gênero</Table.HeaderCell>
         <Table.HeaderCell></Table.HeaderCell>
       </Table.Header>
 
@@ -85,6 +87,7 @@ function StudentTable({ group = {}, students = [] }) {
               )}>
               {name}
             </Table.RowCell>
+            <Table.RowCell>{getGenderName(gender)}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>
                 <Button

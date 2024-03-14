@@ -6,15 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class SearchServices
 {
-    public function searchPerson(Model $model, string $search)
+    public function searchPerson(Model $model, string $searchTerm, array $columns)
     {
-        $query = $model::select('id', 'name', 'email')
-            ->where('id', $search)
-            ->orWhere('name', 'like', "%{$search}%")
-            ->orWhere('email', 'like', "%{$search}%")
-            ->latest('id')
-            ->paginate(10);
+        $query = $model::select($columns)
+            ->where('id', $searchTerm)
+            ->orWhere('name', 'like', "%{$searchTerm}%");
 
-        return $query;
+        $query->latest('id');
+
+        return $query->paginate(10);
     }
 }
