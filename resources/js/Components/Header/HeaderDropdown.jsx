@@ -4,9 +4,12 @@ import { LogOut, UserRoundCog } from 'lucide-react'
 import { useState } from 'react'
 
 // ==============================================
-export function HeaderDropdown({ children }) {
-  const image = 'https://flowbite.com/docs/images/people/profile-picture-5.jpg'
-  const DropdownAvatar = <Avatar alt='User settings' img={image} rounded />
+export function HeaderDropdown({ avatar_url = '', children }) {
+  const image_url =
+    'https://flowbite.com/docs/images/people/profile-picture-5.jpg'
+  const DropdownAvatar = (
+    <Avatar alt='User settings' img={avatar_url || image_url} rounded />
+  )
 
   return (
     <>

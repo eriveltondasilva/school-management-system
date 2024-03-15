@@ -1,11 +1,14 @@
-import { Head, Link, useForm } from '@inertiajs/react'
+import { Link, useForm } from '@inertiajs/react'
 import { useEffect } from 'react'
 
 import Button from '@/Components/Button'
 import Input from '@/Components/Input'
+
 import GuestLayout from '@/Layouts/GuestLayout'
 
-// ==============================
+import { titles } from './data'
+
+// ==============================================
 export default function Register() {
   const { data, setData, post, processing, errors, reset } = useForm({
     username: '',
@@ -16,7 +19,7 @@ export default function Register() {
 
   useEffect(() => {
     return () => {
-      reset('password', 'password_confirmation')
+      reset()
     }
   }, [])
 
@@ -30,24 +33,21 @@ export default function Register() {
   }
 
   return (
-    <GuestLayout>
-      <Head title='Register' />
-
+    <GuestLayout title={titles.register}>
       <form onSubmit={submit}>
         <div>
           <Input.Text
             id='username'
             type='text'
-            label='username'
+            label='Nome de usuário'
             value={data.username}
-            className='mt-1 block w-full'
-            autoComplete='name'
             onChange={handleChange}
+            placeholder='Nome de Usuário'
+            error={errors.username}
+            autoComplete='off'
             autoFocus
             required
           />
-
-          <Input.Error message={errors.username} />
         </div>
 
         <div className='mt-4'>
@@ -56,13 +56,12 @@ export default function Register() {
             type='email'
             label='Email'
             value={data.email}
-            className='mt-1 block w-full'
-            autoComplete='username'
+            placeholder='email@example.com'
             onChange={handleChange}
+            error={errors.email}
+            autoComplete='off'
             required
           />
-
-          <Input.Error message={errors.email} />
         </div>
 
         <div className='mt-4'>
@@ -70,14 +69,13 @@ export default function Register() {
             id='password'
             type='password'
             label='Senha'
+            placeholder='••••••••'
             value={data.password}
-            className='mt-1 block w-full'
-            autoComplete='new-password'
             onChange={handleChange}
+            error={errors.password}
+            autoComplete='off'
             required
           />
-
-          <Input.Error message={errors.password} />
         </div>
 
         <div className='mt-4'>
@@ -85,14 +83,13 @@ export default function Register() {
             id='password_confirmation'
             type='password'
             label='Confirme sua senha'
+            placeholder='••••••••'
             value={data.password_confirmation}
-            className='mt-1 block w-full'
-            autoComplete='new-password'
             onChange={handleChange}
+            error={errors.password_confirmation}
+            autoComplete='off'
             required
           />
-
-          <Input.Error message={errors.password_confirmation} />
         </div>
 
         <div className='mt-4 flex items-center justify-end'>
@@ -102,11 +99,11 @@ export default function Register() {
             Já registrado?
           </Link>
 
-          <div className='ms-4'>
+          <footer className='ms-4'>
             <Button type='submit' disabled={processing}>
               Registrar
             </Button>
-          </div>
+          </footer>
         </div>
       </form>
     </GuestLayout>

@@ -1,12 +1,18 @@
-import { Head, Link, useForm } from '@inertiajs/react'
+import { Link, useForm } from '@inertiajs/react'
 import { Lock, Mail } from 'lucide-react'
 import { useEffect } from 'react'
 
 import Button from '@/Components/Button'
 import Checkbox from '@/Components/Checkbox'
+import HorizontalLine from '@/Components/HorizontalLine'
+import { SignInGoogle } from '@/Components/Icons'
 import Input from '@/Components/Input'
+
 import GuestLayout from '@/Layouts/GuestLayout'
 
+import { titles } from './data'
+
+// ==============================================
 export default function Login({ status, canResetPassword }) {
   const { data, setData, post, processing, errors, reset } = useForm({
     email: '',
@@ -30,50 +36,46 @@ export default function Login({ status, canResetPassword }) {
   }
 
   return (
-    <GuestLayout>
-      <Head title='Log in' />
-
+    <GuestLayout title={titles.login}>
+      {/* # status */}
       {status && (
         <div className='mb-4 text-sm font-medium text-green-600'>{status}</div>
       )}
 
       <form onSubmit={submit}>
-        <div className='max-w-md'>
-          {/* Email Address */}
+        {/* # Email */}
+        <div className='mt-4'>
           <Input.Text
             id='email'
             type='email'
-            label='Email'
+            label='Seu Email'
             icon={Mail}
-            value={data.email}
-            className='mt-1 block w-full'
-            autoComplete='username'
-            placeholder='name@exemplo.com'
             onChange={handleChange}
+            placeholder='name@exemplo.com'
+            value={data.email}
+            error={errors.email}
             autoFocus
+            required
           />
-
-          <Input.Error message={errors.email} />
         </div>
 
+        {/* # Senha */}
         <div className='mt-4'>
-          {/* Password */}
           <Input.Text
             id='password'
             type='password'
-            label='Senha'
+            label='Sua Senha'
             icon={Lock}
-            value={data.password}
-            placeholder='********'
-            className='mt-1 block w-full'
-            autoComplete='current-password'
             onChange={handleChange}
+            placeholder='••••••••'
+            value={data.password}
+            error={errors.password}
+            required
           />
-
-          <Input.Error message={errors.password} />
         </div>
 
-        <div className='mt-4 block'>
+        {/* # Lembre-me e Esqueci minha senha */}
+        <section className='mt-6 flex justify-between'>
           <label className='flex items-center'>
             <Checkbox
               name='remember'
@@ -84,9 +86,7 @@ export default function Login({ status, canResetPassword }) {
               Lembre-me
             </span>
           </label>
-        </div>
 
-        <div className='mt-4 flex items-center justify-end'>
           {canResetPassword && (
             <Link
               href={route('password.request')}
@@ -94,17 +94,25 @@ export default function Login({ status, canResetPassword }) {
               Esqueceu sua senha?
             </Link>
           )}
+        </section>
 
-          <div className='ms-4'>
-            <Button
-              as='button'
-              method='post'
-              type='submit'
-              disabled={processing}>
-              Log in
-            </Button>
-          </div>
-        </div>
+        {/* footer */}
+        <footer className='mt-6 flex flex-col gap-2'>
+          <Button type='submit' disabled={processing}>
+            Entrar com Email
+          </Button>
+
+          <HorizontalLine text='OU' />
+
+          <Button
+            as='a'
+            href={route('socialite.redirect', 'google')}
+            variant='secondary'
+            disabled={processing}>
+            <SignInGoogle />
+            Entrar com Google
+          </Button>
+        </footer>
       </form>
     </GuestLayout>
   )

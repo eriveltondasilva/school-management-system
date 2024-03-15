@@ -72,11 +72,10 @@ function AcademicYearCard({ academicYears = [] }) {
               <Button
                 as={Link}
                 href={route('academic-year.edit', id)}
-                color='light'
-                className=''
+                color='blue'
                 fullSized>
                 <Eye className='mr-2 h-5 w-5' />
-                Visualizar
+                Ver Ano Letivo
               </Button>
             </footer>
           </Card>

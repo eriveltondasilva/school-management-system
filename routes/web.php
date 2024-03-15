@@ -64,13 +64,10 @@ Route::middleware('auth')
 
 //# SOCIALITE
 Route::controller(SocialiteController::class)
-->prefix('auth/{provider}')->name('auth.')
+->prefix('socialite/{provider}')->name('socialite.')
 ->group(function () {
     Route::get('/redirect', 'redirect')->name('redirect');
     Route::get('/callback', 'callback')->name('callback');
-
-    // http://127.0.0.1:8000/auth/google/redirect
-    // http://127.0.0.1:8000/auth/google/callback
 });
 
 

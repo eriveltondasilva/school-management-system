@@ -1,6 +1,6 @@
 export const DEFAULT_VARIANTS = [
   'font-semibold uppercase tracking-widest',
-  'inline-flex items-center justify-center gap-2',
+  'inline-flex items-center justify-center',
   'rounded-md border border-transparent',
   'transition duration-150 ease-in-out',
   'focus:outline-none focus:ring-2 focus:ring-offset-2',

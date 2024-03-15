@@ -43,11 +43,11 @@ export function InputSelect({
   ...props
 }) {
   return (
-    <section className='mb-6'>
+    <section className={twMerge('mb-6', className)}>
       {label && <LabelText id={id} label={label} />}
       <Select id={id} name={id} {...props}>
         {values.map((value, index) => (
-          <option key={value + '-' + index} value={value}>
+          <option key={index} value={value}>
             {value}
           </option>
         ))}
@@ -60,7 +60,7 @@ export function InputSelect({
 // ----------------------------------------------
 export function InputError({ message = '' }) {
   return (
-    <p className='mb-2 text-sm text-red-600 dark:text-red-400'>{message}</p>
+    <p className='mt-2 text-sm text-red-600 dark:text-red-400'>{message}</p>
   )
 }
 

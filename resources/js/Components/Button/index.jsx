@@ -1,27 +1,27 @@
 import { twJoin } from 'tailwind-merge'
 import { COLOR_VARIANTS, DEFAULT_VARIANTS, SIZE_VARIANTS } from './data'
 
-// ====================================
+// ==============================================
 export default function Button({
-  variant,
-  size,
-  full,
-  disabled,
+  as: Component = 'button',
+  variant = 'primary',
+  size = 'base',
+  full = false,
+  disabled = false,
   children,
   ...props
 }) {
+  const buttonClasses = twJoin(
+    DEFAULT_VARIANTS,
+    SIZE_VARIANTS[size],
+    COLOR_VARIANTS[variant],
+    full && 'w-full',
+    disabled && 'cursor-not-allowed opacity-25'
+  )
+
   return (
-    <button
-      disabled={disabled}
-      className={twJoin(
-        DEFAULT_VARIANTS,
-        SIZE_VARIANTS[size || 'base'],
-        COLOR_VARIANTS[variant || 'primary'],
-        full && 'w-full',
-        disabled && 'cursor-not-allowed opacity-25'
-      )}
-      {...props}>
+    <Component disabled={disabled} className={buttonClasses} {...props}>
       {children}
-    </button>
+    </Component>
   )
 }

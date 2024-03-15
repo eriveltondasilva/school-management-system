@@ -1,19 +1,34 @@
-import { Link } from '@inertiajs/react'
+import { Head } from '@inertiajs/react'
+import { twJoin } from 'tailwind-merge'
 
-import AppLogo from '@/Components/AppLogo'
-
-export default function Guest({ children }) {
+// ==============================================
+export default function Guest({ title = '', children }) {
   return (
-    <div className='flex min-h-screen flex-col items-center bg-gray-100 pt-6 dark:bg-gray-900 sm:justify-center sm:pt-0'>
-      <div>
+    <>
+      <Head title={title} />
+      <div
+        className={twJoin(
+          'flex flex-col items-center justify-center',
+          'min-h-screen',
+          'bg-gray-100 dark:bg-gray-900'
+        )}>
+        {/* # Logo */}
+        {/* TODO: adicionar logo */}
+        {/* <div>
         <Link href='/'>
           <AppLogo className='h-20 w-20 fill-current text-gray-500' />
         </Link>
-      </div>
+      </div> */}
 
-      <div className='mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md dark:bg-gray-800 sm:max-w-md sm:rounded-lg'>
-        {children}
+        <main
+          className={twJoin(
+            'w-full px-8 py-6 sm:max-w-md',
+            'overflow-hidden shadow-md sm:rounded-lg',
+            'bg-white dark:bg-gray-800'
+          )}>
+          {children}
+        </main>
       </div>
-    </div>
+    </>
   )
 }

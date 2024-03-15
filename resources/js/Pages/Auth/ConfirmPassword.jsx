@@ -1,11 +1,14 @@
-import { Head, useForm } from '@inertiajs/react'
+import { useForm } from '@inertiajs/react'
 import { useEffect } from 'react'
 
 import Button from '@/Components/Button'
 import Input from '@/Components/Input'
+
 import GuestLayout from '@/Layouts/GuestLayout'
 
-// ==============================
+import { titles } from './data'
+
+// ==============================================
 export default function ConfirmPassword() {
   const { data, setData, post, processing, errors, reset } = useForm({
     password: '',
@@ -27,12 +30,10 @@ export default function ConfirmPassword() {
   }
 
   return (
-    <GuestLayout>
-      <Head title='Confirm Password' />
-
+    <GuestLayout title={titles.confirmPassword}>
       <div className='mb-4 text-sm text-gray-600 dark:text-gray-400'>
-        Esta é uma área segura do aplicativo. Por favor confirme sua senha antes
-        de continuar.
+        Esta é uma área segura do aplicativo. Por favor, confirme sua senha
+        antes de continuar.
       </div>
 
       <form onSubmit={submit}>
@@ -41,22 +42,19 @@ export default function ConfirmPassword() {
             id='password'
             type='password'
             label='Password'
-            value={data.password}
-            className='mt-1 block w-full'
             onChange={handleChange}
+            value={data.password}
+            error={errors.password}
+            required
             autoFocus
           />
-
-          <Input.Error message={errors.password} />
         </div>
 
-        <div className='mt-4 flex items-center justify-end'>
-          <div className='ms-4'>
-            <Button type='submit' disabled={processing}>
-              Confirmar
-            </Button>
-          </div>
-        </div>
+        <footer className='mt-4 flex items-center justify-end'>
+          <Button type='submit' disabled={processing}>
+            Confirmar
+          </Button>
+        </footer>
       </form>
     </GuestLayout>
   )

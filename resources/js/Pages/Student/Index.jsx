@@ -122,7 +122,7 @@ function StudentTable({ students = [] }) {
                 <Button
                   as={Link}
                   href={route('student.edit', id)}
-                  color='green'
+                  color='light'
                   size='xs'>
                   <PencilLine className='ml-2 h-4 w-4' />
                 </Button>

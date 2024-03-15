@@ -1,10 +1,13 @@
-import { Head, useForm } from '@inertiajs/react'
+import { useForm } from '@inertiajs/react'
 
 import Button from '@/Components/Button'
 import Input from '@/Components/Input'
+
 import GuestLayout from '@/Layouts/GuestLayout'
 
-// ==============================
+import { titles } from './data'
+
+// ==============================================
 export default function ForgotPassword({ status }) {
   const { data, setData, post, processing, errors } = useForm({
     email: '',
@@ -20,9 +23,7 @@ export default function ForgotPassword({ status }) {
   }
 
   return (
-    <GuestLayout>
-      <Head title='Forgot Password' />
-
+    <GuestLayout title={titles.forgotPassword}>
       <div className='mb-4 text-sm text-gray-600 dark:text-gray-400'>
         Esqueceu sua senha? Sem problemas. Basta nos informar seu endereço de
         e-mail e enviaremos por e-mail um link de redefinição de senha que
@@ -40,20 +41,17 @@ export default function ForgotPassword({ status }) {
           id='email'
           type='email'
           value={data.email}
-          className='mt-1 block w-full'
           onChange={handleChange}
+          error={errors.email}
+          required
           autoFocus
         />
 
-        <Input.Error message={errors.email} />
-
-        <div className='mt-4 flex items-center justify-end'>
-          <div className='ms-4'>
-            <Button type='submit' disabled={processing}>
-              Link de redefinição de senha de e-mail
-            </Button>
-          </div>
-        </div>
+        <footer className='mt-4 flex items-center justify-end'>
+          <Button type='submit' disabled={processing}>
+            Link de redefinição de senha de e-mail
+          </Button>
+        </footer>
       </form>
     </GuestLayout>
   )

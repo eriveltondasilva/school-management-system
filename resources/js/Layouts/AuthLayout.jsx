@@ -32,7 +32,7 @@ export default function AuthenticatedLayout({ title, breadcrumb, children }) {
         <Header>
           <Header.Left />
           <Header.Right activeAcademicYear={activeAcademicYear}>
-            <Header.Dropdown>
+            <Header.Dropdown avatar_url={user.avatar_url}>
               <Header.DropdownHeader
                 username={user.username}
                 email={user.email}
