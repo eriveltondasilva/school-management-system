@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
-import { PencilLine, Plus } from 'lucide-react'
+import { PencilLine, Plus, Undo2 } from 'lucide-react'
 
 import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
@@ -21,28 +21,35 @@ export default function StudentShowPage({ student = {} }) {
 
       {/* header student */}
       <Form.Header>
-        <span className='flex gap-4'>
-          {titles.show}
-          <Button.Group>
-            <Button
-              title='Editar aluno'
-              href={route('student.edit', student.id)}
-              color='blue'
-              size='xs'
-              as={Link}>
-              <PencilLine className='h-4 w-4' />
-            </Button>
+        <Form.HeaderTitle title={titles.show} />
 
-            <Button
-              title='Cadastrar novo aluno'
-              href={route('student.create')}
-              color='green'
-              size='xs'
-              as={Link}>
-              <Plus className='h-4 w-4' />
-            </Button>
-          </Button.Group>
-        </span>
+        <Button.Group>
+          <Button
+            title='Editar aluno'
+            href={route('student.edit', student.id)}
+            color='blue'
+            size='xs'
+            as={Link}>
+            <PencilLine className='h-4 w-4' />
+          </Button>
+
+          <Button
+            title='Cadastrar novo aluno'
+            href={route('student.create')}
+            color='green'
+            size='xs'
+            as={Link}>
+            <Plus className='mx-1 h-4 w-4' />
+          </Button>
+
+          <Button
+            title='Voltar'
+            color='red'
+            size='xs'
+            onClick={() => history.back()}>
+            <Undo2 className='mx-1 h-4 w-4' />
+          </Button>
+        </Button.Group>
       </Form.Header>
 
       {/* student form data */}

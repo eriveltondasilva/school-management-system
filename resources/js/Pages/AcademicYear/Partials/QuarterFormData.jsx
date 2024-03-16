@@ -5,7 +5,7 @@ export default function QuarterFormData({ data = {}, errors = {} }) {
   const isCreateRoute = route().current('*.create')
 
   return (
-    <>
+    <section>
       <Input.Text
         id='quarter[start_date]'
         type='date'
@@ -21,6 +21,6 @@ export default function QuarterFormData({ data = {}, errors = {} }) {
         defaultValue={data.end_date}
         error={errors.end_date}
       />
-    </>
+    </section>
   )
 }

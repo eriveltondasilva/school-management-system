@@ -1,7 +1,9 @@
-import { Label, Select, TextInput, Textarea } from 'flowbite-react'
+import { Label, Radio, Select, TextInput, Textarea } from 'flowbite-react'
 import { twMerge } from 'tailwind-merge'
 
-// ==============================================
+const inputClassName = 'mb-6 space-y-2'
+
+// ===============================================
 export function InputText({
   id = '',
   label = '',
@@ -11,14 +13,20 @@ export function InputText({
   ...props
 }) {
   return (
-    <section className={twMerge('mb-6', className)}>
-      {label && <LabelText id={id} label={label} />}
+    <section className={twMerge(inputClassName, className)}>
+      {/* # texto do label */}
+      {label && <Label htmlFor={id} value={label} />}
+
+      {/* # input text */}
       <TextInput id={id} name={id} type={type} {...props} />
+
+      {/* # erro */}
       {error && <InputError message={error} />}
     </section>
   )
 }
 
+// -----------------------------------------------
 export function InputTextarea({
   id = '',
   label = '',
@@ -27,48 +35,84 @@ export function InputTextarea({
   ...props
 }) {
   return (
-    <section className={twMerge('mb-6', className)}>
-      {label && <LabelText id={id} label={label} />}
+    <section className={twMerge(inputClassName, className)}>
+      {/* # texto do label */}
+      {label && <Label htmlFor={id} value={label} />}
+
+      {/* # input textarea */}
       <Textarea id={id} name={id} {...props} />
+
+      {/* # erro */}
       {error && <InputError message={error} />}
     </section>
   )
 }
 
+// -----------------------------------------------
 export function InputSelect({
   id = '',
   label = '',
   error = '',
   values = [],
+  className = '',
   ...props
 }) {
   return (
-    <section className={twMerge('mb-6', className)}>
-      {label && <LabelText id={id} label={label} />}
+    <section className={twMerge(inputClassName, className)}>
+      {/* # texto do label */}
+      {label && <Label htmlFor={id} value={label} />}
+
+      {/* # input select */}
       <Select id={id} name={id} {...props}>
         {values.map((value, index) => (
-          <option key={index} value={value}>
-            {value}
+          <option key={index} value={value.value ?? value}>
+            {value.label ?? value}
           </option>
         ))}
       </Select>
+
+      {/* # erro */}
       {error && <InputError message={error} />}
     </section>
   )
 }
 
-// ----------------------------------------------
-export function InputError({ message = '' }) {
+// -----------------------------------------------
+export function InputRadio({
+  id = '',
+  label = '',
+  error = '',
+  className = '',
+  values = [],
+  defaultChecked = '',
+  readOnly = false,
+}) {
   return (
-    <p className='mt-2 text-sm text-red-600 dark:text-red-400'>{message}</p>
+    <fieldset className='mb-6 flex max-w-md flex-col gap-4'>
+      {/* # texto do label */}
+      {label && <Label htmlFor={id} value={label} />}
+
+      {/* # input radio */}
+      {values.map((item, index) => (
+        <div key={index} className='flex items-center gap-2'>
+          <Radio
+            id={item.id}
+            name={id}
+            defaultValue={item.value}
+            defaultChecked={item.value === defaultChecked}
+            disabled={readOnly}
+          />
+          <Label htmlFor={item.id} value={item.label} />
+        </div>
+      ))}
+
+      {/* # erro */}
+      {error && <InputError message={error} />}
+    </fieldset>
   )
 }
 
-// ----------------------------------------------
-function LabelText({ id = '', label = '' }) {
-  return (
-    <div className='mb-2 block'>
-      <Label htmlFor={id} value={label} />
-    </div>
-  )
+// ==============================================
+export function InputError({ message = '' }) {
+  return <p className='text-sm text-red-600 dark:text-red-400'>{message}</p>
 }

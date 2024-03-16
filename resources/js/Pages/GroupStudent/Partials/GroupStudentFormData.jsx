@@ -3,13 +3,13 @@ import Input from '@/Components/Input'
 // ====================================
 export default function GroupStudentFormData({ data = {} }) {
   return (
-    <>
+    <section>
       <Input.Text
         id='id'
         type='number'
-        label='Id'
+        label='ID do aluno'
         value={data.id}
-        className='w-16'
+        className='w-24'
         readOnly
       />
 
@@ -28,6 +28,6 @@ export default function GroupStudentFormData({ data = {} }) {
         value={data.cpf || 'Sem CPF'}
         readOnly
       />
-    </>
+    </section>
   )
 }

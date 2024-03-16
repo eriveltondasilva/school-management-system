@@ -1,4 +1,6 @@
 import { Link, usePage } from '@inertiajs/react'
+import { Button } from 'flowbite-react'
+import { Undo2 } from 'lucide-react'
 
 import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
@@ -21,35 +23,43 @@ export default function GroupCreatePage() {
   const { handleSubmit, errors, isLoading } = useFormDate(formDataOptions)
 
   return (
-    <>
+    <section>
       {/*  Criar ano letivo */}
-      <section>
-        <Form onSubmit={handleSubmit}>
-          {/* Mensagem flash */}
-          {flash.message && (
-            <Alert color='success'>
-              <div>{flash.message}</div>
-              <Link
-                href={route('group.edit', flash.id)}
-                className='font-medium underline'>
-                Clique aqui para vê-lo.
-              </Link>
-            </Alert>
-          )}
+      <Form onSubmit={handleSubmit}>
+        {/* Mensagem flash */}
+        {flash.message && (
+          <Alert color='success'>
+            <div>{flash.message}</div>
+            <Link
+              href={route('group.edit', flash.id)}
+              className='font-medium underline'>
+              Clique aqui para vê-lo.
+            </Link>
+          </Alert>
+        )}
 
-          {/* header teacher */}
-          <Form.Header>{titles.create}</Form.Header>
+        {/* header teacher */}
+        <Form.Header>
+          <Form.HeaderTitle title={titles.create} />
 
-          {/* form */}
-          <GroupFormData errors={errors} />
+          <Button
+            title='Voltar'
+            color='red'
+            size='xs'
+            onClick={() => history.back()}>
+            <Undo2 className='mx-1 h-4 w-4' />
+          </Button>
+        </Form.Header>
 
-          {/* footer teacher */}
-          <Form.Footer>
-            <GroupFormFooterButton disabled={isLoading} />
-          </Form.Footer>
-        </Form>
-      </section>
-    </>
+        {/* form */}
+        <GroupFormData errors={errors} />
+
+        {/* footer teacher */}
+        <Form.Footer>
+          <GroupFormFooterButton disabled={isLoading} />
+        </Form.Footer>
+      </Form>
+    </section>
   )
 }
 

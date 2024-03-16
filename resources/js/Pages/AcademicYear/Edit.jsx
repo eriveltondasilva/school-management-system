@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react'
-import { Badge, Button, Tooltip } from 'flowbite-react'
-import { Plus } from 'lucide-react'
+import { Badge, Button } from 'flowbite-react'
+import { Plus, Undo2 } from 'lucide-react'
 
 import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
@@ -31,18 +31,25 @@ export default function AcademicYearEditPage({ academicYear = {} }) {
 
       {/* Form header */}
       <Form.Header>
-        <span className='flex gap-4'>
-          {titles.edit}
-          <Tooltip content='Cadastrar novo ano letivo'>
-            <Button
-              href={route('academic-year.create')}
-              color='blue'
-              size='xs'
-              as={Link}>
-              <Plus className='h-4 w-4' />
-            </Button>
-          </Tooltip>
-        </span>
+        <Form.HeaderTitle title={titles.edit} />
+
+        <Button.Group>
+          <Button
+            href={route('academic-year.create')}
+            color='blue'
+            size='xs'
+            as={Link}>
+            <Plus className='h-4 w-4' />
+          </Button>
+
+          <Button
+            title='Voltar'
+            color='red'
+            size='xs'
+            onClick={() => history.back()}>
+            <Undo2 className='mx-1 h-4 w-4' />
+          </Button>
+        </Button.Group>
       </Form.Header>
 
       {/* Academic year status */}

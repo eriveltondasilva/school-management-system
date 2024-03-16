@@ -1,5 +1,4 @@
 import Input from '@/Components/Input'
-import { Label, Radio } from 'flowbite-react'
 
 // ================================================
 export default function TeacherFormData({
@@ -7,6 +6,11 @@ export default function TeacherFormData({
   errors = {},
   readOnly = false,
 }) {
+  const genderRadioValues = [
+    { id: 'gender-male', label: 'Masculino', value: 'M' },
+    { id: 'gender-female', label: 'Feminino', value: 'F' },
+  ]
+
   return (
     <section className='mb-4'>
       {/* NOME DO PROFESSOR */}
@@ -45,29 +49,14 @@ export default function TeacherFormData({
       />
 
       {/* GÊNERO DO PROFESSOR */}
-      <fieldset className='mb-6 flex max-w-md flex-col gap-3'>
-        <Label htmlFor='gender'>Gênero do Professor</Label>
-        <div className='flex items-center gap-2'>
-          <Radio
-            id='gender-male'
-            name='gender'
-            defaultValue='M'
-            defaultChecked={data.gender === 'M'}
-            disabled={readOnly}
-          />
-          <Label htmlFor='gender-male'>Masculino</Label>
-        </div>
-        <div className='flex items-center gap-2'>
-          <Radio
-            id='gender-female'
-            name='gender'
-            defaultValue='F'
-            defaultChecked={data.gender === 'F'}
-            disabled={readOnly}
-          />
-          <Label htmlFor='gender-female'>Feminino</Label>
-        </div>
-      </fieldset>
+      <Input.Radio
+        id='gender'
+        label='Gênero do Professor'
+        values={genderRadioValues}
+        error={errors.gender}
+        defaultChecked={data.gender}
+        readOnly={readOnly}
+      />
 
       {/* CPF DO PROFESSOR */}
       <Input.Text

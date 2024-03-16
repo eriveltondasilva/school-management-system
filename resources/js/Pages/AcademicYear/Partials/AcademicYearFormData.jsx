@@ -5,7 +5,7 @@ export default function AcademicYearFormData({ data = {}, errors = {} }) {
   const isCreateRoute = route().current('*.create')
 
   return (
-    <>
+    <section>
       <Input.Text
         id='year'
         type='number'
@@ -35,6 +35,6 @@ export default function AcademicYearFormData({ data = {}, errors = {} }) {
         defaultValue={data.end_date}
         error={errors.end_date}
       />
-    </>
+    </section>
   )
 }

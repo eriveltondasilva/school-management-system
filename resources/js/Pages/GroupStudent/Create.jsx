@@ -1,6 +1,6 @@
 import { usePage } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
-import { Save, Search, XCircle } from 'lucide-react'
+import { Save, Search, UserRoundSearch, XCircle } from 'lucide-react'
 
 import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
@@ -79,15 +79,23 @@ function GroupStudentForm({ student = {}, group = {} }) {
   const { handleSubmit, isLoading } = useFormDate(formDataOptions)
 
   return (
-    <Form className='sm:mx-0 md:mx-0' onSubmit={handleSubmit}>
-      <Form.Header>Aluno pesquisado:</Form.Header>
+    <Form className='mt-6 sm:mx-0 md:mx-0' onSubmit={handleSubmit}>
+      <header className='flex items-center'>
+        <UserRoundSearch className='mr-2 h-8 w-8' />
+        <h3 className='text-xl font-semibold'>Aluno pesquisado:</h3>
+      </header>
 
       <GroupStudentFormData data={student} />
 
       <Form.Footer>
-        <Button color='blue' type='submit' disabled={isLoading} fullSized>
+        <Button
+          className='uppercase'
+          color='blue'
+          type='submit'
+          disabled={isLoading}
+          fullSized>
           <Save className='mr-2 h-5 w-5' />
-          Adicionar
+          Adicionar aluno à turma
         </Button>
       </Form.Footer>
     </Form>

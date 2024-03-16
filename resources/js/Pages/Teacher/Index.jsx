@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
-import { Eye, PencilLine, Search, Undo2, UserPlus } from 'lucide-react'
+import { Eye, PencilLine, Plus, Search, Undo2 } from 'lucide-react'
 import { useState } from 'react'
 
 import Input from '@/Components/Input'
@@ -15,7 +15,7 @@ import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
 
-// ==============================================
+// ===============================================
 export default function TeacherIndexPage({ teachers = [] }) {
   const paramsSearch = route().params.search || ''
   const [search, setSearch] = useState(paramsSearch)
@@ -41,7 +41,7 @@ export default function TeacherIndexPage({ teachers = [] }) {
             href={route('teacher.create')}
             color='blue'
             className=''>
-            <UserPlus className='mr-2 h-5 w-5' />
+            <Plus className='mr-2 h-5 w-5' />
             Cadastrar Professor
           </Button>
         </Title.Right>
@@ -88,7 +88,7 @@ export default function TeacherIndexPage({ teachers = [] }) {
   )
 }
 
-// ------------------------------------
+// -----------------------------------------------
 function TeacherTable({ teachers = [] }) {
   return (
     <Table>
@@ -120,7 +120,7 @@ function TeacherTable({ teachers = [] }) {
                 <Button
                   as={Link}
                   href={route('teacher.edit', id)}
-                  color='light'
+                  color='green'
                   size='xs'>
                   <PencilLine className='ml-2 h-4 w-4' />
                 </Button>
@@ -133,12 +133,12 @@ function TeacherTable({ teachers = [] }) {
   )
 }
 
-// ------------------------------------
+// -----------------------------------------------
 function TeacherNotFound() {
   return <NotFound icon>Nenhum professor encontrado...</NotFound>
 }
 
-// ------------------------------------
+// -----------------------------------------------
 function TeacherPagination({ teachers = {} }) {
   const { total, from, to, next_page_url, prev_page_url } = teachers
 
@@ -153,7 +153,7 @@ function TeacherPagination({ teachers = {} }) {
   )
 }
 
-// ------------------------------------
+// ===============================================
 TeacherIndexPage.layout = (page) => (
   <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>
     {page}

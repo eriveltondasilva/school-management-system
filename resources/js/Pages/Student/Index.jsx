@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
-import { Eye, PencilLine, Search, Undo2, UserRoundPlus } from 'lucide-react'
+import { Eye, PencilLine, Plus, Search, Undo2 } from 'lucide-react'
 import { useState } from 'react'
 
 import Input from '@/Components/Input'
@@ -42,7 +42,7 @@ export default function StudentIndexPage({ students = [] }) {
             href={route('student.create')}
             color='blue'
             className=''>
-            <UserRoundPlus className='mr-2 h-5 w-5' />
+            <Plus className='mr-2 h-5 w-5' />
             Cadastrar Aluno
           </Button>
         </Title.Right>
@@ -122,7 +122,7 @@ function StudentTable({ students = [] }) {
                 <Button
                   as={Link}
                   href={route('student.edit', id)}
-                  color='light'
+                  color='green'
                   size='xs'>
                   <PencilLine className='ml-2 h-4 w-4' />
                 </Button>

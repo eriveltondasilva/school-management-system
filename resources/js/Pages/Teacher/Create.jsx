@@ -1,4 +1,6 @@
 import { Link, usePage } from '@inertiajs/react'
+import { Button } from 'flowbite-react'
+import { Undo2 } from 'lucide-react'
 
 import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
@@ -35,7 +37,17 @@ export default function TeacherCreatePage() {
         )}
 
         {/* header teacher */}
-        <Form.Header>{titles.create}</Form.Header>
+        <Form.Header>
+          <Form.HeaderTitle title={titles.create} />
+
+          <Button
+            title='Voltar'
+            color='red'
+            size='xs'
+            onClick={() => history.back()}>
+            <Undo2 className='mx-1 h-4 w-4' />
+          </Button>
+        </Form.Header>
 
         {/* form */}
         <TeacherFormData errors={errors} />

@@ -4,9 +4,11 @@ import { usePage } from '@inertiajs/react'
 // ==============================================
 export default function GroupFormData({ data = {}, errors = {} }) {
   const { year } = usePage().props.auth.activeAcademicYear || {}
+  const nameSelectValues = ['6° Ano', '7° Ano', '8° Ano', '9° Ano']
+  const shiftSelectValues = ['Matutino', 'Vespertino']
 
   return (
-    <>
+    <section>
       <Input.Text
         id='academicYear'
         type='text'
@@ -18,10 +20,10 @@ export default function GroupFormData({ data = {}, errors = {} }) {
       <Input.Select
         id='name'
         label='Turma'
-        defaultValue={data.name || '6° Ano'}
+        defaultValue={data.name || nameSelectValues.at(0)}
         disabled={!!data.name}
         error={errors.name}
-        values={['6° Ano', '7° Ano', '8° Ano', '9° Ano']}
+        values={nameSelectValues}
         autoFocus
         required
       />
@@ -38,10 +40,10 @@ export default function GroupFormData({ data = {}, errors = {} }) {
       <Input.Select
         id='shift'
         label='Turno'
-        defaultValue={data.shift || 'Vespertino'}
-        values={['Matutino', 'Vespertino']}
+        defaultValue={data.shift || shiftSelectValues.at(-1)}
+        values={shiftSelectValues}
         error={errors.shift}
       />
-    </>
+    </section>
   )
 }

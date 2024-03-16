@@ -1,4 +1,10 @@
-import { InputError, InputSelect, InputText, InputTextarea } from './Input'
+import {
+  InputError,
+  InputRadio,
+  InputSelect,
+  InputText,
+  InputTextarea,
+} from './Input'
 
 // ---------------------------------------------------------------------------
 const Input = {
@@ -6,6 +12,7 @@ const Input = {
   Textarea: InputTextarea,
   Select: InputSelect,
   Error: InputError,
+  Radio: InputRadio,
 }
 
 export default Input
