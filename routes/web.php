@@ -76,5 +76,4 @@ require __DIR__.'/auth.php';
 require __DIR__.'/student.php';
 require __DIR__.'/teacher.php';
 require __DIR__.'/group.php';
-require __DIR__.'/groupStudent.php';
 require __DIR__.'/academicYear.php';

@@ -64,6 +64,6 @@ class GroupStudentController extends Controller
         $studentName = $student->name;
 
         return back()
-            ->with('message', "O estudante {$studentName}, com matrícula {$matriculation}, foi removido da turma.");
+            ->with('message', "O estudante {$studentName}, com matrícula {$matriculation}, foi removido da turma  com sucesso.");
     }
 }

@@ -10,15 +10,15 @@ import Title from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 import formatId from '@/Utils/formatId'
-import getGenderName from '@/Utils/getGenderName'
 
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageGroupStudentIndex({ group = {}, students = [] }) {
-  const hasStudents = students?.length > 0
+export default function PageGroupTeacherIndex({ group = {}, teachers = [] }) {
   const flash = usePage().props.flash || {}
+
   const pageTitle = `${titles.index} - ${group.name}`
+  const hasTeachers = teachers.length > 0
 
   return (
     <>
@@ -35,11 +35,11 @@ export default function PageGroupStudentIndex({ group = {}, students = [] }) {
         <Title.Right>
           <Button
             as={Link}
-            href={route('group-students.create', group.id)}
+            href={route('group-teachers.create', group.id)}
             color='blue'
             className=''>
             <Plus className='mr-2 h-5 w-5' />
-            Adicionar alunos
+            Adicionar professor
           </Button>
         </Title.Right>
         {/* TODO: implementar PDF */}
@@ -48,22 +48,21 @@ export default function PageGroupStudentIndex({ group = {}, students = [] }) {
       <br />
 
       {/* Exibe mensagem se não houver alunos */}
-      {!hasStudents && <GroupStudentNotFound />}
+      {!hasTeachers && <GroupTeacherNotFound />}
 
       {/* Tabela de alunos */}
-      {hasStudents && <StudentTable {...{ group, students }} />}
+      {hasTeachers && <TeacherTable {...{ group, teachers }} />}
     </>
   )
 }
 
 // ----------------------------------------------
-function StudentTable({ group = {}, students = [] }) {
-  const handleDestroyStudent = (id, name, gender) => {
-    const genderText = gender === 'M' ? 'o aluno' : 'a aluna'
-    const message = `Tem certeza que deseja remover ${genderText}\n${name}, matrícula ${formatId(id)}?`
+function TeacherTable({ group = {}, teachers = [] }) {
+  const handleDestroyTeacher = (id, name) => {
+    const message = `Tem certeza que deseja remover professor(a)\n${name}, id ${formatId(id)}?`
 
     router.delete(
-      route('group-students.destroy', { group: group.id, student: id }),
+      route('group-teachers.destroy', { group: group.id, teacher: id }),
       { onBefore: () => confirm(message) }
     )
   }
@@ -74,13 +73,13 @@ function StudentTable({ group = {}, students = [] }) {
       <Table.Header>
         <Table.HeaderCell className='w-0'></Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
-        <Table.HeaderCell>Gênero</Table.HeaderCell>
+        <Table.HeaderCell>email</Table.HeaderCell>
         <Table.HeaderCell></Table.HeaderCell>
       </Table.Header>
 
       {/* Table Body */}
       <Table.Body>
-        {students.map(({ id, name, gender }, index) => (
+        {teachers.map(({ id, name, email }, index) => (
           <Table.Row key={id}>
             <Table.RowCell className='font-medium'>{++index}</Table.RowCell>
             <Table.RowCell
@@ -90,12 +89,12 @@ function StudentTable({ group = {}, students = [] }) {
               )}>
               {name}
             </Table.RowCell>
-            <Table.RowCell>{getGenderName(gender)}</Table.RowCell>
+            <Table.RowCell>{email}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>
                 <Button
                   as={Link}
-                  href={route('student.show', id)}
+                  href={route('teacher.show', id)}
                   color='blue'
                   size='xs'>
                   <Eye className='h-4 w-4' />
@@ -103,7 +102,7 @@ function StudentTable({ group = {}, students = [] }) {
                 <Button
                   as='button'
                   color='failure'
-                  onClick={() => handleDestroyStudent(id, name, gender)}
+                  onClick={() => handleDestroyTeacher(id, name)}
                   size='xs'>
                   <Trash2 className='mx-1 h-4 w-4' />
                 </Button>
@@ -117,17 +116,17 @@ function StudentTable({ group = {}, students = [] }) {
 }
 
 // ----------------------------------------------
-function GroupStudentNotFound() {
+function GroupTeacherNotFound() {
   return (
     <NotFound>
       <XCircle />
-      Nenhum aluno na turma...
+      Nenhum professor na turma...
     </NotFound>
   )
 }
 
 // ==============================================
-PageGroupStudentIndex.layout = (page) => (
+PageGroupTeacherIndex.layout = (page) => (
   <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>
     {page}
   </AuthLayout>

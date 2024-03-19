@@ -1,13 +1,13 @@
 import Input from '@/Components/Input'
 
 // ====================================
-export default function GroupStudentFormData({ data = {} }) {
+export default function GroupTeacherFormData({ data = {} }) {
   return (
     <section>
       <Input.Text
         id='id'
         type='number'
-        label='Matrícula do aluno'
+        label='ID do professor'
         value={data.id}
         className='w-24'
         readOnly
@@ -16,7 +16,7 @@ export default function GroupStudentFormData({ data = {} }) {
       <Input.Text
         id='name'
         type='text'
-        label='Nome do aluno'
+        label='Nome do professor'
         value={data.name}
         readOnly
       />
@@ -24,7 +24,7 @@ export default function GroupStudentFormData({ data = {} }) {
       <Input.Text
         id='cpf'
         type='text'
-        label='CPF do aluno'
+        label='CPF do professor'
         value={data.cpf || 'Sem CPF'}
         readOnly
       />

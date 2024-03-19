@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react'
 import { Button, Card, Tooltip } from 'flowbite-react'
-import { Eye, PencilLine, Plus, XCircle } from 'lucide-react'
+import { PencilLine, Plus, XCircle } from 'lucide-react'
 
 import NotFound from '@/Components/NotFound'
 import Title from '@/Components/Title'
@@ -47,7 +47,7 @@ export default function PageGroupIndex({ groups = [] }) {
 function GroupCard({ groups = [] }) {
   return (
     <section className='grid max-w-6xl grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-      {groups.map(({ id, name, students_count }) => (
+      {groups.map(({ id, name, students_count, teachers_count }) => (
         <Card key={id} className='max-w-sm'>
           <header className='flex justify-between'>
             <h5 className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
@@ -68,15 +68,26 @@ function GroupCard({ groups = [] }) {
           <p className='font-normal text-gray-700 dark:text-gray-400'>
             Alunos: {students_count || 'sem aluno'}
           </p>
+          <p className='font-normal text-gray-700 dark:text-gray-400'>
+            Professores: {teachers_count || 'sem prof.'}
+          </p>
 
-          <footer>
+          <footer className='space-y-4'>
             <Button
               as={Link}
               href={route('group-students.index', id)}
               color='blue'
               fullSized>
-              <Eye className='mr-2 h-5 w-5' />
+              {/* <Eye className='mr-2 h-5 w-5' /> */}
               Ver Alunos
+            </Button>
+            <Button
+              as={Link}
+              href={route('group-teachers.index', id)}
+              color='warning'
+              fullSized>
+              {/* <Eye className='mr-2 h-5 w-5' /> */}
+              Ver Professores
             </Button>
           </footer>
         </Card>

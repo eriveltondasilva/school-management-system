@@ -12,18 +12,19 @@ import Title from '@/Components/Title'
 import useFormDate from '@/Hooks/useFormDate'
 import AuthLayout from '@/Layouts/AuthLayout'
 
-import GroupStudentFormData from './Partials/GroupStudentFormData'
+import GroupTeacherFormData from './Partials/GroupTeacherFormData'
+
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageGroupStudentCreate({ group = {}, student = {} }) {
+export default function PageGroupTeacherCreate({ group = {}, teacher = {} }) {
   const flash = usePage().props.flash || {}
   const searchId = route().params.search || ''
 
   const pageTitle = `${titles.create} - ${group.name}`
 
   const formDataOptions = {
-    routeName: 'group-students.create',
+    routeName: 'group-teachers.create',
     method: 'GET',
     id: group.id,
   }
@@ -53,7 +54,7 @@ export default function PageGroupStudentCreate({ group = {}, student = {} }) {
             type='text'
             className='mb-0'
             defaultValue={searchId}
-            placeholder='Pesquisar pela matrícula do aluno...'
+            placeholder='Pesquisar pelo id do professor...'
             autoFocus
           />
           <Button type='submit' color='blue' disabled={isLoading}>
@@ -63,18 +64,18 @@ export default function PageGroupStudentCreate({ group = {}, student = {} }) {
       </Searchbar>
 
       {/* Verificar se o aluno não foi encontrado */}
-      {!student && <GroupStudentNotFound />}
+      {!teacher && <GroupTeacherNotFound />}
 
       {/* Formulário do aluno */}
-      {student && <GroupStudentForm {...{ group, student }} />}
+      {teacher && <GroupTeacherForm {...{ group, teacher }} />}
     </>
   )
 }
 
 // ----------------------------------------------
-function GroupStudentForm({ student = {}, group = {} }) {
+function GroupTeacherForm({ group = {}, teacher = {} }) {
   const formDataOptions = {
-    routeName: 'group-students.store',
+    routeName: 'group-teachers.store',
     id: group.id,
   }
   const { handleSubmit, isLoading } = useFormDate(formDataOptions)
@@ -83,10 +84,10 @@ function GroupStudentForm({ student = {}, group = {} }) {
     <Form className='mt-6 sm:mx-0 md:mx-0' onSubmit={handleSubmit}>
       <header className='flex items-center'>
         <UserRoundSearch className='mr-2 h-8 w-8' />
-        <h3 className='text-xl font-semibold'>Aluno pesquisado:</h3>
+        <h3 className='text-xl font-semibold'>Professor pesquisado:</h3>
       </header>
 
-      <GroupStudentFormData data={student} />
+      <GroupTeacherFormData data={teacher} />
 
       <Form.Footer>
         <Button
@@ -96,7 +97,7 @@ function GroupStudentForm({ student = {}, group = {} }) {
           disabled={isLoading}
           fullSized>
           <Save className='mr-2 h-5 w-5' />
-          Adicionar aluno à turma
+          Adicionar professor à turma
         </Button>
       </Form.Footer>
     </Form>
@@ -104,13 +105,13 @@ function GroupStudentForm({ student = {}, group = {} }) {
 }
 
 // ----------------------------------------------
-function GroupStudentNotFound() {
+function GroupTeacherNotFound() {
   const searchId = route().params.search || ''
 
-  const notFoundText = 'Nenhum aluno encontrado...'
-  const notFoundStudent = `Aluno com id ${searchId} não foi encontrado...`
+  const notFoundText = 'Nenhum professor encontrado...'
+  const notFoundTeacher = `Professor com id ${searchId} não foi encontrado...`
 
-  const message = searchId ? notFoundStudent : notFoundText
+  const message = searchId ? notFoundTeacher : notFoundText
 
   return (
     <NotFound>
@@ -121,7 +122,7 @@ function GroupStudentNotFound() {
 }
 
 // ==============================================
-PageGroupStudentCreate.layout = (page) => (
+PageGroupTeacherCreate.layout = (page) => (
   <AuthLayout title={titles.create} breadcrumb={breadcrumbs.create}>
     {page}
   </AuthLayout>

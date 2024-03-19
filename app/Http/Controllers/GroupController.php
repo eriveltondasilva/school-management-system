@@ -14,7 +14,9 @@ class GroupController extends Controller
     /** xxx */
     public function index()
     {
-        $groups = Group::activeAcademicYear()->withCount('students')->get();
+        $groups = Group::activeAcademicYear()
+            ->withCount('students', 'teachers')
+            ->get();
 
         return inertia('Group/Index', compact('groups'));
     }
