@@ -10,15 +10,16 @@ import { breadcrumbs, titles } from './data'
 
 // ==============================================
 export default function GroupIndexPage({ groups = [] }) {
-  const hasGroups = groups.length > 0
   const year = usePage().props.auth.activeAcademicYear.year || ''
+
+  const groupPageTitle = `${titles.index} - ${year}`
+  const hasGroups = groups.length > 0
 
   return (
     <>
       {/* Título */}
       <Title>
-        <Title.Left title={titles.index + ' - ' + year} />
-
+        <Title.Left title={groupPageTitle} />
         <Title.Right>
           <Button
             as={Link}

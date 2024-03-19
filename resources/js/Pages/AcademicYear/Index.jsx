@@ -21,7 +21,6 @@ export default function AcademicYearIndexPage({ academicYears = [] }) {
       {/* título */}
       <Title>
         <Title.Left title={titles.index} />
-
         <Title.Right>
           <Button
             as={Link}

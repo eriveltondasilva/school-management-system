@@ -24,7 +24,6 @@ export default function TeacherShowPage({ teacher = {} }) {
       {/* header teacher */}
       <Form.Header>
         <Form.HeaderTitle title={titles.show} />
-
         <Button.Group>
           <Button
             title='Editar professor'
@@ -34,7 +33,6 @@ export default function TeacherShowPage({ teacher = {} }) {
             as={Link}>
             <PencilLine className='h-4 w-4' />
           </Button>
-
           <Button
             title='Cadastrar novo professor'
             href={route('teacher.create')}
@@ -43,7 +41,6 @@ export default function TeacherShowPage({ teacher = {} }) {
             as={Link}>
             <Plus className='mx-1 h-4 w-4' />
           </Button>
-
           <Button
             title='Voltar'
             color='red'

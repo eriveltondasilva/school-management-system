@@ -8,6 +8,7 @@ import Form from '@/Components/Form'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import StudentFormData from './Partials/StudentFormData'
+
 import { breadcrumbs, titles } from './data'
 
 // ====================================
@@ -22,7 +23,6 @@ export default function StudentShowPage({ student = {} }) {
       {/* header student */}
       <Form.Header>
         <Form.HeaderTitle title={titles.show} />
-
         <Button.Group>
           <Button
             title='Editar aluno'
@@ -32,7 +32,6 @@ export default function StudentShowPage({ student = {} }) {
             as={Link}>
             <PencilLine className='h-4 w-4' />
           </Button>
-
           <Button
             title='Cadastrar novo aluno'
             href={route('student.create')}
@@ -41,7 +40,6 @@ export default function StudentShowPage({ student = {} }) {
             as={Link}>
             <Plus className='mx-1 h-4 w-4' />
           </Button>
-
           <Button
             title='Voltar'
             color='red'

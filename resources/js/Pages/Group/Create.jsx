@@ -13,7 +13,7 @@ import GroupFormFooterButton from './Partials/GroupFormFooterButton'
 
 import { breadcrumbs, titles } from './data'
 
-// ==============================================
+// ===============================================
 export default function GroupCreatePage() {
   const flash = usePage().props.flash || {}
 
@@ -41,7 +41,6 @@ export default function GroupCreatePage() {
         {/* header teacher */}
         <Form.Header>
           <Form.HeaderTitle title={titles.create} />
-
           <Button
             title='Voltar'
             color='red'

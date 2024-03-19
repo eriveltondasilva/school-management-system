@@ -20,7 +20,6 @@ export default function StudentEditPage({ student = {} }) {
       {/* header student */}
       <Form.Header>
         <Form.HeaderTitle title={titles.edit} />
-
         <Button
           title='Voltar'
           color='red'

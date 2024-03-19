@@ -35,7 +35,6 @@ export default function StudentIndexPage({ students = [] }) {
       {/* Título */}
       <Title>
         <Title.Left title={titles.index} />
-
         <Title.Right>
           <Button
             as={Link}
@@ -61,12 +60,10 @@ export default function StudentIndexPage({ students = [] }) {
             onChange={handleChange}
             autoFocus
           />
-
           <Button.Group>
             <Button type='submit' color='blue' disabled={isLoading || !search}>
               <Search className='h-5 w-5' />
             </Button>
-
             <Button
               as={Link}
               href={route('student.index')}
@@ -94,6 +91,7 @@ export default function StudentIndexPage({ students = [] }) {
 function StudentTable({ students = [] }) {
   return (
     <Table>
+      {/* Table Header */}
       <Table.Header>
         <Table.HeaderCell className='w-0'>Id</Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
@@ -101,6 +99,7 @@ function StudentTable({ students = [] }) {
         <Table.HeaderCell></Table.HeaderCell>
       </Table.Header>
 
+      {/* Table Body */}
       <Table.Body>
         {students.map(({ id, name, gender }) => (
           <Table.Row key={id}>
@@ -118,7 +117,6 @@ function StudentTable({ students = [] }) {
                   size='xs'>
                   <Eye className='h-4 w-4' />
                 </Button>
-
                 <Button
                   as={Link}
                   href={route('student.edit', id)}

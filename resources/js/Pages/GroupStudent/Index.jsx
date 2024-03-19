@@ -69,6 +69,7 @@ function StudentTable({ group = {}, students = [] }) {
 
   return (
     <Table>
+      {/* Table Header */}
       <Table.Header>
         <Table.HeaderCell className='w-0'></Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
@@ -76,6 +77,7 @@ function StudentTable({ group = {}, students = [] }) {
         <Table.HeaderCell></Table.HeaderCell>
       </Table.Header>
 
+      {/* Table Body */}
       <Table.Body>
         {students.map(({ id, name, gender }, index) => (
           <Table.Row key={id}>

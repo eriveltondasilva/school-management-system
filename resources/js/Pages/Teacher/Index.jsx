@@ -31,10 +31,9 @@ export default function TeacherIndexPage({ teachers = [] }) {
 
   return (
     <>
-      {/* título */}
+      {/* Título */}
       <Title>
         <Title.Left title={titles.index} />
-
         <Title.Right>
           <Button
             as={Link}
@@ -60,12 +59,10 @@ export default function TeacherIndexPage({ teachers = [] }) {
             onChange={handleChange}
             autoFocus
           />
-
           <Button.Group>
             <Button type='submit' color='blue' disabled={isLoading || !search}>
               <Search className='h-5 w-5' />
             </Button>
-
             <Button
               as={Link}
               href={route('teacher.index')}
@@ -92,6 +89,7 @@ export default function TeacherIndexPage({ teachers = [] }) {
 function TeacherTable({ teachers = [] }) {
   return (
     <Table>
+      {/* Table Header */}
       <Table.Header>
         <Table.HeaderCell className='w-0'>Id</Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
@@ -99,6 +97,7 @@ function TeacherTable({ teachers = [] }) {
         <Table.HeaderCell></Table.HeaderCell>
       </Table.Header>
 
+      {/* Table Body */}
       <Table.Body>
         {teachers.map(({ id, name, email }) => (
           <Table.Row key={id}>
@@ -116,7 +115,6 @@ function TeacherTable({ teachers = [] }) {
                   size='xs'>
                   <Eye className='h-4 w-4' />
                 </Button>
-
                 <Button
                   as={Link}
                   href={route('teacher.edit', id)}

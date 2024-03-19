@@ -105,6 +105,7 @@ function GroupStudentForm({ student = {}, group = {} }) {
 // ----------------------------------------------
 function GroupStudentNotFound() {
   const searchId = route().params.search || ''
+
   const notFoundText = 'Nenhum aluno encontrado...'
   const notFoundStudent = `Aluno com id ${searchId} não foi encontrado...`
 

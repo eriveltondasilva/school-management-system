@@ -31,7 +31,6 @@ export default function GroupEditPage({ group = {} }) {
       {/* Form header */}
       <Form.Header>
         <Form.HeaderTitle title={titles.edit} />
-
         <Button.Group>
           <Button
             href={route('group.create')}

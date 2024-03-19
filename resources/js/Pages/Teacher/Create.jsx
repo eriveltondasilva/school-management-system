@@ -39,7 +39,6 @@ export default function TeacherCreatePage() {
         {/* header teacher */}
         <Form.Header>
           <Form.HeaderTitle title={titles.create} />
-
           <Button
             title='Voltar'
             color='red'

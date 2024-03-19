@@ -32,7 +32,6 @@ export default function AcademicYearEditPage({ academicYear = {} }) {
       {/* Form header */}
       <Form.Header>
         <Form.HeaderTitle title={titles.edit} />
-
         <Button.Group>
           <Button
             href={route('academic-year.create')}
@@ -41,7 +40,6 @@ export default function AcademicYearEditPage({ academicYear = {} }) {
             as={Link}>
             <Plus className='h-4 w-4' />
           </Button>
-
           <Button
             title='Voltar'
             color='red'
