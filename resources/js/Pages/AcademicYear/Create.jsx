@@ -14,7 +14,7 @@ import AcademicYearFormFooterButton from './Partials/AcademicYearFormFooterButto
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function AcademicYearCreatePage() {
+export default function PageAcademicYearCreate() {
   const flash = usePage().props.flash || {}
 
   const formDataOptions = {
@@ -62,7 +62,7 @@ export default function AcademicYearCreatePage() {
 }
 
 // ==============================================
-AcademicYearCreatePage.layout = (page) => (
+PageAcademicYearCreate.layout = (page) => (
   <AuthLayout title={titles.create} breadcrumb={breadcrumbs.create}>
     {page}
   </AuthLayout>

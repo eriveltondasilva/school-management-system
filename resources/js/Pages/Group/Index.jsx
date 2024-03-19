@@ -9,7 +9,7 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function GroupIndexPage({ groups = [] }) {
+export default function PageGroupIndex({ groups = [] }) {
   const year = usePage().props.auth.activeAcademicYear.year || ''
 
   const groupPageTitle = `${titles.index} - ${year}`
@@ -96,7 +96,7 @@ function GroupNotFound() {
 }
 
 // ==============================================
-GroupIndexPage.layout = (page) => (
+PageGroupIndex.layout = (page) => (
   <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>
     {page}
   </AuthLayout>

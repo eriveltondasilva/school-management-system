@@ -13,7 +13,7 @@ import formatDate from '@/Utils/formatDate'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function AcademicYearIndexPage({ academicYears = [] }) {
+export default function PageAcademicYearIndex({ academicYears = [] }) {
   const hasAcademicYears = academicYears.length > 0
 
   return (
@@ -95,7 +95,7 @@ function AcademicYearNotFound() {
 }
 
 // ==============================================
-AcademicYearIndexPage.layout = (page) => (
+PageAcademicYearIndex.layout = (page) => (
   <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>
     {page}
   </AuthLayout>

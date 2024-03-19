@@ -15,7 +15,7 @@ import TeacherFormFooterButtons from './Partials/TeacherFormFooterButtons'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function TeacherCreatePage() {
+export default function PageTeacherCreate() {
   const flash = usePage().props.flash || {}
 
   const formDataOptions = { routeName: 'teacher.store' }
@@ -64,7 +64,7 @@ export default function TeacherCreatePage() {
 }
 
 // ------------------------------------
-TeacherCreatePage.layout = (page) => (
+PageTeacherCreate.layout = (page) => (
   <AuthLayout title={titles.create} breadcrumb={breadcrumbs.create}>
     {page}
   </AuthLayout>

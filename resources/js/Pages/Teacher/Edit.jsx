@@ -13,7 +13,7 @@ import TeacherFormFooterButtons from './Partials/TeacherFormFooterButtons'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function TeacherEditPage({ teacher = {} }) {
+export default function PageTeacherEdit({ teacher = {} }) {
   const formDataOptions = { routeName: 'teacher.update', id: teacher.id }
   const { handleSubmit, errors, isLoading } = useFormDate(formDataOptions)
 
@@ -48,7 +48,7 @@ export default function TeacherEditPage({ teacher = {} }) {
 }
 
 // ==============================================
-TeacherEditPage.layout = (page) => (
+PageTeacherEdit.layout = (page) => (
   <AuthLayout title={titles.edit} breadcrumb={breadcrumbs.edit}>
     {page}
   </AuthLayout>

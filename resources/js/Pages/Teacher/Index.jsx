@@ -16,7 +16,7 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './data'
 
 // ===============================================
-export default function TeacherIndexPage({ teachers = [] }) {
+export default function PageTeacherIndex({ teachers = [] }) {
   const paramsSearch = route().params.search || ''
   const [search, setSearch] = useState(paramsSearch)
 
@@ -152,7 +152,7 @@ function TeacherPagination({ teachers = {} }) {
 }
 
 // ===============================================
-TeacherIndexPage.layout = (page) => (
+PageTeacherIndex.layout = (page) => (
   <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>
     {page}
   </AuthLayout>

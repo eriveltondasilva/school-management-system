@@ -17,7 +17,7 @@ import getGenderName from '@/Utils/getGenderName'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function StudentIndexPage({ students = [] }) {
+export default function PageStudentIndex({ students = [] }) {
   const paramsSearch = route().params.search || ''
   const [search, setSearch] = useState(paramsSearch)
 
@@ -154,7 +154,7 @@ function StudentPagination({ students = {} }) {
 }
 
 // ==============================================
-StudentIndexPage.layout = (page) => (
+PageStudentIndex.layout = (page) => (
   <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>
     {page}
   </AuthLayout>

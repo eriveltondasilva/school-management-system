@@ -14,7 +14,7 @@ import StudentFormFooterButtons from './Partials/StudentFormFooterButtons'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function StudentCreatePage() {
+export default function PageStudentCreate() {
   const flash = usePage().props.flash || {}
 
   const formDataOptions = { routeName: 'student.store' }
@@ -58,7 +58,7 @@ export default function StudentCreatePage() {
 }
 
 // ----------------------------------------------
-StudentCreatePage.layout = (page) => (
+PageStudentCreate.layout = (page) => (
   <AuthLayout title={titles.create} breadcrumb={breadcrumbs.create}>
     {page}
   </AuthLayout>

@@ -12,7 +12,7 @@ import StudentFormData from './Partials/StudentFormData'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function StudentShowPage({ student = {} }) {
+export default function PageStudentShow({ student = {} }) {
   const flash = usePage().props.flash || {}
 
   return (
@@ -57,7 +57,7 @@ export default function StudentShowPage({ student = {} }) {
 }
 
 // ----------------------------------------------
-StudentShowPage.layout = (page) => (
+PageStudentShow.layout = (page) => (
   <AuthLayout title={titles.show} breadcrumb={breadcrumbs.show}>
     {page}
   </AuthLayout>

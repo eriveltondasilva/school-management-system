@@ -14,7 +14,7 @@ import GroupFormFooterButton from './Partials/GroupFormFooterButton'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function GroupEditPage({ group = {} }) {
+export default function PageGroupEdit({ group = {} }) {
   const flash = usePage().props.flash || {}
 
   const formDataOptions = {
@@ -62,7 +62,7 @@ export default function GroupEditPage({ group = {} }) {
 }
 
 // ==============================================
-GroupEditPage.layout = (page) => (
+PageGroupEdit.layout = (page) => (
   <AuthLayout title={titles.edit} breadcrumb={breadcrumbs.edit}>
     {page}
   </AuthLayout>

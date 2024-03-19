@@ -15,7 +15,7 @@ import getGenderName from '@/Utils/getGenderName'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function GroupStudentIndexPage({ group = {}, students = [] }) {
+export default function PageGroupStudentIndex({ group = {}, students = [] }) {
   const hasStudents = students?.length > 0
   const flash = usePage().props.flash || {}
 
@@ -126,7 +126,7 @@ function GroupStudentNotFound() {
 }
 
 // ==============================================
-GroupStudentIndexPage.layout = (page) => (
+PageGroupStudentIndex.layout = (page) => (
   <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>
     {page}
   </AuthLayout>

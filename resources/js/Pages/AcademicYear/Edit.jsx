@@ -15,7 +15,7 @@ import AcademicYearModel from './Partials/AcademicYearModel'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function AcademicYearEditPage({ academicYear = {} }) {
+export default function PageAcademicYearEdit({ academicYear = {} }) {
   const flash = usePage().props.flash || {}
 
   const formDataOptions = {
@@ -77,7 +77,7 @@ export default function AcademicYearEditPage({ academicYear = {} }) {
 }
 
 // ==============================================
-AcademicYearEditPage.layout = (page) => (
+PageAcademicYearEdit.layout = (page) => (
   <AuthLayout title={titles.edit} breadcrumb={breadcrumbs.edit}>
     {page}
   </AuthLayout>

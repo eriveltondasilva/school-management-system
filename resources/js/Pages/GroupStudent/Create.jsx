@@ -16,7 +16,7 @@ import GroupStudentFormData from './Partials/GroupStudentFormData'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function GroupStudentCreatePage({ group = {}, student = {} }) {
+export default function PageGroupStudentCreate({ group = {}, student = {} }) {
   const flash = usePage().props.flash || {}
   const searchId = route().params.search || ''
   const title = `${titles.create} - ${group.name}`
@@ -120,7 +120,7 @@ function GroupStudentNotFound() {
 }
 
 // ==============================================
-GroupStudentCreatePage.layout = (page) => (
+PageGroupStudentCreate.layout = (page) => (
   <AuthLayout title={titles.create} breadcrumb={breadcrumbs.create}>
     {page}
   </AuthLayout>

@@ -11,7 +11,7 @@ import StudentFormFooterButtons from './Partials/StudentFormFooterButtons'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function StudentEditPage({ student = {} }) {
+export default function PageStudentEdit({ student = {} }) {
   const formDataOptions = { routeName: 'student.update', id: student.id }
   const { handleSubmit, errors, isLoading } = useFormDate(formDataOptions)
 
@@ -41,7 +41,7 @@ export default function StudentEditPage({ student = {} }) {
 }
 
 // ==============================================
-StudentEditPage.layout = (page) => (
+PageStudentEdit.layout = (page) => (
   <AuthLayout title={titles.edit} breadcrumb={breadcrumbs.edit}>
     {page}
   </AuthLayout>
