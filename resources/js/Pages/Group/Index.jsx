@@ -75,7 +75,7 @@ function GroupCard({ groups = [] }) {
           <footer className='space-y-4'>
             <Button
               as={Link}
-              href={route('group-students.index', id)}
+              href={route('group.list-students', id)}
               color='blue'
               fullSized>
               <Eye className='mr-2 h-5 w-5' />
@@ -83,7 +83,7 @@ function GroupCard({ groups = [] }) {
             </Button>
             <Button
               as={Link}
-              href={route('group-teachers.index', id)}
+              href={route('group.list-teachers', id)}
               color='warning'
               fullSized>
               <Eye className='mr-2 h-5 w-5' />
@@ -108,7 +108,9 @@ function GroupNotFound() {
 
 // ==============================================
 PageGroupIndex.layout = (page) => (
-  <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>
-    {page}
-  </AuthLayout>
+  <AuthLayout
+    title={titles.index}
+    breadcrumb={breadcrumbs.index}
+    children={page}
+  />
 )

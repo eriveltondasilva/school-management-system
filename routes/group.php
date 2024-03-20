@@ -8,41 +8,36 @@ use App\Http\Controllers\{
 };
 
 // ===============================================
-//# GROUP ROUTES
 Route::middleware('auth')
-->controller(GroupController::class)
-->prefix('turmas')->name('group.')
-->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/cadastrar', 'create')->name('create');
-    Route::post('/', 'store')->name('store');
-    // ### ACTIONS ###
-    Route::get('/{group}/editar', 'edit')->name('edit');
-    Route::put('/{group}', 'update')->name('update');
-});
+->prefix('turmas')->name('group.')->group(function () {
+    //# GROUP ROUTES
+    Route::controller(GroupController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/cadastrar', 'create')->name('create');
+        Route::get('/{group}/editar', 'edit')->name('edit');
+        // Route::get('/{group}', 'show')->name('show');
+        // ### ACTIONS ###
+        Route::post('/', 'store')->name('store');
+        Route::put('/{group}', 'update')->name('update');
+    });
 
+    //# GROUP/STUDENTS ROUTES
+    Route::controller(GroupStudentController::class)
+    ->prefix('{group}/alunos')->group(function () {
+        Route::get('/', 'listStudents')->name('list-students');
+        Route::get('/adicionar', 'addStudent')->name('add-student');
+        // ### ACTIONS ###
+        Route::post('/{student}', 'storeStudent')->name('store-student');
+        Route::delete('/{student}', 'destroyStudent')->name('destroy-student');
+    });
 
-//# GROUP/STUDENTS ROUTES
-Route::middleware('auth')
-->controller(GroupStudentController::class)
-->prefix('turmas/{group}/alunos')->name('group-students.')
-->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/cadastrar', 'create')->name('create');
-    // ### ACTIONS ###
-    Route::post('/{student}', 'addStudent')->name('add-student');
-    Route::delete('/{student}', 'deleteStudent')->name('delete-student');
-});
-
-
-//# GROUP/TEACHERS ROUTES
-Route::middleware('auth')
-->controller(GroupTeacherController::class)
-->prefix('turmas/{group}/professores')->name('group-teachers.')
-->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/cadastrar', 'create')->name('create');
-    // ### ACTIONS ###
-    Route::post('/{teacher}', 'addTeacher')->name('add-teacher');
-    Route::delete('/{teacher}', 'deleteTeacher')->name('delete-teacher');
+    //# GROUP/TEACHERS ROUTES
+    Route::controller(GroupTeacherController::class)
+    ->prefix('{group}/professores')->group(function () {
+        Route::get('/', 'listTeachers')->name('list-teachers');
+        Route::get('/adicionar', 'addTeacher')->name('add-teacher');
+        // ### ACTIONS ###
+        Route::post('/{teacher}', 'storeTeacher')->name('store-teacher');
+        Route::delete('/{teacher}', 'destroyTeacher')->name('destroy-teacher');
+    });
 });

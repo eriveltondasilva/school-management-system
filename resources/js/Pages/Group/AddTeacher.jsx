@@ -1,6 +1,7 @@
 import { Link, router, usePage } from '@inertiajs/react'
 import { Button, Tooltip } from 'flowbite-react'
 import { Eye, Plus, XCircle } from 'lucide-react'
+import { useState } from 'react'
 import { twJoin } from 'tailwind-merge'
 
 import Alert from '@/Components/Alert'
@@ -13,7 +14,7 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageGroupTeacherCreate({ group = {}, teachers = [] }) {
+export default function PageGroupAddTeacher({ group = {}, teachers = [] }) {
   const flash = usePage().props.flash || {}
 
   const pageTitle = `${titles.create} - ${group.name}`
@@ -34,24 +35,34 @@ export default function PageGroupTeacherCreate({ group = {}, teachers = [] }) {
       </Title>
 
       {/* Verificar se o professor não foi encontrado */}
-      {!hasTeachers && <GroupTeacherNotFound />}
+      {!hasTeachers && <TeacherNotFound />}
 
       {/* Formulário do professor */}
-      {hasTeachers && <GroupTeacherTable {...{ group, teachers }} />}
+      {hasTeachers && <TeacherTable {...{ group, teachers }} />}
     </>
   )
 }
 
 // ----------------------------------------------
-function GroupTeacherTable({ group = {}, teachers = [] }) {
-  const handleAddTeacher = (id, name, cpf) => {
+function TeacherTable({ group = {}, teachers = [] }) {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleStoreTeacher = async (id, name, cpf) => {
     const message = `Tem certeza que deseja adicionar professor(a)\n${name}, CPF ${cpf},\nà turma do ${group.name}?`
 
     if (!confirm(message)) return
 
-    router.post(
-      route('group-teachers.add-teacher', { group: group.id, teacher: id })
-    )
+    try {
+      setIsLoading(true)
+
+      await router.post(
+        route('group.store-teacher', { group: group.id, teacher: id })
+      )
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -91,7 +102,8 @@ function GroupTeacherTable({ group = {}, teachers = [] }) {
                 <Button
                   as='button'
                   color='blue'
-                  onClick={() => handleAddTeacher(id, name, cpf)}
+                  onClick={() => handleStoreTeacher(id, name, cpf)}
+                  disabled={isLoading}
                   size='xs'>
                   <Tooltip content='Adicionar Professor'>
                     <Plus className='mx-1 h-4 w-4' />
@@ -107,7 +119,7 @@ function GroupTeacherTable({ group = {}, teachers = [] }) {
 }
 
 // ----------------------------------------------
-function GroupTeacherNotFound() {
+function TeacherNotFound() {
   return (
     <NotFound>
       <XCircle />
@@ -117,8 +129,10 @@ function GroupTeacherNotFound() {
 }
 
 // ==============================================
-PageGroupTeacherCreate.layout = (page) => (
-  <AuthLayout title={titles.create} breadcrumb={breadcrumbs.create}>
-    {page}
-  </AuthLayout>
+PageGroupAddTeacher.layout = (page) => (
+  <AuthLayout
+    title={titles.addTeacher}
+    breadcrumb={breadcrumbs.addTeacher}
+    children={page}
+  />
 )

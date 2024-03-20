@@ -1,6 +1,7 @@
 import { Link, router, usePage } from '@inertiajs/react'
 import { Button, Tooltip } from 'flowbite-react'
 import { Eye, Plus, Search, XCircle } from 'lucide-react'
+import { useState } from 'react'
 import { twJoin } from 'tailwind-merge'
 
 import Alert from '@/Components/Alert'
@@ -10,27 +11,34 @@ import Searchbar from '@/Components/Searchbar'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
-import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
+
 import formatId from '@/Utils/formatId'
 import getGenderName from '@/Utils/getGenderName'
 
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageGroupStudentCreate({ group = {}, students = [] }) {
+export default function PageGroupAddStudent({ group = {}, students = [] }) {
+  const [isLoading, setIsLoading] = useState(false)
   const flash = usePage().props.flash || {}
   const searchId = route().params.search || ''
 
   const pageTitle = `${titles.create} - ${group.name}`
   const hasStudents = students.length > 0
 
-  const formDataOptions = {
-    routeName: 'group-students.create',
-    method: 'GET',
-    id: group.id,
+  const handleSearchStudent = async (e) => {
+    e.preventDefault()
+    setIsLoading(true)
+
+    try {
+      await router.get(route('group.add-student', { group: group.id }))
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
   }
-  const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
 
   return (
     <>
@@ -47,7 +55,7 @@ export default function PageGroupStudentCreate({ group = {}, students = [] }) {
       </Title>
 
       {/* Barra de pesquisa */}
-      <Searchbar onSubmit={handleSubmit}>
+      <Searchbar onSubmit={handleSearchStudent}>
         <Searchbar.Left>
           <Input.Text
             id='search'
@@ -64,24 +72,34 @@ export default function PageGroupStudentCreate({ group = {}, students = [] }) {
       </Searchbar>
 
       {/* Verificar se o aluno não foi encontrado */}
-      {!hasStudents && <GroupStudentNotFound />}
+      {!hasStudents && <StudentNotFound />}
 
       {/* Formulário do aluno */}
-      {hasStudents && <GroupStudentTable {...{ group, students }} />}
+      {hasStudents && <StudentTable {...{ group, students }} />}
     </>
   )
 }
 
 // ----------------------------------------------
-function GroupStudentTable({ group = {}, students = [] }) {
-  const handleAddStudent = (id, name) => {
+function StudentTable({ group = {}, students = [] }) {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleStoreStudent = async (id, name) => {
     const message = `Tem certeza que deseja adicionar aluno(a)\n${name}, matrícula ${formatId(id)},\nà turma do ${group.name}?`
 
     if (!confirm(message)) return
 
-    router.post(
-      route('group-students.add-student', { group: group.id, student: id })
-    )
+    try {
+      setIsLoading(true)
+
+      await router.post(
+        route('group.store-student', { group: group.id, student: id })
+      )
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -123,7 +141,8 @@ function GroupStudentTable({ group = {}, students = [] }) {
                 <Button
                   as='button'
                   color='blue'
-                  onClick={() => handleAddStudent(id, name, gender)}
+                  onClick={() => handleStoreStudent(id, name, gender)}
+                  disabled={isLoading}
                   size='xs'>
                   <Tooltip content='Adicionar Aluno'>
                     <Plus className='mx-1 h-4 w-4' />
@@ -139,7 +158,7 @@ function GroupStudentTable({ group = {}, students = [] }) {
 }
 
 // ----------------------------------------------
-function GroupStudentNotFound() {
+function StudentNotFound() {
   return (
     <NotFound>
       <XCircle />
@@ -149,8 +168,10 @@ function GroupStudentNotFound() {
 }
 
 // ==============================================
-PageGroupStudentCreate.layout = (page) => (
-  <AuthLayout title={titles.create} breadcrumb={breadcrumbs.create}>
-    {page}
-  </AuthLayout>
+PageGroupAddStudent.layout = (page) => (
+  <AuthLayout
+    title={titles.addStudent}
+    breadcrumb={breadcrumbs.addStudent}
+    children={page}
+  />
 )

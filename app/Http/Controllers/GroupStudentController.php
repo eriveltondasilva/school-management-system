@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class GroupStudentController extends Controller
 {
-    public function index(Group $group)
+    public function listStudents(Group $group)
     {
         $students = $group
             ->students()
@@ -15,10 +15,10 @@ class GroupStudentController extends Controller
             ->orderBy('students.name')
             ->get();
 
-        return inertia('GroupStudent/Index', compact('group', 'students'));
+        return inertia('Group/ListStudents', compact('group', 'students'));
     }
 
-    public function create(Request $request, Group $group)
+    public function addStudent(Request $request, Group $group)
     {
 
         $request->validate(['search' => 'nullable|string']);
@@ -42,12 +42,12 @@ class GroupStudentController extends Controller
 
         $students = $studentsQuery->get();
 
-        return inertia('GroupStudent/Create', compact('group', 'students'));
+        return inertia('Group/AddStudent', compact('group', 'students'));
     }
 
     // ### Actions ###
 
-    public function addStudent(Group $group, Student $student)
+    public function storeStudent(Group $group, Student $student)
     {
         $group->students()->attach($student);
 
@@ -58,7 +58,7 @@ class GroupStudentController extends Controller
         return back()->with('message', $message);
     }
 
-    public function deleteStudent(Group $group, Student $student)
+    public function destroyStudent(Group $group, Student $student)
     {
         $group->students()->detach($student);
 

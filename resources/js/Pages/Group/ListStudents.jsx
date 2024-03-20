@@ -1,6 +1,7 @@
 import { Link, router, usePage } from '@inertiajs/react'
 import { Button, Tooltip } from 'flowbite-react'
 import { Eye, Plus, Trash2, XCircle } from 'lucide-react'
+import { useState } from 'react'
 import { twJoin } from 'tailwind-merge'
 
 import Alert from '@/Components/Alert'
@@ -9,13 +10,14 @@ import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
+
 import formatId from '@/Utils/formatId'
 import getGenderName from '@/Utils/getGenderName'
 
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageGroupStudentIndex({ group = {}, students = [] }) {
+export default function PageGroupListStudents({ group = {}, students = [] }) {
   const flash = usePage().props.flash || {}
 
   const pageTitle = `${titles.index} - ${group.name}`
@@ -36,7 +38,7 @@ export default function PageGroupStudentIndex({ group = {}, students = [] }) {
         <Title.Right>
           <Button
             as={Link}
-            href={route('group-students.create', group.id)}
+            href={route('group.add-student', group.id)}
             color='blue'
             className='uppercase'>
             <Plus className='mr-2 h-5 w-5' />
@@ -49,7 +51,7 @@ export default function PageGroupStudentIndex({ group = {}, students = [] }) {
       <br />
 
       {/* Exibe mensagem se não houver alunos */}
-      {!hasStudents && <GroupStudentNotFound />}
+      {!hasStudents && <StudentNotFound />}
 
       {/* Tabela de alunos */}
       {hasStudents && <StudentTable {...{ group, students }} />}
@@ -59,15 +61,25 @@ export default function PageGroupStudentIndex({ group = {}, students = [] }) {
 
 // ----------------------------------------------
 function StudentTable({ group = {}, students = [] }) {
+  const [isLoading, setIsLoading] = useState(false)
+
   const handleDeleteStudent = (id, name, gender) => {
     const genderText = gender === 'M' ? 'o aluno' : 'a aluna'
     const message = `Tem certeza que deseja remover ${genderText}\n${name}, matrícula ${formatId(id)}, da turma do ${group.name}?`
 
     if (!confirm(message)) return
 
-    router.delete(
-      route('group-students.delete-student', { group: group.id, student: id })
-    )
+    try {
+      setIsLoading(true)
+
+      router.delete(
+        route('group.destroy-student', { group: group.id, student: id })
+      )
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -110,6 +122,7 @@ function StudentTable({ group = {}, students = [] }) {
                   as='button'
                   color='failure'
                   onClick={() => handleDeleteStudent(id, name, gender)}
+                  disabled={isLoading}
                   size='xs'>
                   <Tooltip content='Remover Aluno(a)'>
                     <Trash2 className='mx-1 h-4 w-4' />
@@ -125,7 +138,7 @@ function StudentTable({ group = {}, students = [] }) {
 }
 
 // ----------------------------------------------
-function GroupStudentNotFound() {
+function StudentNotFound() {
   return (
     <NotFound>
       <XCircle />
@@ -135,8 +148,10 @@ function GroupStudentNotFound() {
 }
 
 // ==============================================
-PageGroupStudentIndex.layout = (page) => (
-  <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>
-    {page}
-  </AuthLayout>
+PageGroupListStudents.layout = (page) => (
+  <AuthLayout
+    title={titles.listStudents}
+    breadcrumb={breadcrumbs.listStudents}
+    children={page}
+  />
 )

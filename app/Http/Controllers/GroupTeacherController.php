@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\{AcademicYear, Group, Teacher};
+
 // use Illuminate\Http\Request;
 
 class GroupTeacherController extends Controller
 {
-    public function index(Group $group)
+    public function listTeachers(Group $group)
     {
         $teachers = $group
             ->teachers()
@@ -15,10 +16,10 @@ class GroupTeacherController extends Controller
             ->orderBy('teachers.name')
             ->get();
 
-        return inertia('GroupTeacher/Index', compact('group', 'teachers'));
+        return inertia('Group/ListTeachers', compact('group', 'teachers'));
     }
 
-    public function create(Group $group)
+    public function addTeacher(Group $group)
     {
         $activeYearId = AcademicYear::isActive()->value('id');
 
@@ -29,12 +30,12 @@ class GroupTeacherController extends Controller
             ->orderBy('teachers.name')
             ->get();
 
-        return inertia('GroupTeacher/Create', compact('group', 'teachers'));
+        return inertia('Group/AddTeacher', compact('group', 'teachers'));
     }
 
     // ### Actions ###
 
-    public function addTeacher(Group $group, Teacher $teacher)
+    public function storeTeacher(Group $group, Teacher $teacher)
     {
         $group->teachers()->attach($teacher);
 
@@ -45,7 +46,7 @@ class GroupTeacherController extends Controller
         return back()->with('message', $message);
     }
 
-    public function deleteTeacher(Group $group, Teacher $teacher)
+    public function destroyTeacher(Group $group, Teacher $teacher)
     {
         $group->teachers()->detach($teacher);
 

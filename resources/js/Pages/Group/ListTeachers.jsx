@@ -1,6 +1,7 @@
 import { Link, router, usePage } from '@inertiajs/react'
 import { Button, Tooltip } from 'flowbite-react'
 import { Eye, Plus, Trash2, XCircle } from 'lucide-react'
+import { useState } from 'react'
 import { twJoin } from 'tailwind-merge'
 
 import Alert from '@/Components/Alert'
@@ -13,7 +14,7 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageGroupTeacherIndex({ group = {}, teachers = [] }) {
+export default function PageGroupListTeachers({ group = {}, teachers = [] }) {
   const flash = usePage().props.flash || {}
 
   const pageTitle = `${titles.index} - ${group.name}`
@@ -34,7 +35,7 @@ export default function PageGroupTeacherIndex({ group = {}, teachers = [] }) {
         <Title.Right>
           <Button
             as={Link}
-            href={route('group-teachers.create', group.id)}
+            href={route('group.add-teacher', group.id)}
             color='blue'
             className='uppercase'>
             <Plus className='mr-2 h-5 w-5' />
@@ -47,7 +48,7 @@ export default function PageGroupTeacherIndex({ group = {}, teachers = [] }) {
       <br />
 
       {/* Exibe mensagem se não houver professores */}
-      {!hasTeachers && <GroupTeacherNotFound />}
+      {!hasTeachers && <TeacherNotFound />}
 
       {/* Tabela de professores */}
       {hasTeachers && <TeacherTable {...{ group, teachers }} />}
@@ -57,14 +58,24 @@ export default function PageGroupTeacherIndex({ group = {}, teachers = [] }) {
 
 // ----------------------------------------------
 function TeacherTable({ group = {}, teachers = [] }) {
+  const [isLoading, setIsLoading] = useState(false)
+
   const handleDeleteTeacher = (id, name, cpf) => {
     const message = `Tem certeza que deseja remover professor(a)\n${name}, CPF ${cpf},\nda turma do ${group.name}?`
 
     if (!confirm(message)) return
 
-    router.delete(
-      route('group-teachers.delete-teacher', { group: group.id, teacher: id })
-    )
+    try {
+      setIsLoading(true)
+
+      router.delete(
+        route('group.destroy-teacher', { group: group.id, teacher: id })
+      )
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -105,6 +116,7 @@ function TeacherTable({ group = {}, teachers = [] }) {
                   as='button'
                   color='failure'
                   onClick={() => handleDeleteTeacher(id, name, cpf)}
+                  disabled={isLoading}
                   size='xs'>
                   <Tooltip content='Remover Professor(a)'>
                     <Trash2 className='mx-1 h-4 w-4' />
@@ -120,7 +132,7 @@ function TeacherTable({ group = {}, teachers = [] }) {
 }
 
 // ----------------------------------------------
-function GroupTeacherNotFound() {
+function TeacherNotFound() {
   return (
     <NotFound>
       <XCircle />
@@ -130,8 +142,10 @@ function GroupTeacherNotFound() {
 }
 
 // ==============================================
-PageGroupTeacherIndex.layout = (page) => (
-  <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>
-    {page}
-  </AuthLayout>
+PageGroupListTeachers.layout = (page) => (
+  <AuthLayout
+    title={titles.listTeachers}
+    breadcrumb={breadcrumbs.listTeachers}
+    children={page}
+  />
 )

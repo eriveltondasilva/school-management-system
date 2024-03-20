@@ -4,7 +4,7 @@ import {
   Calendar,
   CalendarDays,
   Home,
-  SquareLibrary,
+  Library,
   UsersRound,
 } from 'lucide-react'
 
@@ -20,7 +20,7 @@ export const sidebarItems = [
   ],
   [
     { title: 'Turmas', icon: UsersRound, routeName: 'group.index' },
-    { title: 'Disciplinas', icon: SquareLibrary, routeName: 'test' },
+    { title: 'Disciplinas', icon: Library, routeName: 'test' },
     { title: 'Ano Letivo', icon: Calendar, routeName: 'academic-year.index' },
   ],
 ]

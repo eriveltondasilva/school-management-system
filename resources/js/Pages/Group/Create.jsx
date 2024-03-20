@@ -62,7 +62,9 @@ export default function PageGroupCreate() {
 
 // ==============================================
 PageGroupCreate.layout = (page) => (
-  <AuthLayout title={titles.create} breadcrumb={breadcrumbs.create}>
-    {page}
-  </AuthLayout>
+  <AuthLayout
+    title={titles.create}
+    breadcrumb={breadcrumbs.create}
+    children={page}
+  />
 )
