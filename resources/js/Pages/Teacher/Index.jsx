@@ -10,7 +10,7 @@ import Searchbar from '@/Components/Searchbar'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
-import useFormDate from '@/Hooks/useFormDate'
+import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
@@ -20,14 +20,14 @@ export default function PageTeacherIndex({ teachers = [] }) {
   const paramsSearch = route().params.search || ''
   const [search, setSearch] = useState(paramsSearch)
 
-  const hasTeachers = teachers.data?.length > 0
+  const hasTeachers = teachers.data.length > 0
 
   const handleChange = (e) => {
     setSearch(e.target.value)
   }
 
   const formDataOptions = { routeName: 'teacher.index' }
-  const { handleSubmit, isLoading } = useFormDate(formDataOptions)
+  const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
 
   return (
     <>

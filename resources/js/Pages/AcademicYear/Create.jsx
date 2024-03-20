@@ -5,7 +5,7 @@ import { Undo2 } from 'lucide-react'
 import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
 
-import useFormDate from '@/Hooks/useFormDate'
+import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import AcademicYearFormData from './Partials/AcademicYearFormData'
@@ -17,10 +17,8 @@ import { breadcrumbs, titles } from './data'
 export default function PageAcademicYearCreate() {
   const flash = usePage().props.flash || {}
 
-  const formDataOptions = {
-    routeName: 'academic-year.store',
-  }
-  const { handleSubmit, errors, isLoading } = useFormDate(formDataOptions)
+  const formDataOptions = { routeName: 'academic-year.store' }
+  const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
 
   return (
     <section>

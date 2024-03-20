@@ -9,7 +9,7 @@ import NotFound from '@/Components/NotFound'
 import Searchbar from '@/Components/Searchbar'
 import Title from '@/Components/Title'
 
-import useFormDate from '@/Hooks/useFormDate'
+import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import GroupTeacherFormData from './Partials/GroupTeacherFormData'
@@ -28,7 +28,7 @@ export default function PageGroupTeacherCreate({ group = {}, teacher = {} }) {
     method: 'GET',
     id: group.id,
   }
-  const { handleSubmit, isLoading } = useFormDate(formDataOptions)
+  const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
 
   return (
     <>
@@ -63,22 +63,19 @@ export default function PageGroupTeacherCreate({ group = {}, teacher = {} }) {
         </Searchbar.Left>
       </Searchbar>
 
-      {/* Verificar se o aluno não foi encontrado */}
+      {/* Verificar se o professor não foi encontrado */}
       {!teacher && <GroupTeacherNotFound />}
 
-      {/* Formulário do aluno */}
-      {teacher && <GroupTeacherForm {...{ group, teacher }} />}
+      {/* Formulário do professor */}
+      {teacher && <GroupTeacherTable {...{ group, teacher }} />}
     </>
   )
 }
 
 // ----------------------------------------------
-function GroupTeacherForm({ group = {}, teacher = {} }) {
-  const formDataOptions = {
-    routeName: 'group-teachers.store',
-    id: group.id,
-  }
-  const { handleSubmit, isLoading } = useFormDate(formDataOptions)
+function GroupTeacherTable({ group = {}, teacher = {} }) {
+  const formDataOptions = { routeName: 'group-teachers.store', id: group.id }
+  const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
 
   return (
     <Form className='mt-6 sm:mx-0 md:mx-0' onSubmit={handleSubmit}>

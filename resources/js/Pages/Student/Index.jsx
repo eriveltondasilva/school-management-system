@@ -10,7 +10,7 @@ import Searchbar from '@/Components/Searchbar'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
-import useFormDate from '@/Hooks/useFormDate'
+import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 import getGenderName from '@/Utils/getGenderName'
 
@@ -21,14 +21,14 @@ export default function PageStudentIndex({ students = [] }) {
   const paramsSearch = route().params.search || ''
   const [search, setSearch] = useState(paramsSearch)
 
-  const hasStudents = students.data?.length > 0
+  const hasStudents = students.data.length > 0
 
   const handleChange = (e) => {
     setSearch(e.target.value)
   }
 
   const formDataOptions = { routeName: 'student.index' }
-  const { handleSubmit, isLoading } = useFormDate(formDataOptions)
+  const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
 
   return (
     <>

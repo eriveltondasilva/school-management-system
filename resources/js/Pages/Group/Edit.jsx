@@ -5,7 +5,7 @@ import { Plus, Undo2 } from 'lucide-react'
 import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
 
-import useFormDate from '@/Hooks/useFormDate'
+import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import GroupFormData from './Partials/GroupFormData'
@@ -17,11 +17,8 @@ import { breadcrumbs, titles } from './data'
 export default function PageGroupEdit({ group = {} }) {
   const flash = usePage().props.flash || {}
 
-  const formDataOptions = {
-    routeName: 'group.update',
-    id: group.id,
-  }
-  const { handleSubmit, errors, isLoading } = useFormDate(formDataOptions)
+  const formDataOptions = { routeName: 'group.update', id: group.id }
+  const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
 
   return (
     <Form onSubmit={handleSubmit}>

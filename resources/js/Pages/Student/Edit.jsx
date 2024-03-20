@@ -2,7 +2,7 @@ import { Button } from 'flowbite-react'
 import { Undo2 } from 'lucide-react'
 
 import Form from '@/Components/Form'
-import useFormDate from '@/Hooks/useFormDate'
+import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import StudentFormData from './Partials/StudentFormData'
@@ -13,7 +13,7 @@ import { breadcrumbs, titles } from './data'
 // ==============================================
 export default function PageStudentEdit({ student = {} }) {
   const formDataOptions = { routeName: 'student.update', id: student.id }
-  const { handleSubmit, errors, isLoading } = useFormDate(formDataOptions)
+  const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
 
   return (
     <Form onSubmit={handleSubmit}>

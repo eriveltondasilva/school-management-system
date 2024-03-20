@@ -3,7 +3,7 @@ import { Undo2 } from 'lucide-react'
 
 import Form from '@/Components/Form'
 
-import useFormDate from '@/Hooks/useFormDate'
+import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import AddressFormData from './Partials/AddressFormData'
@@ -15,7 +15,7 @@ import { breadcrumbs, titles } from './data'
 // ==============================================
 export default function PageTeacherEdit({ teacher = {} }) {
   const formDataOptions = { routeName: 'teacher.update', id: teacher.id }
-  const { handleSubmit, errors, isLoading } = useFormDate(formDataOptions)
+  const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
 
   return (
     <>

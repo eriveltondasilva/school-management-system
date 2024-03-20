@@ -5,7 +5,7 @@ import { Undo2 } from 'lucide-react'
 import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
 
-import useFormDate from '@/Hooks/useFormDate'
+import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import AddressFormData from './Partials/AddressFormData'
@@ -19,7 +19,7 @@ export default function PageTeacherCreate() {
   const flash = usePage().props.flash || {}
 
   const formDataOptions = { routeName: 'teacher.store' }
-  const { handleSubmit, errors, isLoading } = useFormDate(formDataOptions)
+  const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
 
   return (
     <>

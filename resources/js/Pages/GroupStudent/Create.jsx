@@ -9,7 +9,7 @@ import NotFound from '@/Components/NotFound'
 import Searchbar from '@/Components/Searchbar'
 import Title from '@/Components/Title'
 
-import useFormDate from '@/Hooks/useFormDate'
+import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import GroupStudentFormData from './Partials/GroupStudentFormData'
@@ -27,7 +27,7 @@ export default function PageGroupStudentCreate({ group = {}, student = {} }) {
     method: 'GET',
     id: group.id,
   }
-  const { handleSubmit, isLoading } = useFormDate(formDataOptions)
+  const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
 
   return (
     <>
@@ -73,11 +73,8 @@ export default function PageGroupStudentCreate({ group = {}, student = {} }) {
 
 // ----------------------------------------------
 function GroupStudentForm({ student = {}, group = {} }) {
-  const formDataOptions = {
-    routeName: 'group-students.store',
-    id: group.id,
-  }
-  const { handleSubmit, isLoading } = useFormDate(formDataOptions)
+  const formDataOptions = { routeName: 'group-students.store', id: group.id }
+  const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
 
   return (
     <Form className='mt-6 sm:mx-0 md:mx-0' onSubmit={handleSubmit}>

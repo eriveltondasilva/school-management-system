@@ -5,7 +5,7 @@ import { Plus, Undo2 } from 'lucide-react'
 import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
 
-import useFormDate from '@/Hooks/useFormDate'
+import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import AcademicYearFormData from './Partials/AcademicYearFormData'
@@ -22,7 +22,7 @@ export default function PageAcademicYearEdit({ academicYear = {} }) {
     routeName: 'academic-year.update',
     id: academicYear.id,
   }
-  const { handleSubmit, errors, isLoading } = useFormDate(formDataOptions)
+  const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
 
   return (
     <Form onSubmit={handleSubmit}>

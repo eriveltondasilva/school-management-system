@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { twJoin } from 'tailwind-merge'
 
 import Modal from '@/Components/Modal'
-import useFormDate from '@/Hooks/useFormDate'
+import useFormHandler from '@/Hooks/useFormHandler'
 
 // ==============================================
 export default function AcademicYearModel({ academicYear = {} }) {
@@ -15,7 +15,7 @@ export default function AcademicYearModel({ academicYear = {} }) {
     method: 'put',
     id: academicYear.id,
   }
-  const { handleSubmit, isLoading } = useFormDate(formDataOptions)
+  const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
 
   const handleToggleModal = () => setIsShowed(!isShowed)
 

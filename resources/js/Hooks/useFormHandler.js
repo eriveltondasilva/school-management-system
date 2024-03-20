@@ -1,8 +1,12 @@
 import { router, usePage } from '@inertiajs/react'
 import { useState } from 'react'
 
-// ====================================
-export default function useFormDate({ routeName = '', id = '', method = '' }) {
+// ===============================================
+export default function useFormHandler({
+  routeName = '',
+  method = '',
+  id = '',
+}) {
   const [isLoading, setIsLoading] = useState(false)
   const { errors } = usePage().props || {}
 
