@@ -7,6 +7,7 @@ import { twJoin } from 'tailwind-merge'
 import Alert from '@/Components/Alert'
 import Input from '@/Components/Input'
 import NotFound from '@/Components/NotFound'
+import Pagination from '@/Components/Pagination'
 import Searchbar from '@/Components/Searchbar'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
@@ -19,13 +20,14 @@ import getGenderName from '@/Utils/getGenderName'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageGroupAddStudent({ group = {}, students = [] }) {
+export default function PageGroupAddStudent({ group = {}, students = {} }) {
   const [isLoading, setIsLoading] = useState(false)
   const flash = usePage().props.flash || {}
   const searchId = route().params.search || ''
 
   const pageTitle = `${titles.create} - ${group.name}`
-  const hasStudents = students.length > 0
+  const hasStudents = students.data.length > 0
+  const hasPagination = students.total > students.data.length
 
   const handleSearchStudent = async (e) => {
     e.preventDefault()
@@ -75,7 +77,10 @@ export default function PageGroupAddStudent({ group = {}, students = [] }) {
       {!hasStudents && <StudentNotFound />}
 
       {/* Formulário do aluno */}
-      {hasStudents && <StudentTable {...{ group, students }} />}
+      {hasStudents && <StudentTable {...{ group, students: students.data }} />}
+
+      {/* Pagination */}
+      {hasPagination && <StudentPagination {...{ students }} />}
     </>
   )
 }
@@ -164,6 +169,21 @@ function StudentNotFound() {
       <XCircle />
       Nenhum aluno disponível para adicionar à turma...
     </NotFound>
+  )
+}
+
+// ----------------------------------------------
+function StudentPagination({ students = {} }) {
+  const { total, from, to, next_page_url, prev_page_url } = students
+
+  return (
+    <Pagination>
+      <Pagination.Left to={to} from={from} total={total} />
+      <Pagination.Right>
+        <Pagination.Previous href={prev_page_url} />
+        <Pagination.Next href={next_page_url} />
+      </Pagination.Right>
+    </Pagination>
   )
 }
 

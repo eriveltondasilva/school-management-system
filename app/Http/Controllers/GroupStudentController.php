@@ -40,7 +40,7 @@ class GroupStudentController extends Controller
             });
         }
 
-        $students = $studentsQuery->get();
+        $students = $studentsQuery->paginate(5);
 
         return inertia('Group/AddStudent', compact('group', 'students'));
     }

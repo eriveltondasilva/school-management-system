@@ -14,6 +14,6 @@ class SearchServices
 
         $query->latest('id');
 
-        return $query->paginate(10);
+        return $query->paginate(20);
     }
 }
