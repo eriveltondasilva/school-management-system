@@ -44,16 +44,16 @@ class GroupController extends Controller
     /** xxx */
     public function store(GroupRequest $request)
     {
-        $activeAcademicYearId = AcademicYear::isActive()->value('id');
+        $activeYearId = AcademicYear::isActive()->value('id');
 
-        if (!$activeAcademicYearId) {
+        if (!$activeYearId) {
             return back()->with('message', 'Ano letivo atual não existe!');
         }
 
         $validated = $request->validated();
 
         $group = Group::create($validated);
-        $group->academic_year_id = $activeAcademicYearId;
+        $group->academic_year_id = $activeYearId;
         $group->save();
 
         return back()

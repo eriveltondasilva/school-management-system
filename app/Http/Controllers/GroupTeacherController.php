@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\{AcademicYear, Group, Teacher};
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 
 class GroupTeacherController extends Controller
 {
@@ -11,56 +11,48 @@ class GroupTeacherController extends Controller
     {
         $teachers = $group
             ->teachers()
-            ->select('teachers.id', 'teachers.name', 'teachers.email')
-            ->oldest('teachers.name')
+            ->select('teachers.id', 'teachers.name', 'teachers.cpf')
+            ->orderBy('teachers.name')
             ->get();
 
         return inertia('GroupTeacher/Index', compact('group', 'teachers'));
     }
 
-    public function create(Request $request, Group $group)
+    public function create(Group $group)
     {
-        $validated = $request->validate([
-            'search' => 'nullable|integer|min:1',
-        ]);
+        $activeYearId = AcademicYear::isActive()->value('id');
 
-        $searchId = $request->get('search', '');
-        $teacher = null;
+        $teachers = Teacher::select('id', 'name', 'cpf')
+            ->whereDoesntHave('groups', function ($query) use ($group) {
+                $query->where('groups.id', $group->id);
+            })
+            ->orderBy('teachers.name')
+            ->get();
 
-        if ($searchId) {
-            $teacher = Teacher::select('id', 'name', 'cpf')
-                ->whereDoesntHave('groups', function ($query) {
-                    $query->where('academic_year_id', AcademicYear::isActive()->value('id'));
-                })
-                ->find($searchId);
-        }
-
-        return inertia('GroupTeacher/Create', compact('group', 'teacher'));
+        return inertia('GroupTeacher/Create', compact('group', 'teachers'));
     }
 
     // ### Actions ###
 
-    public function store(Request $request, Group $group)
+    public function addTeacher(Group $group, Teacher $teacher)
     {
-        $validated = $request->validate([
-            'id' => 'required|exists:teachers,id',
-        ]);
+        $group->teachers()->attach($teacher);
 
-        $teacherId = $validated['id'];
+        $group->load('teachers');
 
-        $group->teachers()->attach($teacherId);
+        $message = sprintf("Professor(a) %s, CPF %s, adicionado(a) à turma do %s.", $teacher->name, $teacher->cpf, $group->name);
 
-        return back()
-            ->with('message', "Professor com id {$teacherId} adicionado a turma do {$group->name} com sucesso.");
+        return back()->with('message', $message);
     }
 
-    public function destroy(Group $group, Teacher $teacher)
+    public function deleteTeacher(Group $group, Teacher $teacher)
     {
         $group->teachers()->detach($teacher);
 
-        $group->refresh();
+        $group->load('teachers');
 
-        return back()
-            ->with('message', "O professor {$teacher->name}, com id {$teacher->id}, foi removido da turma com sucesso.");
+        $message = sprintf("Professor(a) %s, CPF %s, removido(a) da turma do %s.", $teacher->name, $teacher->cpf, $group->name);
+
+        return back()->with('message', $message);
     }
 }

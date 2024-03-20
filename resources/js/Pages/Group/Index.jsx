@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react'
 import { Button, Card, Tooltip } from 'flowbite-react'
-import { PencilLine, Plus, XCircle } from 'lucide-react'
+import { Eye, PencilLine, Plus, XCircle } from 'lucide-react'
 
 import NotFound from '@/Components/NotFound'
 import Title from '@/Components/Title'
@@ -25,7 +25,7 @@ export default function PageGroupIndex({ groups = [] }) {
             as={Link}
             href={route('group.create')}
             color='blue'
-            className=''>
+            className='uppercase'>
             <Plus className='mr-2 h-5 w-5' />
             Cadastrar Turma
           </Button>
@@ -78,16 +78,16 @@ function GroupCard({ groups = [] }) {
               href={route('group-students.index', id)}
               color='blue'
               fullSized>
-              {/* <Eye className='mr-2 h-5 w-5' /> */}
-              Ver Alunos
+              <Eye className='mr-2 h-5 w-5' />
+              Alunos
             </Button>
             <Button
               as={Link}
               href={route('group-teachers.index', id)}
               color='warning'
               fullSized>
-              {/* <Eye className='mr-2 h-5 w-5' /> */}
-              Ver Professores
+              <Eye className='mr-2 h-5 w-5' />
+              Professores
             </Button>
           </footer>
         </Card>

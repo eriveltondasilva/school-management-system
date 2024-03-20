@@ -1,7 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{GroupController, GroupStudentController, GroupTeacherController};
+use App\Http\Controllers\{
+    GroupController,
+    GroupStudentController,
+    GroupTeacherController
+};
 
 // ===============================================
 //# GROUP ROUTES
@@ -12,7 +16,7 @@ Route::middleware('auth')
     Route::get('/', 'index')->name('index');
     Route::get('/cadastrar', 'create')->name('create');
     Route::post('/', 'store')->name('store');
-    // #####
+    // ### ACTIONS ###
     Route::get('/{group}/editar', 'edit')->name('edit');
     Route::put('/{group}', 'update')->name('update');
 });
@@ -25,9 +29,9 @@ Route::middleware('auth')
 ->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/cadastrar', 'create')->name('create');
-    // #####
-    Route::post('/', 'store')->name('store');
-    Route::delete('/{student}', 'destroy')->name('destroy');
+    // ### ACTIONS ###
+    Route::post('/{student}', 'addStudent')->name('add-student');
+    Route::delete('/{student}', 'deleteStudent')->name('delete-student');
 });
 
 
@@ -38,12 +42,7 @@ Route::middleware('auth')
 ->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/cadastrar', 'create')->name('create');
-    // #####
-    Route::post('/', 'store')->name('store');
-    Route::delete('/{teacher}', 'destroy')->name('destroy');
-
-    // TODO: implementar
-    // Route::get('/cadastrar', 'create')->name('create');
-    // Route::get('/{student}', 'edit')->name('edit');
-    // Route::put('/{student}', 'update')->name('update');
+    // ### ACTIONS ###
+    Route::post('/{teacher}', 'addTeacher')->name('add-teacher');
+    Route::delete('/{teacher}', 'deleteTeacher')->name('delete-teacher');
 });

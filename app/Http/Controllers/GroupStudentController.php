@@ -12,7 +12,7 @@ class GroupStudentController extends Controller
         $students = $group
             ->students()
             ->select('students.id', 'students.name', 'students.gender')
-            ->oldest('students.name')
+            ->orderBy('students.name')
             ->get();
 
         return inertia('GroupStudent/Index', compact('group', 'students'));
@@ -20,50 +20,52 @@ class GroupStudentController extends Controller
 
     public function create(Request $request, Group $group)
     {
-        $validated = $request->validate([
-            'search' => 'nullable|integer|min:1',
-        ]);
 
-        $searchId = $request->get('search', '');
-        $student = null;
+        $request->validate(['search' => 'nullable|string']);
 
-        if ($searchId) {
-            $student = Student::select('id', 'name', 'cpf')
-                ->whereDoesntHave('groups', function ($query) {
-                    $query->where('academic_year_id', AcademicYear::isActive()->value('id'));
-                })
-                ->find($searchId);
+        $searchTerm = $request->get('search', '');
+
+        $activeYearId = AcademicYear::isActive()->value('id');
+
+        $studentsQuery = Student::select('id', 'name', 'gender')
+            ->whereDoesntHave('groups', function ($query) use ($activeYearId) {
+                $query->where('academic_year_id', $activeYearId);
+            })
+            ->orderBy('name');
+
+        if ($searchTerm) {
+            $studentsQuery->where(function ($query) use ($searchTerm) {
+                $query->where('id', $searchTerm)
+                    ->orWhere('name', 'like', "{$searchTerm}%");
+            });
         }
 
-        return inertia('GroupStudent/Create', compact('group', 'student'));
+        $students = $studentsQuery->get();
+
+        return inertia('GroupStudent/Create', compact('group', 'students'));
     }
 
     // ### Actions ###
 
-    public function store(Request $request, Group $group)
+    public function addStudent(Group $group, Student $student)
     {
-        $validated = $request->validate([
-            'id' => 'required|exists:students,id',
-        ]);
+        $group->students()->attach($student);
 
-        $studentId = $validated['id'];
+        $group->load('students');
 
-        $group->students()->attach($studentId);
+        $message = sprintf("Aluno(a) %s adicionado(a) à turma do %s.", $student->name, $group->name);
 
-        return back()
-            ->with('message', "Aluno com matrícula {$studentId} adicionado a turma do {$group->name} com sucesso.");
+        return back()->with('message', $message);
     }
 
-    public function destroy(Group $group, Student $student)
+    public function deleteStudent(Group $group, Student $student)
     {
         $group->students()->detach($student);
 
-        $group->refresh();
+        $group->load('students');
 
-        $matriculation = $student->id;
-        $studentName = $student->name;
+        $message = sprintf("Aluno(a) %s removido(a) da turma do %s.", $student->name, $group->name);
 
-        return back()
-            ->with('message', "O estudante {$studentName}, com matrícula {$matriculation}, foi removido da turma  com sucesso.");
+        return back()->with('message', $message);
     }
 }

@@ -1,5 +1,5 @@
 import { Link, router, usePage } from '@inertiajs/react'
-import { Button } from 'flowbite-react'
+import { Button, Tooltip } from 'flowbite-react'
 import { Eye, Plus, Trash2, XCircle } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
@@ -9,7 +9,6 @@ import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
-import formatId from '@/Utils/formatId'
 
 import { breadcrumbs, titles } from './data'
 
@@ -24,7 +23,7 @@ export default function PageGroupTeacherIndex({ group = {}, teachers = [] }) {
     <>
       {/* Mensagem flash */}
       {flash.message && (
-        <Alert color='success' className='mb-4'>
+        <Alert color='failure' className='mb-4'>
           {flash.message}
         </Alert>
       )}
@@ -37,7 +36,7 @@ export default function PageGroupTeacherIndex({ group = {}, teachers = [] }) {
             as={Link}
             href={route('group-teachers.create', group.id)}
             color='blue'
-            className=''>
+            className='uppercase'>
             <Plus className='mr-2 h-5 w-5' />
             Adicionar professor
           </Button>
@@ -47,10 +46,10 @@ export default function PageGroupTeacherIndex({ group = {}, teachers = [] }) {
 
       <br />
 
-      {/* Exibe mensagem se não houver alunos */}
+      {/* Exibe mensagem se não houver professores */}
       {!hasTeachers && <GroupTeacherNotFound />}
 
-      {/* Tabela de alunos */}
+      {/* Tabela de professores */}
       {hasTeachers && <TeacherTable {...{ group, teachers }} />}
     </>
   )
@@ -58,12 +57,13 @@ export default function PageGroupTeacherIndex({ group = {}, teachers = [] }) {
 
 // ----------------------------------------------
 function TeacherTable({ group = {}, teachers = [] }) {
-  const handleDestroyTeacher = (id, name) => {
-    const message = `Tem certeza que deseja remover professor(a)\n${name}, id ${formatId(id)}?`
+  const handleDeleteTeacher = (id, name, cpf) => {
+    const message = `Tem certeza que deseja remover professor(a)\n${name}, CPF ${cpf},\nda turma do ${group.name}?`
+
+    if (!confirm(message)) return
 
     router.delete(
-      route('group-teachers.destroy', { group: group.id, teacher: id }),
-      { onBefore: () => confirm(message) }
+      route('group-teachers.delete-teacher', { group: group.id, teacher: id })
     )
   }
 
@@ -73,13 +73,13 @@ function TeacherTable({ group = {}, teachers = [] }) {
       <Table.Header>
         <Table.HeaderCell className='w-0'></Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
-        <Table.HeaderCell>email</Table.HeaderCell>
+        <Table.HeaderCell>CPF</Table.HeaderCell>
         <Table.HeaderCell></Table.HeaderCell>
       </Table.Header>
 
       {/* Table Body */}
       <Table.Body>
-        {teachers.map(({ id, name, email }, index) => (
+        {teachers.map(({ id, name, cpf }, index) => (
           <Table.Row key={id}>
             <Table.RowCell className='font-medium'>{++index}</Table.RowCell>
             <Table.RowCell
@@ -89,7 +89,7 @@ function TeacherTable({ group = {}, teachers = [] }) {
               )}>
               {name}
             </Table.RowCell>
-            <Table.RowCell>{email}</Table.RowCell>
+            <Table.RowCell>{cpf}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>
                 <Button
@@ -97,14 +97,18 @@ function TeacherTable({ group = {}, teachers = [] }) {
                   href={route('teacher.show', id)}
                   color='blue'
                   size='xs'>
-                  <Eye className='h-4 w-4' />
+                  <Tooltip content='Visualizar Professor(a)'>
+                    <Eye className='h-4 w-4' />
+                  </Tooltip>
                 </Button>
                 <Button
                   as='button'
                   color='failure'
-                  onClick={() => handleDestroyTeacher(id, name)}
+                  onClick={() => handleDeleteTeacher(id, name, cpf)}
                   size='xs'>
-                  <Trash2 className='mx-1 h-4 w-4' />
+                  <Tooltip content='Remover Professor(a)'>
+                    <Trash2 className='mx-1 h-4 w-4' />
+                  </Tooltip>
                 </Button>
               </Button.Group>
             </Table.RowCell>
@@ -120,7 +124,7 @@ function GroupTeacherNotFound() {
   return (
     <NotFound>
       <XCircle />
-      Nenhum professor na turma...
+      Nenhum professor encontrado na turma...
     </NotFound>
   )
 }

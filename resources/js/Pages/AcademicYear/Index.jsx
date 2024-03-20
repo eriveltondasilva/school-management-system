@@ -26,7 +26,7 @@ export default function PageAcademicYearIndex({ academicYears = [] }) {
             as={Link}
             href={route('academic-year.create')}
             color='blue'
-            className=''>
+            className='uppercase'>
             <Plus className='mr-2 h-5 w-5' />
             Cadastrar Ano Letivo
           </Button>

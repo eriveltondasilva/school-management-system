@@ -1,26 +1,29 @@
-import { usePage } from '@inertiajs/react'
-import { Button } from 'flowbite-react'
-import { Save, Search, UserRoundSearch, XCircle } from 'lucide-react'
+import { Link, router, usePage } from '@inertiajs/react'
+import { Button, Tooltip } from 'flowbite-react'
+import { Eye, Plus, Search, XCircle } from 'lucide-react'
+import { twJoin } from 'tailwind-merge'
 
 import Alert from '@/Components/Alert'
-import Form from '@/Components/Form'
 import Input from '@/Components/Input'
 import NotFound from '@/Components/NotFound'
 import Searchbar from '@/Components/Searchbar'
+import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
 import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
+import formatId from '@/Utils/formatId'
+import getGenderName from '@/Utils/getGenderName'
 
-import GroupStudentFormData from './Partials/GroupStudentFormData'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageGroupStudentCreate({ group = {}, student = {} }) {
+export default function PageGroupStudentCreate({ group = {}, students = [] }) {
   const flash = usePage().props.flash || {}
   const searchId = route().params.search || ''
 
   const pageTitle = `${titles.create} - ${group.name}`
+  const hasStudents = students.length > 0
 
   const formDataOptions = {
     routeName: 'group-students.create',
@@ -33,11 +36,9 @@ export default function PageGroupStudentCreate({ group = {}, student = {} }) {
     <>
       {/* Mensagem flash */}
       {flash.message && (
-        <div className='max-w-xl'>
-          <Alert color='success' className='mb-4'>
-            {flash.message}
-          </Alert>
-        </div>
+        <Alert color='success' className='mb-4'>
+          {flash.message}
+        </Alert>
       )}
 
       {/* Título */}
@@ -50,10 +51,10 @@ export default function PageGroupStudentCreate({ group = {}, student = {} }) {
         <Searchbar.Left>
           <Input.Text
             id='search'
-            type='text'
-            className='mb-0'
+            type='search'
+            className='mb-0 sm:w-96'
             defaultValue={searchId}
-            placeholder='Pesquisar pela matrícula do aluno...'
+            placeholder='Pesquisar aluno...'
             autoFocus
           />
           <Button type='submit' color='blue' disabled={isLoading}>
@@ -63,56 +64,86 @@ export default function PageGroupStudentCreate({ group = {}, student = {} }) {
       </Searchbar>
 
       {/* Verificar se o aluno não foi encontrado */}
-      {!student && <GroupStudentNotFound />}
+      {!hasStudents && <GroupStudentNotFound />}
 
       {/* Formulário do aluno */}
-      {student && <GroupStudentForm {...{ group, student }} />}
+      {hasStudents && <GroupStudentTable {...{ group, students }} />}
     </>
   )
 }
 
 // ----------------------------------------------
-function GroupStudentForm({ student = {}, group = {} }) {
-  const formDataOptions = { routeName: 'group-students.store', id: group.id }
-  const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
+function GroupStudentTable({ group = {}, students = [] }) {
+  const handleAddStudent = (id, name) => {
+    const message = `Tem certeza que deseja adicionar aluno(a)\n${name}, matrícula ${formatId(id)},\nà turma do ${group.name}?`
+
+    if (!confirm(message)) return
+
+    router.post(
+      route('group-students.add-student', { group: group.id, student: id })
+    )
+  }
 
   return (
-    <Form className='mt-6 sm:mx-0 md:mx-0' onSubmit={handleSubmit}>
-      <header className='flex items-center'>
-        <UserRoundSearch className='mr-2 h-8 w-8' />
-        <h3 className='text-xl font-semibold'>Aluno pesquisado:</h3>
-      </header>
+    <Table>
+      {/* Table Header */}
+      <Table.Header>
+        <Table.HeaderCell className='w-0'></Table.HeaderCell>
+        <Table.HeaderCell>Nome</Table.HeaderCell>
+        <Table.HeaderCell>Matrícula</Table.HeaderCell>
+        <Table.HeaderCell>Gênero</Table.HeaderCell>
+        <Table.HeaderCell></Table.HeaderCell>
+      </Table.Header>
 
-      <GroupStudentFormData data={student} />
-
-      <Form.Footer>
-        <Button
-          className='uppercase'
-          color='blue'
-          type='submit'
-          disabled={isLoading}
-          fullSized>
-          <Save className='mr-2 h-5 w-5' />
-          Adicionar aluno à turma
-        </Button>
-      </Form.Footer>
-    </Form>
+      {/* Table Body */}
+      <Table.Body>
+        {students.map(({ id, name, gender }, index) => (
+          <Table.Row key={id}>
+            <Table.RowCell className='font-bold'>{++index}</Table.RowCell>
+            <Table.RowCell
+              className={twJoin(
+                'whitespace-nowrap font-medium',
+                'text-gray-900 dark:text-white'
+              )}>
+              {name}
+            </Table.RowCell>
+            <Table.RowCell>{formatId(id)}</Table.RowCell>
+            <Table.RowCell>{getGenderName(gender)}</Table.RowCell>
+            <Table.RowCell className='flex justify-end'>
+              <Button.Group>
+                <Button
+                  as={Link}
+                  href={route('student.show', id)}
+                  color='green'
+                  size='xs'>
+                  <Tooltip content='Visualizar Aluno'>
+                    <Eye className='h-4 w-4' />
+                  </Tooltip>
+                </Button>
+                <Button
+                  as='button'
+                  color='blue'
+                  onClick={() => handleAddStudent(id, name, gender)}
+                  size='xs'>
+                  <Tooltip content='Adicionar Aluno'>
+                    <Plus className='mx-1 h-4 w-4' />
+                  </Tooltip>
+                </Button>
+              </Button.Group>
+            </Table.RowCell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table>
   )
 }
 
 // ----------------------------------------------
 function GroupStudentNotFound() {
-  const searchId = route().params.search || ''
-
-  const notFoundText = 'Nenhum aluno encontrado...'
-  const notFoundStudent = `Aluno com id ${searchId} não foi encontrado...`
-
-  const message = searchId ? notFoundStudent : notFoundText
-
   return (
     <NotFound>
       <XCircle />
-      {message}
+      Nenhum aluno disponível para adicionar à turma...
     </NotFound>
   )
 }

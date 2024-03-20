@@ -1,5 +1,5 @@
 import { Link, router, usePage } from '@inertiajs/react'
-import { Button } from 'flowbite-react'
+import { Button, Tooltip } from 'flowbite-react'
 import { Eye, Plus, Trash2, XCircle } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
@@ -16,15 +16,16 @@ import { breadcrumbs, titles } from './data'
 
 // ==============================================
 export default function PageGroupStudentIndex({ group = {}, students = [] }) {
-  const hasStudents = students?.length > 0
   const flash = usePage().props.flash || {}
+
   const pageTitle = `${titles.index} - ${group.name}`
+  const hasStudents = students.length > 0
 
   return (
     <>
       {/* Mensagem flash */}
       {flash.message && (
-        <Alert color='success' className='mb-4'>
+        <Alert color='failure' className='mb-4'>
           {flash.message}
         </Alert>
       )}
@@ -37,7 +38,7 @@ export default function PageGroupStudentIndex({ group = {}, students = [] }) {
             as={Link}
             href={route('group-students.create', group.id)}
             color='blue'
-            className=''>
+            className='uppercase'>
             <Plus className='mr-2 h-5 w-5' />
             Adicionar alunos
           </Button>
@@ -58,13 +59,14 @@ export default function PageGroupStudentIndex({ group = {}, students = [] }) {
 
 // ----------------------------------------------
 function StudentTable({ group = {}, students = [] }) {
-  const handleDestroyStudent = (id, name, gender) => {
+  const handleDeleteStudent = (id, name, gender) => {
     const genderText = gender === 'M' ? 'o aluno' : 'a aluna'
-    const message = `Tem certeza que deseja remover ${genderText}\n${name}, matrícula ${formatId(id)}?`
+    const message = `Tem certeza que deseja remover ${genderText}\n${name}, matrícula ${formatId(id)}, da turma do ${group.name}?`
+
+    if (!confirm(message)) return
 
     router.delete(
-      route('group-students.destroy', { group: group.id, student: id }),
-      { onBefore: () => confirm(message) }
+      route('group-students.delete-student', { group: group.id, student: id })
     )
   }
 
@@ -74,6 +76,7 @@ function StudentTable({ group = {}, students = [] }) {
       <Table.Header>
         <Table.HeaderCell className='w-0'></Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
+        <Table.HeaderCell>Matrícula</Table.HeaderCell>
         <Table.HeaderCell>Gênero</Table.HeaderCell>
         <Table.HeaderCell></Table.HeaderCell>
       </Table.Header>
@@ -90,6 +93,7 @@ function StudentTable({ group = {}, students = [] }) {
               )}>
               {name}
             </Table.RowCell>
+            <Table.RowCell>{formatId(id)}</Table.RowCell>
             <Table.RowCell>{getGenderName(gender)}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>
@@ -98,14 +102,18 @@ function StudentTable({ group = {}, students = [] }) {
                   href={route('student.show', id)}
                   color='blue'
                   size='xs'>
-                  <Eye className='h-4 w-4' />
+                  <Tooltip content='Visualizar Aluno(a)'>
+                    <Eye className='h-4 w-4' />
+                  </Tooltip>
                 </Button>
                 <Button
                   as='button'
                   color='failure'
-                  onClick={() => handleDestroyStudent(id, name, gender)}
+                  onClick={() => handleDeleteStudent(id, name, gender)}
                   size='xs'>
-                  <Trash2 className='mx-1 h-4 w-4' />
+                  <Tooltip content='Remover Aluno(a)'>
+                    <Trash2 className='mx-1 h-4 w-4' />
+                  </Tooltip>
                 </Button>
               </Button.Group>
             </Table.RowCell>
@@ -121,7 +129,7 @@ function GroupStudentNotFound() {
   return (
     <NotFound>
       <XCircle />
-      Nenhum aluno na turma...
+      Nenhum aluno encontrado na turma...
     </NotFound>
   )
 }

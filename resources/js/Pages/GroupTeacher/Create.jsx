@@ -1,44 +1,31 @@
-import { usePage } from '@inertiajs/react'
-import { Button } from 'flowbite-react'
-import { Save, Search, UserRoundSearch, XCircle } from 'lucide-react'
+import { Link, router, usePage } from '@inertiajs/react'
+import { Button, Tooltip } from 'flowbite-react'
+import { Eye, Plus, XCircle } from 'lucide-react'
+import { twJoin } from 'tailwind-merge'
 
 import Alert from '@/Components/Alert'
-import Form from '@/Components/Form'
-import Input from '@/Components/Input'
 import NotFound from '@/Components/NotFound'
-import Searchbar from '@/Components/Searchbar'
+import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
-import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
-
-import GroupTeacherFormData from './Partials/GroupTeacherFormData'
 
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageGroupTeacherCreate({ group = {}, teacher = {} }) {
+export default function PageGroupTeacherCreate({ group = {}, teachers = [] }) {
   const flash = usePage().props.flash || {}
-  const searchId = route().params.search || ''
 
   const pageTitle = `${titles.create} - ${group.name}`
-
-  const formDataOptions = {
-    routeName: 'group-teachers.create',
-    method: 'GET',
-    id: group.id,
-  }
-  const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
+  const hasTeachers = teachers.length > 0
 
   return (
     <>
       {/* Mensagem flash */}
       {flash.message && (
-        <div className='max-w-xl'>
-          <Alert color='success' className='mb-4'>
-            {flash.message}
-          </Alert>
-        </div>
+        <Alert color='success' className='mb-4'>
+          {flash.message}
+        </Alert>
       )}
 
       {/* Título */}
@@ -46,74 +33,85 @@ export default function PageGroupTeacherCreate({ group = {}, teacher = {} }) {
         <Title.Left title={pageTitle} />
       </Title>
 
-      {/* Barra de pesquisa */}
-      <Searchbar onSubmit={handleSubmit}>
-        <Searchbar.Left>
-          <Input.Text
-            id='search'
-            type='text'
-            className='mb-0'
-            defaultValue={searchId}
-            placeholder='Pesquisar pelo id do professor...'
-            autoFocus
-          />
-          <Button type='submit' color='blue' disabled={isLoading}>
-            <Search className='h-5 w-5' />
-          </Button>
-        </Searchbar.Left>
-      </Searchbar>
-
       {/* Verificar se o professor não foi encontrado */}
-      {!teacher && <GroupTeacherNotFound />}
+      {!hasTeachers && <GroupTeacherNotFound />}
 
       {/* Formulário do professor */}
-      {teacher && <GroupTeacherTable {...{ group, teacher }} />}
+      {hasTeachers && <GroupTeacherTable {...{ group, teachers }} />}
     </>
   )
 }
 
 // ----------------------------------------------
-function GroupTeacherTable({ group = {}, teacher = {} }) {
-  const formDataOptions = { routeName: 'group-teachers.store', id: group.id }
-  const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
+function GroupTeacherTable({ group = {}, teachers = [] }) {
+  const handleAddTeacher = (id, name, cpf) => {
+    const message = `Tem certeza que deseja adicionar professor(a)\n${name}, CPF ${cpf},\nà turma do ${group.name}?`
+
+    if (!confirm(message)) return
+
+    router.post(
+      route('group-teachers.add-teacher', { group: group.id, teacher: id })
+    )
+  }
 
   return (
-    <Form className='mt-6 sm:mx-0 md:mx-0' onSubmit={handleSubmit}>
-      <header className='flex items-center'>
-        <UserRoundSearch className='mr-2 h-8 w-8' />
-        <h3 className='text-xl font-semibold'>Professor pesquisado:</h3>
-      </header>
+    <Table>
+      {/* Table Header */}
+      <Table.Header>
+        <Table.HeaderCell className='w-0'></Table.HeaderCell>
+        <Table.HeaderCell>Nome</Table.HeaderCell>
+        <Table.HeaderCell>CPF</Table.HeaderCell>
+        <Table.HeaderCell></Table.HeaderCell>
+      </Table.Header>
 
-      <GroupTeacherFormData data={teacher} />
-
-      <Form.Footer>
-        <Button
-          className='uppercase'
-          color='blue'
-          type='submit'
-          disabled={isLoading}
-          fullSized>
-          <Save className='mr-2 h-5 w-5' />
-          Adicionar professor à turma
-        </Button>
-      </Form.Footer>
-    </Form>
+      {/* Table Body */}
+      <Table.Body>
+        {teachers.map(({ id, name, cpf }, index) => (
+          <Table.Row key={id}>
+            <Table.RowCell className='font-bold'>{++index}</Table.RowCell>
+            <Table.RowCell
+              className={twJoin(
+                'whitespace-nowrap font-medium',
+                'text-gray-900 dark:text-white'
+              )}>
+              {name}
+            </Table.RowCell>
+            <Table.RowCell>{cpf}</Table.RowCell>
+            <Table.RowCell className='flex justify-end'>
+              <Button.Group>
+                <Button
+                  as={Link}
+                  href={route('teacher.show', id)}
+                  color='green'
+                  size='xs'>
+                  <Tooltip content='Visualizar Professor'>
+                    <Eye className='h-4 w-4' />
+                  </Tooltip>
+                </Button>
+                <Button
+                  as='button'
+                  color='blue'
+                  onClick={() => handleAddTeacher(id, name, cpf)}
+                  size='xs'>
+                  <Tooltip content='Adicionar Professor'>
+                    <Plus className='mx-1 h-4 w-4' />
+                  </Tooltip>
+                </Button>
+              </Button.Group>
+            </Table.RowCell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table>
   )
 }
 
 // ----------------------------------------------
 function GroupTeacherNotFound() {
-  const searchId = route().params.search || ''
-
-  const notFoundText = 'Nenhum professor encontrado...'
-  const notFoundTeacher = `Professor com id ${searchId} não foi encontrado...`
-
-  const message = searchId ? notFoundTeacher : notFoundText
-
   return (
     <NotFound>
       <XCircle />
-      {message}
+      Nenhum professor disponível para adicionar à turma...
     </NotFound>
   )
 }

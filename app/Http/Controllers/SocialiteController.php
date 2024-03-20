@@ -7,7 +7,7 @@ use App\Enums\ProviderEnum;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
-// ==============================================
+// ===============================================
 class SocialiteController extends Controller
 {
     /** xxx */
