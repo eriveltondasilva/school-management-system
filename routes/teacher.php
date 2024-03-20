@@ -8,8 +8,7 @@ use App\Http\Controllers\TeacherController;
 //# TEACHER ROUTES
 Route::middleware('auth')
 ->controller(TeacherController::class)
-->prefix('professores')->name('teacher.')
-->group(function () {
+->prefix('professores')->name('teacher.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/cadastrar', 'create')->name('create');
     Route::post('/', 'store')->name('store');

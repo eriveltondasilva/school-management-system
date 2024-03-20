@@ -7,8 +7,7 @@ use App\Http\Controllers\StudentController;
 //# STUDENT ROUTES
 Route::middleware('auth')
 ->controller(StudentController::class)
-->prefix('alunos')->name('student.')
-->group(function () {
+->prefix('alunos')->name('student.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/cadastrar', 'create')->name('create');
     Route::post('/', 'store')->name('store');

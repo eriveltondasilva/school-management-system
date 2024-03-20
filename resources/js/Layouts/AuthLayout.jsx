@@ -11,7 +11,7 @@ import Main from './partials/Main'
 import schoolImg from '/resources/images/school.png'
 
 // ============================================================================
-export default function AuthenticatedLayout({ title, breadcrumb, children }) {
+export default function AuthLayout({ title, breadcrumb, children }) {
   const { user, activeAcademicYear } = usePage().props.auth || {}
 
   return (

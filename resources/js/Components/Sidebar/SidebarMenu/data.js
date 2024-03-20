@@ -20,7 +20,7 @@ export const sidebarItems = [
   ],
   [
     { title: 'Turmas', icon: UsersRound, routeName: 'group.index' },
-    { title: 'Disciplinas', icon: Library, routeName: 'test' },
+    { title: 'Disciplinas', icon: Library, routeName: 'subject.index' },
     { title: 'Ano Letivo', icon: Calendar, routeName: 'academic-year.index' },
   ],
 ]

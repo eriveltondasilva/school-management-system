@@ -5,9 +5,8 @@ use App\Http\Controllers\AcademicYearController;
 
 // ===============================================
 // #ACADEMIC YEAR ROUTES
-Route::controller(AcademicYearController::class)
-->prefix('ano-letivo')->name('academic-year.')
-->group(function () {
+Route::middleware('auth')->controller(AcademicYearController::class)
+->prefix('ano-letivo')->name('academic-year.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/cadastrar', 'create')->name('create');
     Route::post('/', 'store')->name('store');
