@@ -21,6 +21,7 @@ export default function PageTeacherIndex({ teachers = [] }) {
   const [search, setSearch] = useState(paramsSearch)
 
   const hasTeachers = teachers.data.length > 0
+  const hasPagination = teachers.total > teachers.data.length
 
   const handleChange = (e) => {
     setSearch(e.target.value)
@@ -80,7 +81,7 @@ export default function PageTeacherIndex({ teachers = [] }) {
       {hasTeachers && <TeacherTable teachers={teachers.data} />}
 
       {/* Pagination */}
-      {hasTeachers && <TeacherPagination teachers={teachers} />}
+      {hasPagination && <TeacherPagination teachers={teachers} />}
     </>
   )
 }
@@ -91,7 +92,7 @@ function TeacherTable({ teachers = [] }) {
     <Table>
       {/* Table Header */}
       <Table.Header>
-        <Table.HeaderCell className='w-0'>Id</Table.HeaderCell>
+        <Table.HeaderCell className='w-0'></Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
         <Table.HeaderCell>Email</Table.HeaderCell>
         <Table.HeaderCell></Table.HeaderCell>

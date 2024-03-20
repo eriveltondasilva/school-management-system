@@ -12,6 +12,7 @@ import Title from '@/Components/Title'
 
 import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
+import formatId from '@/Utils/formatId'
 import getGenderName from '@/Utils/getGenderName'
 
 import { breadcrumbs, titles } from './data'
@@ -22,6 +23,7 @@ export default function PageStudentIndex({ students = [] }) {
   const [search, setSearch] = useState(paramsSearch)
 
   const hasStudents = students.data.length > 0
+  const hasPagination = students.total > students.data.length
 
   const handleChange = (e) => {
     setSearch(e.target.value)
@@ -82,7 +84,7 @@ export default function PageStudentIndex({ students = [] }) {
       {hasStudents && <StudentTable students={students.data} />}
 
       {/* Student Pagination */}
-      {hasStudents && <StudentPagination students={students} />}
+      {hasPagination && <StudentPagination students={students} />}
     </>
   )
 }
@@ -93,7 +95,7 @@ function StudentTable({ students = [] }) {
     <Table>
       {/* Table Header */}
       <Table.Header>
-        <Table.HeaderCell className='w-0'>Id</Table.HeaderCell>
+        <Table.HeaderCell className='w-0'></Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
         <Table.HeaderCell>Gênero</Table.HeaderCell>
         <Table.HeaderCell></Table.HeaderCell>
@@ -103,7 +105,7 @@ function StudentTable({ students = [] }) {
       <Table.Body>
         {students.map(({ id, name, gender }) => (
           <Table.Row key={id}>
-            <Table.RowCell className='font-bold'>{id}</Table.RowCell>
+            <Table.RowCell className='font-bold'>{formatId(id)}</Table.RowCell>
             <Table.RowCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
               {name}
             </Table.RowCell>

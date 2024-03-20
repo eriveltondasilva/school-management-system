@@ -12,7 +12,6 @@ export default function Guest({ title = '', children }) {
           'min-h-screen',
           'bg-gray-100 dark:bg-gray-900'
         )}>
-        {/* # Logo */}
         {/* TODO: adicionar logo */}
         {/* <div>
         <Link href='/'>
@@ -26,6 +25,9 @@ export default function Guest({ title = '', children }) {
             'overflow-hidden shadow-md sm:rounded-lg',
             'bg-white dark:bg-gray-800'
           )}>
+          <h1 className='text-center text-2xl font-bold text-gray-800 dark:text-white'>
+            {title}
+          </h1>
           {children}
         </main>
       </div>
