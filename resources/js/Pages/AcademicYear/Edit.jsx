@@ -78,7 +78,9 @@ export default function PageAcademicYearEdit({ academicYear = {} }) {
 
 // ==============================================
 PageAcademicYearEdit.layout = (page) => (
-  <AuthLayout title={titles.edit} breadcrumb={breadcrumbs.edit}>
-    {page}
-  </AuthLayout>
+  <AuthLayout
+    title={titles.edit}
+    breadcrumb={breadcrumbs.edit}
+    children={page}
+  />
 )

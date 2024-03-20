@@ -6,7 +6,7 @@ import Button from '@/Components/Button'
 import { titles } from './data'
 
 // ==============================================
-export default function VerifyEmail({ status }) {
+export default function PageVerifyEmail({ status }) {
   const { post, processing } = useForm({})
 
   const submit = (e) => {
@@ -15,7 +15,7 @@ export default function VerifyEmail({ status }) {
   }
 
   return (
-    <GuestLayout title={titles.verifyEmail}>
+    <>
       <div className='mb-4 text-sm text-gray-600 dark:text-gray-400'>
         Obrigado por inscrever-se! Antes de começar, você poderia verificar seu
         endereço de e-mail clicando no link que acabamos de enviar para você? Se
@@ -42,6 +42,11 @@ export default function VerifyEmail({ status }) {
           </Link>
         </div>
       </form>
-    </GuestLayout>
+    </>
   )
 }
+
+// ==============================================
+PageVerifyEmail.layout = (page) => (
+  <GuestLayout title={titles.verifyEmail} children={page} />
+)

@@ -9,7 +9,7 @@ import GuestLayout from '@/Layouts/GuestLayout'
 import { titles } from './data'
 
 // ==============================================
-export default function ConfirmPassword() {
+export default function PageConfirmPassword() {
   const { data, setData, post, processing, errors, reset } = useForm({
     password: '',
   })
@@ -30,7 +30,7 @@ export default function ConfirmPassword() {
   }
 
   return (
-    <GuestLayout title={titles.confirmPassword}>
+    <>
       <div className='mb-4 text-sm text-gray-600 dark:text-gray-400'>
         Esta é uma área segura do aplicativo. Por favor, confirme sua senha
         antes de continuar.
@@ -56,6 +56,10 @@ export default function ConfirmPassword() {
           </Button>
         </footer>
       </form>
-    </GuestLayout>
+    </>
   )
 }
+
+PageConfirmPassword.layout = (page) => (
+  <GuestLayout title={titles.confirmPassword}>{page}</GuestLayout>
+)

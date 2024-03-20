@@ -58,7 +58,9 @@ export default function PageStudentShow({ student = {} }) {
 
 // ----------------------------------------------
 PageStudentShow.layout = (page) => (
-  <AuthLayout title={titles.show} breadcrumb={breadcrumbs.show}>
-    {page}
-  </AuthLayout>
+  <AuthLayout
+    title={titles.show}
+    breadcrumb={breadcrumbs.show}
+    children={page}
+  />
 )

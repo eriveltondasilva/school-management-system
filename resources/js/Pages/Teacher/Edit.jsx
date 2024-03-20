@@ -49,7 +49,9 @@ export default function PageTeacherEdit({ teacher = {} }) {
 
 // ==============================================
 PageTeacherEdit.layout = (page) => (
-  <AuthLayout title={titles.edit} breadcrumb={breadcrumbs.edit}>
-    {page}
-  </AuthLayout>
+  <AuthLayout
+    title={titles.edit}
+    breadcrumb={breadcrumbs.edit}
+    children={page}
+  />
 )

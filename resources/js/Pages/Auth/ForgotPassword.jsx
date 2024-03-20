@@ -8,7 +8,7 @@ import GuestLayout from '@/Layouts/GuestLayout'
 import { titles } from './data'
 
 // ==============================================
-export default function ForgotPassword({ status }) {
+export default function PageForgotPassword({ status }) {
   const { data, setData, post, processing, errors } = useForm({
     email: '',
   })
@@ -23,7 +23,7 @@ export default function ForgotPassword({ status }) {
   }
 
   return (
-    <GuestLayout title={titles.forgotPassword}>
+    <>
       <div className='mb-4 text-sm text-gray-600 dark:text-gray-400'>
         Esqueceu sua senha? Sem problemas. Basta nos informar seu endereço de
         e-mail e enviaremos por e-mail um link de redefinição de senha que
@@ -53,6 +53,10 @@ export default function ForgotPassword({ status }) {
           </Button>
         </footer>
       </form>
-    </GuestLayout>
+    </>
   )
 }
+
+PageForgotPassword.layout = (page) => (
+  <GuestLayout title={titles.forgotPassword}>{page}</GuestLayout>
+)

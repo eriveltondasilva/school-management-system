@@ -157,7 +157,9 @@ function StudentPagination({ students = {} }) {
 
 // ==============================================
 PageStudentIndex.layout = (page) => (
-  <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>
-    {page}
-  </AuthLayout>
+  <AuthLayout
+    title={titles.index}
+    breadcrumb={breadcrumbs.index}
+    children={page}
+  />
 )

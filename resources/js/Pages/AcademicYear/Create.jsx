@@ -61,7 +61,9 @@ export default function PageAcademicYearCreate() {
 
 // ==============================================
 PageAcademicYearCreate.layout = (page) => (
-  <AuthLayout title={titles.create} breadcrumb={breadcrumbs.create}>
-    {page}
-  </AuthLayout>
+  <AuthLayout
+    title={titles.create}
+    breadcrumb={breadcrumbs.create}
+    children={page}
+  />
 )

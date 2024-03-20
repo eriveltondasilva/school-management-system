@@ -7,11 +7,10 @@ export const titles = {
 // ------------------------------------
 const baseBreadcrumb = [
   { title: 'Painel', routeName: 'dashboard' },
-  { title: titles.index, routeName: 'group.index' },
+  { title: titles.index, routeName: 'subject.index' },
 ]
 
-// prettier-ignore
 export const breadcrumbs = {
-  index : [...baseBreadcrumb, { title: titles.index }],
+  index: [...baseBreadcrumb, { title: titles.index }],
   create: [...baseBreadcrumb, { title: titles.create }],
 }

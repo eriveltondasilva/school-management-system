@@ -13,7 +13,7 @@ import GuestLayout from '@/Layouts/GuestLayout'
 import { titles } from './data'
 
 // ==============================================
-export default function Login({ status, canResetPassword }) {
+export default function PageLogin({ status, canResetPassword }) {
   const { data, setData, post, processing, errors, reset } = useForm({
     email: '',
     password: '',
@@ -36,7 +36,7 @@ export default function Login({ status, canResetPassword }) {
   }
 
   return (
-    <GuestLayout title={titles.login}>
+    <>
       {/* # status */}
       {status && (
         <div className='mb-4 text-sm font-medium text-green-600'>{status}</div>
@@ -114,6 +114,10 @@ export default function Login({ status, canResetPassword }) {
           </Button>
         </footer>
       </form>
-    </GuestLayout>
+    </>
   )
 }
+
+PageLogin.layout = (page) => (
+  <GuestLayout title={titles.login} children={page} />
+)
