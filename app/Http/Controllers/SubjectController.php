@@ -10,7 +10,7 @@ class SubjectController extends Controller
 {
     public function index()
     {
-        $subjects = Teacher::find(1);
+        $subjects = Subject::all();
         return inertia('Subject/Index', compact('subjects'));
     }
 

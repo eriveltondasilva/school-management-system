@@ -6,37 +6,20 @@ namespace Database\Seeders;
 
 use App\Models\AcademicYear;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class QuarterSeeder extends Seeder
 {
     public function run(): void
     {
-        $academicYears = AcademicYear::all();
+        $quarters = [
+            ['name' => '1° Trimestre'],
+            ['name' => '2° Trimestre'],
+            ['name' => '3° Trimestre'],
+            ['name' => '4° Trimestre'],
+        ];
 
-        foreach ($academicYears as $year) {
-            $year->quarters()->createMany([
-                [
-                    'name' => '1° Trimestre',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ],
-                [
-                    'name' => '2° Trimestre',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ],
-                [
-                    'name' => '3° Trimestre',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ],
-                [
-                    'name' => '4° Trimestre',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ],
-            ]);
-        }
+        AcademicYear::all()->each(function ($year) use ($quarters) {
+            return $year->quarters()->createMany($quarters);
+        });
     }
 }

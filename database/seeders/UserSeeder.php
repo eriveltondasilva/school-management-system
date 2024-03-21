@@ -19,7 +19,6 @@ class UserSeeder extends Seeder
         ]);
         $erivelton->assignRole(RoleEnum::ADMIN);
 
-
         $maria = User::factory()->create([
             'username' => 'maria',
             'email' => 'maria@gmail.com',

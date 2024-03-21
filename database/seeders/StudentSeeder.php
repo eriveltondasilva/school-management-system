@@ -12,14 +12,12 @@ class StudentSeeder extends Seeder
 {
     public function run(): void
     {
-        $group1Students = Student::factory()->count(10)->create();
-        $group2Students = Student::factory()->count(10)->create();
-        Student::factory()->count(10)->create();
+        $firstGroupStudents = Student::factory()->count(15)->create();
+        $secondGroupStudents = Student::factory()->count(15)->create();
 
-        $group1StudentsIds = $group1Students->pluck('id');
-        $group2StudentsIds = $group2Students->pluck('id');
+        Group::find(1)->students()->attach($firstGroupStudents);
+        Group::find(2)->students()->attach($secondGroupStudents);
 
-        Group::find(1)->students()->attach($group1StudentsIds);
-        Group::find(2)->students()->attach($group2StudentsIds);
+        Student::factory()->count(20)->create();
     }
 }

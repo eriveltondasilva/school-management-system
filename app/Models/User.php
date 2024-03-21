@@ -42,13 +42,17 @@ class User extends Authenticatable
     ];
 
     // ------------------------------
-    // #Relationships
+    // ### Scope ###
     // ------------------------------
 
     public function scopeIsActive($query)
     {
         return $query->where('is_active', true);
     }
+
+    // ------------------------------
+    // ### Relationships ###
+    // ------------------------------
 
     public function profile(): MorphTo
     {

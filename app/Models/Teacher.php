@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Models\Scopes\IsActiveScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\{BelongsToMany, HasMany, MorphOne};
+use Illuminate\Database\Eloquent\Relations\{BelongsToMany, MorphOne};
 
 // ====================================
 
@@ -34,7 +34,6 @@ class Teacher extends Model
     protected $casts = [
         'is_active' => 'boolean',
         'birthday' => 'datetime:Y-m-d',
-        // 'gender' => 'enum:M,F',
     ];
 
     // ------------------------------
@@ -55,9 +54,9 @@ class Teacher extends Model
         return $this->morphOne(User::class, 'profile');
     }
 
-    public function subjects(): HasMany
+    public function subjects(): BelongsToMany
     {
-        return $this->hasMany(Subject::class);
+        return $this->belongsToMany(Subject::class);
     }
 
     public function groups(): BelongsToMany
