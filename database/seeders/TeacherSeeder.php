@@ -12,10 +12,10 @@ class TeacherSeeder extends Seeder
 {
     public function run(): void
     {
-        Teacher::factory()->count(5)->create(['is_active' => false]);
-
         $teachers = Teacher::factory()->count(10)->create();
 
         Group::find(1)->teachers()->attach($teachers);
+
+        Teacher::factory()->count(5)->create(['is_active' => false]);
     }
 }

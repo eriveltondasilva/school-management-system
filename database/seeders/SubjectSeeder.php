@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Enums\SubjectEnum;
+use App\Models\AcademicYear;
 use App\Models\Subject;
 use Illuminate\Database\Seeder;
 
@@ -11,7 +12,7 @@ class SubjectSeeder extends Seeder
 {
     public function run(): void
     {
-        $subjects = [
+        $subjectsData = [
             [
                 'name' => SubjectEnum::PORTUGUESE->label(),
                 'abbr' => SubjectEnum::PORTUGUESE->abbr(),
@@ -34,6 +35,14 @@ class SubjectSeeder extends Seeder
             ],
         ];
 
-        Subject::insert($subjects);
+        Subject::insert($subjectsData);
+
+        $activeYearId = AcademicYear::isActive()->value('id');
+
+        $subjects = Subject::all();
+
+        $subjects->each(function ($subject) use ($activeYearId) {
+            $subject->teachers()->attach([1,2], ['academic_year_id' => $activeYearId]);
+        });
     }
 }

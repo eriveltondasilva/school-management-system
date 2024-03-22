@@ -12,10 +12,9 @@ return new class () extends Migration {
             $table->string('name')->comment('Nome do turma');
             $table->string('classroom')->nullable()->comment('Sala de aula');
             $table->string('shift')->nullable()->comment('Turno');
-            //
-            $table->unsignedBigInteger('academic_year_id')->nullable()->comment('ID do ano escolar');
-            //
             $table->timestamps();
+            //
+            $table->unsignedBigInteger('academic_year_id')->comment('ID do ano escolar');
         });
     }
 

@@ -9,11 +9,11 @@ return new class () extends Migration {
     {
         Schema::create('subject_teacher', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
+            //
             $table->unsignedBigInteger('subject_id')->comment('ID da disciplina');
             $table->unsignedBigInteger('teacher_id')->comment('ID da professor');
-            $table->unsignedBigInteger('academic_year_id')->comment('ID do ano acadêmico');
-            //
-            $table->timestamps();
+            $table->unsignedBigInteger('academic_year_id')->nullable()->comment('ID do ano acadêmico');
         });
     }
 
