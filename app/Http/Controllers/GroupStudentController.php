@@ -25,7 +25,7 @@ class GroupStudentController extends Controller
 
         $searchTerm = $request->get('search', '');
 
-        $activeYearId = AcademicYear::isActive()->value('id');
+        $activeYearId = AcademicYear::IsActive()->id;
 
         $studentsQuery = Student::select('id', 'name', 'gender')
             ->whereDoesntHave('groups', function ($query) use ($activeYearId) {

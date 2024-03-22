@@ -4,7 +4,7 @@ import {
   Calendar,
   CalendarDays,
   Home,
-  Library,
+  LibraryBig,
   UsersRound,
 } from 'lucide-react'
 
@@ -20,7 +20,7 @@ export const sidebarItems = [
   ],
   [
     { title: 'Turmas', icon: UsersRound, routeName: 'group.index' },
-    { title: 'Disciplinas', icon: Library, routeName: 'subject.index' },
+    { title: 'Disciplinas', icon: LibraryBig, routeName: 'subject.index' },
     { title: 'Ano Letivo', icon: Calendar, routeName: 'academic-year.index' },
   ],
 ]

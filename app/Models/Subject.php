@@ -34,6 +34,7 @@ class Subject extends Model
 
     public function teachers(): BelongsToMany
     {
-        return $this->belongsToMany(Teacher::class);
+        return $this->belongsToMany(Teacher::class)
+            ->wherePivot('academic_year_id', AcademicYear::IsActive()->id);
     }
 }

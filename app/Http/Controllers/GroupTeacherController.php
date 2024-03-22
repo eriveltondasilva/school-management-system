@@ -21,8 +21,6 @@ class GroupTeacherController extends Controller
 
     public function addTeacher(Group $group)
     {
-        $activeYearId = AcademicYear::isActive()->value('id');
-
         $teachers = Teacher::select('id', 'name', 'cpf')
             ->whereDoesntHave('groups', function ($query) use ($group) {
                 $query->where('groups.id', $group->id);
@@ -38,9 +36,7 @@ class GroupTeacherController extends Controller
     public function storeTeacher(Group $group, Teacher $teacher)
     {
         $group->teachers()->attach($teacher);
-
         $group->load('teachers');
-
         $message = sprintf("Professor(a) %s, CPF %s, adicionado(a) à turma do %s.", $teacher->name, $teacher->cpf, $group->name);
 
         return back()->with('message', $message);
@@ -49,9 +45,7 @@ class GroupTeacherController extends Controller
     public function destroyTeacher(Group $group, Teacher $teacher)
     {
         $group->teachers()->detach($teacher);
-
         $group->load('teachers');
-
         $message = sprintf("Professor(a) %s, CPF %s, removido(a) da turma do %s.", $teacher->name, $teacher->cpf, $group->name);
 
         return back()->with('message', $message);

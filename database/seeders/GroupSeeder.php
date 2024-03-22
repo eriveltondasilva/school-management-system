@@ -11,7 +11,7 @@ class GroupSeeder extends Seeder
 {
     public function run(): void
     {
-        $academicYear = AcademicYear::isActive()->first();
+        $academicYear = AcademicYear::IsActive();
 
         $groups = [
             [

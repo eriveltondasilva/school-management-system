@@ -21,7 +21,7 @@ class GroupRequest extends FormRequest
         ];
 
         if ($this->isMethod('POST')) {
-            $activeAcademicYearId = AcademicYear::isActive()->value('id');
+            $activeAcademicYearId = AcademicYear::IsActive()->id;
 
             $rules['name'] = [
                     'required',

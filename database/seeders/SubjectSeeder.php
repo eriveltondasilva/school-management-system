@@ -37,7 +37,7 @@ class SubjectSeeder extends Seeder
 
         Subject::insert($subjectsData);
 
-        $activeYearId = AcademicYear::isActive()->value('id');
+        $activeYearId = AcademicYear::IsActive()->id;
 
         $subjects = Subject::all();
 

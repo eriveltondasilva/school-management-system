@@ -48,6 +48,11 @@ Route::middleware('auth')
     Route::controller(SubjectController::class)
     ->prefix('disciplinas')->name('subject.')->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/{subject}/professores', 'listTeachers')->name('list-teachers');
+        Route::get('/{subject}/professores/adicionar', 'addTeacher')->name('add-teacher');
+        // ### ACTIONS ###
+        Route::post('/{subject}/professores/{teacher}', 'storeTeacher')->name('store-teacher');
+        Route::delete('/{subject}/professores/{teacher}', 'destroyTeacher')->name('destroy-teacher');
     });
 
     // #TEST
