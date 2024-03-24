@@ -18,7 +18,7 @@ class GroupStudentController extends Controller
         return inertia('Group/ListStudents', compact('group', 'students'));
     }
 
-    public function addStudent(Request $request, Group $group)
+    public function addStudents(Request $request, Group $group)
     {
 
         $request->validate(['search' => 'nullable|string']);

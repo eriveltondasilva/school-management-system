@@ -24,13 +24,12 @@ class GroupRequest extends FormRequest
             $activeAcademicYearId = AcademicYear::IsActive()->id;
 
             $rules['name'] = [
-                    'required',
-                    'string',
-                    'max:255',
-                    Rule::unique('groups')->where(function ($query) use ($activeAcademicYearId) {
-                        return $query->where('academic_year_id', $activeAcademicYearId);
-                    })
-                ];
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('groups')
+                ->where(fn ($query) => $query->where('academic_year_id', $activeAcademicYearId))
+            ];
         }
 
         return $rules;

@@ -19,7 +19,7 @@ class GroupTeacherController extends Controller
         return inertia('Group/ListTeachers', compact('group', 'teachers'));
     }
 
-    public function addTeacher(Group $group)
+    public function addTeachers(Group $group)
     {
         $teachers = Teacher::select('id', 'name', 'cpf')
             ->whereDoesntHave('groups', function ($query) use ($group) {

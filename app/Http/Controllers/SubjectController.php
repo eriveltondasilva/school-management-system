@@ -32,7 +32,7 @@ class SubjectController extends Controller
         return inertia('Subject/ListTeachers', compact('subject', 'teachers'));
     }
 
-    public function addTeacher(Subject $subject)
+    public function addTeachers(Subject $subject)
     {
         $teachers = Teacher::select('id', 'name', 'cpf')
             ->whereDoesntHave('subjects', function ($query) use ($subject) {

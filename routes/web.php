@@ -2,11 +2,9 @@
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{
-    DashboardController,
-    ProfileController,
-    SubjectController,
-};
+//
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SocialiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +14,6 @@ use App\Http\Controllers\{
 
 //# WELCOME
 Route::get('/', function () {
-    //* redireciona para a página painel caso usuário esteja logado
-    if (auth()->user()) {
-        return to_route('dashboard');
-    }
-
     $canLogin = Route::has('login');
     $canRegister = Route::has('register');
     $laravelVersion = Application::VERSION;
@@ -31,51 +24,43 @@ Route::get('/', function () {
 
 
 //# AUTH
-Route::middleware('auth')
-->group(function () {
-    // TODO: remover esta rota e configurar o HOME no arquivo auth.php
-    // Route::redirect('/dashboard', '/painel');
+Route::middleware('auth')->group(function () {
+    //# DASHBOARD
+    Route::redirect('/painel', route('admin.dashboard'));
 
-    // #DASHBOARD
-    Route::get('/painel', [DashboardController::class, 'index'])->name('dashboard');
-
-    // #CALENDAR
+    //# CALENDAR
     Route::get('/calendario', function () {
         return inertia('Calendar');
     })->name('calendar');
 
-    // #SUBJECT
-    Route::controller(SubjectController::class)
-    ->prefix('disciplinas')->name('subject.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/{subject}/professores', 'listTeachers')->name('list-teachers');
-        Route::get('/{subject}/professores/adicionar', 'addTeacher')->name('add-teacher');
-        // ### ACTIONS ###
-        Route::post('/{subject}/professores/{teacher}', 'storeTeacher')->name('store-teacher');
-        Route::delete('/{subject}/professores/{teacher}', 'destroyTeacher')->name('destroy-teacher');
+
+    //# PROFILE
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('perfil/', 'edit')->name('profile.edit');
+        //* ### ACTIONS ###
+        Route::patch('perfil/', 'update')->name('profile.update');
+        Route::delete('perfil/', 'destroy')->name('profile.destroy');
     });
 
-    // #TEST
+
+    //# TEST
     Route::get('/teste', function () {
         return 'Hello, world!';
     })->name('test');
 });
 
 
-//# PROFILE
-Route::middleware('auth')->controller(ProfileController::class)
-->prefix('perfil')->name('profile.')->group(function () {
-    Route::get('/', 'edit')->name('edit');
-    Route::patch('/', 'update')->name('update');
-    Route::delete('/', 'destroy')->name('destroy');
+//# SOCIALITE
+Route::controller(SocialiteController::class)->group(function () {
+    Route::get('socialite/{provider}/redirect', 'redirect')->name('socialite.redirect');
+    Route::get('socialite/{provider}/callback', 'callback')->name('socialite.callback');
 });
 
 
 // ===============================================
 //# ROUTES
 require __DIR__.'/auth.php';
-require __DIR__.'/socialite.php';
-require __DIR__.'/student.php';
-require __DIR__.'/teacher.php';
-require __DIR__.'/group.php';
-require __DIR__.'/academicYear.php';
+//
+require __DIR__.'/adminRoutes.php';
+require __DIR__.'/teacherRoutes.php';
+require __DIR__.'/studentRoutes.php';
