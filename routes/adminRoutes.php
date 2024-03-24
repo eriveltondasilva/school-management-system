@@ -19,6 +19,12 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('painel', [DashboardController::class, 'index'])->name('dashboard');
 
 
+    //# CALENDAR
+    Route::get('/calendario', function () {
+        return inertia('Calendar');
+    })->name('calendar');
+
+
     // #ACADEMIC YEAR ROUTES
     Route::controller(AcademicYearController::class)->group(function () {
         Route::get('ano-letivo/', 'index')->name('academic-year.index');

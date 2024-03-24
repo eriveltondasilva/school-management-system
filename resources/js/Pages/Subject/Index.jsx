@@ -12,6 +12,7 @@ import { breadcrumbs, titles } from './data'
 // ===============================================
 export default function PageSubjectIndex({ subjects }) {
   const hasSubjects = subjects.length > 0
+
   return (
     <>
       <Title>
@@ -49,7 +50,7 @@ function CardSubject({ subjects = [] }) {
           <footer>
             <Button
               as={Link}
-              href={route('subject.list-teachers', id)}
+              href={route('admin.subject.list-teachers', id)}
               color='blue'
               fullSized>
               <Eye className='mr-2 h-5 w-5' />

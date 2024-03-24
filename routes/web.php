@@ -26,12 +26,9 @@ Route::get('/', function () {
 //# AUTH
 Route::middleware('auth')->group(function () {
     //# DASHBOARD
-    Route::redirect('/painel', route('admin.dashboard'));
-
-    //# CALENDAR
-    Route::get('/calendario', function () {
-        return inertia('Calendar');
-    })->name('calendar');
+    Route::get ('/painel', function () {
+        return to_route('admin.dashboard');
+    })->name('dashboard');
 
 
     //# PROFILE
@@ -62,5 +59,5 @@ Route::controller(SocialiteController::class)->group(function () {
 require __DIR__.'/auth.php';
 //
 require __DIR__.'/adminRoutes.php';
-require __DIR__.'/teacherRoutes.php';
-require __DIR__.'/studentRoutes.php';
+// require __DIR__.'/teacherRoutes.php';
+// require __DIR__.'/studentRoutes.php';

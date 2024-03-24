@@ -8,11 +8,10 @@ enum RoleEnum: string
 {
     use EnumAttributesTrait;
 
-    case ADMIN   = 'administrator';  // administrador(a)
-    case COORD   = 'coordinator';    // coordenador(a)
-    case TEACHER = 'teacher';        // professor(a)
-    case STUDENT = 'student';        // estudante
-    case USER    = 'user';           // usuário(a)
+    case ADMIN   = 'admin';    // administrador(a)
+    case TEACHER = 'teacher';  // professor(a)
+    case STUDENT = 'student';  // estudante
+    case USER    = 'user';     // usuário(a)
 
     public const DEFAULT = self::USER;
 
@@ -24,7 +23,6 @@ enum RoleEnum: string
     {
         return match($this) {
             static::ADMIN   => 'administrador(a)',
-            static::COORD   => 'coordenador(a)',
             static::TEACHER => 'professor(a)',
             static::STUDENT => 'estudante',
             static::USER    => 'usuário(a)',

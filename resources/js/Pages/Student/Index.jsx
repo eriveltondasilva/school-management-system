@@ -29,7 +29,7 @@ export default function PageStudentIndex({ students = [] }) {
     setSearch(e.target.value)
   }
 
-  const formDataOptions = { routeName: 'student.index' }
+  const formDataOptions = { routeName: 'admin.student.index' }
   const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
 
   return (
@@ -40,7 +40,7 @@ export default function PageStudentIndex({ students = [] }) {
         <Title.Right>
           <Button
             as={Link}
-            href={route('student.create')}
+            href={route('admin.student.create')}
             color='blue'
             className=''>
             <Plus className='mr-2 h-5 w-5' />
@@ -68,7 +68,7 @@ export default function PageStudentIndex({ students = [] }) {
             </Button>
             <Button
               as={Link}
-              href={route('student.index')}
+              href={route('admin.student.index')}
               color='light'
               disabled={isLoading}>
               <Undo2 className='h-5 w-5' />
@@ -114,14 +114,14 @@ function StudentTable({ students = [] }) {
               <Button.Group>
                 <Button
                   as={Link}
-                  href={route('student.show', id)}
+                  href={route('admin.student.show', id)}
                   color='blue'
                   size='xs'>
                   <Eye className='h-4 w-4' />
                 </Button>
                 <Button
                   as={Link}
-                  href={route('student.edit', id)}
+                  href={route('admin.student.edit', id)}
                   color='green'
                   size='xs'>
                   <PencilLine className='ml-2 h-4 w-4' />

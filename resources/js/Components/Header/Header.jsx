@@ -1,6 +1,6 @@
 import { DarkThemeToggle, Navbar } from 'flowbite-react'
-import { Menu } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
+import Sidebar from '../Sidebar'
 
 // ====================================
 export function HeaderRoot({ children }) {
@@ -19,24 +19,11 @@ export function HeaderRoot({ children }) {
 }
 
 // ====================================
-export function HeaderLeft({ title }) {
+export function HeaderLeft({ title = '' }) {
   return (
     <Navbar.Brand>
       {/* Botão de menu */}
-      <button
-        data-drawer-target='sidebar'
-        data-drawer-show='sidebar'
-        aria-controls='sidebar'
-        type='button'
-        className={twJoin(
-          'mx-2 p-2',
-          'inline-flex items-center md:hidden',
-          'rounded-lg text-sm focus:outline-none focus:ring-2',
-          'text-gray-500 hover:bg-gray-100 focus:ring-gray-200 ',
-          'dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
-        )}>
-        <Menu />
-      </button>
+      <Sidebar.TriggerOpen />
 
       {/* Título */}
       <span
@@ -45,19 +32,19 @@ export function HeaderLeft({ title }) {
           'hidden sm:block',
           'text-xl font-semibold dark:text-white'
         )}>
-        {title === 'Painel' ? 'Bem-vindo(a)' : title}
+        {title || 'Bem-vindo(a)'}
       </span>
     </Navbar.Brand>
   )
 }
 
 // ====================================
-export function HeaderRight({ activeAcademicYear, children }) {
+export function HeaderRight({ activeYear = {}, children }) {
   return (
     <div className='mr-2 flex items-center space-x-2'>
       {/*  */}
       <div className='text-sm font-medium text-gray-600 dark:text-gray-400 '>
-        Ano Letivo: {activeAcademicYear.year}
+        Ano Letivo: {activeYear.year}
       </div>
 
       {/* Botão tema escuro */}

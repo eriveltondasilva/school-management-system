@@ -3,7 +3,7 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function DashboardPage() {
+export default function DashboardPage(props) {
   return null
 }
 

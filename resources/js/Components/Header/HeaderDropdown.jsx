@@ -22,13 +22,11 @@ export function HeaderDropdown({ avatar_url = '', children }) {
 }
 
 // ----------------------------------------------
-export function HeaderDropdownHeader({ username, email }) {
+export function HeaderDropdownHeader({ role, email }) {
   return (
     <Dropdown.Header>
-      <span
-        className='block truncate text-sm font-semibold'
-        title={username || 'Nome'}>
-        {username || 'Usuário'}
+      <span className='block truncate text-sm font-semibold uppercase'>
+        {role || 'Usuário'}
       </span>
       <span
         className='block truncate text-sm text-gray-400'

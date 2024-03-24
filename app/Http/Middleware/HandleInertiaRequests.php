@@ -20,18 +20,48 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            'auth' => [
-                'user' => $request->user(),
-                'activeAcademicYear' => AcademicYear::IsActive(),
-            ],
-            'ziggy' => fn () => [
-                ...(new Ziggy())->toArray(),
-                'location' => $request->url(),
-            ],
-            'flash' => [
-                'message' => fn () => $request->session()->get('message'),
-                'id' => fn () => $request->session()->get('id'),
-            ],
+            'auth' => $this->getAuthUserData($request),
+            'ziggy' => $this->getZiggyData($request),
+            'flash' => $this->getFlashData($request),
         ];
+    }
+
+    // ziggy data
+    private function getZiggyData(Request $request): array
+    {
+        return (new Ziggy())->toArray() + ['location' => $request->url()];
+    }
+
+    // flash data
+    private function getFlashData(Request $request): array
+    {
+        $message = $request->session()->pull('message');
+        $id = $request->session()->pull('id');
+
+        return [
+            'message' => $message,
+            'id' => $id,
+        ];
+    }
+
+    // auth data
+    private function getAuthUserData(Request $request): array
+    {
+        $user =  $request->user();
+
+        if ($user) {
+            $userWithRoles = $user->load('roles:id,name,display_name');
+            $userData = $userWithRoles->only('id', 'username', 'email', 'avatar_url');
+            $roles = $userWithRoles->roles[0];
+
+            $activeYear = AcademicYear::select('id', 'year')->IsActive();
+
+            return [
+                'user' => $userData + ['roles' => $roles],
+                'activeYear' => $activeYear,
+            ];
+        }
+
+        return ['user' => null];
     }
 }

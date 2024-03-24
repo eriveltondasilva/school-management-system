@@ -2,17 +2,26 @@ import { Head, usePage } from '@inertiajs/react'
 import { twJoin } from 'tailwind-merge'
 
 import Breadcrumb from '@/Components/Breadcrumb'
-// import PanelInfo from '@/Components/PanelInfo'
 import Footer from '@/Components/Footer'
 import Header from '@/Components/Header'
 import Sidebar from '@/Components/Sidebar'
-import Main from './partials/Main'
 
+import SidebarItems from './data'
+import Main from './partials/Main'
 import schoolImg from '/resources/images/school.png'
 
 // ============================================================================
 export default function AuthLayout({ title, breadcrumb, children }) {
-  const { user, activeAcademicYear } = usePage().props.auth || {}
+  const { user, activeYear } = usePage().props.auth || {}
+
+  console.log(user.roles)
+
+  const sidebarItemsMap = {
+    admin: SidebarItems.Admin,
+    teacher: SidebarItems.Teacher,
+    student: SidebarItems.Student,
+    user: SidebarItems.User,
+  }[user?.roles.name || 'user']
 
   return (
     <>
@@ -23,18 +32,18 @@ export default function AuthLayout({ title, breadcrumb, children }) {
         <Sidebar.Logo img={schoolImg} imgAlt='Escola Viver'>
           Escola Viver
         </Sidebar.Logo>
-        <Sidebar.BtnClose />
-        <Sidebar.Menu />
+        <Sidebar.TriggerClose />
+        <Sidebar.Menu items={sidebarItemsMap} />
       </Sidebar>
 
       <Wrapper>
         {/* #header */}
         <Header>
           <Header.Left />
-          <Header.Right activeAcademicYear={activeAcademicYear}>
+          <Header.Right activeYear={activeYear}>
             <Header.Dropdown avatar_url={user.avatar_url}>
               <Header.DropdownHeader
-                username={user.username}
+                role={user?.roles.display_name || 'user'}
                 email={user.email}
               />
               <Header.DropdownItem />
@@ -43,7 +52,7 @@ export default function AuthLayout({ title, breadcrumb, children }) {
         </Header>
 
         {/* #breadcrumb */}
-        <Breadcrumb items={breadcrumb} />
+        {breadcrumb && <Breadcrumb items={breadcrumb} />}
 
         {/* {panelInfo && <PanelInfo />} */}
 
