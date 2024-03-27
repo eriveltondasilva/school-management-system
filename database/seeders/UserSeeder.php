@@ -12,20 +12,47 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $erivelton = User::factory()->create([
-            'username' => 'erivelton',
-            'email' => 'eriveltondasilva13@gmail.com',
-            'password' => '12345678',
-        ]);
-        $erivelton->assignRole(RoleEnum::ADMIN);
 
-        $maria = User::factory()->create([
-            'username' => 'maria',
-            'email' => 'maria@gmail.com',
-            'password' => '12345678',
-        ]);
-        $maria->assignRole(RoleEnum::TEACHER);
+        // Criação de usuários e atribuição de papéis
+        $users = [
+            [
+                'username' => 'erivelton',
+                'email' => 'eriveltondasilva13@gmail.com',
+                'role' => RoleEnum::ADMIN,
+            ],
+            [
+                'username' => 'admin',
+                'email' => 'admin@gmail.com',
+                'role' => RoleEnum::ADMIN,
+            ],
+            [
+                'username' => 'teacher',
+                'email' => 'teacher@gmail.com',
+                'role' => RoleEnum::TEACHER,
+            ],
+            [
+                'username' => 'student',
+                'email' => 'student@gmail.com',
+                'role' => RoleEnum::STUDENT,
+            ],
+            [
+                'username' => 'user',
+                'email' => 'user@gmail.com',
+                'role' => RoleEnum::USER,
+            ],
+        ];
 
+
+        foreach ($users as $userData) {
+            $user = User::factory()->create([
+                'username' => $userData['username'],
+                'email' => $userData['email']
+            ]);
+            $user->assignRole($userData['role']);
+        }
+
+
+        // Criação de usuários padrão
         User::factory()->count(10)->create()->each(function ($user) {
             $user->assignRole(RoleEnum::DEFAULT);
         });

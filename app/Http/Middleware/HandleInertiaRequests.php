@@ -22,26 +22,14 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'auth' => $this->getAuthUserData($request),
             'ziggy' => $this->getZiggyData($request),
-            'flash' => $this->getFlashData($request),
         ];
     }
+
 
     // ziggy data
     private function getZiggyData(Request $request): array
     {
         return (new Ziggy())->toArray() + ['location' => $request->url()];
-    }
-
-    // flash data
-    private function getFlashData(Request $request): array
-    {
-        $message = $request->session()->pull('message');
-        $id = $request->session()->pull('id');
-
-        return [
-            'message' => $message,
-            'id' => $id,
-        ];
     }
 
     // auth data

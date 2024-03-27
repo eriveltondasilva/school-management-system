@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 //
-use App\Http\Controllers\{
+use App\Http\Controllers\Admin\{
     DashboardController,
     AcademicYearController,
     GroupController,
@@ -16,7 +16,7 @@ use App\Http\Controllers\{
 // ===============================================
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     //# DASHBOARD ROUTES
-    Route::get('painel', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('painel', DashboardController::class)->name('dashboard');
 
 
     //# CALENDAR

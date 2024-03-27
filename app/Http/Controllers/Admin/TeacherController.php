@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+//
 use App\Http\Requests\PersonRequest;
 use App\Models\Teacher;
 use App\Services\SearchServices;

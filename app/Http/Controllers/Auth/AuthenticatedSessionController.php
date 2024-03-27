@@ -14,9 +14,7 @@ use Inertia\Response;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
+    /* Display the login view */
     public function create(): Response
     {
         $canResetPassword = Route::has('password.request');
@@ -25,31 +23,16 @@ class AuthenticatedSessionController extends Controller
         return Inertia::render('Auth/Login', compact('canResetPassword', 'status'));
     }
 
-    /**
-     * Handle an incoming authentication request.
-     */
+    /* Handle an incoming authentication request */
     public function store(LoginRequest $request): RedirectResponse
     {
-        // $roleRoutes = [
-        //     'admin' => 'Admin/Dashboard',
-        //     'coordenator' => 'Coordenator/Dashboard',
-        //     'teacher' => 'Teacher/Dashboard',
-        //     'student' => 'Student/Dashboard',
-        // ];
-
-        // $role = Auth::user()->role->name;
-        // $route = $roleRoutes[$role] ?? 'welcome';
-
         $request->authenticate();
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);
-        // return redirect()->intended(route($route));
     }
 
-    /**
-     * Destroy an authenticated session.
-     */
+    /* Destroy an authenticated session */
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();

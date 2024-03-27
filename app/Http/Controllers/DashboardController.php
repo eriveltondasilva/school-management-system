@@ -2,15 +2,25 @@
 
 namespace App\Http\Controllers;
 
-// use App\Models\AcademicYear;
-// use App\Models\Student;
+use Illuminate\Http\Request;
 
-// ========================================================================
 class DashboardController extends Controller
 {
-    /** xxx */
-    public function index()
+    public function __invoke()
     {
-        return inertia('Dashboard');
+        $user = auth()->user();
+        if ($user->hasRole('admin')) {
+            return to_route('admin.dashboard');
+        }
+
+        if ($user->hasRole('teacher')) {
+            return to_route('teacher.dashboard');
+        }
+
+        if ($user->hasRole('student')) {
+            return to_route('student.dashboard');
+        }
+
+        return inertia('Dashboard')->with('message', 'Something went wrong. Please try again later.');
     }
 }

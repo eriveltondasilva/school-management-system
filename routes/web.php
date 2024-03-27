@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 //
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SocialiteController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,17 +27,13 @@ Route::get('/', function () {
 //# AUTH
 Route::middleware('auth')->group(function () {
     //# DASHBOARD
-    Route::get ('/painel', function () {
-        return to_route('admin.dashboard');
-    })->name('dashboard');
-
+    Route::get('/painel', DashboardController::class)->name('dashboard');
 
     //# PROFILE
-    Route::controller(ProfileController::class)->group(function () {
-        Route::get('perfil/', 'edit')->name('profile.edit');
-        //* ### ACTIONS ###
-        Route::patch('perfil/', 'update')->name('profile.update');
-        Route::delete('perfil/', 'destroy')->name('profile.destroy');
+    Route::controller(ProfileController::class)->name('profile.')->group(function () {
+        Route::get('perfil/', 'edit')->name('edit');
+        Route::patch('perfil/', 'update')->name('update');
+        Route::delete('perfil/', 'destroy')->name('destroy');
     });
 
 
@@ -48,9 +45,9 @@ Route::middleware('auth')->group(function () {
 
 
 //# SOCIALITE
-Route::controller(SocialiteController::class)->group(function () {
-    Route::get('socialite/{provider}/redirect', 'redirect')->name('socialite.redirect');
-    Route::get('socialite/{provider}/callback', 'callback')->name('socialite.callback');
+Route::controller(SocialiteController::class)->name('socialite.')->group(function () {
+    Route::get('socialite/{provider}/redirect', 'redirect')->name('redirect');
+    Route::get('socialite/{provider}/callback', 'callback')->name('callback');
 });
 
 
@@ -59,5 +56,5 @@ Route::controller(SocialiteController::class)->group(function () {
 require __DIR__.'/auth.php';
 //
 require __DIR__.'/adminRoutes.php';
-// require __DIR__.'/teacherRoutes.php';
-// require __DIR__.'/studentRoutes.php';
+require __DIR__.'/teacherRoutes.php';
+require __DIR__.'/studentRoutes.php';
