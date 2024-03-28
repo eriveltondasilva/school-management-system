@@ -27,7 +27,7 @@ export default function PageTeacherIndex({ teachers = [] }) {
     setSearch(e.target.value)
   }
 
-  const formDataOptions = { routeName: 'teacher.index' }
+  const formDataOptions = { routeName: 'admin.teacher.index' }
   const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
 
   return (
@@ -38,7 +38,7 @@ export default function PageTeacherIndex({ teachers = [] }) {
         <Title.Right>
           <Button
             as={Link}
-            href={route('teacher.create')}
+            href={route('admin.teacher.create')}
             color='blue'
             className=''>
             <Plus className='mr-2 h-5 w-5' />
@@ -66,7 +66,7 @@ export default function PageTeacherIndex({ teachers = [] }) {
             </Button>
             <Button
               as={Link}
-              href={route('teacher.index')}
+              href={route('admin.teacher.index')}
               color='light'
               disabled={isLoading}>
               <Undo2 className='h-5 w-5' />
@@ -111,14 +111,14 @@ function TeacherTable({ teachers = [] }) {
               <Button.Group>
                 <Button
                   as={Link}
-                  href={route('teacher.show', id)}
+                  href={route('admin.teacher.show', id)}
                   color='blue'
                   size='xs'>
                   <Eye className='h-4 w-4' />
                 </Button>
                 <Button
                   as={Link}
-                  href={route('teacher.edit', id)}
+                  href={route('admin.teacher.edit', id)}
                   color='green'
                   size='xs'>
                   <PencilLine className='ml-2 h-4 w-4' />

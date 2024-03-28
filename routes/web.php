@@ -29,11 +29,16 @@ Route::middleware('auth')->group(function () {
     //# DASHBOARD
     Route::get('/painel', DashboardController::class)->name('dashboard');
 
+
     //# PROFILE
-    Route::controller(ProfileController::class)->name('profile.')->group(function () {
-        Route::get('perfil/', 'edit')->name('edit');
-        Route::patch('perfil/', 'update')->name('update');
-        Route::delete('perfil/', 'destroy')->name('destroy');
+    Route::controller(ProfileController::class)
+    ->prefix('perfil')->name('profile.')->group(function () {
+
+        Route::get('/', 'edit')->name('edit');
+        //* ACTIONS
+        Route::patch('/', 'update')->name('update');
+        Route::delete('/', 'destroy')->name('destroy');
+
     });
 
 
@@ -45,16 +50,18 @@ Route::middleware('auth')->group(function () {
 
 
 //# SOCIALITE
-Route::controller(SocialiteController::class)->name('socialite.')->group(function () {
-    Route::get('socialite/{provider}/redirect', 'redirect')->name('redirect');
-    Route::get('socialite/{provider}/callback', 'callback')->name('callback');
+Route::controller(SocialiteController::class)
+->prefix('socialite/{provider}')->name('socialite.')->group(function () {
+
+    Route::get('/redirect', 'redirect')->name('redirect');
+    Route::get('/callback', 'callback')->name('callback');
+
 });
 
 
 // ===============================================
 //# ROUTES
 require __DIR__.'/auth.php';
-//
-require __DIR__.'/adminRoutes.php';
-require __DIR__.'/teacherRoutes.php';
-require __DIR__.'/studentRoutes.php';
+require __DIR__.'/admin.php';
+// require __DIR__.'/teacher.php';
+// require __DIR__.'/student.php';
