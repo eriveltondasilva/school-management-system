@@ -20,7 +20,7 @@ import getGenderName from '@/Utils/getGenderName'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageGroupAddStudent({ group = {}, students = {} }) {
+export default function PageGroupAddStudent({ group = {}, students = [] }) {
   const [isLoading, setIsLoading] = useState(false)
   const flash = usePage().props.flash || {}
   const searchId = route().params.search || ''

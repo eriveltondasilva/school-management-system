@@ -8,7 +8,7 @@ use App\Models\{AcademicYear, Group, Teacher};
 
 class GroupTeacherController extends Controller
 {
-    public function listTeachers(Group $group)
+    public function index(Group $group)
     {
         $teachers = $group
             ->teachers()
@@ -19,7 +19,7 @@ class GroupTeacherController extends Controller
         return inertia('Group/ListTeachers', compact('group', 'teachers'));
     }
 
-    public function addTeachers(Group $group)
+    public function create(Group $group)
     {
         $teachers = Teacher::select('id', 'name', 'cpf')
             ->whereDoesntHave('groups', function ($query) use ($group) {
@@ -33,7 +33,7 @@ class GroupTeacherController extends Controller
 
     // ### Actions ###
 
-    public function storeTeacher(Group $group, Teacher $teacher)
+    public function store(Group $group, Teacher $teacher)
     {
         $group->teachers()->attach($teacher);
         $group->load('teachers');
@@ -42,7 +42,7 @@ class GroupTeacherController extends Controller
         return back()->with('message', $message);
     }
 
-    public function destroyTeacher(Group $group, Teacher $teacher)
+    public function destroy(Group $group, Teacher $teacher)
     {
         $group->teachers()->detach($teacher);
         $group->load('teachers');

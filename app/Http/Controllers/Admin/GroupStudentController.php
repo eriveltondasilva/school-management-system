@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class GroupStudentController extends Controller
 {
-    public function listStudents(Group $group)
+    public function index(Group $group)
     {
         $students = $group
             ->students()
@@ -20,7 +20,7 @@ class GroupStudentController extends Controller
         return inertia('Group/ListStudents', compact('group', 'students'));
     }
 
-    public function addStudents(Request $request, Group $group)
+    public function create(Request $request, Group $group)
     {
 
         $request->validate(['search' => 'nullable|string']);
@@ -49,7 +49,7 @@ class GroupStudentController extends Controller
 
     // ### Actions ###
 
-    public function storeStudent(Group $group, Student $student)
+    public function store(Group $group, Student $student)
     {
         $group->students()->attach($student);
 
@@ -60,7 +60,7 @@ class GroupStudentController extends Controller
         return back()->with('message', $message);
     }
 
-    public function destroyStudent(Group $group, Student $student)
+    public function destroy(Group $group, Student $student)
     {
         $group->students()->detach($student);
 

@@ -10,13 +10,11 @@ use Laravel\Socialite\Facades\Socialite;
 // ===============================================
 class SocialiteController extends Controller
 {
-    /** xxx */
     public function redirect(ProviderEnum $provider)
     {
         return Socialite::driver($provider->value)->redirect();
     }
 
-    /** xxx */
     public function callback(ProviderEnum $provider)
     {
         $providerUser = Socialite::driver($provider->value)->user();

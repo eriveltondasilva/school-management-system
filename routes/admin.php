@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\{
     GroupTeacherController,
     StudentController,
     SubjectController,
+    SubjectTeacherController,
     TeacherController,
 };
 
@@ -26,7 +27,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     // #ACADEMIC YEAR ROUTES
     Route::controller(AcademicYearController::class)
-    ->prefix('ano-letivo')->name('academic-year.')->group(function () {
+    ->prefix('ano-letivos')->name('academic-years.')->group(function () {
 
         Route::get('/', 'index')->name('index');
         Route::get('/cadastrar', 'create')->name('create');
@@ -41,7 +42,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     //# GROUP ROUTES
     Route::controller(GroupController::class)
-    ->prefix('turmas')->name('group.')->group(function () {
+    ->prefix('turmas')->name('groups.')->group(function () {
 
         Route::get('/', 'index')->name('index');
         Route::get('/cadastrar', 'create')->name('create');
@@ -55,33 +56,33 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     //# GROUP/STUDENT ROUTES
     Route::controller(GroupStudentController::class)
-    ->prefix('turmas/{group}/alunos')->name('group.')->group(function () {
+    ->prefix('turmas/{group}/alunos')->name('groups.students.')->group(function () {
 
-        Route::get('/', 'listStudents')->name('list-students');
-        Route::get('/adicionar', 'addStudents')->name('add-students');
+        Route::get('/', 'index')->name('index');
+        Route::get('/adicionar', 'creates')->name('create');
         //* ACTIONS
-        Route::post('/{student}', 'storeStudent')->name('store-student');
-        Route::delete('/{student}', 'destroyStudent')->name('destroy-student');
+        Route::post('/{student}', 'store')->name('store');
+        Route::delete('/{student}', 'destroy')->name('destroy');
 
     });
 
 
     //# GROUP/TEACHER ROUTES
     Route::controller(GroupTeacherController::class)
-    ->prefix('turmas/{group}/professores')->name('group.')->group(function () {
+    ->prefix('turmas/{group}/professores')->name('groups.teachers.')->group(function () {
 
-        Route::get('/', 'listTeachers')->name('list-teachers');
-        Route::get('/adicionar', 'addTeachers')->name('add-teachers');
+        Route::get('/', 'index')->name('index');
+        Route::get('/adicionar', 'create')->name('create');
         //* ACTIONS
-        Route::post('/{teacher}', 'storeTeacher')->name('store-teacher');
-        Route::delete('/{teacher}', 'destroyTeacher')->name('destroy-teacher');
+        Route::post('/{teacher}', 'store')->name('store');
+        Route::delete('/{teacher}', 'destroy')->name('destroy');
 
     });
 
 
     //# STUDENT ROUTES
     Route::controller(StudentController::class)
-    ->prefix('alunos')->name('student.')->group(function () {
+    ->prefix('alunos')->name('students.')->group(function () {
 
         Route::get('/', 'index')->name('index');
         Route::get('/cadastrar', 'create')->name('create');
@@ -96,21 +97,29 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     //# SUBJECT ROUTES
     Route::controller(SubjectController::class)
-    ->prefix('disciplinas')->name('subject.')->group(function () {
+    ->prefix('disciplinas')->name('subjects.')->group(function () {
 
         Route::get('/', 'index')->name('index');
-        Route::get('/{subject}/professores', 'listTeachers')->name('list-teachers');
-        Route::get('/{subject}/professores/adicionar', 'addTeachers')->name('add-teachers');
+
+    });
+
+
+    //# SUBJECT/TEACHER ROUTES
+    Route::controller(SubjectTeacherController::class)
+    ->prefix('disciplinas/{subject}/professores')->name('subjects.')->group(function () {
+
+        Route::get('/', 'index')->name('index');
+        Route::get('/adicionar', 'create')->name('create');
         //* ACTIONS
-        Route::post('/{subject}/professores/{teacher}', 'storeTeacher')->name('store-teacher');
-        Route::delete('/{subject}/professores/{teacher}', 'destroyTeacher')->name('destroy-teacher');
+        Route::post('/{teacher}', 'store')->name('store');
+        Route::delete('/{teacher}', 'destroy')->name('destroy');
 
     });
 
 
     //# TEACHER ROUTES
     Route::controller(TeacherController::class)
-    ->prefix('professores')->name('teacher.')->group(function () {
+    ->prefix('professores')->name('teachers.')->group(function () {
 
         Route::get('/', 'index')->name('index');
         Route::get('/cadastrar', 'create')->name('create');

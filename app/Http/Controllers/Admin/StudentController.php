@@ -17,7 +17,6 @@ class StudentController extends Controller
     ) {
     }
 
-    /** xxx */
     public function index(Request $request)
     {
         $searchTerm = $request->get('search', '');
@@ -29,19 +28,16 @@ class StudentController extends Controller
         return inertia('Student/Index', compact('students'));
     }
 
-    /** xxx */
     public function create()
     {
         return inertia('Student/Create');
     }
 
-    /** xxx */
     public function show(Student $student)
     {
         return inertia('Student/Show', compact('student'));
     }
 
-    /** xxx */
     public function edit(Student $student)
     {
         return inertia('Student/Edit', compact('student'));
@@ -49,7 +45,6 @@ class StudentController extends Controller
 
     // ### Actions ###
 
-    /** xxx */
     public function store(PersonRequest $request)
     {
         $validated = $request->validated();
@@ -60,7 +55,6 @@ class StudentController extends Controller
             ->with('id', $student->id);
     }
 
-    /** xxx */
     public function update(PersonRequest $request, Student $student)
     {
         $validated = $request->validated();
@@ -69,5 +63,4 @@ class StudentController extends Controller
         return to_route('student.show', $student->id)
             ->with('message', 'Aluno atualizado com sucesso!');
     }
-    //
 }

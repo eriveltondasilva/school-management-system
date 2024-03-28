@@ -12,7 +12,6 @@ use App\Models\AcademicYear;
 // ========================================================================
 class AcademicYearController extends Controller
 {
-    /** xxx */
     public function index()
     {
         $academicYears = AcademicYear::latest('year')
@@ -23,19 +22,16 @@ class AcademicYearController extends Controller
         return inertia('AcademicYear/Index', compact('academicYears'));
     }
 
-    /** xxx */
     public function create()
     {
         return inertia('AcademicYear/Create');
     }
 
-    /** xxx */
     public function show()
     {
         //
     }
 
-    /** xxx */
     public function edit(AcademicYear $academicYear)
     {
         $academicYear->load('quarters');
@@ -45,7 +41,6 @@ class AcademicYearController extends Controller
 
     // ### Actions ###
 
-    /** xxx */
     public function store(AcademicYearRequest $request)
     {
         $quarters = [
@@ -66,7 +61,6 @@ class AcademicYearController extends Controller
             ->with('id', $academicYear->id);
     }
 
-    /** xxx */
     public function update(AcademicYearRequest $request, AcademicYear $academicYear)
     {
         $validated = $request->validated();
@@ -76,7 +70,6 @@ class AcademicYearController extends Controller
         return back()->with('message', 'Ano letivo atualizado com sucesso!');
     }
 
-    /** xxx */
     public function updateStatus(AcademicYear $academicYear)
     {
         if ($academicYear->is_active) {
@@ -89,5 +82,4 @@ class AcademicYearController extends Controller
 
         return back()->with('message', 'Ano letivo ativo!');
     }
-    //
 }

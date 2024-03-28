@@ -13,7 +13,6 @@ use App\Models\Group;
 // ========================================================================
 class GroupController extends Controller
 {
-    /** xxx */
     public function index()
     {
         $groups = Group::activeAcademicYear()
@@ -23,19 +22,16 @@ class GroupController extends Controller
         return inertia('Group/Index', compact('groups'));
     }
 
-    /** xxx */
     public function create()
     {
         return inertia('Group/Create');
     }
 
-    /** xxx */
     public function show()
     {
         //
     }
 
-    /** xxx */
     public function edit(Group $group)
     {
         return inertia('Group/Edit', compact('group'));
@@ -43,7 +39,6 @@ class GroupController extends Controller
 
     // ### Actions ###
 
-    /** xxx */
     public function store(GroupRequest $request)
     {
         $activeYearId = AcademicYear::IsActive()->id;
@@ -63,7 +58,6 @@ class GroupController extends Controller
             ->with('id', $group->id);
     }
 
-    /** xxx */
     public function update(GroupRequest $request, Group $group)
     {
         $validated = $request->validated();

@@ -17,7 +17,6 @@ class TeacherController extends Controller
     ) {
     }
 
-    /** xxx */
     public function index(Request $request)
     {
         $searchTerm = $request->get('search', '');
@@ -29,19 +28,16 @@ class TeacherController extends Controller
         return inertia('Teacher/Index', compact('teachers'));
     }
 
-    /** xxx */
     public function create()
     {
         return inertia('Teacher/Create');
     }
 
-    /** xxx */
     public function show(Teacher $teacher)
     {
         return inertia('Teacher/Show', compact('teacher'));
     }
 
-    /** xxx */
     public function edit(Teacher $teacher)
     {
         return inertia('Teacher/Edit', compact('teacher'));
@@ -49,7 +45,6 @@ class TeacherController extends Controller
 
     // ### Actions ###
 
-    /** xxx */
     public function store(PersonRequest $request)
     {
         $validated = $request->validated();
@@ -60,7 +55,6 @@ class TeacherController extends Controller
             ->with('id', $teacher->id);
     }
 
-    /** xxx */
     public function update(PersonRequest $request, Teacher $teacher)
     {
         $validated = $request->validated();
@@ -69,5 +63,4 @@ class TeacherController extends Controller
         return to_route('teacher.show', $teacher->id)
             ->with('message', 'Professor atualizado com sucesso!');
     }
-    //
 }
