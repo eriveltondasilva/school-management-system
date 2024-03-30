@@ -18,17 +18,17 @@ export default function PageSubjectListTeachers({
   subject = {},
   teachers = [],
 }) {
-  const flash = usePage().props.flash || {}
+  const { message } = usePage().props || {}
 
   const pageTitle = `${titles.listTeachers} - ${subject.name}`
   const hasTeachers = teachers.length > 0
 
   return (
     <>
-      {/* Mensagem flash */}
-      {flash.message && (
+      {/* Mensagem */}
+      {message && (
         <Alert color='failure' className='mb-4'>
-          {flash.message}
+          {message}
         </Alert>
       )}
 
@@ -38,7 +38,9 @@ export default function PageSubjectListTeachers({
         <Title.Right>
           <Button
             as={Link}
-            href={route('subject.add-teacher', subject.id)}
+            href={route('admin.subjects.teachers.create', {
+              subject: subject.id,
+            })}
             color='blue'
             className='uppercase'>
             <Plus className='mr-2 h-5 w-5' />
@@ -63,22 +65,21 @@ export default function PageSubjectListTeachers({
 function TableTeacher({ subject = {}, teachers = [] }) {
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleDeleteTeacher = (id, name, cpf) => {
-    const message = `Tem certeza que deseja remover professor(a)\n${name}, CPF ${cpf},\nda disciplina do ${subject.name}?`
+  const handleDeleteTeacher = async (teacherId, teacherName, teacherCpf) => {
+    setIsLoading(true)
 
-    if (!confirm(message)) return
+    const message = `Tem certeza que deseja remover professor(a)\n${teacherName}, CPF ${teacherCpf},\nda disciplina do ${subject.name}?`
 
-    try {
-      setIsLoading(true)
-
-      router.delete(
-        route('subject.destroy-teacher', { subject: subject.id, teacher: id })
-      )
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setIsLoading(false)
-    }
+    router.delete(
+      route('admin.subjects.teachers.destroy', {
+        subject: subject.id,
+        teacher: teacherId,
+      }),
+      {
+        onBefore: () => confirm(message),
+        onFinish: () => setIsLoading(false),
+      }
+    )
   }
 
   return (
@@ -93,22 +94,22 @@ function TableTeacher({ subject = {}, teachers = [] }) {
 
       {/* Table Body */}
       <Table.Body>
-        {teachers.map(({ id, name, cpf }, index) => (
-          <Table.Row key={id}>
+        {teachers.map((teacher, index) => (
+          <Table.Row key={teacher.id}>
             <Table.RowCell className='font-medium'>{++index}</Table.RowCell>
             <Table.RowCell
               className={twJoin(
                 'whitespace-nowrap font-medium',
                 'text-gray-900 dark:text-white'
               )}>
-              {name}
+              {teacher.name}
             </Table.RowCell>
-            <Table.RowCell>{cpf}</Table.RowCell>
+            <Table.RowCell>{teacher.cpf}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>
                 <Button
                   as={Link}
-                  href={route('teacher.show', id)}
+                  href={route('admin.teachers.show', { teacher: teacher.id })}
                   color='blue'
                   size='xs'>
                   <Tooltip content='Visualizar Professor(a)'>
@@ -118,7 +119,9 @@ function TableTeacher({ subject = {}, teachers = [] }) {
                 <Button
                   as='button'
                   color='failure'
-                  onClick={() => handleDeleteTeacher(id, name, cpf)}
+                  onClick={() =>
+                    handleDeleteTeacher(teacher.id, teacher.name, teacher.cpf)
+                  }
                   disabled={isLoading}
                   size='xs'>
                   <Tooltip content='Remover Professor(a)'>

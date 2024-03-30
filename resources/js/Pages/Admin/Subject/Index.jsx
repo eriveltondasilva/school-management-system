@@ -33,24 +33,26 @@ export default function PageSubjectIndex({ subjects }) {
 function CardSubject({ subjects = [] }) {
   return (
     <section className='grid max-w-6xl grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-      {subjects.map(({ id, name, abbr, teachers_count }) => (
-        <Card key={id} className='max-w-sm'>
+      {subjects.map((subject) => (
+        <Card key={subject.id} className='max-w-sm'>
           <header className=''>
             <h5
               className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'
-              title={name}>
-              {abbr}
+              title={subject.name}>
+              {subject.abbr}
             </h5>
           </header>
 
           <p className='my-3 font-normal text-gray-700 dark:text-gray-400'>
-            Professores: {teachers_count || 'sem prof.'}
+            Professores: {subject.teachers_count || 'sem prof.'}
           </p>
 
           <footer>
             <Button
               as={Link}
-              href={route('admin.subject.list-teachers', id)}
+              href={route('admin.subjects.teachers.index', {
+                subject: subject.id,
+              })}
               color='blue'
               fullSized>
               <Eye className='mr-2 h-5 w-5' />

@@ -1,8 +1,6 @@
-import { Link, usePage } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
 import { Undo2 } from 'lucide-react'
 
-import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
 
 import useFormHandler from '@/Hooks/useFormHandler'
@@ -14,31 +12,21 @@ import TeacherFormFooterButtons from './Partials/TeacherFormFooterButtons'
 
 import { breadcrumbs, titles } from './data'
 
-// ====================================
-export default function PageTeacherCreate() {
-  const flash = usePage().props.flash || {}
-
-  const formDataOptions = { routeName: 'teacher.store' }
+// ==============================================
+export default function PageTeacherEdit({ teacher = {} }) {
+  const formDataOptions = {
+    method: 'PUT',
+    route: 'admin.teachers.update',
+    params: { teacher: teacher.id },
+  }
   const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
 
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        {/* flash message */}
-        {flash.message && (
-          <Alert color='success'>
-            <div>{flash.message}</div>
-            <Link
-              href={route('teacher.show', flash.id)}
-              className='font-medium underline'>
-              Clique aqui para vê-lo.
-            </Link>
-          </Alert>
-        )}
-
         {/* header teacher */}
         <Form.Header>
-          <Form.HeaderTitle title={titles.create} />
+          <Form.HeaderTitle title={titles.edit} />
           <Button
             title='Voltar'
             color='red'
@@ -49,10 +37,10 @@ export default function PageTeacherCreate() {
         </Form.Header>
 
         {/* form */}
-        <TeacherFormData errors={errors} />
+        <TeacherFormData {...{ data: teacher, errors }} />
 
         {/* address teacher */}
-        <AddressFormData errors={errors} />
+        <AddressFormData {...{ data: teacher, errors }} />
 
         {/* footer teacher */}
         <Form.Footer>
@@ -63,11 +51,11 @@ export default function PageTeacherCreate() {
   )
 }
 
-// ------------------------------------
-PageTeacherCreate.layout = (page) => (
+// ==============================================
+PageTeacherEdit.layout = (page) => (
   <AuthLayout
-    title={titles.create}
-    breadcrumb={breadcrumbs.create}
+    title={titles.edit}
+    breadcrumb={breadcrumbs.edit}
     children={page}
   />
 )

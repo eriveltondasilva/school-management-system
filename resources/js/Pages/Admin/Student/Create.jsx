@@ -15,19 +15,19 @@ import { breadcrumbs, titles } from './data'
 
 // ==============================================
 export default function PageStudentCreate() {
-  const flash = usePage().props.flash || {}
+  const { message, id } = usePage().props || {}
 
-  const formDataOptions = { routeName: 'student.store' }
+  const formDataOptions = { route: 'admin.students.store' }
   const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
 
   return (
     <Form onSubmit={handleSubmit}>
       {/* flash message */}
-      {flash.message && (
+      {message && (
         <Alert color='success'>
-          <div>{flash.message}</div>
+          <div>{message}</div>
           <Link
-            href={route('student.show', flash.id)}
+            href={route('admin.students.show', { student: id })}
             className='font-medium underline'>
             Clique aqui para vê-lo.
           </Link>

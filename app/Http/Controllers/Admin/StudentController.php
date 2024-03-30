@@ -25,22 +25,22 @@ class StudentController extends Controller
         $students = $this->searchServices
             ->searchPerson(new Student(), $searchTerm, $columns);
 
-        return inertia('Student/Index', compact('students'));
+        return inertia('Admin/Student/Index', compact('students'));
     }
 
     public function create()
     {
-        return inertia('Student/Create');
+        return inertia('Admin/Student/Create');
     }
 
     public function show(Student $student)
     {
-        return inertia('Student/Show', compact('student'));
+        return inertia('Admin/Student/Show', compact('student'));
     }
 
     public function edit(Student $student)
     {
-        return inertia('Student/Edit', compact('student'));
+        return inertia('Admin/Student/Edit', compact('student'));
     }
 
     // ### Actions ###

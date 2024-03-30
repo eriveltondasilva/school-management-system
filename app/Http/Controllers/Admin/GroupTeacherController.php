@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-//
 use App\Models\{AcademicYear, Group, Teacher};
 
 class GroupTeacherController extends Controller
@@ -16,7 +15,7 @@ class GroupTeacherController extends Controller
             ->orderBy('teachers.name')
             ->get();
 
-        return inertia('Group/ListTeachers', compact('group', 'teachers'));
+        return inertia('Admin/Group/ListTeachers', compact('group', 'teachers'));
     }
 
     public function create(Group $group)
@@ -28,7 +27,7 @@ class GroupTeacherController extends Controller
             ->orderBy('teachers.name')
             ->get();
 
-        return inertia('Group/AddTeacher', compact('group', 'teachers'));
+        return inertia('Admin/Group/AddTeacher', compact('group', 'teachers'));
     }
 
     // ### Actions ###

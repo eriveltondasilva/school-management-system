@@ -7,34 +7,35 @@ import Form from '@/Components/Form'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 
-import StudentFormData from './Partials/StudentFormData'
+import AddressFormData from './Partials/AddressFormData'
+import TeacherFormData from './Partials/TeacherFormData'
 
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function PageStudentShow({ student = {} }) {
-  const flash = usePage().props.flash || {}
+export default function PageTeacherShow({ teacher = {} }) {
+  const { message } = usePage().props || {}
 
   return (
     <Form>
-      {/* flash message */}
-      {flash.message && <Alert color='success'>{flash.message}</Alert>}
+      {/* message */}
+      {message && <Alert color='success'>{message}</Alert>}
 
-      {/* header student */}
+      {/* header teacher */}
       <Form.Header>
         <Form.HeaderTitle title={titles.show} />
         <Button.Group>
           <Button
-            title='Editar aluno'
-            href={route('student.edit', student.id)}
+            title='Editar professor'
+            href={route('admin.teachers.edit', { teacher: teacher.id })}
             color='blue'
             size='xs'
             as={Link}>
             <PencilLine className='h-4 w-4' />
           </Button>
           <Button
-            title='Cadastrar novo aluno'
-            href={route('student.create')}
+            title='Cadastrar novo professor'
+            href={route('admin.teachers.create')}
             color='green'
             size='xs'
             as={Link}>
@@ -50,14 +51,17 @@ export default function PageStudentShow({ student = {} }) {
         </Button.Group>
       </Form.Header>
 
-      {/* student form data */}
-      <StudentFormData data={student} readOnly />
+      {/* form */}
+      <TeacherFormData data={teacher} readOnly />
+
+      {/* address teacher */}
+      <AddressFormData data={teacher} readOnly />
     </Form>
   )
 }
 
-// ----------------------------------------------
-PageStudentShow.layout = (page) => (
+// ------------------------------------
+PageTeacherShow.layout = (page) => (
   <AuthLayout
     title={titles.show}
     breadcrumb={breadcrumbs.show}

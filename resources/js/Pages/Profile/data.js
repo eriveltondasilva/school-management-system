@@ -4,7 +4,7 @@ export const titles = {
 }
 
 // ------------------------------------
-const baseBreadcrumb = [{ title: 'Painel', routeName: 'dashboard' }]
+const baseBreadcrumb = [{ title: 'Painel', route: 'dashboard' }]
 
 // prettier-ignore
 export const breadcrumbs = {

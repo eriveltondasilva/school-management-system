@@ -16,21 +16,38 @@ const AdminSidebarItems = [
     { title: 'Calendário', icon: CalendarDays, route: 'admin.calendar' },
   ],
   [
-    { title: 'Alunos', icon: Backpack, route: 'admin.student.index' },
-    { title: 'Professor', icon: Briefcase, route: 'admin.teacher.index' },
+    { title: 'Alunos', icon: Backpack, route: 'admin.students.index' },
+    { title: 'Professor', icon: Briefcase, route: 'admin.teachers.index' },
   ],
   [
-    { title: 'Turmas', icon: UsersRound, route: 'admin.group.index' },
-    { title: 'Disciplinas', icon: LibraryBig, route: 'admin.subject.index' },
-    { title: 'Ano Letivo', icon: Calendar, route: 'admin.academic-year.index' },
+    { title: 'Turmas', icon: UsersRound, route: 'admin.groups.index' },
+    { title: 'Disciplinas', icon: LibraryBig, route: 'admin.subjects.index' },
+    { title: 'Ano Letivo', icon: Calendar, route: 'admin.academic-years.index' },
   ],
 ]
 
-const TeacherSidebarItems = []
+// prettier-ignore
+const TeacherSidebarItems = [
+  [
+    { title: 'Painel', icon: Home, route: 'teacher.dashboard' },
+    { title: 'Calendário', icon: CalendarDays, route: 'teacher.calendar' },
+  ]
+]
 
-const StudentSidebarItems = []
+// prettier-ignore
+const StudentSidebarItems = [
+  [
+    { title: 'Painel', icon: Home, route: 'student.dashboard' },
+    { title: 'Calendário', icon: CalendarDays, route: 'student.calendar' },
+  ]
+]
 
-const UserSidebarItems = []
+// prettier-ignore
+const UserSidebarItems = [
+  [
+    // { title: 'Painel', icon: Home, route: null },
+  ]
+]
 
 // ===============================================
 export default {

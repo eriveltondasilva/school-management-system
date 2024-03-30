@@ -25,22 +25,22 @@ class TeacherController extends Controller
         $teachers = $this->searchServices
             ->searchPerson(new Teacher(), $searchTerm, $columns);
 
-        return inertia('Teacher/Index', compact('teachers'));
+        return inertia('Admin/Teacher/Index', compact('teachers'));
     }
 
     public function create()
     {
-        return inertia('Teacher/Create');
+        return inertia('Admin/Teacher/Create');
     }
 
     public function show(Teacher $teacher)
     {
-        return inertia('Teacher/Show', compact('teacher'));
+        return inertia('Admin/Teacher/Show', compact('teacher'));
     }
 
     public function edit(Teacher $teacher)
     {
-        return inertia('Teacher/Edit', compact('teacher'));
+        return inertia('Admin/Teacher/Edit', compact('teacher'));
     }
 
     // ### Actions ###

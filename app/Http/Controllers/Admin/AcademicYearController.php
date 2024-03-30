@@ -19,12 +19,12 @@ class AcademicYearController extends Controller
             ->withCount('groups')
             ->get();
 
-        return inertia('AcademicYear/Index', compact('academicYears'));
+        return inertia('Admin/AcademicYear/Index', compact('academicYears'));
     }
 
     public function create()
     {
-        return inertia('AcademicYear/Create');
+        return inertia('Admin/AcademicYear/Create');
     }
 
     public function show()
@@ -36,7 +36,7 @@ class AcademicYearController extends Controller
     {
         $academicYear->load('quarters');
 
-        return inertia('AcademicYear/Edit', compact('academicYear'));
+        return inertia('Admin/AcademicYear/Edit', compact('academicYear'));
     }
 
     // ### Actions ###

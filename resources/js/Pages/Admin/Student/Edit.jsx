@@ -12,7 +12,10 @@ import { breadcrumbs, titles } from './data'
 
 // ==============================================
 export default function PageStudentEdit({ student = {} }) {
-  const formDataOptions = { routeName: 'student.update', id: student.id }
+  const formDataOptions = {
+    route: 'admin.students.update',
+    params: { student: student.id },
+  }
   const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
 
   return (

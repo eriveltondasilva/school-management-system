@@ -13,15 +13,14 @@ import schoolImg from '/resources/images/school.png'
 // ============================================================================
 export default function AuthLayout({ title, breadcrumb, children }) {
   const { user, activeYear } = usePage().props.auth || {}
-
-  console.log(user.roles)
+  const userRole = user.role.name || 'user'
 
   const sidebarItemsMap = {
     admin: SidebarItems.Admin,
     teacher: SidebarItems.Teacher,
     student: SidebarItems.Student,
     user: SidebarItems.User,
-  }[user?.roles.name || 'user']
+  }[userRole]
 
   return (
     <>
@@ -43,7 +42,7 @@ export default function AuthLayout({ title, breadcrumb, children }) {
           <Header.Right activeYear={activeYear}>
             <Header.Dropdown avatar_url={user.avatar_url}>
               <Header.DropdownHeader
-                role={user?.roles.display_name || 'user'}
+                role={user.role.display_name || 'user'}
                 email={user.email}
               />
               <Header.DropdownItem />

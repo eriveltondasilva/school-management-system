@@ -2,18 +2,13 @@
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-//
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SocialiteController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\{
+    DashboardController,
+    ProfileController,
+    SocialiteController,
+};
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
-
-//# WELCOME
+//# WEB ROUTES =================================================================
 Route::get('/', function () {
     $canLogin = Route::has('login');
     $canRegister = Route::has('register');
@@ -26,11 +21,11 @@ Route::get('/', function () {
 
 //# AUTH
 Route::middleware('auth')->group(function () {
-    //# DASHBOARD
+    //* DASHBOARD
     Route::get('/painel', DashboardController::class)->name('dashboard');
 
 
-    //# PROFILE
+    //* PROFILE
     Route::controller(ProfileController::class)
     ->prefix('perfil')->name('profile.')->group(function () {
 
@@ -42,7 +37,7 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    //# TEST
+    //* TEST
     Route::get('/teste', function () {
         return 'Hello, world!';
     })->name('test');
@@ -60,8 +55,8 @@ Route::controller(SocialiteController::class)
 
 
 // ===============================================
-//# ROUTES
+//# EXTRA ROUTES
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
-// require __DIR__.'/teacher.php';
-// require __DIR__.'/student.php';
+require __DIR__.'/teacher.php';
+require __DIR__.'/student.php';

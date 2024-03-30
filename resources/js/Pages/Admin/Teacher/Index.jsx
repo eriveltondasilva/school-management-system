@@ -27,7 +27,7 @@ export default function PageTeacherIndex({ teachers = [] }) {
     setSearch(e.target.value)
   }
 
-  const formDataOptions = { routeName: 'admin.teacher.index' }
+  const formDataOptions = { route: 'admin.teachers.index' }
   const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
 
   return (
@@ -38,7 +38,7 @@ export default function PageTeacherIndex({ teachers = [] }) {
         <Title.Right>
           <Button
             as={Link}
-            href={route('admin.teacher.create')}
+            href={route('admin.teachers.create')}
             color='blue'
             className=''>
             <Plus className='mr-2 h-5 w-5' />
@@ -66,7 +66,7 @@ export default function PageTeacherIndex({ teachers = [] }) {
             </Button>
             <Button
               as={Link}
-              href={route('admin.teacher.index')}
+              href={route('admin.teachers.index')}
               color='light'
               disabled={isLoading}>
               <Undo2 className='h-5 w-5' />
@@ -75,6 +75,7 @@ export default function PageTeacherIndex({ teachers = [] }) {
         </Searchbar.Left>
       </Searchbar>
 
+      {/* Teacher NotFound */}
       {!hasTeachers && <TeacherNotFound />}
 
       {/* Teacher Table */}
@@ -100,25 +101,25 @@ function TeacherTable({ teachers = [] }) {
 
       {/* Table Body */}
       <Table.Body>
-        {teachers.map(({ id, name, email }) => (
-          <Table.Row key={id}>
-            <Table.RowCell className='font-bold'>{id}</Table.RowCell>
+        {teachers.map((teacher) => (
+          <Table.Row key={teacher.id}>
+            <Table.RowCell className='font-bold'>{teacher.id}</Table.RowCell>
             <Table.RowCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
-              {name}
+              {teacher.name}
             </Table.RowCell>
-            <Table.RowCell>{email}</Table.RowCell>
+            <Table.RowCell>{teacher.email}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>
                 <Button
                   as={Link}
-                  href={route('admin.teacher.show', id)}
+                  href={route('admin.teachers.show', { teacher: teacher.id })}
                   color='blue'
                   size='xs'>
                   <Eye className='h-4 w-4' />
                 </Button>
                 <Button
                   as={Link}
-                  href={route('admin.teacher.edit', id)}
+                  href={route('admin.teachers.edit', { teacher: teacher.id })}
                   color='green'
                   size='xs'>
                   <PencilLine className='ml-2 h-4 w-4' />

@@ -10,11 +10,12 @@ import Searchbar from '@/Components/Searchbar'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
-import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
-import formatId from '@/Utils/formatId'
-import getGenderName from '@/Utils/getGenderName'
 
+import useFormHandler from '@/Hooks/useFormHandler'
+import formatId from '@/Utils/formatId'
+
+import getGenderName from '@/Utils/getGenderName'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
@@ -29,7 +30,7 @@ export default function PageStudentIndex({ students = [] }) {
     setSearch(e.target.value)
   }
 
-  const formDataOptions = { routeName: 'admin.student.index' }
+  const formDataOptions = { route: 'admin.students.index' }
   const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
 
   return (
@@ -40,7 +41,7 @@ export default function PageStudentIndex({ students = [] }) {
         <Title.Right>
           <Button
             as={Link}
-            href={route('admin.student.create')}
+            href={route('admin.students.create')}
             color='blue'
             className=''>
             <Plus className='mr-2 h-5 w-5' />
@@ -68,7 +69,7 @@ export default function PageStudentIndex({ students = [] }) {
             </Button>
             <Button
               as={Link}
-              href={route('admin.student.index')}
+              href={route('admin.students.index')}
               color='light'
               disabled={isLoading}>
               <Undo2 className='h-5 w-5' />
@@ -103,25 +104,27 @@ function StudentTable({ students = [] }) {
 
       {/* Table Body */}
       <Table.Body>
-        {students.map(({ id, name, gender }) => (
-          <Table.Row key={id}>
-            <Table.RowCell className='font-bold'>{formatId(id)}</Table.RowCell>
-            <Table.RowCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
-              {name}
+        {students.map((student) => (
+          <Table.Row key={student.id}>
+            <Table.RowCell className='font-bold'>
+              {formatId(student.id)}
             </Table.RowCell>
-            <Table.RowCell>{getGenderName(gender)}</Table.RowCell>
+            <Table.RowCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
+              {student.name}
+            </Table.RowCell>
+            <Table.RowCell>{getGenderName(student.gender)}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>
                 <Button
                   as={Link}
-                  href={route('admin.student.show', id)}
+                  href={route('admin.students.show', { student: student.id })}
                   color='blue'
                   size='xs'>
                   <Eye className='h-4 w-4' />
                 </Button>
                 <Button
                   as={Link}
-                  href={route('admin.student.edit', id)}
+                  href={route('admin.students.edit', { student: student.id })}
                   color='green'
                   size='xs'>
                   <PencilLine className='ml-2 h-4 w-4' />

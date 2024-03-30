@@ -10,10 +10,11 @@ class SubjectController extends Controller
 {
     public function index()
     {
+        // TODO: restringir as disciplinas para o ano corrente
         $subjects = Subject::select('id', 'name', 'abbr')
             ->withCount('teachers')
             ->get();
 
-        return inertia('Subject/Index', compact('subjects'));
+        return inertia('Admin/Subject/Index', compact('subjects'));
     }
 }

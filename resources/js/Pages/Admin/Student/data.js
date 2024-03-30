@@ -1,15 +1,15 @@
 // prettier-ignore
 export const titles = {
-  index : 'Listar anos letivos',
-  create: 'Cadastrar ano letivo',
-  edit  : 'Editar ano letivo',
-  show  : 'Visualizar ano letivo',
+  index : 'Listar alunos',
+  create: 'Cadastrar aluno',
+  edit  : 'Editar aluno',
+  show  : 'Visualizar aluno',
 }
 
 // ------------------------------------
 const baseBreadcrumb = [
-  { title: 'Painel', routeName: 'dashboard' },
-  { title: titles.index, routeName: 'academic-year.index' },
+  { title: 'Painel', route: 'admin.dashboard' },
+  { title: titles.index, route: 'admin.students.index' },
 ]
 
 // prettier-ignore

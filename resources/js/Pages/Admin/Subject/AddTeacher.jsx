@@ -15,7 +15,7 @@ import { breadcrumbs, titles } from './data'
 
 // ==============================================
 export default function PageSubjectAddTeacher({ subject = {}, teachers = [] }) {
-  const flash = usePage().props.flash || {}
+  const { message } = usePage().props || {}
 
   const pageTitle = `${titles.addTeacher} - ${subject.name}`
   const hasTeachers = teachers.length > 0
@@ -23,9 +23,9 @@ export default function PageSubjectAddTeacher({ subject = {}, teachers = [] }) {
   return (
     <>
       {/* Mensagem flash */}
-      {flash.message && (
+      {message && (
         <Alert color='success' className='mb-4'>
-          {flash.message}
+          {message}
         </Alert>
       )}
 
@@ -47,22 +47,21 @@ export default function PageSubjectAddTeacher({ subject = {}, teachers = [] }) {
 function TeacherTable({ subject = {}, teachers = [] }) {
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleStoreTeacher = async (id, name, cpf) => {
-    const message = `Tem certeza que deseja adicionar professor(a)\n${name}, CPF ${cpf},\nà turma do ${subject.name}?`
+  const handleStoreTeacher = async (teacherId, teacherName, teacherCpf) => {
+    setIsLoading(true)
 
-    if (!confirm(message)) return
+    const message = `Tem certeza que deseja adicionar professor(a)\n${teacherName}, CPF ${teacherCpf},\nà turma do ${subject.name}?`
 
-    try {
-      setIsLoading(true)
-
-      await router.post(
-        route('subject.store-teacher', { subject: subject.id, teacher: id })
-      )
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setIsLoading(false)
-    }
+    router.delete(
+      route('admin.subjects.teachers.store', {
+        subject: subject.id,
+        teacher: teacherId,
+      }),
+      {
+        onBefore: () => confirm(message),
+        onFinish: () => setIsLoading(false),
+      }
+    )
   }
 
   return (
@@ -77,22 +76,22 @@ function TeacherTable({ subject = {}, teachers = [] }) {
 
       {/* Table Body */}
       <Table.Body>
-        {teachers.map(({ id, name, cpf }, index) => (
-          <Table.Row key={id}>
+        {teachers.map((teacher, index) => (
+          <Table.Row key={teacher.id}>
             <Table.RowCell className='font-bold'>{++index}</Table.RowCell>
             <Table.RowCell
               className={twJoin(
                 'whitespace-nowrap font-medium',
                 'text-gray-900 dark:text-white'
               )}>
-              {name}
+              {teacher.name}
             </Table.RowCell>
-            <Table.RowCell>{cpf}</Table.RowCell>
+            <Table.RowCell>{teacher.cpf}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>
                 <Button
                   as={Link}
-                  href={route('teacher.show', id)}
+                  href={route('admin.teachers.show', { teacher: teacher.id })}
                   color='green'
                   size='xs'>
                   <Tooltip content='Visualizar Professor'>
@@ -102,7 +101,9 @@ function TeacherTable({ subject = {}, teachers = [] }) {
                 <Button
                   as='button'
                   color='blue'
-                  onClick={() => handleStoreTeacher(id, name, cpf)}
+                  onClick={() =>
+                    handleStoreTeacher(teacher.id, teacher.name, teacher.cpf)
+                  }
                   disabled={isLoading}
                   size='xs'>
                   <Tooltip content='Adicionar Professor'>

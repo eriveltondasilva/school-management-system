@@ -18,7 +18,7 @@ export default function Alert({ icon = '', time = 0, children, ...props }) {
       )
       return () => clearTimeout(timer)
     }
-  })
+  }, [])
 
   return (
     <>

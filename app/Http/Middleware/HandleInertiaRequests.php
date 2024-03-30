@@ -40,12 +40,12 @@ class HandleInertiaRequests extends Middleware
         if ($user) {
             $userWithRoles = $user->load('roles:id,name,display_name');
             $userData = $userWithRoles->only('id', 'username', 'email', 'avatar_url');
-            $roles = $userWithRoles->roles[0];
+            $role = $userWithRoles->roles[0];
 
             $activeYear = AcademicYear::select('id', 'year')->IsActive();
 
             return [
-                'user' => $userData + ['roles' => $roles],
+                'user' => $userData + ['role' => $role],
                 'activeYear' => $activeYear,
             ];
         }

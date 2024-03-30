@@ -4,8 +4,6 @@ import { Home } from 'lucide-react'
 
 // ===================================
 export default function BreadcrumbRoot({ items }) {
-  if (!items) return null
-
   return (
     <Breadcrumb aria-label='breadcrumb'>
       {items?.map((item, index) => (
@@ -17,17 +15,14 @@ export default function BreadcrumbRoot({ items }) {
 
 // ===================================
 function BreadcrumbItem({ item }) {
-  const { title, routeName } = item
+  const { title, route: routeName } = item
   const icon = title === 'Painel' && Home
   const lowerCaseTitle = title?.toLowerCase()
 
   return (
     <Breadcrumb.Item icon={icon}>
-      {routeName ? (
-        <Link href={route(routeName)}>{lowerCaseTitle}</Link>
-      ) : (
-        lowerCaseTitle
-      )}
+      {!routeName && lowerCaseTitle}
+      {routeName && <Link href={route(routeName)}>{lowerCaseTitle}</Link>}
     </Breadcrumb.Item>
   )
 }

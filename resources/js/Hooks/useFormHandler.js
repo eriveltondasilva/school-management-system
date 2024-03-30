@@ -3,12 +3,15 @@ import { useState } from 'react'
 
 // ===============================================
 export default function useFormHandler({
-  routeName = '',
+  route: routeName = '',
   method = '',
-  id = '',
+  params = {},
 }) {
   const [isLoading, setIsLoading] = useState(false)
   const { errors } = usePage().props || {}
+
+  const hasParams = Object.keys(params).length > 0
+  const baseUrl = hasParams ? `${routeName}, ${params}` : routeName
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -19,31 +22,33 @@ export default function useFormHandler({
       const requestData = Object.fromEntries(formData.entries())
 
       if (method === 'GET' || route().current('*.index')) {
-        await router.get(route(routeName, id), requestData)
-        return
+        return await router.get(route(baseUrl), requestData, {
+          onFinish: () => setIsLoading(false),
+        })
       }
 
       if (method === 'POST' || route().current('*.create')) {
-        await router.post(route(routeName, id), requestData)
         e.target.reset()
-        return
+        return await router.post(route(baseUrl), requestData, {
+          onFinish: () => setIsLoading(false),
+        })
       }
 
       if (method === 'PUT' || route().current('*.edit')) {
-        await router.put(route(routeName, id), requestData)
-        return
+        return await router.put(route(baseUrl), requestData, {
+          onFinish: () => setIsLoading(false),
+        })
       }
 
       if (method === 'DELETE' || route().current('*.destroy')) {
-        await router.delete(route(routeName, id))
-        return
+        return await router.delete(route(baseUrl), requestData, {
+          onFinish: () => setIsLoading(false),
+        })
       }
 
       throw new Error('Método de envio inválido')
     } catch (error) {
       console.error('Erro ao enviar formulário:', error)
-    } finally {
-      setIsLoading(false)
     }
   }
 

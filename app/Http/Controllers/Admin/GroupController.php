@@ -19,22 +19,17 @@ class GroupController extends Controller
             ->withCount('students', 'teachers')
             ->get();
 
-        return inertia('Group/Index', compact('groups'));
+        return inertia('Admin/Group/Index', compact('groups'));
     }
 
     public function create()
     {
-        return inertia('Group/Create');
-    }
-
-    public function show()
-    {
-        //
+        return inertia('Admin/Group/Create');
     }
 
     public function edit(Group $group)
     {
-        return inertia('Group/Edit', compact('group'));
+        return inertia('Admin/Group/Edit', compact('group'));
     }
 
     // ### Actions ###
