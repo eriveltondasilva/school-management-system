@@ -2,11 +2,9 @@
 
 namespace App\Enums;
 
-/**
- * Enum representing authentication providers.
- */
+/* Enumeração para os provedores de autenticação. */
 enum ProviderEnum: string
 {
-    case GOOGLE = 'google';
+    case GOOGLE    = 'google';
     case INSTAGRAM = 'instagram';
 }

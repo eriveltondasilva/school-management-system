@@ -20,7 +20,7 @@ enum RoleEnum: string
             static::TEACHER => 'Professor',
             static::STUDENT => 'Estudante',
             static::USER    => 'Usuário',
-            default         => '',
+            default         => 'Indefinido',
         };
 
         return $labelMap;

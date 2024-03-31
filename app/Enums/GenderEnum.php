@@ -8,19 +8,16 @@ enum GenderEnum: string
 {
     use EnumAttributesTrait;
 
-    case MALE = 'M';
+    case MALE   = 'M';
     case FEMALE = 'F';
 
     public const DEFAULT = self::MALE;
 
-    /**
-     * Returns the label corresponding to the value of the object.
-     * @return string The label.
-     */
+    /* Returns the label corresponding to the value of the object. */
     public function label(): string
     {
         return match ($this) {
-            self::MALE => 'masculino',
+            self::MALE   => 'masculino',
             self::FEMALE => 'feminino',
         };
     }
