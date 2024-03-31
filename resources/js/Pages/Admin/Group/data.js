@@ -14,7 +14,7 @@ export const titles = {
 // ------------------------------------
 const baseBreadcrumb = [
   { title: 'Painel', route: 'dashboard' },
-  { title: titles.index, route: 'group.index' },
+  { title: titles.index, route: 'groups.index' },
 ]
 
 // prettier-ignore

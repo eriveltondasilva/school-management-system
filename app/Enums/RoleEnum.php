@@ -2,12 +2,9 @@
 
 namespace App\Enums;
 
-use App\Traits\EnumAttributesTrait;
-
+/* Enumeração para os papéis dos usuários. */
 enum RoleEnum: string
 {
-    use EnumAttributesTrait;
-
     case ADMIN   = 'admin';    // administrador(a)
     case TEACHER = 'teacher';  // professor(a)
     case STUDENT = 'student';  // estudante
@@ -15,17 +12,17 @@ enum RoleEnum: string
 
     public const DEFAULT = self::USER;
 
-    /**
-     * Returns a label based on the role of the user.
-     * @return string The label corresponding to the user's role.
-     */
+    /* Retorna um rótulo com base no papel do usuário. */
     public function label(): string
     {
-        return match($this) {
-            static::ADMIN   => 'administrador(a)',
-            static::TEACHER => 'professor(a)',
-            static::STUDENT => 'estudante',
-            static::USER    => 'usuário(a)',
+        $labelMap = match($this) {
+            static::ADMIN   => 'Administrador',
+            static::TEACHER => 'Professor',
+            static::STUDENT => 'Estudante',
+            static::USER    => 'Usuário',
+            default         => '',
         };
+
+        return $labelMap;
     }
 };
