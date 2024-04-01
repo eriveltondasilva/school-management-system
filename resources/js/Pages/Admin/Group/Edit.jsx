@@ -15,7 +15,7 @@ import { breadcrumbs, titles } from './data'
 
 // ==============================================
 export default function PageGroupEdit({ group = {} }) {
-  const flash = usePage().props.flash || {}
+  const { message } = usePage().props || {}
 
   const formDataOptions = {
     route: 'admin.groups.update',
@@ -26,7 +26,7 @@ export default function PageGroupEdit({ group = {} }) {
   return (
     <Form onSubmit={handleSubmit}>
       {/* Mensagem flash */}
-      {flash.message && <Alert color='success'>{flash.message}</Alert>}
+      {message && <Alert color='success'>{message}</Alert>}
 
       {/* Form header */}
       <Form.Header>

@@ -14,23 +14,23 @@ class SubjectSeeder extends Seeder
     {
         $subjectsData = [
             [
-                'name' => SubjectEnum::PORTUGUESE->label(),
+                'name' => SubjectEnum::PORTUGUESE->value,
                 'abbr' => SubjectEnum::PORTUGUESE->abbr(),
             ],
             [
-                'name' => SubjectEnum::MATHEMATICS->label(),
+                'name' => SubjectEnum::MATHEMATICS->value,
                 'abbr' => SubjectEnum::MATHEMATICS->abbr(),
             ],
             [
-                'name' => SubjectEnum::HISTORY->label(),
+                'name' => SubjectEnum::HISTORY->value,
                 'abbr' => SubjectEnum::HISTORY->abbr(),
             ],
             [
-                'name' => SubjectEnum::GEOGRAPHY->label(),
+                'name' => SubjectEnum::GEOGRAPHY->value,
                 'abbr' => SubjectEnum::GEOGRAPHY->abbr(),
             ],
             [
-                'name' => SubjectEnum::ARTS->label(),
+                'name' => SubjectEnum::ARTS->value,
                 'abbr' => SubjectEnum::ARTS->abbr(),
             ],
         ];

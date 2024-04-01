@@ -18,7 +18,6 @@ enum PermissionEnum: string
     case STUDENTS_EDIT   = 'students.edit';    // Editar alunos
     case STUDENTS_DELETE = 'students.delete';  // Excluir alunos
 
-
     // Permissões para operações de professor
     case TEACHERS_INDEX  = 'teachers.index';   // Listar professores
     case TEACHERS_VIEW   = 'teachers.view';    // Visualizar professores
@@ -26,11 +25,28 @@ enum PermissionEnum: string
     case TEACHERS_EDIT   = 'teachers.edit';    // Editar professores
     case TEACHERS_DELETE = 'teachers.delete';  // Excluir professores
 
-    /* Returns a label based on the role of the user. */
-    // public function label(): string
-    // {
-    //     return match($this) {
-    //         static::ADMIN   => 'administrador(a)',
-    //     };
-    // }
+    /* Retorna um rótulo baseado no papel do usuário. */
+    public function label(): string
+    {
+        $labelMap = match($this) {
+            static::USERS_VIEW   => 'Visualizar usuários',
+            static::USERS_CREATE => 'Criar usuários',
+            static::USERS_EDIT   => 'Editar usuários',
+            static::USERS_DELETE => 'Excluir usuários',
+
+            static::STUDENTS_INDEX  => 'Listar alunos',
+            static::STUDENTS_VIEW   => 'Visualizar alunos',
+            static::STUDENTS_CREATE => 'Criar alunos',
+            static::STUDENTS_EDIT   => 'Editar alunos',
+            static::STUDENTS_DELETE => 'Excluir alunos',
+
+            static::TEACHERS_INDEX  => 'Listar professores',
+            static::TEACHERS_VIEW   => 'Visualizar professores',
+            static::TEACHERS_CREATE => 'Criar professores',
+            static::TEACHERS_EDIT   => 'Editar professores',
+            static::TEACHERS_DELETE => 'Excluir professores',
+        };
+
+        return $labelMap;
+    }
 };

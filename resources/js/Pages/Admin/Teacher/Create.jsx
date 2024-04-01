@@ -14,7 +14,7 @@ import TeacherFormFooterButtons from './Partials/TeacherFormFooterButtons'
 
 import { breadcrumbs, titles } from './data'
 
-// ====================================
+// ===============================================
 export default function PageTeacherCreate() {
   const { message, id } = usePage().props || {}
 

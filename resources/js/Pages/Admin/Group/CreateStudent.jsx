@@ -1,7 +1,6 @@
-import { Link, router, usePage } from '@inertiajs/react'
+import { Link, usePage } from '@inertiajs/react'
 import { Button, Tooltip } from 'flowbite-react'
 import { Eye, Plus, Search, XCircle } from 'lucide-react'
-import { useState } from 'react'
 import { twJoin } from 'tailwind-merge'
 
 import Alert from '@/Components/Alert'
@@ -18,11 +17,11 @@ import formatId from '@/Utils/formatId'
 import getGenderName from '@/Utils/getGenderName'
 
 import useActionsHandler from '@/Hooks/useActionsHandler'
+import useFormHandler from '@/Hooks/useFormHandler'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
 export default function PageGroupCreateStudent({ group = {}, students = [] }) {
-  const [isLoading, setIsLoading] = useState(false)
   const { message } = usePage().props || {}
   const searchId = route().params.search || ''
 
@@ -31,20 +30,13 @@ export default function PageGroupCreateStudent({ group = {}, students = [] }) {
   const hasStudents = students.data.length > 0
   const hasPagination = students.total > students.data.length
 
-  const handleSearchStudent = async (e) => {
-    e.preventDefault()
-    setIsLoading(true)
-
-    try {
-      await router.get(
-        route('admin.groups.students.index', { group: group.id })
-      )
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setIsLoading(false)
-    }
+  const formDataOptions = {
+    method: 'GET',
+    route: 'admin.groups.students.index',
+    params: { group: group.id },
   }
+  const { isLoading, handleSubmit: handleSearchStudent } =
+    useFormHandler(formDataOptions)
 
   return (
     <>

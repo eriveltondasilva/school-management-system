@@ -15,7 +15,7 @@ import { breadcrumbs, titles } from './data'
 
 // ==============================================
 export default function PageGroupIndexTeachers({ group = {}, teachers = [] }) {
-  const flash = usePage().props.flash || {}
+  const { message } = usePage().props || {}
 
   const pageTitle = `${titles.index} - ${group.name}`
   const hasTeachers = teachers.length > 0
@@ -23,9 +23,9 @@ export default function PageGroupIndexTeachers({ group = {}, teachers = [] }) {
   return (
     <>
       {/* Mensagem flash */}
-      {flash.message && (
+      {message && (
         <Alert color='failure' className='mb-4'>
-          {flash.message}
+          {message}
         </Alert>
       )}
 

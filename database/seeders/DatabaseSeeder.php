@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
             AcademicYearSeeder::class,
             QuarterSeeder::class,
             RoleSeeder::class,
+            PermissionSeeder::class,
             SubjectSeeder::class,
             GroupSeeder::class,
             UserSeeder::class,
