@@ -24,7 +24,7 @@ export default function PageAcademicYearIndex({ academicYears = [] }) {
         <Title.Right>
           <Button
             as={Link}
-            href={route('academic-year.create')}
+            href={route('admin.academic-years.create')}
             color='blue'
             className='uppercase'>
             <Plus className='mr-2 h-5 w-5' />
@@ -48,38 +48,40 @@ export default function PageAcademicYearIndex({ academicYears = [] }) {
 function AcademicYearCard({ academicYears = [] }) {
   return (
     <section className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-      {academicYears.map(
-        ({ id, year, is_active, start_date, end_date, groups_count }) => (
-          <Card key={id} className='relative max-w-sm'>
-            <Indicator type={is_active ? 'success' : 'secondary'} />
+      {academicYears.map((academicYear) => (
+        <Card key={academicYear.id} className='relative max-w-sm'>
+          <Indicator type={academicYear.is_active ? 'success' : 'secondary'} />
 
-            <h5
-              className={twJoin(
-                'text-2xl font-bold tracking-tight',
-                'text-gray-900 dark:text-white'
-              )}>
-              {year}
-            </h5>
+          <h5
+            className={twJoin(
+              'text-2xl font-bold tracking-tight',
+              'text-gray-900 dark:text-white'
+            )}>
+            {academicYear.year}
+          </h5>
 
-            <ul className='font-normal text-gray-700 dark:text-gray-400'>
-              <li>Início: {formatDate(start_date)}</li>
-              <li>Fim: {formatDate(end_date)}</li>
-              <li className='font-semibold'>Turmas: {groups_count}</li>
-            </ul>
+          <ul className='font-normal text-gray-700 dark:text-gray-400'>
+            <li>Início: {formatDate(academicYear.start_date)}</li>
+            <li>Fim: {formatDate(academicYear.end_date)}</li>
+            <li className='font-semibold'>
+              Turmas: {academicYear.groups_count}
+            </li>
+          </ul>
 
-            <footer>
-              <Button
-                as={Link}
-                href={route('academic-year.edit', id)}
-                color='blue'
-                fullSized>
-                <Eye className='mr-2 h-5 w-5' />
-                Ver Ano Letivo
-              </Button>
-            </footer>
-          </Card>
-        )
-      )}
+          <footer>
+            <Button
+              as={Link}
+              href={route('admin.academic-years.edit', {
+                academicYear: academicYear.id,
+              })}
+              color='blue'
+              fullSized>
+              <Eye className='mr-2 h-5 w-5' />
+              Ver Ano Letivo
+            </Button>
+          </footer>
+        </Card>
+      ))}
     </section>
   )
 }

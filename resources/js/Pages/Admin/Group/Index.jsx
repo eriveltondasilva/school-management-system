@@ -4,6 +4,7 @@ import { Eye, PencilLine, Plus, XCircle } from 'lucide-react'
 
 import NotFound from '@/Components/NotFound'
 import Title from '@/Components/Title'
+
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
@@ -23,7 +24,7 @@ export default function PageGroupIndex({ groups = [] }) {
         <Title.Right>
           <Button
             as={Link}
-            href={route('group.create')}
+            href={route('admin.groups.create')}
             color='blue'
             className='uppercase'>
             <Plus className='mr-2 h-5 w-5' />
@@ -47,16 +48,16 @@ export default function PageGroupIndex({ groups = [] }) {
 function GroupCard({ groups = [] }) {
   return (
     <section className='grid max-w-6xl grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-      {groups.map(({ id, name, students_count, teachers_count }) => (
-        <Card key={id} className='max-w-sm'>
+      {groups.map((group) => (
+        <Card key={group.id} className='max-w-sm'>
           <header className='flex justify-between'>
             <h5 className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
-              {name}
+              {group.name}
             </h5>
 
             <Tooltip content='Editar Turma'>
               <Button
-                href={route('group.edit', id)}
+                href={route('admin.groups.edit', { group: group.id })}
                 color='green'
                 size='xs'
                 as={Link}>
@@ -66,16 +67,16 @@ function GroupCard({ groups = [] }) {
           </header>
 
           <p className='font-normal text-gray-700 dark:text-gray-400'>
-            Alunos: {students_count || 'sem aluno'}
+            Alunos: {group.students_count || 'sem aluno'}
           </p>
           <p className='font-normal text-gray-700 dark:text-gray-400'>
-            Professores: {teachers_count || 'sem prof.'}
+            Professores: {group.teachers_count || 'sem prof.'}
           </p>
 
           <footer className='space-y-4'>
             <Button
               as={Link}
-              href={route('group.list-students', id)}
+              href={route('admin.groups.students.index', { group: group.id })}
               color='blue'
               fullSized>
               <Eye className='mr-2 h-5 w-5' />
@@ -83,7 +84,7 @@ function GroupCard({ groups = [] }) {
             </Button>
             <Button
               as={Link}
-              href={route('group.list-teachers', id)}
+              href={route('admin.groups.teachers.index', { group: group.id })}
               color='warning'
               fullSized>
               <Eye className='mr-2 h-5 w-5' />

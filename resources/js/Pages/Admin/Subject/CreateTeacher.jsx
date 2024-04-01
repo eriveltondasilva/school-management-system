@@ -1,7 +1,6 @@
-import { Link, router, usePage } from '@inertiajs/react'
+import { Link, usePage } from '@inertiajs/react'
 import { Button, Tooltip } from 'flowbite-react'
 import { Eye, Plus, XCircle } from 'lucide-react'
-import { useState } from 'react'
 import { twJoin } from 'tailwind-merge'
 
 import Alert from '@/Components/Alert'
@@ -9,15 +8,19 @@ import NotFound from '@/Components/NotFound'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
+import useActionsHandler from '@/Hooks/useActionsHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageSubjectAddTeacher({ subject = {}, teachers = [] }) {
+export default function PageSubjectCreateTeacher({
+  subject = {},
+  teachers = [],
+}) {
   const { message } = usePage().props || {}
 
-  const pageTitle = `${titles.addTeacher} - ${subject.name}`
+  const pageTitle = `${titles.createTeacher} - ${subject.name}`
   const hasTeachers = teachers.length > 0
 
   return (
@@ -45,24 +48,11 @@ export default function PageSubjectAddTeacher({ subject = {}, teachers = [] }) {
 
 // ----------------------------------------------
 function TeacherTable({ subject = {}, teachers = [] }) {
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleStoreTeacher = async (teacherId, teacherName, teacherCpf) => {
-    setIsLoading(true)
-
-    const message = `Tem certeza que deseja adicionar professor(a)\n${teacherName}, CPF ${teacherCpf},\nà turma do ${subject.name}?`
-
-    router.delete(
-      route('admin.subjects.teachers.store', {
-        subject: subject.id,
-        teacher: teacherId,
-      }),
-      {
-        onBefore: () => confirm(message),
-        onFinish: () => setIsLoading(false),
-      }
-    )
+  const actionOptions = {
+    route: 'admin.subjects.teachers.store',
+    message: 'Tem certeza que deseja adicionar professor(a)?',
   }
+  const { isLoading, handleStoreItem } = useActionsHandler(actionOptions)
 
   return (
     <Table>
@@ -102,7 +92,10 @@ function TeacherTable({ subject = {}, teachers = [] }) {
                   as='button'
                   color='blue'
                   onClick={() =>
-                    handleStoreTeacher(teacher.id, teacher.name, teacher.cpf)
+                    handleStoreItem({
+                      subject: subject.id,
+                      teacher: teacher.id,
+                    })
                   }
                   disabled={isLoading}
                   size='xs'>
@@ -130,10 +123,10 @@ function TeacherNotFound() {
 }
 
 // ==============================================
-PageSubjectAddTeacher.layout = (page) => (
+PageSubjectCreateTeacher.layout = (page) => (
   <AuthLayout
-    title={titles.addTeacher}
-    breadcrumb={breadcrumbs.addTeacher}
+    title={titles.createTeacher}
+    breadcrumb={breadcrumbs.createTeacher}
     children={page}
   />
 )

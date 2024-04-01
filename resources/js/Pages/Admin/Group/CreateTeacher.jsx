@@ -1,7 +1,6 @@
-import { Link, router, usePage } from '@inertiajs/react'
+import { Link, usePage } from '@inertiajs/react'
 import { Button, Tooltip } from 'flowbite-react'
 import { Eye, Plus, XCircle } from 'lucide-react'
-import { useState } from 'react'
 import { twJoin } from 'tailwind-merge'
 
 import Alert from '@/Components/Alert'
@@ -9,23 +8,24 @@ import NotFound from '@/Components/NotFound'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
+import useActionsHandler from '@/Hooks/useActionsHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageGroupAddTeacher({ group = {}, teachers = [] }) {
-  const flash = usePage().props.flash || {}
+export default function PageGroupCreateTeacher({ group = {}, teachers = [] }) {
+  const { message } = usePage().props || {}
 
   const pageTitle = `${titles.create} - ${group.name}`
   const hasTeachers = teachers.length > 0
 
   return (
     <>
-      {/* Mensagem flash */}
-      {flash.message && (
+      {/* Mensagem */}
+      {message && (
         <Alert color='success' className='mb-4'>
-          {flash.message}
+          {message}
         </Alert>
       )}
 
@@ -45,25 +45,11 @@ export default function PageGroupAddTeacher({ group = {}, teachers = [] }) {
 
 // ----------------------------------------------
 function TeacherTable({ group = {}, teachers = [] }) {
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleStoreTeacher = async (id, name, cpf) => {
-    const message = `Tem certeza que deseja adicionar professor(a)\n${name}, CPF ${cpf},\nà turma do ${group.name}?`
-
-    if (!confirm(message)) return
-
-    try {
-      setIsLoading(true)
-
-      await router.post(
-        route('group.store-teacher', { group: group.id, teacher: id })
-      )
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setIsLoading(false)
-    }
+  const actionOptions = {
+    route: 'admin.groups.teachers.store',
+    message: 'Tem certeza que deseja adicionar professor(a)?',
   }
+  const { isLoading, handleStoreItem } = useActionsHandler(actionOptions)
 
   return (
     <Table>
@@ -77,22 +63,22 @@ function TeacherTable({ group = {}, teachers = [] }) {
 
       {/* Table Body */}
       <Table.Body>
-        {teachers.map(({ id, name, cpf }, index) => (
-          <Table.Row key={id}>
+        {teachers.map((teacher, index) => (
+          <Table.Row key={teacher.id}>
             <Table.RowCell className='font-bold'>{++index}</Table.RowCell>
             <Table.RowCell
               className={twJoin(
                 'whitespace-nowrap font-medium',
                 'text-gray-900 dark:text-white'
               )}>
-              {name}
+              {teacher.name}
             </Table.RowCell>
-            <Table.RowCell>{cpf}</Table.RowCell>
+            <Table.RowCell>{teacher.cpf}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>
                 <Button
                   as={Link}
-                  href={route('teacher.show', id)}
+                  href={route('admin.teachers.show', { teacher: teacher.id })}
                   color='green'
                   size='xs'>
                   <Tooltip content='Visualizar Professor'>
@@ -102,7 +88,9 @@ function TeacherTable({ group = {}, teachers = [] }) {
                 <Button
                   as='button'
                   color='blue'
-                  onClick={() => handleStoreTeacher(id, name, cpf)}
+                  onClick={() =>
+                    handleStoreItem({ group: group.id, teacher: teacher.id })
+                  }
                   disabled={isLoading}
                   size='xs'>
                   <Tooltip content='Adicionar Professor'>
@@ -129,10 +117,10 @@ function TeacherNotFound() {
 }
 
 // ==============================================
-PageGroupAddTeacher.layout = (page) => (
+PageGroupCreateTeacher.layout = (page) => (
   <AuthLayout
-    title={titles.addTeacher}
-    breadcrumb={breadcrumbs.addTeacher}
+    title={titles.createTeacher}
+    breadcrumb={breadcrumbs.createTeacher}
     children={page}
   />
 )

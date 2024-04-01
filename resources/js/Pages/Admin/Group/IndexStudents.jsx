@@ -1,7 +1,6 @@
-import { Link, router, usePage } from '@inertiajs/react'
+import { Link, usePage } from '@inertiajs/react'
 import { Button, Tooltip } from 'flowbite-react'
 import { Eye, Plus, Trash2, XCircle } from 'lucide-react'
-import { useState } from 'react'
 import { twJoin } from 'tailwind-merge'
 
 import Alert from '@/Components/Alert'
@@ -11,24 +10,25 @@ import Title from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 
+import useActionsHandler from '@/Hooks/useActionsHandler'
+import formatId from '@/Utils/formatId'
+import getGenderName from '@/Utils/getGenderName'
+
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageSubjectListTeachers({
-  subject = {},
-  teachers = [],
-}) {
-  const { message } = usePage().props || {}
+export default function PageGroupIndexStudents({ group = {}, students = [] }) {
+  const flash = usePage().props.flash || {}
 
-  const pageTitle = `${titles.listTeachers} - ${subject.name}`
-  const hasTeachers = teachers.length > 0
+  const pageTitle = `${titles.index} - ${group.name}`
+  const hasStudents = students.length > 0
 
   return (
     <>
-      {/* Mensagem */}
-      {message && (
+      {/* Mensagem flash */}
+      {flash.message && (
         <Alert color='failure' className='mb-4'>
-          {message}
+          {flash.message}
         </Alert>
       )}
 
@@ -38,13 +38,11 @@ export default function PageSubjectListTeachers({
         <Title.Right>
           <Button
             as={Link}
-            href={route('admin.subjects.teachers.create', {
-              subject: subject.id,
-            })}
+            href={route('admin.groups.students.create', { group: group.id })}
             color='blue'
             className='uppercase'>
             <Plus className='mr-2 h-5 w-5' />
-            Adicionar professor
+            Adicionar alunos
           </Button>
         </Title.Right>
         {/* TODO: implementar PDF */}
@@ -52,35 +50,22 @@ export default function PageSubjectListTeachers({
 
       <br />
 
-      {/* Exibe mensagem se não houver professores */}
-      {!hasTeachers && <NotFoundTeacher />}
+      {/* Exibe mensagem se não houver alunos */}
+      {!hasStudents && <StudentNotFound />}
 
-      {/* Tabela de professores */}
-      {hasTeachers && <TableTeacher {...{ subject, teachers }} />}
+      {/* Tabela de alunos */}
+      {hasStudents && <StudentTable {...{ group, students }} />}
     </>
   )
 }
 
 // ----------------------------------------------
-function TableTeacher({ subject = {}, teachers = [] }) {
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleDeleteTeacher = async (teacherId, teacherName, teacherCpf) => {
-    setIsLoading(true)
-
-    const message = `Tem certeza que deseja remover professor(a)\n${teacherName}, CPF ${teacherCpf},\nda disciplina do ${subject.name}?`
-
-    router.delete(
-      route('admin.subjects.teachers.destroy', {
-        subject: subject.id,
-        teacher: teacherId,
-      }),
-      {
-        onBefore: () => confirm(message),
-        onFinish: () => setIsLoading(false),
-      }
-    )
+function StudentTable({ group = {}, students = [] }) {
+  const actionOptions = {
+    route: 'admin.groups.students.destroy',
+    message: 'Tem certeza que deseja remover o aluno(a)?',
   }
+  const { isLoading, handleDeleteItem } = useActionsHandler(actionOptions)
 
   return (
     <Table>
@@ -88,31 +73,33 @@ function TableTeacher({ subject = {}, teachers = [] }) {
       <Table.Header>
         <Table.HeaderCell className='w-0'></Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
-        <Table.HeaderCell>CPF</Table.HeaderCell>
+        <Table.HeaderCell>Matrícula</Table.HeaderCell>
+        <Table.HeaderCell>Gênero</Table.HeaderCell>
         <Table.HeaderCell></Table.HeaderCell>
       </Table.Header>
 
       {/* Table Body */}
       <Table.Body>
-        {teachers.map((teacher, index) => (
-          <Table.Row key={teacher.id}>
+        {students.map((student, index) => (
+          <Table.Row key={student.id}>
             <Table.RowCell className='font-medium'>{++index}</Table.RowCell>
             <Table.RowCell
               className={twJoin(
                 'whitespace-nowrap font-medium',
                 'text-gray-900 dark:text-white'
               )}>
-              {teacher.name}
+              {student.name}
             </Table.RowCell>
-            <Table.RowCell>{teacher.cpf}</Table.RowCell>
+            <Table.RowCell>{formatId(student.id)}</Table.RowCell>
+            <Table.RowCell>{getGenderName(student.gender)}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>
                 <Button
                   as={Link}
-                  href={route('admin.teachers.show', { teacher: teacher.id })}
+                  href={route('admin.students.show', { student: student.id })}
                   color='blue'
                   size='xs'>
-                  <Tooltip content='Visualizar Professor(a)'>
+                  <Tooltip content='Visualizar Aluno(a)'>
                     <Eye className='h-4 w-4' />
                   </Tooltip>
                 </Button>
@@ -120,11 +107,11 @@ function TableTeacher({ subject = {}, teachers = [] }) {
                   as='button'
                   color='failure'
                   onClick={() =>
-                    handleDeleteTeacher(teacher.id, teacher.name, teacher.cpf)
+                    handleDeleteItem({ group: group.id, student: student.id })
                   }
                   disabled={isLoading}
                   size='xs'>
-                  <Tooltip content='Remover Professor(a)'>
+                  <Tooltip content='Remover Aluno(a)'>
                     <Trash2 className='mx-1 h-4 w-4' />
                   </Tooltip>
                 </Button>
@@ -138,20 +125,20 @@ function TableTeacher({ subject = {}, teachers = [] }) {
 }
 
 // ----------------------------------------------
-function NotFoundTeacher() {
+function StudentNotFound() {
   return (
     <NotFound>
       <XCircle />
-      Nenhum professor encontrado na disciplina...
+      Nenhum aluno encontrado na turma...
     </NotFound>
   )
 }
 
 // ==============================================
-PageSubjectListTeachers.layout = (page) => (
+PageGroupIndexStudents.layout = (page) => (
   <AuthLayout
-    title={titles.listTeachers}
-    breadcrumb={breadcrumbs.listTeachers}
+    title={titles.indexStudents}
+    breadcrumb={breadcrumbs.indexStudents}
     children={page}
   />
 )

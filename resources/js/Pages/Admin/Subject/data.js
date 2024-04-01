@@ -1,8 +1,8 @@
 // prettier-ignore
 export const titles = {
-  index       : 'Listar disciplinas',
-  listTeachers: 'Listar professors da disciplina',
-  addTeacher  : 'Adicionar professor à disciplina',
+  index        : 'Listar disciplinas',
+  indexTeachers: 'Listar professors da disciplina',
+  createTeacher: 'Adicionar professor à disciplina',
 }
 
 // ------------------------------------
@@ -13,7 +13,7 @@ const baseBreadcrumb = [
 
 // prettier-ignore
 export const breadcrumbs = {
-  index       : [...baseBreadcrumb, { title: titles.index }],
-  listTeachers: [...baseBreadcrumb, { title: titles.listTeachers }],
-  addTeacher  : [...baseBreadcrumb, { title: titles.addTeacher }],
+  index        : [...baseBreadcrumb, { title: titles.index }],
+  indexTeachers: [...baseBreadcrumb, { title: titles.indexTeachers }],
+  createTeacher: [...baseBreadcrumb, { title: titles.createTeacher }],
 }

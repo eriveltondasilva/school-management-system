@@ -16,25 +16,25 @@ import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function PageAcademicYearEdit({ academicYear = {} }) {
-  const flash = usePage().props.flash || {}
+  const { message } = usePage().props || {}
 
   const formDataOptions = {
-    routeName: 'academic-year.update',
-    id: academicYear.id,
+    route: 'admin.academic-years.update',
+    params: { academicYear: academicYear.id },
   }
   const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
 
   return (
     <Form onSubmit={handleSubmit}>
       {/* flash message */}
-      {flash.message && <Alert color='success'>{flash.message}</Alert>}
+      {message && <Alert color='success'>{message}</Alert>}
 
       {/* Form header */}
       <Form.Header>
         <Form.HeaderTitle title={titles.edit} />
         <Button.Group>
           <Button
-            href={route('academic-year.create')}
+            href={route('admin.academic-years.create')}
             color='blue'
             size='xs'
             as={Link}>

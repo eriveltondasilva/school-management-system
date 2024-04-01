@@ -1,7 +1,6 @@
-import { Link, router, usePage } from '@inertiajs/react'
+import { Link, usePage } from '@inertiajs/react'
 import { Button, Tooltip } from 'flowbite-react'
 import { Eye, Plus, Trash2, XCircle } from 'lucide-react'
-import { useState } from 'react'
 import { twJoin } from 'tailwind-merge'
 
 import Alert from '@/Components/Alert'
@@ -9,23 +8,27 @@ import NotFound from '@/Components/NotFound'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
+import useActionsHandler from '@/Hooks/useActionsHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageGroupListTeachers({ group = {}, teachers = [] }) {
-  const flash = usePage().props.flash || {}
+export default function PageSubjectIndexTeachers({
+  subject = {},
+  teachers = [],
+}) {
+  const { message } = usePage().props || {}
 
-  const pageTitle = `${titles.index} - ${group.name}`
+  const pageTitle = `${titles.indexTeachers} - ${subject.name}`
   const hasTeachers = teachers.length > 0
 
   return (
     <>
-      {/* Mensagem flash */}
-      {flash.message && (
+      {/* Mensagem */}
+      {message && (
         <Alert color='failure' className='mb-4'>
-          {flash.message}
+          {message}
         </Alert>
       )}
 
@@ -35,7 +38,9 @@ export default function PageGroupListTeachers({ group = {}, teachers = [] }) {
         <Title.Right>
           <Button
             as={Link}
-            href={route('group.add-teacher', group.id)}
+            href={route('admin.subjects.teachers.create', {
+              subject: subject.id,
+            })}
             color='blue'
             className='uppercase'>
             <Plus className='mr-2 h-5 w-5' />
@@ -48,35 +53,21 @@ export default function PageGroupListTeachers({ group = {}, teachers = [] }) {
       <br />
 
       {/* Exibe mensagem se não houver professores */}
-      {!hasTeachers && <TeacherNotFound />}
+      {!hasTeachers && <NotFoundTeacher />}
 
       {/* Tabela de professores */}
-      {hasTeachers && <TeacherTable {...{ group, teachers }} />}
+      {hasTeachers && <TableTeacher {...{ subject, teachers }} />}
     </>
   )
 }
 
 // ----------------------------------------------
-function TeacherTable({ group = {}, teachers = [] }) {
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleDeleteTeacher = (id, name, cpf) => {
-    const message = `Tem certeza que deseja remover professor(a)\n${name}, CPF ${cpf},\nda turma do ${group.name}?`
-
-    if (!confirm(message)) return
-
-    try {
-      setIsLoading(true)
-
-      router.delete(
-        route('group.destroy-teacher', { group: group.id, teacher: id })
-      )
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setIsLoading(false)
-    }
+function TableTeacher({ subject = {}, teachers = [] }) {
+  const actionOptions = {
+    route: 'admin.subjects.teachers.destroy',
+    message: 'Tem certeza que deseja remover professor(a)?',
   }
+  const { isLoading, handleDeleteItem } = useActionsHandler(actionOptions)
 
   return (
     <Table>
@@ -90,22 +81,22 @@ function TeacherTable({ group = {}, teachers = [] }) {
 
       {/* Table Body */}
       <Table.Body>
-        {teachers.map(({ id, name, cpf }, index) => (
-          <Table.Row key={id}>
+        {teachers.map((teacher, index) => (
+          <Table.Row key={teacher.id}>
             <Table.RowCell className='font-medium'>{++index}</Table.RowCell>
             <Table.RowCell
               className={twJoin(
                 'whitespace-nowrap font-medium',
                 'text-gray-900 dark:text-white'
               )}>
-              {name}
+              {teacher.name}
             </Table.RowCell>
-            <Table.RowCell>{cpf}</Table.RowCell>
+            <Table.RowCell>{teacher.cpf}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>
                 <Button
                   as={Link}
-                  href={route('teacher.show', id)}
+                  href={route('admin.teachers.show', { teacher: teacher.id })}
                   color='blue'
                   size='xs'>
                   <Tooltip content='Visualizar Professor(a)'>
@@ -115,7 +106,12 @@ function TeacherTable({ group = {}, teachers = [] }) {
                 <Button
                   as='button'
                   color='failure'
-                  onClick={() => handleDeleteTeacher(id, name, cpf)}
+                  onClick={() =>
+                    handleDeleteItem({
+                      subject: subject.id,
+                      teacher: teacher.id,
+                    })
+                  }
                   disabled={isLoading}
                   size='xs'>
                   <Tooltip content='Remover Professor(a)'>
@@ -132,20 +128,20 @@ function TeacherTable({ group = {}, teachers = [] }) {
 }
 
 // ----------------------------------------------
-function TeacherNotFound() {
+function NotFoundTeacher() {
   return (
     <NotFound>
       <XCircle />
-      Nenhum professor encontrado na turma...
+      Nenhum professor encontrado na disciplina...
     </NotFound>
   )
 }
 
 // ==============================================
-PageGroupListTeachers.layout = (page) => (
+PageSubjectIndexTeachers.layout = (page) => (
   <AuthLayout
-    title={titles.listTeachers}
-    breadcrumb={breadcrumbs.listTeachers}
+    title={titles.indexTeachers}
+    breadcrumb={breadcrumbs.indexTeachers}
     children={page}
   />
 )

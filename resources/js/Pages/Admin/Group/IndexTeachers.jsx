@@ -1,7 +1,6 @@
-import { Link, router, usePage } from '@inertiajs/react'
+import { Link, usePage } from '@inertiajs/react'
 import { Button, Tooltip } from 'flowbite-react'
 import { Eye, Plus, Trash2, XCircle } from 'lucide-react'
-import { useState } from 'react'
 import { twJoin } from 'tailwind-merge'
 
 import Alert from '@/Components/Alert'
@@ -9,19 +8,17 @@ import NotFound from '@/Components/NotFound'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
+import useActionsHandler from '@/Hooks/useActionsHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
-
-import formatId from '@/Utils/formatId'
-import getGenderName from '@/Utils/getGenderName'
 
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageGroupListStudents({ group = {}, students = [] }) {
+export default function PageGroupIndexTeachers({ group = {}, teachers = [] }) {
   const flash = usePage().props.flash || {}
 
   const pageTitle = `${titles.index} - ${group.name}`
-  const hasStudents = students.length > 0
+  const hasTeachers = teachers.length > 0
 
   return (
     <>
@@ -38,11 +35,11 @@ export default function PageGroupListStudents({ group = {}, students = [] }) {
         <Title.Right>
           <Button
             as={Link}
-            href={route('group.add-student', group.id)}
+            href={route('admin.groups.teachers.create', { group: group.id })}
             color='blue'
             className='uppercase'>
             <Plus className='mr-2 h-5 w-5' />
-            Adicionar alunos
+            Adicionar professor
           </Button>
         </Title.Right>
         {/* TODO: implementar PDF */}
@@ -50,37 +47,22 @@ export default function PageGroupListStudents({ group = {}, students = [] }) {
 
       <br />
 
-      {/* Exibe mensagem se não houver alunos */}
-      {!hasStudents && <StudentNotFound />}
+      {/* Exibe mensagem se não houver professores */}
+      {!hasTeachers && <TeacherNotFound />}
 
-      {/* Tabela de alunos */}
-      {hasStudents && <StudentTable {...{ group, students }} />}
+      {/* Tabela de professores */}
+      {hasTeachers && <TeacherTable {...{ group, teachers }} />}
     </>
   )
 }
 
 // ----------------------------------------------
-function StudentTable({ group = {}, students = [] }) {
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleDeleteStudent = (id, name, gender) => {
-    const genderText = gender === 'M' ? 'o aluno' : 'a aluna'
-    const message = `Tem certeza que deseja remover ${genderText}\n${name}, matrícula ${formatId(id)}, da turma do ${group.name}?`
-
-    if (!confirm(message)) return
-
-    try {
-      setIsLoading(true)
-
-      router.delete(
-        route('group.destroy-student', { group: group.id, student: id })
-      )
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setIsLoading(false)
-    }
+function TeacherTable({ group = {}, teachers = [] }) {
+  const actionOptions = {
+    route: 'admin.groups.teachers.destroy',
+    message: 'Tem certeza que deseja remover professor(a)?',
   }
+  const { isLoading, handleDeleteItem } = useActionsHandler(actionOptions)
 
   return (
     <Table>
@@ -88,43 +70,43 @@ function StudentTable({ group = {}, students = [] }) {
       <Table.Header>
         <Table.HeaderCell className='w-0'></Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
-        <Table.HeaderCell>Matrícula</Table.HeaderCell>
-        <Table.HeaderCell>Gênero</Table.HeaderCell>
+        <Table.HeaderCell>CPF</Table.HeaderCell>
         <Table.HeaderCell></Table.HeaderCell>
       </Table.Header>
 
       {/* Table Body */}
       <Table.Body>
-        {students.map(({ id, name, gender }, index) => (
-          <Table.Row key={id}>
+        {teachers.map((teacher, index) => (
+          <Table.Row key={teacher.id}>
             <Table.RowCell className='font-medium'>{++index}</Table.RowCell>
             <Table.RowCell
               className={twJoin(
                 'whitespace-nowrap font-medium',
                 'text-gray-900 dark:text-white'
               )}>
-              {name}
+              {teacher.name}
             </Table.RowCell>
-            <Table.RowCell>{formatId(id)}</Table.RowCell>
-            <Table.RowCell>{getGenderName(gender)}</Table.RowCell>
+            <Table.RowCell>{teacher.cpf}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>
                 <Button
                   as={Link}
-                  href={route('student.show', id)}
+                  href={route('admin.teachers.show', { teacher: teacher.id })}
                   color='blue'
                   size='xs'>
-                  <Tooltip content='Visualizar Aluno(a)'>
+                  <Tooltip content='Visualizar Professor(a)'>
                     <Eye className='h-4 w-4' />
                   </Tooltip>
                 </Button>
                 <Button
                   as='button'
                   color='failure'
-                  onClick={() => handleDeleteStudent(id, name, gender)}
+                  onClick={() =>
+                    handleDeleteItem({ group: group.id, teacher: teacher.id })
+                  }
                   disabled={isLoading}
                   size='xs'>
-                  <Tooltip content='Remover Aluno(a)'>
+                  <Tooltip content='Remover Professor(a)'>
                     <Trash2 className='mx-1 h-4 w-4' />
                   </Tooltip>
                 </Button>
@@ -138,20 +120,20 @@ function StudentTable({ group = {}, students = [] }) {
 }
 
 // ----------------------------------------------
-function StudentNotFound() {
+function TeacherNotFound() {
   return (
     <NotFound>
       <XCircle />
-      Nenhum aluno encontrado na turma...
+      Nenhum professor encontrado na turma...
     </NotFound>
   )
 }
 
 // ==============================================
-PageGroupListStudents.layout = (page) => (
+PageGroupIndexTeachers.layout = (page) => (
   <AuthLayout
-    title={titles.listStudents}
-    breadcrumb={breadcrumbs.listStudents}
+    title={titles.indexTeachers}
+    breadcrumb={breadcrumbs.indexTeachers}
     children={page}
   />
 )

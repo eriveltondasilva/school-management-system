@@ -17,15 +17,17 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import formatId from '@/Utils/formatId'
 import getGenderName from '@/Utils/getGenderName'
 
+import useActionsHandler from '@/Hooks/useActionsHandler'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageGroupAddStudent({ group = {}, students = [] }) {
+export default function PageGroupCreateStudent({ group = {}, students = [] }) {
   const [isLoading, setIsLoading] = useState(false)
-  const flash = usePage().props.flash || {}
+  const { message } = usePage().props || {}
   const searchId = route().params.search || ''
 
   const pageTitle = `${titles.create} - ${group.name}`
+
   const hasStudents = students.data.length > 0
   const hasPagination = students.total > students.data.length
 
@@ -34,7 +36,9 @@ export default function PageGroupAddStudent({ group = {}, students = [] }) {
     setIsLoading(true)
 
     try {
-      await router.get(route('group.add-student', { group: group.id }))
+      await router.get(
+        route('admin.groups.students.index', { group: group.id })
+      )
     } catch (error) {
       console.log(error)
     } finally {
@@ -45,9 +49,9 @@ export default function PageGroupAddStudent({ group = {}, students = [] }) {
   return (
     <>
       {/* Mensagem flash */}
-      {flash.message && (
+      {message && (
         <Alert color='success' className='mb-4'>
-          {flash.message}
+          {message}
         </Alert>
       )}
 
@@ -87,25 +91,11 @@ export default function PageGroupAddStudent({ group = {}, students = [] }) {
 
 // ----------------------------------------------
 function StudentTable({ group = {}, students = [] }) {
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleStoreStudent = async (id, name) => {
-    const message = `Tem certeza que deseja adicionar aluno(a)\n${name}, matrícula ${formatId(id)},\nà turma do ${group.name}?`
-
-    if (!confirm(message)) return
-
-    try {
-      setIsLoading(true)
-
-      await router.post(
-        route('group.store-student', { group: group.id, student: id })
-      )
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setIsLoading(false)
-    }
+  const actionOptions = {
+    route: 'admin.groups.students.store',
+    message: 'Tem certeza que deseja adicionar o aluno(a)?',
   }
+  const { isLoading, handleStoreItem } = useActionsHandler(actionOptions)
 
   return (
     <Table>
@@ -120,23 +110,23 @@ function StudentTable({ group = {}, students = [] }) {
 
       {/* Table Body */}
       <Table.Body>
-        {students.map(({ id, name, gender }, index) => (
-          <Table.Row key={id}>
+        {students.map((student, index) => (
+          <Table.Row key={student.id}>
             <Table.RowCell className='font-bold'>{++index}</Table.RowCell>
             <Table.RowCell
               className={twJoin(
                 'whitespace-nowrap font-medium',
                 'text-gray-900 dark:text-white'
               )}>
-              {name}
+              {student.name}
             </Table.RowCell>
-            <Table.RowCell>{formatId(id)}</Table.RowCell>
-            <Table.RowCell>{getGenderName(gender)}</Table.RowCell>
+            <Table.RowCell>{formatId(student.id)}</Table.RowCell>
+            <Table.RowCell>{getGenderName(student.gender)}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>
                 <Button
                   as={Link}
-                  href={route('student.show', id)}
+                  href={route('admin.students.show', { student: student.id })}
                   color='green'
                   size='xs'>
                   <Tooltip content='Visualizar Aluno'>
@@ -146,7 +136,9 @@ function StudentTable({ group = {}, students = [] }) {
                 <Button
                   as='button'
                   color='blue'
-                  onClick={() => handleStoreStudent(id, name, gender)}
+                  onClick={() =>
+                    handleStoreItem({ group: group.id, student: student.id })
+                  }
                   disabled={isLoading}
                   size='xs'>
                   <Tooltip content='Adicionar Aluno'>
@@ -188,10 +180,10 @@ function StudentPagination({ students = {} }) {
 }
 
 // ==============================================
-PageGroupAddStudent.layout = (page) => (
+PageGroupCreateStudent.layout = (page) => (
   <AuthLayout
-    title={titles.addStudent}
-    breadcrumb={breadcrumbs.addStudent}
+    title={titles.createStudent}
+    breadcrumb={breadcrumbs.createStudent}
     children={page}
   />
 )

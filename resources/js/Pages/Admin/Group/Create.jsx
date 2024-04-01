@@ -15,9 +15,9 @@ import { breadcrumbs, titles } from './data'
 
 // ===============================================
 export default function PageGroupCreate() {
-  const flash = usePage().props.flash || {}
+  const { message, id } = usePage().props || {}
 
-  const formDataOptions = { routeName: 'group.store' }
+  const formDataOptions = { route: 'admin.groups.store' }
   const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
 
   return (
@@ -25,11 +25,11 @@ export default function PageGroupCreate() {
       {/*  Criar ano letivo */}
       <Form onSubmit={handleSubmit}>
         {/* Mensagem flash */}
-        {flash.message && (
+        {message && (
           <Alert color='success'>
-            <div>{flash.message}</div>
+            <div>{message}</div>
             <Link
-              href={route('group.edit', flash.id)}
+              href={route('admin.groups.edit', { group: id })}
               className='font-medium underline'>
               Clique aqui para vê-lo.
             </Link>

@@ -1,31 +1,27 @@
 // prettier-ignore
 export const titles = {
-  index       : 'Listar turmas',
-  create      : 'Cadastrar turma',
-  edit        : 'Editar turma',
-  //
-  listStudents: 'Listar alunos da turma',
-  addStudent  : 'Adicionar aluno à turma',
-  //
-  listTeachers: 'Listar professores da turma',
-  addTeacher  : 'Adicionar professor à turma',
+  index        : 'Listar turmas',
+  indexStudents: 'Listar alunos da turma',
+  indexTeachers: 'Listar professores da turma',
+  create       : 'Cadastrar turma',
+  createStudent: 'Adicionar aluno à turma',
+  createTeacher: 'Adicionar professor à turma',
+  edit         : 'Editar turma',
 }
 
 // ------------------------------------
 const baseBreadcrumb = [
-  { title: 'Painel', route: 'dashboard' },
-  { title: titles.index, route: 'groups.index' },
+  { title: 'Painel', route: 'admin.dashboard' },
+  { title: titles.index, route: 'admin.groups.index' },
 ]
 
 // prettier-ignore
 export const breadcrumbs = {
-  index       : [baseBreadcrumb[0], { title: titles.index }],
-  create      : [...baseBreadcrumb, { title: titles.create }],
-  edit        : [...baseBreadcrumb, { title: titles.edit }],
-  //
-  listStudents: [...baseBreadcrumb, { title: titles.listStudents }],
-  addStudent  : [...baseBreadcrumb, { title: titles.addStudent }],
-  //
-  listTeachers: [...baseBreadcrumb, { title: titles.listTeachers }],
-  addTeacher  : [...baseBreadcrumb, { title: titles.addTeacher }],
+  index        : [baseBreadcrumb[0], { title: titles.index }],
+  indexStudents: [...baseBreadcrumb, { title: titles.indexStudents }],
+  indexTeachers: [...baseBreadcrumb, { title: titles.indexTeachers }],
+  create       : [...baseBreadcrumb, { title: titles.create }],
+  createStudent: [...baseBreadcrumb, { title: titles.createStudent }],
+  createTeacher: [...baseBreadcrumb, { title: titles.createTeacher }],
+  edit         : [...baseBreadcrumb, { title: titles.edit }],
 }

@@ -14,8 +14,8 @@ import AuthLayout from '@/Layouts/AuthLayout'
 
 import useFormHandler from '@/Hooks/useFormHandler'
 import formatId from '@/Utils/formatId'
-
 import getGenderName from '@/Utils/getGenderName'
+
 import { breadcrumbs, titles } from './data'
 
 // ==============================================

@@ -15,20 +15,20 @@ import { breadcrumbs, titles } from './data'
 
 // ==============================================
 export default function PageAcademicYearCreate() {
-  const flash = usePage().props.flash || {}
+  const { message, id } = usePage().props || {}
 
-  const formDataOptions = { routeName: 'academic-year.store' }
+  const formDataOptions = { route: 'admin.academic-years.store' }
   const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
 
   return (
     <section>
       <Form onSubmit={handleSubmit}>
         {/* Mensagem flash */}
-        {flash.message && (
+        {message && (
           <Alert color='success'>
-            <div>{flash.message}</div>
+            <div>{message}</div>
             <Link
-              href={route('academic-year.edit', flash.id)}
+              href={route('admin.academic-years.edit', { academicYear: id })}
               className='font-medium underline'>
               Clique aqui para vê-lo.
             </Link>

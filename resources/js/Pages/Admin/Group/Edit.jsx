@@ -17,7 +17,10 @@ import { breadcrumbs, titles } from './data'
 export default function PageGroupEdit({ group = {} }) {
   const flash = usePage().props.flash || {}
 
-  const formDataOptions = { routeName: 'group.update', id: group.id }
+  const formDataOptions = {
+    route: 'admin.groups.update',
+    params: { group: group.id },
+  }
   const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
 
   return (
@@ -30,7 +33,7 @@ export default function PageGroupEdit({ group = {} }) {
         <Form.HeaderTitle title={titles.edit} />
         <Button.Group>
           <Button
-            href={route('group.create')}
+            href={route('admin.groups.create')}
             color='blue'
             size='xs'
             title='Cadastrar novo turma'
