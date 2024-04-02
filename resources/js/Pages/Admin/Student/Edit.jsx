@@ -14,10 +14,11 @@ import { breadcrumbs, titles } from './data'
 // ==============================================
 export default function PageStudentEdit({ student = {} }) {
   const formDataOptions = {
+    method: 'PUT',
     route: 'admin.students.update',
     params: { student: student.id },
   }
-  const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
+  const { handleSubmit, isLoading, errors } = useFormHandler(formDataOptions)
 
   return (
     <Form onSubmit={handleSubmit}>

@@ -18,10 +18,11 @@ export default function PageGroupEdit({ group = {} }) {
   const { message } = usePage().props.flash || {}
 
   const formDataOptions = {
+    method: 'PUT',
     route: 'admin.groups.update',
     params: { group: group.id },
   }
-  const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
+  const { handleSubmit, isLoading, errors } = useFormHandler(formDataOptions)
 
   return (
     <Form onSubmit={handleSubmit}>

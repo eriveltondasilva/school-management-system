@@ -16,21 +16,25 @@ class AcademicYearSeeder extends Seeder
                 'year' => '2020',
                 'start_date' => '2020-01-01',
                 'end_date' => '2020-12-31',
+                'is_active' => false,
             ],
             [
                 'year' => '2021',
                 'start_date' => '2021-01-01',
                 'end_date' => '2021-12-31',
+                'is_active' => false,
             ],
             [
                 'year' => '2022',
                 'start_date' => '2022-01-01',
                 'end_date' => '2022-12-31',
+                'is_active' => false,
             ],
             [
                 'year' => '2023',
                 'start_date' => '2023-01-01',
                 'end_date' => '2023-12-31',
+                'is_active' => false,
             ],
             [
                 'year' => '2024',

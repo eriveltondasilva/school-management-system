@@ -11,12 +11,12 @@ export default function AcademicYearModel({ academicYear = {} }) {
   const [isShowed, setIsShowed] = useState(false)
   const handleToggleModal = () => setIsShowed(!isShowed)
 
-  const formDataOptions = {
+  const formOptions = {
     method: 'PUT',
     route: 'admin.academic-years.update-status',
     params: { academicYear: academicYear.id },
   }
-  const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
+  const { handleSubmit, isLoading } = useFormHandler(formOptions)
 
   return (
     <>

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-//
-use App\Models\{AcademicYear, Group, Student};
+use App\Models\AcademicYear;
+use App\Models\Group;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class GroupStudentController extends Controller

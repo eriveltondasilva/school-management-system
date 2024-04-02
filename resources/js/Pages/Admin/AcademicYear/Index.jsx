@@ -75,9 +75,10 @@ function AcademicYearCard({ academicYears = [] }) {
                 academicYear: academicYear.id,
               })}
               color='blue'
+              className='uppercase'
               fullSized>
               <Eye className='mr-2 h-5 w-5' />
-              Ver Ano Letivo
+              Ano Letivo
             </Button>
           </footer>
         </Card>

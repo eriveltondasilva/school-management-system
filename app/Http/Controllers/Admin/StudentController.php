@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-//
 use App\Models\Student;
 use App\Http\Requests\PersonRequest;
 use App\Services\SearchServices;
@@ -60,7 +59,6 @@ class StudentController extends Controller
         $validated = $request->validated();
         $student->update($validated);
 
-        // return to_route('student.show', $student->id)
         return back()->with('message', 'Aluno atualizado com sucesso!');
     }
 }

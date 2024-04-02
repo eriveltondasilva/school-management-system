@@ -4,8 +4,6 @@ import { useEffect } from 'react'
 
 import Button from '@/Components/Button'
 import Checkbox from '@/Components/Checkbox'
-import HorizontalLine from '@/Components/HorizontalLine'
-import { SignInGoogle } from '@/Components/Icons'
 import Input from '@/Components/Input'
 
 import GuestLayout from '@/Layouts/GuestLayout'
@@ -102,16 +100,17 @@ export default function PageLogin({ status, canResetPassword }) {
             Entrar com Email
           </Button>
 
-          <HorizontalLine text='OU' />
+          {/* TODO: implementar login com Google */}
+          {/* <HorizontalLine text='OU' /> */}
 
-          <Button
+          {/* <Button
             as='a'
             href={route('socialite.redirect', 'google')}
             variant='secondary'
             disabled={processing}>
             <SignInGoogle />
             Entrar com Google
-          </Button>
+          </Button> */}
         </footer>
       </form>
     </>

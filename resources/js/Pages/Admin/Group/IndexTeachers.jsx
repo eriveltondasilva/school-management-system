@@ -8,7 +8,7 @@ import NotFound from '@/Components/NotFound'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
-import useActionsHandler from '@/Hooks/useActionsHandler'
+import useActionHandler from '@/Hooks/useActionHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
@@ -59,10 +59,12 @@ export default function PageGroupIndexTeachers({ group = {}, teachers = [] }) {
 // ----------------------------------------------
 function TeacherTable({ group = {}, teachers = [] }) {
   const actionOptions = {
+    method: 'DELETE',
     route: 'admin.groups.teachers.destroy',
-    message: 'Tem certeza que deseja remover professor(a)?',
+    // message: 'Tem certeza que deseja remover professor(a)?',
   }
-  const { isLoading, handleDeleteItem } = useActionsHandler(actionOptions)
+  const { isLoading, handleAction: handleDeleteAction } =
+    useActionHandler(actionOptions)
 
   return (
     <Table>
@@ -102,7 +104,7 @@ function TeacherTable({ group = {}, teachers = [] }) {
                   as='button'
                   color='failure'
                   onClick={() =>
-                    handleDeleteItem({ group: group.id, teacher: teacher.id })
+                    handleDeleteAction({ group: group.id, teacher: teacher.id })
                   }
                   disabled={isLoading}
                   size='xs'>

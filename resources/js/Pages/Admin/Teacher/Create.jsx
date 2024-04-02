@@ -18,8 +18,11 @@ import { breadcrumbs, titles } from './data'
 export default function PageTeacherCreate() {
   const { message, id } = usePage().props.flash || {}
 
-  const formDataOptions = { route: 'admin.teachers.store' }
-  const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
+  const formDataOptions = {
+    method: 'POST',
+    route: 'admin.teachers.store',
+  }
+  const { handleSubmit, isLoading, errors } = useFormHandler(formDataOptions)
 
   return (
     <>

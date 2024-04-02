@@ -8,7 +8,7 @@ import NotFound from '@/Components/NotFound'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
-import useActionsHandler from '@/Hooks/useActionsHandler'
+import useActionHandler from '@/Hooks/useActionHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
@@ -64,10 +64,12 @@ export default function PageSubjectIndexTeachers({
 // ----------------------------------------------
 function TableTeacher({ subject = {}, teachers = [] }) {
   const actionOptions = {
+    method: 'DELETE',
     route: 'admin.subjects.teachers.destroy',
-    message: 'Tem certeza que deseja remover professor(a)?',
+    // message: 'Tem certeza que deseja remover professor(a)?',
   }
-  const { isLoading, handleDeleteItem } = useActionsHandler(actionOptions)
+  const { isLoading, handleAction: handleDeleteAction } =
+    useActionHandler(actionOptions)
 
   return (
     <Table>
@@ -107,7 +109,7 @@ function TableTeacher({ subject = {}, teachers = [] }) {
                   as='button'
                   color='failure'
                   onClick={() =>
-                    handleDeleteItem({
+                    handleDeleteAction({
                       subject: subject.id,
                       teacher: teacher.id,
                     })

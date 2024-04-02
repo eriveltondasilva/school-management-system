@@ -1,11 +1,11 @@
 // prettier-ignore
 export const titles = {
   index        : 'Listar turmas',
-  indexStudents: 'Listar alunos da turma',
-  indexTeachers: 'Listar professores da turma',
+  indexStudents: 'Listar alunos',
+  indexTeachers: 'Listar professores',
   create       : 'Cadastrar turma',
-  createStudent: 'Adicionar aluno à turma',
-  createTeacher: 'Adicionar professor à turma',
+  createStudent: 'Adicionar aluno',
+  createTeacher: 'Adicionar professor',
   edit         : 'Editar turma',
 }
 

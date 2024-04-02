@@ -27,7 +27,10 @@ export default function PageTeacherIndex({ teachers = [] }) {
     setSearch(e.target.value)
   }
 
-  const formDataOptions = { route: 'admin.teachers.index' }
+  const formDataOptions = {
+    method: 'GET',
+    route: 'admin.teachers.index',
+  }
   const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
 
   return (

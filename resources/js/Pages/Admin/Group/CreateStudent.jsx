@@ -16,8 +16,9 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import formatId from '@/Utils/formatId'
 import getGenderName from '@/Utils/getGenderName'
 
-import useActionsHandler from '@/Hooks/useActionsHandler'
+import useActionHandler from '@/Hooks/useActionHandler'
 import useFormHandler from '@/Hooks/useFormHandler'
+
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
@@ -83,11 +84,17 @@ export default function PageGroupCreateStudent({ group = {}, students = [] }) {
 
 // ----------------------------------------------
 function StudentTable({ group = {}, students = [] }) {
+  const message = 'Tem certeza que deseja adicionar o aluno(a)?'
+
   const actionOptions = {
+    method: 'POST',
     route: 'admin.groups.students.store',
-    message: 'Tem certeza que deseja adicionar o aluno(a)?',
+    options: {
+      onBefore: () => confirm(message),
+    },
   }
-  const { isLoading, handleStoreItem } = useActionsHandler(actionOptions)
+  const { isLoading, handleAction: handleStoreAction } =
+    useActionHandler(actionOptions)
 
   return (
     <Table>
@@ -129,7 +136,7 @@ function StudentTable({ group = {}, students = [] }) {
                   as='button'
                   color='blue'
                   onClick={() =>
-                    handleStoreItem({ group: group.id, student: student.id })
+                    handleStoreAction({ group: group.id, student: student.id })
                   }
                   disabled={isLoading}
                   size='xs'>

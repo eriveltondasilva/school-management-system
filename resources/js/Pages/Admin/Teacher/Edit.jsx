@@ -19,7 +19,7 @@ export default function PageTeacherEdit({ teacher = {} }) {
     route: 'admin.teachers.update',
     params: { teacher: teacher.id },
   }
-  const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
+  const { handleSubmit, isLoading, errors } = useFormHandler(formDataOptions)
 
   return (
     <>

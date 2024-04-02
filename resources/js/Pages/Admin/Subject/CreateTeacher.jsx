@@ -8,7 +8,7 @@ import NotFound from '@/Components/NotFound'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
-import useActionsHandler from '@/Hooks/useActionsHandler'
+import useActionHandler from '@/Hooks/useActionHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
@@ -49,10 +49,12 @@ export default function PageSubjectCreateTeacher({
 // ----------------------------------------------
 function TeacherTable({ subject = {}, teachers = [] }) {
   const actionOptions = {
+    method: 'POST',
     route: 'admin.subjects.teachers.store',
-    message: 'Tem certeza que deseja adicionar professor(a)?',
+    // message: 'Tem certeza que deseja adicionar professor(a)?',
   }
-  const { isLoading, handleStoreItem } = useActionsHandler(actionOptions)
+  const { isLoading, handleAction: handleStoreAction } =
+    useActionHandler(actionOptions)
 
   return (
     <Table>
@@ -92,7 +94,7 @@ function TeacherTable({ subject = {}, teachers = [] }) {
                   as='button'
                   color='blue'
                   onClick={() =>
-                    handleStoreItem({
+                    handleStoreAction({
                       subject: subject.id,
                       teacher: teacher.id,
                     })

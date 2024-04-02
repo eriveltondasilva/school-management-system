@@ -16,8 +16,8 @@ enum RoleEnum: string
     public function label(): string
     {
         $labelMap = match($this) {
-            static::ADMIN   => 'Administrador',
-            static::TEACHER => 'Professor',
+            static::ADMIN   => 'Administrador(a)',
+            static::TEACHER => 'Professor(a)',
             static::STUDENT => 'Estudante',
             static::USER    => 'Usuário',
             default         => 'Indefinido',

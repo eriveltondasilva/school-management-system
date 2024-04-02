@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react'
+import { Link, usePage } from '@inertiajs/react'
 import { Button, Card } from 'flowbite-react'
 import { Eye, XCircle } from 'lucide-react'
 
@@ -13,10 +13,13 @@ import { breadcrumbs, titles } from './data'
 export default function PageSubjectIndex({ subjects }) {
   const hasSubjects = subjects.length > 0
 
+  const { activeYear } = usePage().props.auth
+  const pageTitle = `${titles.index} - Ano Letivo: ${activeYear}`
+
   return (
     <>
       <Title>
-        <Title.Left title={titles.index} />
+        <Title.Left title={pageTitle} />
       </Title>
 
       <br />
@@ -54,6 +57,7 @@ function CardSubject({ subjects = [] }) {
                 subject: subject.id,
               })}
               color='blue'
+              className='uppercase'
               fullSized>
               <Eye className='mr-2 h-5 w-5' />
               Professores

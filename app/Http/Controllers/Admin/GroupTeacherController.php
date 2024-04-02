@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\{AcademicYear, Group, Teacher};
+use App\Models\Group;
+use App\Models\Teacher;
 
 class GroupTeacherController extends Controller
 {
@@ -36,7 +37,7 @@ class GroupTeacherController extends Controller
     {
         $group->teachers()->attach($teacher);
         $group->load('teachers');
-        $message = sprintf("Professor(a) %s, CPF %s, adicionado(a) à turma do %s.", $teacher->name, $teacher->cpf, $group->name);
+        $message = sprintf("Professor(a) %s adicionado(a) à turma do %s.", $teacher->name, $group->name);
 
         return back()->with('message', $message);
     }
@@ -45,7 +46,7 @@ class GroupTeacherController extends Controller
     {
         $group->teachers()->detach($teacher);
         $group->load('teachers');
-        $message = sprintf("Professor(a) %s, CPF %s, removido(a) da turma do %s.", $teacher->name, $teacher->cpf, $group->name);
+        $message = sprintf("Professor(a) %s removido(a) da turma do %s.", $teacher->name, $group->name);
 
         return back()->with('message', $message);
     }

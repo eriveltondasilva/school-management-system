@@ -10,7 +10,7 @@ import Title from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 
-import useActionsHandler from '@/Hooks/useActionsHandler'
+import useActionHandler from '@/Hooks/useActionHandler'
 import formatId from '@/Utils/formatId'
 import getGenderName from '@/Utils/getGenderName'
 
@@ -62,10 +62,12 @@ export default function PageGroupIndexStudents({ group = {}, students = [] }) {
 // ----------------------------------------------
 function StudentTable({ group = {}, students = [] }) {
   const actionOptions = {
+    method: 'DELETE',
     route: 'admin.groups.students.destroy',
-    message: 'Tem certeza que deseja remover o aluno(a)?',
+    // message: 'Tem certeza que deseja remover o aluno(a)?',
   }
-  const { isLoading, handleDeleteItem } = useActionsHandler(actionOptions)
+  const { isLoading, handleAction: handleDeleteAction } =
+    useActionHandler(actionOptions)
 
   return (
     <Table>
@@ -107,7 +109,7 @@ function StudentTable({ group = {}, students = [] }) {
                   as='button'
                   color='failure'
                   onClick={() =>
-                    handleDeleteItem({ group: group.id, student: student.id })
+                    handleDeleteAction({ group: group.id, student: student.id })
                   }
                   disabled={isLoading}
                   size='xs'>

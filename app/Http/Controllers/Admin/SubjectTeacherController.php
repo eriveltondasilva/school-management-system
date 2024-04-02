@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\{
-    AcademicYear,
-    Subject,
-    Teacher
-};
+use App\Models\AcademicYear;
+use App\Models\Subject;
+use App\Models\Teacher;
 
 // ========================================================================
 class SubjectTeacherController extends Controller
@@ -39,12 +37,12 @@ class SubjectTeacherController extends Controller
 
     public function store(Subject $subject, Teacher $teacher)
     {
-        $academicYearId = AcademicYear::IsActive()->firstOrFail()->id;
+        $academicYearId = AcademicYear::IsActive()->id;
 
         $subject->teachers()->attach($teacher, ['academic_year_id' => $academicYearId]);
         $subject->load('teachers');
 
-        $message = sprintf("Professor(a) %s, CPF %s, adicionado(a) à disciplina de %s.", $teacher->name, $teacher->cpf, $subject->name);
+        $message = sprintf("Professor(a) %s adicionado(a) à disciplina de %s.", $teacher->name, $subject->name);
 
         return back()->with('message', $message);
     }
@@ -54,7 +52,7 @@ class SubjectTeacherController extends Controller
         $subject->teachers()->detach($teacher);
         $subject->load('teachers');
 
-        $message = sprintf("Professor(a) %s, CPF %s, removido(a) da disciplina de %s.", $teacher->name, $teacher->cpf, $subject->name);
+        $message = sprintf("Professor(a) %s removido(a) da disciplina de %s.", $teacher->name, $subject->name);
 
         return back()->with('message', $message);
     }

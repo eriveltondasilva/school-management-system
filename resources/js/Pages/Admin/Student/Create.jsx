@@ -18,10 +18,10 @@ export default function PageStudentCreate() {
   const { message, id } = usePage().props.flash || {}
 
   const formDataOptions = {
-    route: 'admin.students.store',
     method: 'POST',
+    route: 'admin.students.store',
   }
-  const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
+  const { handleSubmit, isLoading, errors } = useFormHandler(formDataOptions)
 
   return (
     <Form onSubmit={handleSubmit}>

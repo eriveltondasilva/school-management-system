@@ -18,11 +18,12 @@ import { breadcrumbs, titles } from './data'
 export default function PageAcademicYearEdit({ academicYear = {} }) {
   const { message } = usePage().props.flash || {}
 
-  const formDataOptions = {
+  const formOptions = {
+    method: 'PUT',
     route: 'admin.academic-years.update',
     params: { academicYear: academicYear.id },
   }
-  const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
+  const { handleSubmit, errors, isLoading } = useFormHandler(formOptions)
 
   return (
     <Form onSubmit={handleSubmit}>

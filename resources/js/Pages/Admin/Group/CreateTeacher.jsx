@@ -8,7 +8,7 @@ import NotFound from '@/Components/NotFound'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
-import useActionsHandler from '@/Hooks/useActionsHandler'
+import useActionHandler from '@/Hooks/useActionHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
@@ -46,10 +46,12 @@ export default function PageGroupCreateTeacher({ group = {}, teachers = [] }) {
 // ----------------------------------------------
 function TeacherTable({ group = {}, teachers = [] }) {
   const actionOptions = {
+    method: 'POST',
     route: 'admin.groups.teachers.store',
-    message: 'Tem certeza que deseja adicionar professor(a)?',
+    // message: 'Tem certeza que deseja adicionar professor(a)?',
   }
-  const { isLoading, handleStoreItem } = useActionsHandler(actionOptions)
+  const { isLoading, handleAction: handleStoreAction } =
+    useActionHandler(actionOptions)
 
   return (
     <Table>
@@ -89,7 +91,7 @@ function TeacherTable({ group = {}, teachers = [] }) {
                   as='button'
                   color='blue'
                   onClick={() =>
-                    handleStoreItem({ group: group.id, teacher: teacher.id })
+                    handleStoreAction({ group: group.id, teacher: teacher.id })
                   }
                   disabled={isLoading}
                   size='xs'>
