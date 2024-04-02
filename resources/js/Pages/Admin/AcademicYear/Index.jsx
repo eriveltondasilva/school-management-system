@@ -39,7 +39,7 @@ export default function PageAcademicYearIndex({ academicYears = [] }) {
       {!hasAcademicYears && <AcademicYearNotFound />}
 
       {/* Exibe os cards dos anos letivos */}
-      {hasAcademicYears && <AcademicYearCard academicYears={academicYears} />}
+      {hasAcademicYears && <AcademicYearCard {...{ academicYears }} />}
     </>
   )
 }

@@ -16,7 +16,7 @@ import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function PageAcademicYearEdit({ academicYear = {} }) {
-  const { message } = usePage().props || {}
+  const { message } = usePage().props.flash || {}
 
   const formDataOptions = {
     route: 'admin.academic-years.update',

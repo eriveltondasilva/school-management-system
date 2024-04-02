@@ -15,9 +15,12 @@ import { breadcrumbs, titles } from './data'
 
 // ==============================================
 export default function PageStudentCreate() {
-  const { message, id } = usePage().props || {}
+  const { message, id } = usePage().props.flash || {}
 
-  const formDataOptions = { route: 'admin.students.store' }
+  const formDataOptions = {
+    route: 'admin.students.store',
+    method: 'POST',
+  }
   const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)
 
   return (

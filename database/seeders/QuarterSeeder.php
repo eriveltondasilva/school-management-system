@@ -19,7 +19,7 @@ class QuarterSeeder extends Seeder
         ];
 
         AcademicYear::all()->each(function ($year) use ($quarters) {
-            return $year->quarters()->createMany($quarters);
+            $year->quarters()->createMany($quarters);
         });
     }
 }

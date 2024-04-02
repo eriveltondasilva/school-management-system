@@ -20,7 +20,8 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            'auth' => $this->getAuthUserData($request),
+            'auth'  => $this->getAuthUserData($request),
+            'flash' => $this->getFlashData($request),
             'ziggy' => $this->getZiggyData($request),
         ];
     }
@@ -32,17 +33,22 @@ class HandleInertiaRequests extends Middleware
         return (new Ziggy())->toArray() + ['location' => $request->url()];
     }
 
+    // flash data
+    private function getFlashData(Request $request): array
+    {
+        return $request->session()->only(['message', 'id']);
+    }
+
     // auth data
     private function getAuthUserData(Request $request): array
     {
         $user =  $request->user();
 
         if ($user) {
-            $userWithRoles = $user->load('roles:id,name,display_name');
-            $userData = $userWithRoles->only('id', 'username', 'email', 'avatar_url');
-            $role = $userWithRoles->roles[0];
+            $userData = $user->only('id', 'username', 'email', 'avatar_url');
+            $role = $user->roles->first();
 
-            $activeYear = AcademicYear::select('id', 'year')->IsActive();
+            $activeYear = AcademicYear::IsActive()->year;
 
             return [
                 'user' => $userData + ['role' => $role],

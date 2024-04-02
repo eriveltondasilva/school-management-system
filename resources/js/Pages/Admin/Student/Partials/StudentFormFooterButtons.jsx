@@ -4,6 +4,7 @@ import { Save, Trash2 } from 'lucide-react'
 // ====================================
 export default function StudentFormFooterButtons({ disabled = false }) {
   const isCreate = route().current('*.create')
+
   const submitButtonText = isCreate ? 'Cadastrar' : 'Atualizar'
   const resetButtonText = isCreate ? 'Limpar' : 'Resetar'
 

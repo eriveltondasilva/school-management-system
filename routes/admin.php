@@ -26,7 +26,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     //* ACADEMIC YEAR ROUTES
     Route::controller(AcademicYearController::class)
-    ->prefix('ano-letivos')->name('academic-years.')->group(function () {
+    ->prefix('anos-letivos')->name('academic-years.')->group(function () {
         //
         Route::get('/', 'index')->name('index');
         Route::get('/cadastrar', 'create')->name('create');

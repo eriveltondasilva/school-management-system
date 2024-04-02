@@ -6,7 +6,7 @@ export function PanelInfoRoot({ children }) {
 }
 
 // ====================================
-export function PanelInfoItem({ title, number, icon }) {
+export function PanelInfoItem({ title = '', number = '', icon = '' }) {
   return (
     <div
       className={twJoin(

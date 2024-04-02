@@ -13,8 +13,13 @@ export default function useActionsHandler({
     setIsLoading(true)
 
     return await router.post(route(routeName, params), {
-      onBefore: () => confirm(message),
       onFinish: () => setIsLoading(false),
+      onBefore: () => {
+        if (!confirm(message)) {
+          setIsLoading(false)
+          return false
+        }
+      },
     })
   }
 
@@ -23,8 +28,13 @@ export default function useActionsHandler({
     setIsLoading(true)
 
     return await router.delete(route(routeName, params), {
-      onBefore: () => confirm(message),
       onFinish: () => setIsLoading(false),
+      onBefore: () => {
+        if (!confirm(message)) {
+          setIsLoading(false)
+          return false
+        }
+      },
     })
   }
 

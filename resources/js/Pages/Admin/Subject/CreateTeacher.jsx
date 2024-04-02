@@ -18,7 +18,7 @@ export default function PageSubjectCreateTeacher({
   subject = {},
   teachers = [],
 }) {
-  const { message } = usePage().props || {}
+  const { message } = usePage().props.flash || {}
 
   const pageTitle = `${titles.createTeacher} - ${subject.name}`
   const hasTeachers = teachers.length > 0

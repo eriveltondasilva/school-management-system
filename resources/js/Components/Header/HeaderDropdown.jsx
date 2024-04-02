@@ -41,10 +41,10 @@ export function HeaderDropdownHeader({ role, email }) {
 export function HeaderDropdownItem() {
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setIsLoading(true)
 
-    router.post(route('logout'), {
+    return await router.post(route('logout'), {
       onFinish: () => {
         setIsLoading(false)
       },
@@ -58,6 +58,7 @@ export function HeaderDropdownItem() {
       </Dropdown.Item>
       <Dropdown.Item
         as='button'
+        method='POST'
         disabled={isLoading}
         onClick={handleLogout}
         icon={LogOut}>

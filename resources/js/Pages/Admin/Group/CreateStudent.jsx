@@ -22,7 +22,7 @@ import { breadcrumbs, titles } from './data'
 
 // ==============================================
 export default function PageGroupCreateStudent({ group = {}, students = [] }) {
-  const { message } = usePage().props || {}
+  const { message } = usePage().props.flash || {}
   const searchId = route().params.search || ''
 
   const pageTitle = `${titles.create} - ${group.name}`

@@ -6,10 +6,7 @@ export const titles = {
 }
 
 // ------------------------------------
-const baseBreadcrumb = [
-  { title: 'Painel', route: 'admin.dashboard' },
-  { title: titles.index, route: 'admin.subjects.index' },
-]
+const baseBreadcrumb = [{ title: 'Painel', route: 'admin.dashboard' }]
 
 // prettier-ignore
 export const breadcrumbs = {

@@ -15,7 +15,7 @@ import { breadcrumbs, titles } from './data'
 
 // ===============================================
 export default function PageGroupCreate() {
-  const { message, id } = usePage().props || {}
+  const { message, id } = usePage().props.flash || {}
 
   const formDataOptions = { route: 'admin.groups.store' }
   const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)

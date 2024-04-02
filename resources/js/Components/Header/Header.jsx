@@ -19,32 +19,31 @@ export function HeaderRoot({ children }) {
 }
 
 // ====================================
-export function HeaderLeft({ title = '' }) {
+export function HeaderLeft({ role = '' }) {
   return (
     <Navbar.Brand>
       {/* Botão de menu */}
       <Sidebar.TriggerOpen />
 
       {/* Título */}
-      <span
+      <div
         className={twJoin(
-          'self-center whitespace-nowrap',
-          'hidden sm:block',
+          'flex self-center whitespace-nowrap',
           'text-xl font-semibold dark:text-white'
         )}>
-        {title || 'Bem-vindo(a)'}
-      </span>
+        <span className='hidden lg:flex'>Bem-vindo(a),&nbsp;</span>
+        <span>{role || 'Usuário'}</span>
+      </div>
     </Navbar.Brand>
   )
 }
 
 // ====================================
-export function HeaderRight({ activeYear = {}, children }) {
+export function HeaderRight({ activeYear = '', children }) {
   return (
     <div className='mr-2 flex items-center space-x-2'>
-      {/*  */}
       <div className='text-sm font-medium text-gray-600 dark:text-gray-400 '>
-        Ano Letivo: {activeYear.year}
+        Ano Letivo: {activeYear || 'XXXX'}
       </div>
 
       {/* Botão tema escuro */}

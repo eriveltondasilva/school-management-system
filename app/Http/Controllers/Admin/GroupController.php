@@ -15,7 +15,9 @@ class GroupController extends Controller
 {
     public function index()
     {
-        $groups = Group::activeAcademicYear()
+        $groups = Group::whereHas('academicYear', function ($query) {
+                $query->where('is_active', true);
+            })
             ->withCount('students', 'teachers')
             ->get();
 
@@ -39,14 +41,13 @@ class GroupController extends Controller
         $activeYearId = AcademicYear::IsActive()->id;
 
         if (!$activeYearId) {
-            return back()->with('message', 'Ano letivo atual não existe!');
+            return back()->with('message', 'Ano letivo atual não configurado!');
         }
 
         $validated = $request->validated();
+        $validated['academic_year_id'] = $activeYearId;
 
         $group = Group::create($validated);
-        $group->academic_year_id = $activeYearId;
-        $group->save();
 
         return back()
             ->with('message', 'Turma criada com sucesso!')

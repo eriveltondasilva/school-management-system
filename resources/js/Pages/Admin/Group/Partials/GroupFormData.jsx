@@ -3,7 +3,8 @@ import { usePage } from '@inertiajs/react'
 
 // ==============================================
 export default function GroupFormData({ data = {}, errors = {} }) {
-  const { year } = usePage().props.auth.activeAcademicYear || {}
+  const { activeYear } = usePage().props.auth || {}
+
   const nameSelectValues = ['6° Ano', '7° Ano', '8° Ano', '9° Ano']
   const shiftSelectValues = ['Matutino', 'Vespertino']
 
@@ -13,7 +14,7 @@ export default function GroupFormData({ data = {}, errors = {} }) {
         id='academicYear'
         type='text'
         label='Ano Letivo'
-        value={year}
+        value={activeYear}
         disabled
       />
 

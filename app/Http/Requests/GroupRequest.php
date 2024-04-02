@@ -27,8 +27,9 @@ class GroupRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('groups')
-                ->where(fn ($query) => $query->where('academic_year_id', $activeAcademicYearId))
+                Rule::unique('groups')->where(function ($query) {
+                    return $query->where('academic_year_id', $activeAcademicYearId);
+                })
             ];
         }
 

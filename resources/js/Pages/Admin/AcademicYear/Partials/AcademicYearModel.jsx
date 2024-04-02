@@ -9,15 +9,14 @@ import useFormHandler from '@/Hooks/useFormHandler'
 // ==============================================
 export default function AcademicYearModel({ academicYear = {} }) {
   const [isShowed, setIsShowed] = useState(false)
+  const handleToggleModal = () => setIsShowed(!isShowed)
 
   const formDataOptions = {
-    routeName: 'academic-year.update-status',
-    method: 'put',
-    id: academicYear.id,
+    method: 'PUT',
+    route: 'admin.academic-years.update-status',
+    params: { academicYear: academicYear.id },
   }
   const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
-
-  const handleToggleModal = () => setIsShowed(!isShowed)
 
   return (
     <>

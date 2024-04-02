@@ -20,7 +20,7 @@ export function SidebarRoot({ children }) {
 }
 
 // -----------------------------------------------
-export function SidebarLogo({ img, imgAlt, children }) {
+export function SidebarLogo({ img = '', imgAlt = '', children }) {
   return (
     <FlowbiteSidebar.Logo img={img} imgAlt={imgAlt}>
       {children}

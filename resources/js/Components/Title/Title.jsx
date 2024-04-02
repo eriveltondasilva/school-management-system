@@ -5,7 +5,6 @@ export function TitleRoot({ children }) {
     <div className='relative overflow-hidden'>
       <div className='flex-row items-center justify-between space-y-3 py-2 sm:flex sm:space-x-4 sm:space-y-0'>
         {children}
-        {/* Botão */}
       </div>
       <HorizontalLine />
     </div>

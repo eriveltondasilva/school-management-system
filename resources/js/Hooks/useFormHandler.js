@@ -6,12 +6,15 @@ export default function useFormHandler({
   route: routeName = '',
   method = '',
   params = {},
+  options = {},
 }) {
   const [isLoading, setIsLoading] = useState(false)
   const { errors } = usePage().props || {}
 
-  const hasParams = Object.keys(params).length > 0
-  const baseUrl = hasParams ? `${routeName}, ${params}` : routeName
+  const eventOptions = {
+    onFinish: () => setIsLoading(false),
+    ...options,
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -21,29 +24,42 @@ export default function useFormHandler({
       const formData = new FormData(e.target)
       const requestData = Object.fromEntries(formData.entries())
 
-      if (method === 'GET' || route().current('*.index')) {
-        return await router.get(route(baseUrl), requestData, {
-          onFinish: () => setIsLoading(false),
-        })
+      const isIndex = route().current('*.index')
+      const isCreate = route().current('*.create')
+      const isEdit = route().current('*.edit')
+      const isDestroy = route().current('*.destroy')
+
+      if (method === 'GET' || isIndex) {
+        return await router.get(
+          route(routeName, params),
+          requestData,
+          eventOptions
+        )
       }
 
-      if (method === 'POST' || route().current('*.create')) {
+      if (method === 'POST' || isCreate) {
         e.target.reset()
-        return await router.post(route(baseUrl), requestData, {
-          onFinish: () => setIsLoading(false),
-        })
+        return await router.post(
+          route(routeName, params),
+          requestData,
+          eventOptions
+        )
       }
 
-      if (method === 'PUT' || route().current('*.edit')) {
-        return await router.put(route(baseUrl), requestData, {
-          onFinish: () => setIsLoading(false),
-        })
+      if (method === 'PUT' || isEdit) {
+        return await router.put(
+          route(routeName, params),
+          requestData,
+          eventOptions
+        )
       }
 
-      if (method === 'DELETE' || route().current('*.destroy')) {
-        return await router.delete(route(baseUrl), requestData, {
-          onFinish: () => setIsLoading(false),
-        })
+      if (method === 'DELETE' || isDestroy) {
+        return await router.delete(
+          route(routeName, params),
+          requestData,
+          eventOptions
+        )
       }
 
       throw new Error('Método de envio inválido')

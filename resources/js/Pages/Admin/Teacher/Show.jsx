@@ -14,7 +14,7 @@ import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function PageTeacherShow({ teacher = {} }) {
-  const { message } = usePage().props || {}
+  const { message } = usePage().props.flash || {}
 
   return (
     <Form>

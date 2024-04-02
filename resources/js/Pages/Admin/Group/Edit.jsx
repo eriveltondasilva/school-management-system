@@ -15,7 +15,7 @@ import { breadcrumbs, titles } from './data'
 
 // ==============================================
 export default function PageGroupEdit({ group = {} }) {
-  const { message } = usePage().props || {}
+  const { message } = usePage().props.flash || {}
 
   const formDataOptions = {
     route: 'admin.groups.update',

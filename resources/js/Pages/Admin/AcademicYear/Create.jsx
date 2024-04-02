@@ -15,7 +15,7 @@ import { breadcrumbs, titles } from './data'
 
 // ==============================================
 export default function PageAcademicYearCreate() {
-  const { message, id } = usePage().props || {}
+  const { message, id } = usePage().props.flash || {}
 
   const formDataOptions = { route: 'admin.academic-years.store' }
   const { handleSubmit, errors, isLoading } = useFormHandler(formDataOptions)

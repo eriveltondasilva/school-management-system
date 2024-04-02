@@ -22,10 +22,10 @@ class PersonRequest extends FormRequest
             'birthday'         => 'nullable|date',
             'phone'            => 'nullable|string|max:255',
             //
-            'birthplace'       => 'sometimes|string|max:255',
-            'gov_benefits'     => 'sometimes|string|max:255',
-            'health_problems'  => 'sometimes|string|max:255',
-            'note'             => 'sometimes|string|max:255',
+            'birthplace'       => 'nullable|string|max:255',
+            'gov_benefits'     => 'nullable|string|max:255',
+            'health_problems'  => 'nullable|string|max:255',
+            'note'             => 'nullable|string|max:255',
             //
             'address_street'   => 'nullable|string|max:255',
             'address_city'     => 'nullable|string|max:255',

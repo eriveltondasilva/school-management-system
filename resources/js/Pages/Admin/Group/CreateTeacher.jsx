@@ -15,7 +15,7 @@ import { breadcrumbs, titles } from './data'
 
 // ==============================================
 export default function PageGroupCreateTeacher({ group = {}, teachers = [] }) {
-  const { message } = usePage().props || {}
+  const { message } = usePage().props.flash || {}
 
   const pageTitle = `${titles.create} - ${group.name}`
   const hasTeachers = teachers.length > 0

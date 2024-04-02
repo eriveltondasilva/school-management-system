@@ -82,7 +82,6 @@ export function InputRadio({
   id = '',
   label = '',
   error = '',
-  className = '',
   values = [],
   defaultChecked = '',
   readOnly = false,
@@ -90,7 +89,7 @@ export function InputRadio({
   return (
     <fieldset className='mb-6 flex max-w-md flex-col gap-4'>
       {/* # texto do label */}
-      {label && <Label htmlFor={id} value={label} />}
+      {label && <Label value={label} />}
 
       {/* # input radio */}
       {values.map((item, index) => (

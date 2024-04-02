@@ -12,7 +12,6 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-
         // Criação de usuários e atribuição de papéis
         $users = [
             [
@@ -22,26 +21,25 @@ class UserSeeder extends Seeder
             ],
             [
                 'username' => 'admin',
-                'email' => 'admin@gmail.com',
+                'email' => 'admin@example.com',
                 'role' => RoleEnum::ADMIN,
             ],
             [
                 'username' => 'teacher',
-                'email' => 'teacher@gmail.com',
+                'email' => 'teacher@example.com',
                 'role' => RoleEnum::TEACHER,
             ],
             [
                 'username' => 'student',
-                'email' => 'student@gmail.com',
+                'email' => 'student@example.com',
                 'role' => RoleEnum::STUDENT,
             ],
             [
                 'username' => 'user',
-                'email' => 'user@gmail.com',
+                'email' => 'user@example.com',
                 'role' => RoleEnum::USER,
             ],
         ];
-
 
         foreach ($users as $userData) {
             $user = User::factory()->create([
@@ -50,7 +48,6 @@ class UserSeeder extends Seeder
             ]);
             $user->assignRole($userData['role']);
         }
-
 
         // Criação de usuários padrão
         User::factory()->count(10)->create()->each(function ($user) {

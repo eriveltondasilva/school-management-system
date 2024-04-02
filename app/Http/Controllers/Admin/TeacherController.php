@@ -22,8 +22,8 @@ class TeacherController extends Controller
         $searchTerm = $request->get('search', '');
         $columns = ['id', 'name', 'email'];
 
-        $teachers = $this->searchServices
-            ->searchPerson(new Teacher(), $searchTerm, $columns);
+        $teachers = $this
+            ->searchServices->searchPerson(new Teacher(), $searchTerm, $columns);
 
         return inertia('Admin/Teacher/Index', compact('teachers'));
     }
@@ -60,7 +60,6 @@ class TeacherController extends Controller
         $validated = $request->validated();
         $teacher->update($validated);
 
-        return to_route('teacher.show', $teacher->id)
-            ->with('message', 'Professor atualizado com sucesso!');
+        return back()->with('message', 'Professor atualizado com sucesso!');
     }
 }

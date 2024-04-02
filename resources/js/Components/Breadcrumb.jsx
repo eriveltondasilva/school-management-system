@@ -6,7 +6,7 @@ import { Home } from 'lucide-react'
 export default function BreadcrumbRoot({ items }) {
   return (
     <Breadcrumb aria-label='breadcrumb'>
-      {items?.map((item, index) => (
+      {items.map((item, index) => (
         <BreadcrumbItem key={index} item={item} />
       ))}
     </Breadcrumb>

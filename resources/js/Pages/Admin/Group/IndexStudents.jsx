@@ -18,7 +18,7 @@ import { breadcrumbs, titles } from './data'
 
 // ==============================================
 export default function PageGroupIndexStudents({ group = {}, students = [] }) {
-  const { message } = usePage().props || {}
+  const { message } = usePage().props.flash || {}
 
   const pageTitle = `${titles.index} - ${group.name}`
   const hasStudents = students.length > 0

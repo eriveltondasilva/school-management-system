@@ -38,7 +38,7 @@ export default function AuthLayout({ title, breadcrumb, children }) {
       <Wrapper>
         {/* #header */}
         <Header>
-          <Header.Left />
+          <Header.Left role={user.role.display_name} />
           <Header.Right activeYear={activeYear}>
             <Header.Dropdown avatar_url={user.avatar_url}>
               <Header.DropdownHeader
