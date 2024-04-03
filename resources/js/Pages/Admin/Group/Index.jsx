@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react'
 import { Button, Card, Tooltip } from 'flowbite-react'
-import { Eye, PencilLine, Plus, XCircle } from 'lucide-react'
+import { PencilLine, Plus, XCircle } from 'lucide-react'
 
 import NotFound from '@/Components/NotFound'
 import Title from '@/Components/Title'
@@ -79,16 +79,16 @@ function GroupCard({ groups = [] }) {
               as={Link}
               href={route('admin.groups.students.index', { group: group.id })}
               color='blue'
+              className='uppercase'
               fullSized>
-              <Eye className='mr-2 h-5 w-5' />
               Alunos
             </Button>
             <Button
               as={Link}
               href={route('admin.groups.teachers.index', { group: group.id })}
               color='warning'
+              className='uppercase'
               fullSized>
-              <Eye className='mr-2 h-5 w-5' />
               Professores
             </Button>
           </footer>

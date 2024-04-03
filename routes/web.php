@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
     //* PROFILE
     Route::controller(ProfileController::class)
     ->prefix('perfil')->name('profile.')->group(function () {
-
+        //
         Route::get('/', 'edit')->name('edit');
         //* ACTIONS
         Route::patch('/', 'update')->name('update');
@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
 //# SOCIALITE
 Route::controller(SocialiteController::class)
 ->prefix('socialite/{provider}')->name('socialite.')->group(function () {
-
+    //
     Route::get('/redirect', 'redirect')->name('redirect');
     Route::get('/callback', 'callback')->name('callback');
 

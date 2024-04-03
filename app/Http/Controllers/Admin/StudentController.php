@@ -21,8 +21,8 @@ class StudentController extends Controller
         $searchTerm = $request->get('search', '');
         $columns = ['id', 'name', 'gender'];
 
-        $students = $this->searchServices
-            ->searchPerson(new Student(), $searchTerm, $columns);
+        $students = $this->searchServices->searchPerson(new Student(), $searchTerm, $columns);
+        dd($students);
 
         return inertia('Admin/Student/Index', compact('students'));
     }

@@ -23,7 +23,6 @@ class GroupStudentController extends Controller
 
     public function create(Request $request, Group $group)
     {
-
         $request->validate(['search' => 'nullable|string']);
 
         $searchTerm = $request->get('search', '');
@@ -38,8 +37,7 @@ class GroupStudentController extends Controller
 
         if ($searchTerm) {
             $studentsQuery->where(function ($query) use ($searchTerm) {
-                $query->where('id', $searchTerm)
-                    ->orWhere('name', 'like', "{$searchTerm}%");
+                $query->where('id', $searchTerm)->orWhere('name', 'like', "%{$searchTerm}%");
             });
         }
 

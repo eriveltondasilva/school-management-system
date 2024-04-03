@@ -29,11 +29,6 @@ export default function useFormHandler({
         onFinish: () => setIsLoading(false),
         ...options,
       })
-
-      const isIndex = route().current('*.index')
-      const isCreate = route().current('*.create')
-      const isEdit = route().current('*.edit')
-      const isDestroy = route().current('*.destroy')
     } catch (error) {
       console.error('Erro ao enviar formulário:', error.message)
     }

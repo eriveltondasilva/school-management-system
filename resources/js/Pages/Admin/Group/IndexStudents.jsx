@@ -61,10 +61,14 @@ export default function PageGroupIndexStudents({ group = {}, students = [] }) {
 
 // ----------------------------------------------
 function StudentTable({ group = {}, students = [] }) {
+  const message = 'Tem certeza que deseja remover o aluno(a)?'
+
   const actionOptions = {
     method: 'DELETE',
     route: 'admin.groups.students.destroy',
-    // message: 'Tem certeza que deseja remover o aluno(a)?',
+    options: {
+      onBefore: () => confirm(message),
+    },
   }
   const { isLoading, handleAction: handleDeleteAction } =
     useActionHandler(actionOptions)

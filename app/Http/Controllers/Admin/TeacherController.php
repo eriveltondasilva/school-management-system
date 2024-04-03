@@ -8,7 +8,7 @@ use App\Models\Teacher;
 use App\Services\SearchServices;
 use Illuminate\Http\Request;
 
-// ========================================================================
+// =============================================================================
 class TeacherController extends Controller
 {
     public function __construct(
@@ -21,8 +21,8 @@ class TeacherController extends Controller
         $searchTerm = $request->get('search', '');
         $columns = ['id', 'name', 'email'];
 
-        $teachers = $this
-            ->searchServices->searchPerson(new Teacher(), $searchTerm, $columns);
+        $teachers = $this->searchServices
+            ->searchPerson(new Teacher(), $searchTerm, $columns);
 
         return inertia('Admin/Teacher/Index', compact('teachers'));
     }

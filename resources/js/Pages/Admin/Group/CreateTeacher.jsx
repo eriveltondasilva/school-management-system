@@ -48,7 +48,6 @@ function TeacherTable({ group = {}, teachers = [] }) {
   const actionOptions = {
     method: 'POST',
     route: 'admin.groups.teachers.store',
-    // message: 'Tem certeza que deseja adicionar professor(a)?',
   }
   const { isLoading, handleAction: handleStoreAction } =
     useActionHandler(actionOptions)

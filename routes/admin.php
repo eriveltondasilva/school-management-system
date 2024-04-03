@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\{
     TeacherController,
 };
 
-//# ADMIN ROUTES =============================================================
+//# ADMIN ROUTES ===============================================================
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     //* DASHBOARD ROUTES
     Route::get('/painel', DashboardController::class)->name('dashboard');
@@ -56,7 +56,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     ->prefix('turmas/{group}/alunos')->name('groups.students.')->group(function () {
         //
         Route::get('/', 'index')->name('index');
-        Route::get('/adicionar', 'creates')->name('create');
+        Route::get('/adicionar', 'create')->name('create');
         //* ACTIONS
         Route::post('/{student}', 'store')->name('store');
         Route::delete('/{student}', 'destroy')->name('destroy');

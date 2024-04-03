@@ -33,7 +33,7 @@ export default function PageGroupCreateStudent({ group = {}, students = [] }) {
 
   const formDataOptions = {
     method: 'GET',
-    route: 'admin.groups.students.index',
+    route: 'admin.groups.students.create',
     params: { group: group.id },
   }
   const { isLoading, handleSubmit: handleSearchStudent } =
