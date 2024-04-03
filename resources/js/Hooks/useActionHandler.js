@@ -16,7 +16,7 @@ export default function useActionHandler({
       if (!method) throw new Error('method não informada.')
 
       await router.visit(route(url, params), {
-        method,
+        method: method.toLowerCase(),
         onStart: () => setIsLoading(true),
         onFinish: () => setIsLoading(false),
         ...options,

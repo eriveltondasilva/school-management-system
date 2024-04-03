@@ -23,8 +23,8 @@ export default function useFormHandler({
       const data = Object.fromEntries(formData.entries())
 
       await router.visit(route(url, params), {
-        method,
         data,
+        method: method.toLowerCase(),
         onStart: () => setIsLoading(true),
         onFinish: () => setIsLoading(false),
         ...options,
