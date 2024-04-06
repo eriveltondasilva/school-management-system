@@ -83,7 +83,7 @@ function TeacherTable({ subject = {}, teachers = [] }) {
               <Button.Group>
                 <Button
                   as={Link}
-                  href={route('admin.teachers.show', { teacher: teacher.id })}
+                  href={route('admin.teachers.show', { teacher })}
                   color='green'
                   size='xs'>
                   <Tooltip content='Visualizar Professor'>
@@ -93,12 +93,7 @@ function TeacherTable({ subject = {}, teachers = [] }) {
                 <Button
                   as='button'
                   color='blue'
-                  onClick={() =>
-                    handleStoreAction({
-                      subject: subject.id,
-                      teacher: teacher.id,
-                    })
-                  }
+                  onClick={() => handleStoreAction({ subject, teacher })}
                   disabled={isLoading}
                   size='xs'>
                   <Tooltip content='Adicionar Professor'>

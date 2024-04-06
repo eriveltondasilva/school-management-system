@@ -34,7 +34,7 @@ export default function PageGroupCreateStudent({ group = {}, students = [] }) {
   const formDataOptions = {
     method: 'GET',
     route: 'admin.groups.students.create',
-    params: { group: group.id },
+    params: { group },
   }
   const { isLoading, handleSubmit: handleSearchStudent } =
     useFormHandler(formDataOptions)
@@ -125,7 +125,7 @@ function StudentTable({ group = {}, students = [] }) {
               <Button.Group>
                 <Button
                   as={Link}
-                  href={route('admin.students.show', { student: student.id })}
+                  href={route('admin.students.show', { student })}
                   color='green'
                   size='xs'>
                   <Tooltip content='Visualizar Aluno'>

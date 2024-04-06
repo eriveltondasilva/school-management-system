@@ -26,7 +26,7 @@ export default function PageStudentShow({ student = {} }) {
         <Button.Group>
           <Button
             title='Editar aluno'
-            href={route('admin.students.edit', { student: student.id })}
+            href={route('admin.students.edit', { student })}
             color='blue'
             size='xs'
             as={Link}>

@@ -53,9 +53,7 @@ function CardSubject({ subjects = [] }) {
           <footer>
             <Button
               as={Link}
-              href={route('admin.subjects.teachers.index', {
-                subject: subject.id,
-              })}
+              href={route('admin.subjects.teachers.index', { subject })}
               color='blue'
               className='uppercase'
               fullSized>

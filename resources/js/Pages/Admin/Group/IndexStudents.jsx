@@ -38,7 +38,7 @@ export default function PageGroupIndexStudents({ group = {}, students = [] }) {
         <Title.Right>
           <Button
             as={Link}
-            href={route('admin.groups.students.create', { group: group.id })}
+            href={route('admin.groups.students.create', { group })}
             color='blue'
             className='uppercase'>
             <Plus className='mr-2 h-5 w-5' />
@@ -102,7 +102,7 @@ function StudentTable({ group = {}, students = [] }) {
               <Button.Group>
                 <Button
                   as={Link}
-                  href={route('admin.students.show', { student: student.id })}
+                  href={route('admin.students.show', { student })}
                   color='blue'
                   size='xs'>
                   <Tooltip content='Visualizar Aluno(a)'>
@@ -112,9 +112,7 @@ function StudentTable({ group = {}, students = [] }) {
                 <Button
                   as='button'
                   color='failure'
-                  onClick={() =>
-                    handleDeleteAction({ group: group.id, student: student.id })
-                  }
+                  onClick={() => handleDeleteAction({ group, student })}
                   disabled={isLoading}
                   size='xs'>
                   <Tooltip content='Remover Aluno(a)'>

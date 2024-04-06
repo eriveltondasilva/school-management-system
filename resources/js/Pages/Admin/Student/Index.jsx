@@ -120,14 +120,14 @@ function StudentTable({ students = [] }) {
               <Button.Group>
                 <Button
                   as={Link}
-                  href={route('admin.students.show', { student: student.id })}
+                  href={route('admin.students.show', { student })}
                   color='blue'
                   size='xs'>
                   <Eye className='h-4 w-4' />
                 </Button>
                 <Button
                   as={Link}
-                  href={route('admin.students.edit', { student: student.id })}
+                  href={route('admin.students.edit', { student })}
                   color='green'
                   size='xs'>
                   <PencilLine className='ml-2 h-4 w-4' />

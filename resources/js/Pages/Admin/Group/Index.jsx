@@ -58,7 +58,7 @@ function GroupCard({ groups = [] }) {
 
             <Tooltip content='Editar Turma'>
               <Button
-                href={route('admin.groups.edit', { group: group.id })}
+                href={route('admin.groups.edit', { group })}
                 color='green'
                 size='xs'
                 as={Link}>
@@ -77,7 +77,7 @@ function GroupCard({ groups = [] }) {
           <footer className='space-y-4'>
             <Button
               as={Link}
-              href={route('admin.groups.students.index', { group: group.id })}
+              href={route('admin.groups.students.index', { group })}
               color='blue'
               className='uppercase'
               fullSized>
@@ -85,7 +85,7 @@ function GroupCard({ groups = [] }) {
             </Button>
             <Button
               as={Link}
-              href={route('admin.groups.teachers.index', { group: group.id })}
+              href={route('admin.groups.teachers.index', { group })}
               color='warning'
               className='uppercase'
               fullSized>

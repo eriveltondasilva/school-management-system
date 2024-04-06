@@ -71,9 +71,7 @@ function AcademicYearCard({ academicYears = [] }) {
           <footer>
             <Button
               as={Link}
-              href={route('admin.academic-years.edit', {
-                academicYear: academicYear.id,
-              })}
+              href={route('admin.academic-years.edit', { academicYear })}
               color='blue'
               className='uppercase'
               fullSized>

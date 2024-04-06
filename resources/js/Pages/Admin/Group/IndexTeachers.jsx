@@ -35,7 +35,7 @@ export default function PageGroupIndexTeachers({ group = {}, teachers = [] }) {
         <Title.Right>
           <Button
             as={Link}
-            href={route('admin.groups.teachers.create', { group: group.id })}
+            href={route('admin.groups.teachers.create', { group })}
             color='blue'
             className='uppercase'>
             <Plus className='mr-2 h-5 w-5' />
@@ -97,7 +97,7 @@ function TeacherTable({ group = {}, teachers = [] }) {
               <Button.Group>
                 <Button
                   as={Link}
-                  href={route('admin.teachers.show', { teacher: teacher.id })}
+                  href={route('admin.teachers.show', { teacher })}
                   color='blue'
                   size='xs'>
                   <Tooltip content='Visualizar Professor(a)'>
@@ -107,9 +107,7 @@ function TeacherTable({ group = {}, teachers = [] }) {
                 <Button
                   as='button'
                   color='failure'
-                  onClick={() =>
-                    handleDeleteAction({ group: group.id, teacher: teacher.id })
-                  }
+                  onClick={() => handleDeleteAction({ group, teacher })}
                   disabled={isLoading}
                   size='xs'>
                   <Tooltip content='Remover Professor(a)'>

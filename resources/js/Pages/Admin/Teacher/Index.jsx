@@ -115,14 +115,14 @@ function TeacherTable({ teachers = [] }) {
               <Button.Group>
                 <Button
                   as={Link}
-                  href={route('admin.teachers.show', { teacher: teacher.id })}
+                  href={route('admin.teachers.show', { teacher })}
                   color='blue'
                   size='xs'>
                   <Eye className='h-4 w-4' />
                 </Button>
                 <Button
                   as={Link}
-                  href={route('admin.teachers.edit', { teacher: teacher.id })}
+                  href={route('admin.teachers.edit', { teacher })}
                   color='green'
                   size='xs'>
                   <PencilLine className='ml-2 h-4 w-4' />

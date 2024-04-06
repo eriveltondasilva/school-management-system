@@ -38,9 +38,7 @@ export default function PageSubjectIndexTeachers({
         <Title.Right>
           <Button
             as={Link}
-            href={route('admin.subjects.teachers.create', {
-              subject: subject.id,
-            })}
+            href={route('admin.subjects.teachers.create', { subject })}
             color='blue'
             className='uppercase'>
             <Plus className='mr-2 h-5 w-5' />
@@ -63,10 +61,14 @@ export default function PageSubjectIndexTeachers({
 
 // ----------------------------------------------
 function TableTeacher({ subject = {}, teachers = [] }) {
+  const message = 'Tem certeza que deseja remover professor(a)?'
+
   const actionOptions = {
     method: 'DELETE',
     route: 'admin.subjects.teachers.destroy',
-    // message: 'Tem certeza que deseja remover professor(a)?',
+    options: {
+      onBefore: () => confirm(message),
+    },
   }
   const { isLoading, handleAction: handleDeleteAction } =
     useActionHandler(actionOptions)
@@ -98,7 +100,7 @@ function TableTeacher({ subject = {}, teachers = [] }) {
               <Button.Group>
                 <Button
                   as={Link}
-                  href={route('admin.teachers.show', { teacher: teacher.id })}
+                  href={route('admin.teachers.show', { teacher })}
                   color='blue'
                   size='xs'>
                   <Tooltip content='Visualizar Professor(a)'>
@@ -108,12 +110,7 @@ function TableTeacher({ subject = {}, teachers = [] }) {
                 <Button
                   as='button'
                   color='failure'
-                  onClick={() =>
-                    handleDeleteAction({
-                      subject: subject.id,
-                      teacher: teacher.id,
-                    })
-                  }
+                  onClick={() => handleDeleteAction({ subject, teacher })}
                   disabled={isLoading}
                   size='xs'>
                   <Tooltip content='Remover Professor(a)'>
