@@ -13,6 +13,11 @@ export default function TeacherFormData({
 
   return (
     <section className='mb-4'>
+      {/* # SUBTÍTULO */}
+      <h2 className='mb-5 text-lg font-medium text-gray-900 dark:text-gray-100'>
+        Dados pessoais
+      </h2>
+
       {/* NOME DO PROFESSOR */}
       <Input.Text
         id='name'

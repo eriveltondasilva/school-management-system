@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react'
 import { Button, Card } from 'flowbite-react'
-import { Eye, Plus, XCircle } from 'lucide-react'
+import { Plus, XCircle } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
 import Indicator from '@/Components/Indicator'
@@ -75,7 +75,6 @@ function AcademicYearCard({ academicYears = [] }) {
               color='blue'
               className='uppercase'
               fullSized>
-              <Eye className='mr-2 h-5 w-5' />
               Ano Letivo
             </Button>
           </footer>

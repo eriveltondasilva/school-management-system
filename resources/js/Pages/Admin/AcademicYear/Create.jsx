@@ -9,7 +9,6 @@ import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import AcademicYearFormData from './Partials/AcademicYearFormData'
-import AcademicYearFormFooterButton from './Partials/AcademicYearFormFooterButton'
 
 import { breadcrumbs, titles } from './data'
 
@@ -55,7 +54,7 @@ export default function PageAcademicYearCreate() {
 
         {/* Form footer */}
         <Form.Footer>
-          <AcademicYearFormFooterButton disabled={isLoading} />
+          <Form.FooterButtonSubmit disabled={isLoading} />
         </Form.Footer>
       </Form>
     </section>

@@ -8,7 +8,6 @@ import AuthLayout from '@/Layouts/AuthLayout'
 
 import AddressFormData from './Partials/AddressFormData'
 import TeacherFormData from './Partials/TeacherFormData'
-import TeacherFormFooterButtons from './Partials/TeacherFormFooterButtons'
 
 import { breadcrumbs, titles } from './data'
 
@@ -44,7 +43,8 @@ export default function PageTeacherEdit({ teacher = {} }) {
 
         {/* footer teacher */}
         <Form.Footer>
-          <TeacherFormFooterButtons disabled={isLoading} />
+          <Form.FooterButtonReset disabled={isLoading} />
+          <Form.FooterButtonSubmit disabled={isLoading} />
         </Form.Footer>
       </Form>
     </>

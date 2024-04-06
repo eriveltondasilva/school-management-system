@@ -9,8 +9,6 @@ use App\Models\AcademicYear;
 
 // use Illuminate\Http\Request;
 
-
-// ========================================================================
 class DashboardController extends Controller
 {
     public function __invoke()
@@ -23,6 +21,6 @@ class DashboardController extends Controller
             'groups' => $groups = $currentYear->groups()->count(),
         ];
 
-        return inertia('Admin/Dashboard', compact('counts'));
+        return inertia('Admin/Dashboard', compact('counts', 'currentYear'));
     }
 }

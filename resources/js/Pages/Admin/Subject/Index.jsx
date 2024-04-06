@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react'
 import { Button, Card } from 'flowbite-react'
-import { Eye, XCircle } from 'lucide-react'
+import { XCircle } from 'lucide-react'
 
 import NotFound from '@/Components/NotFound'
 import Title from '@/Components/Title'
@@ -54,10 +54,9 @@ function CardSubject({ subjects = [] }) {
             <Button
               as={Link}
               href={route('admin.subjects.teachers.index', { subject })}
-              color='blue'
+              color='warning'
               className='uppercase'
               fullSized>
-              <Eye className='mr-2 h-5 w-5' />
               Professores
             </Button>
           </footer>

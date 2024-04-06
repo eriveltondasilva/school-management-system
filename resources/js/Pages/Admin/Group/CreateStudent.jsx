@@ -26,7 +26,7 @@ export default function PageGroupCreateStudent({ group = {}, students = [] }) {
   const { message } = usePage().props.flash || {}
   const searchId = route().params.search || ''
 
-  const pageTitle = `${titles.create} - ${group.name}`
+  const pageTitle = `${titles.createStudent} - ${group.name}`
 
   const hasStudents = students.data.length > 0
   const hasPagination = students.total > students.data.length
@@ -59,7 +59,7 @@ export default function PageGroupCreateStudent({ group = {}, students = [] }) {
           <Input.Text
             id='search'
             type='search'
-            className='mb-0 sm:w-96'
+            className='mb-0'
             defaultValue={searchId}
             placeholder='Pesquisar aluno...'
             autoFocus

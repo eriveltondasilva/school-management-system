@@ -7,7 +7,6 @@ import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import StudentFormData from './Partials/StudentFormData'
-import StudentFormFooterButtons from './Partials/StudentFormFooterButtons'
 
 import { breadcrumbs, titles } from './data'
 
@@ -39,7 +38,8 @@ export default function PageStudentEdit({ student = {} }) {
 
       {/* footer student */}
       <Form.Footer>
-        <StudentFormFooterButtons disabled={isLoading} />
+        <Form.FooterButtonReset disabled={isLoading} />
+        <Form.FooterButtonSubmit disabled={isLoading} />
       </Form.Footer>
     </Form>
   )

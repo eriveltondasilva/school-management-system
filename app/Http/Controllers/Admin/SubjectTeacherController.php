@@ -7,7 +7,6 @@ use App\Models\AcademicYear;
 use App\Models\Subject;
 use App\Models\Teacher;
 
-// ========================================================================
 class SubjectTeacherController extends Controller
 {
     public function index(Subject $subject)

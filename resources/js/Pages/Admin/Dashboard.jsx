@@ -1,5 +1,4 @@
 // import Calendar from '@/Components/Calendar'
-import { usePage } from '@inertiajs/react'
 import { BookCopy, Calendar, Users, UsersRound } from 'lucide-react'
 
 import AuthLayout from '@/Layouts/AuthLayout'
@@ -9,9 +8,7 @@ import { breadcrumbs, titles } from './data'
 let statistics = []
 
 // ====================================
-export default function DashboardPage({ counts }) {
-  const { activeYear } = usePage().props.auth || {}
-
+export default function DashboardPage({ counts, currentYear }) {
   statistics = [
     {
       title: 'Alunos',
@@ -31,7 +28,7 @@ export default function DashboardPage({ counts }) {
     {
       title: 'Ano Letivo',
       icon: <Calendar />,
-      value: activeYear,
+      value: currentYear.year,
     },
   ]
 

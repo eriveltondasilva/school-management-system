@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Subject;
 
-// ========================================================================
 class SubjectController extends Controller
 {
     public function index()

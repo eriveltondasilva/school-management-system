@@ -9,7 +9,6 @@ import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import GroupFormData from './Partials/GroupFormData'
-import GroupFormFooterButton from './Partials/GroupFormFooterButton'
 
 import { breadcrumbs, titles } from './data'
 
@@ -56,7 +55,7 @@ export default function PageGroupEdit({ group = {} }) {
 
       {/*  */}
       <Form.Footer>
-        <GroupFormFooterButton disabled={isLoading} />
+        <Form.FooterButtonSubmit disabled={isLoading} />
       </Form.Footer>
     </Form>
   )

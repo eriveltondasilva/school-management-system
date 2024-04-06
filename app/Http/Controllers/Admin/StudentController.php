@@ -8,7 +8,6 @@ use App\Http\Requests\PersonRequest;
 use App\Services\SearchServices;
 use Illuminate\Http\Request;
 
-// ============================================================================
 class StudentController extends Controller
 {
     public function __construct(

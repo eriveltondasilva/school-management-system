@@ -1,26 +1,25 @@
 import { Head, usePage } from '@inertiajs/react'
 import { twJoin } from 'tailwind-merge'
 
+import Breadcrumb from '@/Components/Breadcrumb'
 import Footer from '@/Components/Footer'
 import Header from '@/Components/Header'
 import Sidebar from '@/Components/Sidebar'
-
-import Breadcrumb from '@/Components/Breadcrumb'
 import StatisticCards from '@/Components/StatisticCards'
-import SidebarItems from './data'
-import Main from './partials/Main'
+
 import schoolImg from '/resources/images/school.png'
+
+import SidebarItems from './data'
 
 // ============================================================================
 export default function AuthLayout({
-  title,
-  breadcrumb,
-  statistics,
+  title = '',
+  breadcrumb = [],
+  statistics = [],
   children,
 }) {
   const { user, activeYear } = usePage().props.auth || {}
   const userRole = user.role.name || 'user'
-  const isDashboard = route().current('*.dashboard')
 
   const sidebarItemsMap = {
     admin: SidebarItems.Admin,
@@ -45,24 +44,28 @@ export default function AuthLayout({
       <Wrapper>
         {/* #header */}
         <Header>
-          <Header.Left role={user.role.display_name} />
+          <Header.Left role={user.role.display_name || 'user'} />
           <Header.Right activeYear={activeYear}>
             <Header.Dropdown avatar_url={user.avatar_url}>
               <Header.DropdownHeader
                 role={user.role.display_name || 'user'}
-                email={user.email}
+                email={user.email || 'exemplo@email.com'}
               />
               <Header.DropdownItem />
             </Header.Dropdown>
           </Header.Right>
         </Header>
 
-        {!isDashboard && <LayoutBreadcrumb items={breadcrumb} />}
+        <section className='space-y-2'>
+          {/* #breadcrumb */}
+          {breadcrumb.length > 0 && <LayoutBreadcrumb items={breadcrumb} />}
 
-        {/* #statistic cards */}
-        {statistics && <LayoutStatisticCards items={statistics} />}
+          {/* #statistic cards */}
+          {statistics.length > 0 && <LayoutStatisticCards items={statistics} />}
+        </section>
 
-        <Main>{children}</Main>
+        {/* #main */}
+        <LayoutMain>{children}</LayoutMain>
 
         {/* #footer */}
         <Footer>
@@ -71,6 +74,21 @@ export default function AuthLayout({
         </Footer>
       </Wrapper>
     </>
+  )
+}
+
+function LayoutMain({ children }) {
+  return (
+    <main
+      className={twJoin(
+        'px-4 py-8 sm:px-8',
+        'rounded-lg border-t-4',
+        'border-yellow-300',
+        'bg-gray-50 text-gray-900',
+        'dark:bg-gray-800 dark:text-gray-200'
+      )}>
+      {children}
+    </main>
   )
 }
 

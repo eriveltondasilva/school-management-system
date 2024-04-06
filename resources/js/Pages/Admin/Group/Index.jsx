@@ -13,14 +13,14 @@ import { breadcrumbs, titles } from './data'
 export default function PageGroupIndex({ groups = [] }) {
   const { activeYear } = usePage().props.auth || ''
 
-  const groupPageTitle = `${titles.index} - ${activeYear}`
+  const pageTitle = `${titles.index} - ${activeYear}`
   const hasGroups = groups.length > 0
 
   return (
     <>
       {/* Título */}
       <Title>
-        <Title.Left title={groupPageTitle} />
+        <Title.Left title={pageTitle} />
 
         <Title.Right>
           <Button
