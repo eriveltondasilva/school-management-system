@@ -8,7 +8,7 @@ import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function DashboardPage() {
-  const { message } = usePage().props
+  const { message } = usePage().props.flash
 
   return <>{message && <Alert>{message}</Alert>}</>
 }

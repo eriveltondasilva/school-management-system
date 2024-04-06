@@ -9,10 +9,11 @@ return new class () extends Migration {
     {
         Schema::create('group_student', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             //
             $table->unsignedBigInteger('group_id')->comment('ID do grupo');
             $table->unsignedBigInteger('student_id')->comment('ID do aluno');
+            //
+            $table->timestamps();
         });
     }
 

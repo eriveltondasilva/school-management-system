@@ -18,7 +18,7 @@ return new class () extends Migration {
             $table->string('avatar_url')->nullable()->comment('URL do avatar do usuário');
             $table->string('provider_id')->nullable()->comment('ID do provedor de autenticação externo');
             $table->string('provider_name')->nullable()->comment('Nome do provedor de autenticação externo');
-            $table->nullableMorphs('profile');
+            $table->nullableMorphs('profile')->comment('Perfil do usuário');
             //
             $table->rememberToken();
             $table->timestamps();

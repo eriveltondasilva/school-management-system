@@ -27,8 +27,8 @@ return new class () extends Migration {
             $table->string('gov_benefits')->nullable()->comment('Benefícios governamentais do aluno');
             $table->string('health_problems')->nullable()->comment('Problemas de saúde do aluno');
             $table->text('note')->nullable()->comment('Observações sobre o aluno');
-            $table->boolean('is_active')->default(true)->comment('Indica se o professor está ativo');
             //
+            $table->boolean('is_active')->default(true)->comment('Indica se o professor está ativo');
             $table->timestamps();
         });
     }

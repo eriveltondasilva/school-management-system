@@ -12,8 +12,8 @@ return new class () extends Migration {
             $table->integer('year')->unique()->comment('ID do ano acadêmico');
             $table->date('start_date')->nullable()->comment('Data de início do ano acadêmico');
             $table->date('end_date')->nullable()->comment('Data de término do ano acadêmico');
-            $table->boolean('is_active')->default(false)->comment('Se o ano acadêmico está ativo');
             //
+            $table->boolean('is_active')->default(false)->comment('Se o ano acadêmico está ativo');
             $table->timestamps();
         });
     }
