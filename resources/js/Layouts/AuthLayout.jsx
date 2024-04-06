@@ -1,19 +1,26 @@
 import { Head, usePage } from '@inertiajs/react'
 import { twJoin } from 'tailwind-merge'
 
-import Breadcrumb from '@/Components/Breadcrumb'
 import Footer from '@/Components/Footer'
 import Header from '@/Components/Header'
 import Sidebar from '@/Components/Sidebar'
 
+import Breadcrumb from '@/Components/Breadcrumb'
+import StatisticCards from '@/Components/StatisticCards'
 import SidebarItems from './data'
 import Main from './partials/Main'
 import schoolImg from '/resources/images/school.png'
 
 // ============================================================================
-export default function AuthLayout({ title, breadcrumb, children }) {
+export default function AuthLayout({
+  title,
+  breadcrumb,
+  statistics,
+  children,
+}) {
   const { user, activeYear } = usePage().props.auth || {}
   const userRole = user.role.name || 'user'
+  const isDashboard = route().current('*.dashboard')
 
   const sidebarItemsMap = {
     admin: SidebarItems.Admin,
@@ -50,10 +57,10 @@ export default function AuthLayout({ title, breadcrumb, children }) {
           </Header.Right>
         </Header>
 
-        {/* #breadcrumb */}
-        {breadcrumb && <Breadcrumb items={breadcrumb} />}
+        {!isDashboard && <LayoutBreadcrumb items={breadcrumb} />}
 
-        {/* {panelInfo && <PanelInfo />} */}
+        {/* #statistic cards */}
+        {statistics && <LayoutStatisticCards items={statistics} />}
 
         <Main>{children}</Main>
 
@@ -64,6 +71,29 @@ export default function AuthLayout({ title, breadcrumb, children }) {
         </Footer>
       </Wrapper>
     </>
+  )
+}
+
+function LayoutBreadcrumb({ items }) {
+  return (
+    <Breadcrumb>
+      {items.map((item, index) => (
+        <Breadcrumb.Item key={index} item={item} />
+      ))}
+    </Breadcrumb>
+  )
+}
+
+function LayoutStatisticCards({ items }) {
+  return (
+    <StatisticCards>
+      {items.map((item, index) => (
+        <StatisticCards.Item key={index}>
+          <StatisticCards.Icon icon={item.icon} />
+          <StatisticCards.Body title={item.title} value={item.value} />
+        </StatisticCards.Item>
+      ))}
+    </StatisticCards>
   )
 }
 

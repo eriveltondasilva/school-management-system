@@ -1,6 +1,5 @@
 import AuthLayout from '@/Layouts/AuthLayout'
 
-import DeleteUserForm from './Partials/DeleteUserForm'
 import UpdatePasswordForm from './Partials/UpdatePasswordForm'
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm'
 
@@ -22,9 +21,9 @@ export default function ProfileEditPage({ mustVerifyEmail, status }) {
         <UpdatePasswordForm className='max-w-xl' />
       </div>
 
-      <div className='p-4 sm:rounded-lg sm:p-8'>
+      {/* <div className='p-4 sm:rounded-lg sm:p-8'>
         <DeleteUserForm className='max-w-xl' />
-      </div>
+      </div> */}
     </div>
   )
 }
