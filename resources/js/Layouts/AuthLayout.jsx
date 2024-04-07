@@ -82,7 +82,7 @@ function LayoutMain({ children }) {
     <main
       className={twJoin(
         'px-4 py-8 sm:px-8',
-        'rounded-lg border-t-4',
+        'rounded-lg border-t-4 shadow-md',
         'border-yellow-300',
         'bg-gray-50 text-gray-900',
         'dark:bg-gray-800 dark:text-gray-200'

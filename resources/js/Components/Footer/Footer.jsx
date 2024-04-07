@@ -3,7 +3,11 @@ import { socialLinks } from './data'
 
 // ====================================
 export function FooterRoot({ children }) {
-  return <Footer container>{children}</Footer>
+  return (
+    <Footer className='shadow-md' container>
+      {children}
+    </Footer>
+  )
 }
 
 // ====================================

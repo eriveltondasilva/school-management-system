@@ -11,10 +11,12 @@ export function SidebarRoot({ children }) {
       aria-label='sidebar'
       className={twJoin(
         'fixed h-screen w-64',
-        'left-0 top-0 z-40 drop-shadow-2xl',
+        'left-0 top-0 z-40 ',
         '-translate-x-full transition-transform md:translate-x-0'
       )}>
-      <FlowbiteSidebar aria-label='sidebar'>{children}</FlowbiteSidebar>
+      <FlowbiteSidebar className='shadow-md' aria-label='sidebar'>
+        {children}
+      </FlowbiteSidebar>
     </aside>
   )
 }

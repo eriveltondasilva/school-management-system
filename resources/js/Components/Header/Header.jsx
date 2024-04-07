@@ -10,7 +10,7 @@ export function HeaderRoot({ children }) {
       rounded
       className={twJoin(
         'sticky top-0 z-30 rounded-lg',
-        'dark:drop-shadow-lg sm:relative',
+        'shadow-md sm:relative',
         'bg-slate-50 dark:text-white'
       )}>
       {children}
@@ -43,7 +43,7 @@ export function HeaderRight({ activeYear = '', children }) {
   return (
     <div className='mr-2 flex items-center space-x-2'>
       <div className='text-sm font-medium text-gray-600 dark:text-gray-400 '>
-        Ano Letivo: {activeYear || 'XXXX'}
+        Ano Letivo: {activeYear || '0000'}
       </div>
 
       {/* Botão tema escuro */}
