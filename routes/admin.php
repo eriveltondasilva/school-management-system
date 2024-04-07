@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\{
     SubjectController,
     SubjectTeacherController,
     TeacherController,
+    TeacherUserController,
 };
 
 //# ADMIN ROUTES ===============================================================
@@ -120,5 +121,18 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
         //* ACTIONS
         Route::post('/', 'store')->name('store');
         Route::put('/{teacher}', 'update')->name('update');
+    });
+
+    //* TEACHER/USER ROUTES
+    Route::controller(TeacherUserController::class)
+    ->prefix('professores/{teacher}/usuarios')->name('teachers.users.')->group(function () {
+        //
+        Route::get('/adicionar', 'create')->name('create');
+        Route::get('/{user}', 'show')->name('show');
+        Route::get('/{user}/editar', 'edit')->name('edit');
+        //* ACTIONS
+        Route::post('/', 'store')->name('store');
+        Route::put('/{user}', 'update')->name('update');
+        Route::delete('/{user}', 'destroy')->name('destroy');
     });
 });

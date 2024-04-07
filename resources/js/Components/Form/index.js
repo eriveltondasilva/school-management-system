@@ -13,6 +13,6 @@ Form.Header = FormHeader
 Form.Footer = FormFooter
 Form.HeaderTitle = FormHeaderTitle
 Form.FooterButtonSubmit = FormFooterButtonSubmit
-Form.FooterButtonsReset = FormFooterButtonReset
+Form.FooterButtonReset = FormFooterButtonReset
 
 export default Form

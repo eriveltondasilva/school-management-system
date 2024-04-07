@@ -22,7 +22,9 @@ export function FormRoot({ className = '', onSubmit = () => {}, children }) {
 export function FormHeader({ className = '', children }) {
   return (
     <header className='mb-4 space-y-4'>
-      <div className={twMerge('flex space-x-2', className)}>{children}</div>
+      <div className={twMerge('flex justify-between', className)}>
+        {children}
+      </div>
       <HorizontalLine />
     </header>
   )

@@ -9,7 +9,7 @@ return new class () extends Migration {
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->comment('Nome da matéria');
+            $table->string('name')->unique()->comment('Nome da matéria');
             $table->string('abbr', 10)->nullable()->comment('Abreviação da matéria');
             //
             $table->timestamps();
