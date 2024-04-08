@@ -1,6 +1,6 @@
 // prettier-ignore
 export const titles = {
-  profile: 'Profile',
+  profile: 'Perfil',
 }
 
 // ------------------------------------

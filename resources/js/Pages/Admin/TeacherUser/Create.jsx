@@ -1,10 +1,10 @@
-import { breadcrumbs, titles } from './data'
-
 import Form from '@/Components/Form'
+import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
+
 import UserFormData from './Partials/UserFormData'
 
-import useFormHandler from '@/Hooks/useFormHandler'
+import { breadcrumbs, titles } from './data'
 
 export default function PageTeacherUserCreate({ teacher = {} }) {
   const formOptions = {
@@ -14,13 +14,16 @@ export default function PageTeacherUserCreate({ teacher = {} }) {
   }
   const { handleSubmit, isLoading, errors } = useFormHandler(formOptions)
 
+  const pageTitle = `${titles.create} - ${teacher.name}`
+
   return (
     <Form onSubmit={handleSubmit} autoComplete='false'>
       {/* header teacher */}
       <Form.Header>
-        <Form.HeaderTitle title={titles.create} />
+        <Form.HeaderTitle title={pageTitle} />
       </Form.Header>
 
+      {/* form data */}
       <UserFormData {...{ errors }} />
 
       {/* footer teacher */}

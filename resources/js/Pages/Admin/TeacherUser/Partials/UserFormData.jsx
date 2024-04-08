@@ -5,10 +5,6 @@ export default function UserFormData({ data = {}, errors = {} }) {
 
   return (
     <section className='mb-4'>
-      <h2 className='mb-5 text-lg font-medium text-gray-900 dark:text-gray-100'>
-        Dados de usuário
-      </h2>
-
       <Input.Text
         id='username'
         type='text'
@@ -29,7 +25,6 @@ export default function UserFormData({ data = {}, errors = {} }) {
         defaultValue={data.email || ' '}
         autoComplete='false'
         required
-        // readOnly={readOnly}
       />
 
       {/* SENHA DO USUÁRIO */}
@@ -40,20 +35,19 @@ export default function UserFormData({ data = {}, errors = {} }) {
         placeholder=''
         error={errors.password}
         defaultValue={data.password}
-        required
+        required={isCreationRoute}
       />
 
       {/* CONFIRMAÇÃO DE SENHA */}
-      {isCreationRoute && (
-        <Input.Text
-          id='password_confirmation'
-          type='text'
-          label='Confirme sua senha'
-          placeholder=''
-          error={errors.password_confirmation}
-          required
-        />
-      )}
+
+      <Input.Text
+        id='password_confirmation'
+        type='text'
+        label='Confirme sua senha'
+        placeholder=''
+        error={errors.password_confirmation}
+        required={isCreationRoute}
+      />
     </section>
   )
 }

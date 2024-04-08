@@ -14,10 +14,10 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageGroupIndexTeachers({ group = {}, teachers = [] }) {
+export default function PageGroupTeacherIndex({ group = {}, teachers = [] }) {
   const { message } = usePage().props.flash || {}
 
-  const pageTitle = `${titles.indexTeachers} - ${group.name}`
+  const pageTitle = `${titles.index} - ${group.name}`
   const hasTeachers = teachers.length > 0
 
   return (
@@ -134,10 +134,10 @@ function TeacherNotFound() {
 }
 
 // ==============================================
-PageGroupIndexTeachers.layout = (page) => (
+PageGroupTeacherIndex.layout = (page) => (
   <AuthLayout
-    title={titles.indexTeachers}
-    breadcrumb={breadcrumbs.indexTeachers}
+    title={titles.index}
+    breadcrumb={breadcrumbs.index}
     children={page}
   />
 )

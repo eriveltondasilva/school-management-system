@@ -14,13 +14,13 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageSubjectCreateTeacher({
+export default function PageSubjectTeacherCreate({
   subject = {},
   teachers = [],
 }) {
   const { message } = usePage().props.flash || {}
 
-  const pageTitle = `${titles.createTeacher} - ${subject.name}`
+  const pageTitle = `${titles.create} - ${subject.name}`
   const hasTeachers = teachers.length > 0
 
   return (
@@ -120,10 +120,10 @@ function TeacherNotFound() {
 }
 
 // ==============================================
-PageSubjectCreateTeacher.layout = (page) => (
+PageSubjectTeacherCreate.layout = (page) => (
   <AuthLayout
-    title={titles.createTeacher}
-    breadcrumb={breadcrumbs.createTeacher}
+    title={titles.create}
+    breadcrumb={breadcrumbs.create}
     children={page}
   />
 )

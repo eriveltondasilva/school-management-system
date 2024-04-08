@@ -22,11 +22,11 @@ import useFormHandler from '@/Hooks/useFormHandler'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageGroupCreateStudent({ group = {}, students = [] }) {
+export default function PageGroupStudentCreate({ group = {}, students = [] }) {
   const { message } = usePage().props.flash || {}
   const searchId = route().params.search || ''
 
-  const pageTitle = `${titles.createStudent} - ${group.name}`
+  const pageTitle = `${titles.create} - ${group.name}`
 
   const hasStudents = students.data.length > 0
   const hasPagination = students.total > students.data.length
@@ -179,10 +179,10 @@ function StudentPagination({ students = {} }) {
 }
 
 // ==============================================
-PageGroupCreateStudent.layout = (page) => (
+PageGroupStudentCreate.layout = (page) => (
   <AuthLayout
-    title={titles.createStudent}
-    breadcrumb={breadcrumbs.createStudent}
+    title={titles.create}
+    breadcrumb={breadcrumbs.create}
     children={page}
   />
 )

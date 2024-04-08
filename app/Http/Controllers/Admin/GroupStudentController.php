@@ -18,7 +18,7 @@ class GroupStudentController extends Controller
             ->orderBy('students.name')
             ->get();
 
-        return inertia('Admin/Group/IndexStudents', compact('group', 'students'));
+        return inertia('Admin/GroupStudent/Index', compact('group', 'students'));
     }
 
     public function create(Request $request, Group $group)
@@ -43,7 +43,7 @@ class GroupStudentController extends Controller
 
         $students = $studentsQuery->paginate(20);
 
-        return inertia('Admin/Group/CreateStudent', compact('group', 'students'));
+        return inertia('Admin/GroupStudent/Create', compact('group', 'students'));
     }
 
     // ### Actions ###

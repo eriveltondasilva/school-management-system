@@ -38,7 +38,7 @@ export default function UpdateProfileInformation({
           <Input.Text
             id='username'
             type='text'
-            label='username'
+            label='Nome de usuário'
             className='mt-1 block w-full'
             value={data.username}
             onChange={handleChange}
@@ -54,7 +54,7 @@ export default function UpdateProfileInformation({
           <Input.Text
             id='email'
             type='email'
-            label='Email'
+            label='Seu email'
             className='mt-1 block w-full'
             value={data.email}
             onChange={handleChange}

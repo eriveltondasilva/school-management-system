@@ -17,7 +17,7 @@ class SubjectTeacherController extends Controller
             ->orderBy('teachers.name')
             ->get();
 
-        return inertia('Admin/Subject/IndexTeachers', compact('subject', 'teachers'));
+        return inertia('Admin/SubjectTeacher/Index', compact('subject', 'teachers'));
     }
 
     public function create(Subject $subject)
@@ -29,7 +29,7 @@ class SubjectTeacherController extends Controller
             ->orderBy('name')
             ->get();
 
-        return inertia('Admin/Subject/CreateTeacher', compact('subject', 'teachers'));
+        return inertia('Admin/SubjectTeacher/Create', compact('subject', 'teachers'));
     }
 
     // ### ACTION ###

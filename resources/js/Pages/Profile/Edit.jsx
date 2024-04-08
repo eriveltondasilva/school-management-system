@@ -21,6 +21,7 @@ export default function ProfileEditPage({ mustVerifyEmail, status }) {
         <UpdatePasswordForm className='max-w-xl' />
       </div>
 
+      {/* TODO: deletar conta */}
       {/* <div className='p-4 sm:rounded-lg sm:p-8'>
         <DeleteUserForm className='max-w-xl' />
       </div> */}

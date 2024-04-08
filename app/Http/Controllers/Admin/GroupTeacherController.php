@@ -16,7 +16,7 @@ class GroupTeacherController extends Controller
             ->orderBy('teachers.name')
             ->get();
 
-        return inertia('Admin/Group/IndexTeachers', compact('group', 'teachers'));
+        return inertia('Admin/GroupTeacher/Index', compact('group', 'teachers'));
     }
 
     public function create(Group $group)
@@ -28,7 +28,7 @@ class GroupTeacherController extends Controller
             ->orderBy('teachers.name')
             ->get();
 
-        return inertia('Admin/Group/CreateTeacher', compact('group', 'teachers'));
+        return inertia('Admin/GroupTeacher/Create', compact('group', 'teachers'));
     }
 
     // ### Actions ###
