@@ -15,7 +15,7 @@ class TeacherUserController extends Controller
 {
     public function create(Teacher $teacher)
     {
-        $user = $teacher->user;
+        $user = $teacher->user?->exists();
 
         if ($user) {
             return to_route('admin.teachers.users.edit', compact('teacher', 'user'));

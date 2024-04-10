@@ -8,22 +8,24 @@ import { breadcrumbs, titles } from './data'
 let statistics = []
 
 // ====================================
-export default function DashboardPage({ counts, currentYear }) {
+export default function DashboardPage({ data }) {
+  const { studentsCount, teachersCount, groupsCount, currentYear } = data || {}
+
   statistics = [
     {
       title: 'Alunos',
       icon: <UsersRound />,
-      value: counts.students,
+      value: studentsCount,
     },
     {
       title: 'Professores',
       icon: <Users />,
-      value: counts.teachers,
+      value: teachersCount,
     },
     {
       title: 'Turmas',
       icon: <BookCopy />,
-      value: counts.groups,
+      value: groupsCount,
     },
     {
       title: 'Ano Letivo',

@@ -31,7 +31,7 @@ export default function UserFormData({ data = {}, errors = {} }) {
       <Input.Text
         id='password'
         type='text'
-        label='Sua senha'
+        label='Senha'
         placeholder=''
         error={errors.password}
         defaultValue={data.password}
@@ -43,7 +43,7 @@ export default function UserFormData({ data = {}, errors = {} }) {
       <Input.Text
         id='password_confirmation'
         type='text'
-        label='Confirme sua senha'
+        label='Confirme senha'
         placeholder=''
         error={errors.password_confirmation}
         required={isCreationRoute}

@@ -65,7 +65,9 @@ class AcademicYearController extends Controller
 
         $academicYear->update($validated);
 
-        return back()->with('message', 'O ano letivo atualizado com sucesso!');
+        $message = sprintf('O ano letivo %s foi ativado com sucesso!', $academicYear->year);
+
+        return back()->with('message', $message);
     }
 
     public function updateStatus(AcademicYear $academicYear)
@@ -78,6 +80,8 @@ class AcademicYearController extends Controller
 
         $academicYear->update(['is_active' => true]);
 
-        return back()->with('message', 'O ano letivo foi ativado com sucesso.!');
+        $message = sprintf('O ano letivo %s foi ativado com sucesso!', $academicYear->year);
+
+        return to_route('admin.academic-years.index')->with('message', $message);
     }
 }
