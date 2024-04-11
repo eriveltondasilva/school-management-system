@@ -17,7 +17,7 @@ class TeacherController extends Controller
 
     public function index(Request $request)
     {
-        $searchTerm = $request->get('search', '');
+        $searchTerm = $request->query('search');
         $columns = ['id', 'name', 'email'];
 
         $teachers = $this->searchServices
@@ -41,12 +41,13 @@ class TeacherController extends Controller
         return inertia('Admin/Teacher/Edit', compact('teacher'));
     }
 
-    // ### Actions ###
+    //# Actions
 
     public function store(PersonRequest $request)
     {
-        $validated = $request->validated();
-        $teacher = Teacher::create($validated);
+        $validatedData = $request->validated();
+
+        $teacher = Teacher::create($validatedData);
 
         return back()
             ->with('message', 'Cadastro do professor criado com sucesso!')
@@ -55,8 +56,9 @@ class TeacherController extends Controller
 
     public function update(PersonRequest $request, Teacher $teacher)
     {
-        $validated = $request->validated();
-        $teacher->update($validated);
+        $validatedData = $request->validated();
+
+        $teacher->update($validatedData);
 
         return back()->with('message', 'Professor atualizado com sucesso!');
     }

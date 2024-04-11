@@ -37,7 +37,7 @@ class AcademicYearController extends Controller
         return inertia('Admin/AcademicYear/Edit', compact('academicYear'));
     }
 
-    // ### Actions ###
+    //# Actions
 
     public function store(AcademicYearRequest $request)
     {
@@ -48,9 +48,9 @@ class AcademicYearController extends Controller
             ['name' => '4° Bimestre'],
         ];
 
-        $validated = $request->validated();
+        $validatedData = $request->validated();
 
-        $academicYear = AcademicYear::create($validated);
+        $academicYear = AcademicYear::create($validatedData);
 
         $academicYear->groups()->createMany($quarters);
 
@@ -61,11 +61,14 @@ class AcademicYearController extends Controller
 
     public function update(AcademicYearRequest $request, AcademicYear $academicYear)
     {
-        $validated = $request->validated();
+        $validatedData = $request->validated();
 
-        $academicYear->update($validated);
+        $academicYear->update($validatedData);
 
-        $message = sprintf('O ano letivo %s foi ativado com sucesso!', $academicYear->year);
+        $message = sprintf(
+            'O ano letivo %s foi atualizado com sucesso!',
+            $academicYear->year
+        );
 
         return back()->with('message', $message);
     }
@@ -80,7 +83,10 @@ class AcademicYearController extends Controller
 
         $academicYear->update(['is_active' => true]);
 
-        $message = sprintf('O ano letivo %s foi ativado com sucesso!', $academicYear->year);
+        $message = sprintf(
+            'O ano letivo %s foi ativado com sucesso!',
+            $academicYear->year
+        );
 
         return to_route('admin.academic-years.index')->with('message', $message);
     }

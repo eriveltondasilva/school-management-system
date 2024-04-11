@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use App\Models\AcademicYear;
 use App\Models\Group;
 use App\Models\Student;
-use Illuminate\Http\Request;
 
 class GroupStudentController extends Controller
 {
@@ -23,21 +24,20 @@ class GroupStudentController extends Controller
 
     public function create(Request $request, Group $group)
     {
-        $request->validate(['search' => 'nullable|string']);
-
-        $searchTerm = $request->get('search', '');
+        $searchTerm = $request->query('search');
 
         $activeYearId = AcademicYear::IsActive()->id;
 
         $studentsQuery = Student::select('id', 'name', 'gender')
-            ->whereDoesntHave('groups', function ($query) use ($activeYearId) {
+            ->whereDoesntHave('groups', function (Builder $query) use ($activeYearId) {
                 $query->where('academic_year_id', $activeYearId);
             })
             ->orderBy('name');
 
         if ($searchTerm) {
-            $studentsQuery->where(function ($query) use ($searchTerm) {
-                $query->where('id', $searchTerm)->orWhere('name', 'like', "%{$searchTerm}%");
+            $studentsQuery->where(function (Builder $query) use ($searchTerm) {
+                $query->where('id', $searchTerm)
+                    ->orWhere('name', 'like', "%{$searchTerm}%");
             });
         }
 
@@ -46,7 +46,7 @@ class GroupStudentController extends Controller
         return inertia('Admin/GroupStudent/Create', compact('group', 'students'));
     }
 
-    // ### Actions ###
+    //# Actions
 
     public function store(Group $group, Student $student)
     {
@@ -54,7 +54,11 @@ class GroupStudentController extends Controller
 
         $group->load('students');
 
-        $message = sprintf("Aluno(a) %s adicionado(a) à turma do %s.", $student->name, $group->name);
+        $message = sprintf(
+            'Aluno(a) %s adicionado(a) à turma do %s.',
+            $student->name,
+            $group->name
+        );
 
         return back()->with('message', $message);
     }
@@ -65,7 +69,11 @@ class GroupStudentController extends Controller
 
         $group->load('students');
 
-        $message = sprintf("Aluno(a) %s removido(a) da turma do %s.", $student->name, $group->name);
+        $message = sprintf(
+            'Aluno(a) %s removido(a) da turma do %s.',
+            $student->name,
+            $group->name
+        );
 
         return back()->with('message', $message);
     }

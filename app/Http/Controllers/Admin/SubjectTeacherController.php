@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\AcademicYear;
 use App\Models\Subject;
 use App\Models\Teacher;
@@ -23,7 +24,7 @@ class SubjectTeacherController extends Controller
     public function create(Subject $subject)
     {
         $teachers = Teacher::select('id', 'name', 'cpf')
-            ->whereDoesntHave('subjects', function ($query) use ($subject) {
+            ->whereDoesntHave('subjects', function (Builder $query) use ($subject) {
                 $query->where('subject_id', $subject->id);
             })
             ->orderBy('name')
@@ -32,16 +33,21 @@ class SubjectTeacherController extends Controller
         return inertia('Admin/SubjectTeacher/Create', compact('subject', 'teachers'));
     }
 
-    // ### ACTION ###
+    //# ACTION
 
     public function store(Subject $subject, Teacher $teacher)
     {
         $academicYearId = AcademicYear::IsActive()->id;
 
         $subject->teachers()->attach($teacher, ['academic_year_id' => $academicYearId]);
+
         $subject->load('teachers');
 
-        $message = sprintf("Professor(a) %s adicionado(a) à disciplina de %s.", $teacher->name, $subject->name);
+        $message = sprintf(
+            'Professor(a) %s adicionado(a) à disciplina de %s.',
+            $teacher->name,
+            $subject->name
+        );
 
         return back()->with('message', $message);
     }
@@ -49,9 +55,14 @@ class SubjectTeacherController extends Controller
     public function destroy(Subject $subject, Teacher $teacher)
     {
         $subject->teachers()->detach($teacher);
+
         $subject->load('teachers');
 
-        $message = sprintf("Professor(a) %s removido(a) da disciplina de %s.", $teacher->name, $subject->name);
+        $message = sprintf(
+            'Professor(a) %s removido(a) da disciplina de %s.',
+            $teacher->name,
+            $subject->name
+        );
 
         return back()->with('message', $message);
     }

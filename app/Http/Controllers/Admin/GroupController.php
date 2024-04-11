@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GroupRequest;
 use App\Models\AcademicYear;
@@ -13,9 +14,9 @@ class GroupController extends Controller
 {
     public function index()
     {
-        $groups = Group::whereHas('academicYear', function ($query) {
-                $query->where('is_active', true);
-            })
+        $groups = Group::whereHas('academicYear', function (Builder $query) {
+            $query->where('is_active', true);
+        })
             ->withCount('students', 'teachers')
             ->get();
 
@@ -32,7 +33,7 @@ class GroupController extends Controller
         return inertia('Admin/Group/Edit', compact('group'));
     }
 
-    // ### Actions ###
+    //# Actions
 
     public function store(GroupRequest $request)
     {
@@ -42,10 +43,10 @@ class GroupController extends Controller
             return back()->with('message', 'Ano letivo atual não configurado!');
         }
 
-        $validated = $request->validated();
-        $validated['academic_year_id'] = $activeYearId;
+        $validatedData = $request->validated();
+        $validatedData['academic_year_id'] = $activeYearId;
 
-        $group = Group::create($validated);
+        $group = Group::create($validatedData);
 
         return back()
             ->with('message', 'Turma criada com sucesso!')
@@ -54,9 +55,9 @@ class GroupController extends Controller
 
     public function update(GroupRequest $request, Group $group)
     {
-        $validated = $request->validated();
+        $validatedData = $request->validated();
 
-        $group->update($validated);
+        $group->update($validatedData);
 
         return back()->with('message', 'Turma atualizada com sucesso!');
     }

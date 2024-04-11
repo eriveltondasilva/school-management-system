@@ -40,12 +40,13 @@ class StudentController extends Controller
         return inertia('Admin/Student/Edit', compact('student'));
     }
 
-    // ### Actions ###
+    //# Actions
 
     public function store(PersonRequest $request)
     {
-        $validated = $request->validated();
-        $student = Student::create($validated);
+        $validatedData = $request->validated();
+
+        $student = Student::create($validatedData);
 
         return back()
             ->with('message', 'Cadastro do aluno criado com sucesso!')
@@ -54,8 +55,9 @@ class StudentController extends Controller
 
     public function update(PersonRequest $request, Student $student)
     {
-        $validated = $request->validated();
-        $student->update($validated);
+        $validatedData = $request->validated();
+
+        $student->update($validatedData);
 
         return back()->with('message', 'Aluno atualizado com sucesso!');
     }

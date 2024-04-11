@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Group;
 use App\Models\Teacher;
 
@@ -22,8 +23,8 @@ class GroupTeacherController extends Controller
     public function create(Group $group)
     {
         $teachers = Teacher::select('id', 'name', 'cpf')
-            ->whereDoesntHave('groups', function ($query) use ($group) {
-                $query->where('groups.id', $group->id);
+            ->whereDoesntHave('groups', function (Builder $query) use ($group) {
+                $query->where('group_id', $group->id);
             })
             ->orderBy('teachers.name')
             ->get();
@@ -31,13 +32,19 @@ class GroupTeacherController extends Controller
         return inertia('Admin/GroupTeacher/Create', compact('group', 'teachers'));
     }
 
-    // ### Actions ###
+    //# Actions
 
     public function store(Group $group, Teacher $teacher)
     {
         $group->teachers()->attach($teacher);
+
         $group->load('teachers');
-        $message = sprintf("Professor(a) %s adicionado(a) à turma do %s.", $teacher->name, $group->name);
+
+        $message = sprintf(
+            'Professor(a) %s adicionado(a) à turma do %s.',
+            $teacher->name,
+            $group->name
+        );
 
         return back()->with('message', $message);
     }
@@ -45,8 +52,14 @@ class GroupTeacherController extends Controller
     public function destroy(Group $group, Teacher $teacher)
     {
         $group->teachers()->detach($teacher);
+
         $group->load('teachers');
-        $message = sprintf("Professor(a) %s removido(a) da turma do %s.", $teacher->name, $group->name);
+
+        $message = sprintf(
+            'Professor(a) %s removido(a) da turma do %s.',
+            $teacher->name,
+            $group->name
+        );
 
         return back()->with('message', $message);
     }
