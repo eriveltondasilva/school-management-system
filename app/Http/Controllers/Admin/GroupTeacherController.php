@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\{Group, Teacher};
 use Illuminate\Database\Eloquent\Builder;
-use App\Models\Group;
-use App\Models\Teacher;
 
 class GroupTeacherController extends Controller
 {
@@ -26,7 +25,7 @@ class GroupTeacherController extends Controller
             ->whereDoesntHave('groups', function (Builder $query) use ($group) {
                 $query->where('group_id', $group->id);
             })
-            ->orderBy('teachers.name')
+            ->orderBy('name')
             ->get();
 
         return inertia('Admin/GroupTeacher/Create', compact('group', 'teachers'));
@@ -37,7 +36,6 @@ class GroupTeacherController extends Controller
     public function store(Group $group, Teacher $teacher)
     {
         $group->teachers()->attach($teacher);
-
         $group->load('teachers');
 
         $message = sprintf(
@@ -52,7 +50,6 @@ class GroupTeacherController extends Controller
     public function destroy(Group $group, Teacher $teacher)
     {
         $group->teachers()->detach($teacher);
-
         $group->load('teachers');
 
         $message = sprintf(

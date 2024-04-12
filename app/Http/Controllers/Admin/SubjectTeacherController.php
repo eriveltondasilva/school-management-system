@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\{AcademicYear, Subject, Teacher};
 use Illuminate\Database\Eloquent\Builder;
-use App\Models\AcademicYear;
-use App\Models\Subject;
-use App\Models\Teacher;
 
 class SubjectTeacherController extends Controller
 {
@@ -37,10 +35,9 @@ class SubjectTeacherController extends Controller
 
     public function store(Subject $subject, Teacher $teacher)
     {
-        $academicYearId = AcademicYear::IsActive()->id;
+        $academicYearId = AcademicYear::isActive()->id;
 
         $subject->teachers()->attach($teacher, ['academic_year_id' => $academicYearId]);
-
         $subject->load('teachers');
 
         $message = sprintf(
@@ -55,7 +52,6 @@ class SubjectTeacherController extends Controller
     public function destroy(Subject $subject, Teacher $teacher)
     {
         $subject->teachers()->detach($teacher);
-
         $subject->load('teachers');
 
         $message = sprintf(

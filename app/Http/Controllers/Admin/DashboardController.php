@@ -3,11 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\AcademicYear;
-use App\Models\Student;
-use App\Models\Teacher;
-
-// use Illuminate\Http\Request;
+use App\Models\{AcademicYear, Student, Teacher};
 
 class DashboardController extends Controller
 {
@@ -16,7 +12,6 @@ class DashboardController extends Controller
         $currentYear = AcademicYear::select('id', 'year')->isActive();
 
         $groupsCount = $currentYear ? $currentYear->groups()->count() : 0;
-
         $studentsCount = Student::count();
         $teachersCount = Teacher::count();
 
@@ -24,7 +19,7 @@ class DashboardController extends Controller
             'currentYear',
             'groupsCount',
             'studentsCount',
-            'teachersCount',
+            'teachersCount'
         );
 
         return inertia('Admin/Dashboard', compact('data'));

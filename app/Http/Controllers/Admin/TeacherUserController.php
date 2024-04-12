@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
+use App\Models\{Teacher, User};
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
-use App\Enums\RoleEnum;
-use App\Models\Teacher;
-use App\Models\User;
 
 class TeacherUserController extends Controller
 {
     public function create(Teacher $teacher)
     {
-        if ($teacher->user) {
+        $user = $teacher->user;
+
+        if ($user->exists()) {
             return to_route('admin.teachers.users.edit', compact('teacher', 'user'));
         }
 
@@ -37,7 +38,6 @@ class TeacherUserController extends Controller
         ]);
 
         $user = $teacher->user()->create($validatedData);
-
         $user->assignRole(RoleEnum::TEACHER);
 
         $message = 'Usuário criado com sucesso';
@@ -63,7 +63,6 @@ class TeacherUserController extends Controller
         }
 
         $validatedData = $request->validate($rules);
-
         $user->update($validatedData);
 
         $message = 'Usuário atualizado com sucesso';

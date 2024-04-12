@@ -17,11 +17,16 @@ class TeacherController extends Controller
 
     public function index(Request $request)
     {
-        $searchTerm = $request->query('search');
+        $searchTerm = $request->query('search', '');
         $columns = ['id', 'name', 'email'];
 
-        $teachers = $this->searchServices
-            ->searchPerson(new Teacher(), $searchTerm, $columns);
+        $teachers = $this->searchServices->searchPerson(
+            new Teacher(),
+            $searchTerm,
+            $columns
+        );
+
+        $teachers = $teachers->paginate(10);
 
         return inertia('Admin/Teacher/Index', compact('teachers'));
     }
@@ -46,7 +51,6 @@ class TeacherController extends Controller
     public function store(PersonRequest $request)
     {
         $validatedData = $request->validated();
-
         $teacher = Teacher::create($validatedData);
 
         return back()
@@ -57,7 +61,6 @@ class TeacherController extends Controller
     public function update(PersonRequest $request, Teacher $teacher)
     {
         $validatedData = $request->validated();
-
         $teacher->update($validatedData);
 
         return back()->with('message', 'Professor atualizado com sucesso!');

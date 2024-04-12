@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AcademicYearRequest;
 use App\Models\AcademicYear;
 
-// use Illuminate\Http\Request;
-
 class AcademicYearController extends Controller
 {
     public function index()
@@ -25,16 +23,16 @@ class AcademicYearController extends Controller
         return inertia('Admin/AcademicYear/Create');
     }
 
-    public function show()
-    {
-        //
-    }
-
     public function edit(AcademicYear $academicYear)
     {
         $academicYear->load('quarters');
 
         return inertia('Admin/AcademicYear/Edit', compact('academicYear'));
+    }
+
+    public function show()
+    {
+        //
     }
 
     //# Actions
@@ -49,24 +47,24 @@ class AcademicYearController extends Controller
         ];
 
         $validatedData = $request->validated();
-
         $academicYear = AcademicYear::create($validatedData);
-
         $academicYear->groups()->createMany($quarters);
 
-        return back()
-            ->with('message', 'Ano letivo criado com sucesso!')
-            ->with('id', $academicYear->id);
+        $message = sprintf(
+            'Ano letivo de %d criado com sucesso!',
+            $academicYear->year
+        );
+
+        return back()->with('message', $message)->with('id', $academicYear->id);
     }
 
     public function update(AcademicYearRequest $request, AcademicYear $academicYear)
     {
         $validatedData = $request->validated();
-
         $academicYear->update($validatedData);
 
         $message = sprintf(
-            'O ano letivo %s foi atualizado com sucesso!',
+            'O ano letivo %d foi atualizado com sucesso!',
             $academicYear->year
         );
 
@@ -76,15 +74,19 @@ class AcademicYearController extends Controller
     public function updateStatus(AcademicYear $academicYear)
     {
         if ($academicYear->is_active) {
-            return back()->with('message', 'O ano letivo já está ativo.');
+            $message = sprintf(
+                'O ano letivo %d já foi ativado.',
+                $academicYear->year
+            );
+
+            return back()->with('message', $message);
         }
 
         AcademicYear::where('is_active', true)->update(['is_active' => false]);
-
         $academicYear->update(['is_active' => true]);
 
         $message = sprintf(
-            'O ano letivo %s foi ativado com sucesso!',
+            'O ano letivo %d foi ativado com sucesso!',
             $academicYear->year
         );
 

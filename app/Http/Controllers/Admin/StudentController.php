@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Student;
 use App\Http\Requests\PersonRequest;
+use App\Models\Student;
 use App\Services\SearchServices;
 use Illuminate\Http\Request;
 
@@ -17,10 +17,16 @@ class StudentController extends Controller
 
     public function index(Request $request)
     {
-        $searchTerm = $request->get('search', '');
+        $searchTerm = $request->query('search', '');
         $columns = ['id', 'name', 'gender'];
 
-        $students = $this->searchServices->searchPerson(new Student(), $searchTerm, $columns);
+        $students = $this->searchServices->searchPerson(
+            new Student(),
+            $searchTerm,
+            $columns
+        );
+
+        $students = $students->paginate(20);
 
         return inertia('Admin/Student/Index', compact('students'));
     }
@@ -45,7 +51,6 @@ class StudentController extends Controller
     public function store(PersonRequest $request)
     {
         $validatedData = $request->validated();
-
         $student = Student::create($validatedData);
 
         return back()
@@ -56,7 +61,6 @@ class StudentController extends Controller
     public function update(PersonRequest $request, Student $student)
     {
         $validatedData = $request->validated();
-
         $student->update($validatedData);
 
         return back()->with('message', 'Aluno atualizado com sucesso!');
