@@ -1,19 +1,20 @@
 import { Link, usePage } from '@inertiajs/react'
 import { Button, Tooltip } from 'flowbite-react'
-import { Eye, Plus, Trash2, XCircle } from 'lucide-react'
+import { Eye, Plus, Trash2 } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
 import Alert from '@/Components/Alert'
-import NotFound from '@/Components/NotFound'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import useActionHandler from '@/Hooks/useActionHandler'
+
 import formatId from '@/Utils/formatId'
 import getGenderName from '@/Utils/getGenderName'
 
+import StudentNotFound from './Partials/StudentNotFound'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
@@ -96,7 +97,7 @@ function StudentTable({ group = {}, students = [] }) {
               )}>
               {student.name}
             </Table.RowCell>
-            <Table.RowCell>{formatId(student.id)}</Table.RowCell>
+            <Table.RowCell>#{formatId(student.id)}</Table.RowCell>
             <Table.RowCell>{getGenderName(student.gender)}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>
@@ -125,16 +126,6 @@ function StudentTable({ group = {}, students = [] }) {
         ))}
       </Table.Body>
     </Table>
-  )
-}
-
-// ----------------------------------------------
-function StudentNotFound() {
-  return (
-    <NotFound>
-      <XCircle />
-      Nenhum aluno encontrado na turma...
-    </NotFound>
   )
 }
 

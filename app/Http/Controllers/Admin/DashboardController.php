@@ -11,16 +11,11 @@ class DashboardController extends Controller
     {
         $currentYear = AcademicYear::select('id', 'year')->isActive();
 
-        $groupsCount = $currentYear ? $currentYear->groups()->count() : 0;
+        $groupsCount = optional($currentYear)->groups()->count() ?? 0;
         $studentsCount = Student::count();
         $teachersCount = Teacher::count();
 
-        $data = compact(
-            'currentYear',
-            'groupsCount',
-            'studentsCount',
-            'teachersCount'
-        );
+        $data = compact('currentYear', 'groupsCount', 'studentsCount', 'teachersCount');
 
         return inertia('Admin/Dashboard', compact('data'));
     }

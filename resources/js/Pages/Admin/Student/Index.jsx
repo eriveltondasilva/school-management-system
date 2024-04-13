@@ -4,7 +4,6 @@ import { Eye, PencilLine, Plus, Search, Undo2 } from 'lucide-react'
 import { useState } from 'react'
 
 import Input from '@/Components/Input'
-import NotFound from '@/Components/NotFound'
 import Pagination from '@/Components/Pagination'
 import Searchbar from '@/Components/Searchbar'
 import Table from '@/Components/Table'
@@ -16,6 +15,7 @@ import useFormHandler from '@/Hooks/useFormHandler'
 import formatId from '@/Utils/formatId'
 import getGenderName from '@/Utils/getGenderName'
 
+import StudentNotFound from './Partials/StudentNotFound'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
@@ -26,14 +26,9 @@ export default function PageStudentIndex({ students = [] }) {
   const hasStudents = students.data.length > 0
   const hasPagination = students.total > students.data.length
 
-  const handleChange = (e) => {
-    setSearch(e.target.value)
-  }
+  const handleChange = (e) => setSearch(e.target.value)
 
-  const formDataOptions = {
-    method: 'GET',
-    route: 'admin.students.index',
-  }
+  const formDataOptions = { method: 'GET', route: 'admin.students.index' }
   const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
 
   return (
@@ -61,14 +56,15 @@ export default function PageStudentIndex({ students = [] }) {
             id='search'
             type='search'
             className='mb-0'
-            placeholder='Pesquisar aluno...'
+            placeholder='Nome ou ID do aluno...'
             defaultValue={search}
             onChange={handleChange}
             autoFocus
           />
           <Button.Group>
             <Button type='submit' color='blue' disabled={isLoading || !search}>
-              <Search className='h-5 w-5' />
+              <Search className='mr-2 h-5 w-5' />
+              Pesquisar
             </Button>
             <Button
               as={Link}
@@ -88,7 +84,7 @@ export default function PageStudentIndex({ students = [] }) {
       {hasStudents && <StudentTable students={students.data} />}
 
       {/* Student Pagination */}
-      {hasPagination && <StudentPagination students={students} />}
+      {hasPagination && <StudentPagination {...{ students }} />}
     </>
   )
 }
@@ -99,7 +95,7 @@ function StudentTable({ students = [] }) {
     <Table>
       {/* Table Header */}
       <Table.Header>
-        <Table.HeaderCell className='w-0'></Table.HeaderCell>
+        <Table.HeaderCell className='w-0 text-center'>ID</Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
         <Table.HeaderCell>Gênero</Table.HeaderCell>
         <Table.HeaderCell></Table.HeaderCell>
@@ -110,7 +106,7 @@ function StudentTable({ students = [] }) {
         {students.map((student) => (
           <Table.Row key={student.id}>
             <Table.RowCell className='font-bold'>
-              {formatId(student.id)}
+              #{formatId(student.id)}
             </Table.RowCell>
             <Table.RowCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
               {student.name}
@@ -122,6 +118,7 @@ function StudentTable({ students = [] }) {
                   as={Link}
                   href={route('admin.students.show', { student })}
                   color='blue'
+                  title='Visualizar aluno'
                   size='xs'>
                   <Eye className='h-4 w-4' />
                 </Button>
@@ -129,8 +126,9 @@ function StudentTable({ students = [] }) {
                   as={Link}
                   href={route('admin.students.edit', { student })}
                   color='green'
+                  title='Editar aluno'
                   size='xs'>
-                  <PencilLine className='ml-2 h-4 w-4' />
+                  <PencilLine className='mx-1 h-4 w-4' />
                 </Button>
               </Button.Group>
             </Table.RowCell>
@@ -139,11 +137,6 @@ function StudentTable({ students = [] }) {
       </Table.Body>
     </Table>
   )
-}
-
-// ----------------------------------------------
-function StudentNotFound() {
-  return <NotFound icon>Nenhum aluno encontrado...</NotFound>
 }
 
 // ----------------------------------------------

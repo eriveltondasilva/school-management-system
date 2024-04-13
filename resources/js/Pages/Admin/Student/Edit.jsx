@@ -1,13 +1,9 @@
-import { Button } from 'flowbite-react'
-import { Undo2 } from 'lucide-react'
-
 import Form from '@/Components/Form'
 
 import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import StudentFormData from './Partials/StudentFormData'
-
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
@@ -15,7 +11,7 @@ export default function PageStudentEdit({ student = {} }) {
   const formDataOptions = {
     method: 'PUT',
     route: 'admin.students.update',
-    params: { student: student.id },
+    params: { student },
   }
   const { handleSubmit, isLoading, errors } = useFormHandler(formDataOptions)
 
@@ -24,13 +20,6 @@ export default function PageStudentEdit({ student = {} }) {
       {/* header student */}
       <Form.Header>
         <Form.HeaderTitle title={titles.edit} />
-        <Button
-          title='Voltar'
-          color='red'
-          size='xs'
-          onClick={() => history.back()}>
-          <Undo2 className='mx-1 h-4 w-4' />
-        </Button>
       </Form.Header>
 
       {/* form student */}

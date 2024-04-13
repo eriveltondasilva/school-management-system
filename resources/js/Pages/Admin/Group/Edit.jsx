@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
-import { Plus, Undo2 } from 'lucide-react'
+import { Plus } from 'lucide-react'
 
 import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
@@ -9,7 +9,6 @@ import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import GroupFormData from './Partials/GroupFormData'
-
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
@@ -31,23 +30,14 @@ export default function PageGroupEdit({ group = {} }) {
       {/* Form header */}
       <Form.Header>
         <Form.HeaderTitle title={titles.edit} />
-        <Button.Group>
-          <Button
-            href={route('admin.groups.create')}
-            color='blue'
-            size='xs'
-            title='Cadastrar novo turma'
-            as={Link}>
-            <Plus className='h-4 w-4' />
-          </Button>
-          <Button
-            title='Voltar'
-            color='red'
-            size='xs'
-            onClick={() => history.back()}>
-            <Undo2 className='mx-1 h-4 w-4' />
-          </Button>
-        </Button.Group>
+        <Button
+          href={route('admin.groups.create')}
+          color='blue'
+          size='xs'
+          title='Cadastrar novo turma'
+          as={Link}>
+          <Plus className='h-4 w-4' />
+        </Button>
       </Form.Header>
 
       {/* Formulário */}

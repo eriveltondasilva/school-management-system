@@ -2,6 +2,7 @@ import { usePage } from '@inertiajs/react'
 
 import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
+
 import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 

@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react'
 import { Badge, Button } from 'flowbite-react'
-import { AlertCircle, Plus, Undo2 } from 'lucide-react'
+import { AlertCircle, Plus } from 'lucide-react'
 import { useState } from 'react'
 
 import Alert from '@/Components/Alert'
@@ -11,12 +11,12 @@ import AuthLayout from '@/Layouts/AuthLayout'
 
 import AcademicYearFormData from './Partials/AcademicYearFormData'
 import AcademicYearModel from './Partials/AcademicYearModel'
-
 import { breadcrumbs, titles } from './data'
 
 // ====================================
 export default function PageAcademicYearEdit({ academicYear = {} }) {
   const { message } = usePage().props.flash || {}
+
   const [isShowed, setIsShowed] = useState(false)
   const handleToggleModal = () => setIsShowed(!isShowed)
 
@@ -36,22 +36,13 @@ export default function PageAcademicYearEdit({ academicYear = {} }) {
         {/* Form header */}
         <Form.Header>
           <Form.HeaderTitle title={titles.edit} />
-          <Button.Group>
-            <Button
-              href={route('admin.academic-years.create')}
-              color='blue'
-              size='xs'
-              as={Link}>
-              <Plus className='h-4 w-4' />
-            </Button>
-            <Button
-              title='Voltar'
-              color='red'
-              size='xs'
-              onClick={() => history.back()}>
-              <Undo2 className='mx-1 h-4 w-4' />
-            </Button>
-          </Button.Group>
+          <Button
+            href={route('admin.academic-years.create')}
+            color='blue'
+            size='xs'
+            as={Link}>
+            <Plus className='h-4 w-4' />
+          </Button>
         </Form.Header>
 
         {/* Academic year status */}

@@ -1,11 +1,10 @@
 import { Link, usePage } from '@inertiajs/react'
 import { Button, Tooltip } from 'flowbite-react'
-import { Eye, Plus, Search, XCircle } from 'lucide-react'
+import { Eye, Plus, Search } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
 import Alert from '@/Components/Alert'
 import Input from '@/Components/Input'
-import NotFound from '@/Components/NotFound'
 import Pagination from '@/Components/Pagination'
 import Searchbar from '@/Components/Searchbar'
 import Table from '@/Components/Table'
@@ -19,6 +18,7 @@ import getGenderName from '@/Utils/getGenderName'
 import useActionHandler from '@/Hooks/useActionHandler'
 import useFormHandler from '@/Hooks/useFormHandler'
 
+import StudentNotFound from './Partials/StudentNotFound'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
@@ -31,13 +31,13 @@ export default function PageGroupStudentCreate({ group = {}, students = [] }) {
   const hasStudents = students.data.length > 0
   const hasPagination = students.total > students.data.length
 
-  const formDataOptions = {
+  const formOptions = {
     method: 'GET',
     route: 'admin.groups.students.create',
     params: { group },
   }
   const { isLoading, handleSubmit: handleSearchStudent } =
-    useFormHandler(formDataOptions)
+    useFormHandler(formOptions)
 
   return (
     <>
@@ -135,9 +135,7 @@ function StudentTable({ group = {}, students = [] }) {
                 <Button
                   as='button'
                   color='blue'
-                  onClick={() =>
-                    handleStoreAction({ group: group.id, student: student.id })
-                  }
+                  onClick={() => handleStoreAction({ group, student })}
                   disabled={isLoading}
                   size='xs'>
                   <Tooltip content='Adicionar Aluno'>
@@ -150,16 +148,6 @@ function StudentTable({ group = {}, students = [] }) {
         ))}
       </Table.Body>
     </Table>
-  )
-}
-
-// ----------------------------------------------
-function StudentNotFound() {
-  return (
-    <NotFound>
-      <XCircle />
-      Nenhum aluno disponível para adicionar à turma...
-    </NotFound>
   )
 }
 

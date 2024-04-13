@@ -1,15 +1,15 @@
 import { Link } from '@inertiajs/react'
 import { Button, Card } from 'flowbite-react'
-import { Plus, XCircle } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
 import Indicator from '@/Components/Indicator'
-import NotFound from '@/Components/NotFound'
 import Title from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 import formatDate from '@/Utils/formatDate'
 
+import AcademicYearNotFound from './Partials/AcademicYearNotFound'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
@@ -25,8 +25,7 @@ export default function PageAcademicYearIndex({ academicYears = [] }) {
           <Button
             as={Link}
             href={route('admin.academic-years.create')}
-            color='blue'
-            className='uppercase'>
+            color='blue'>
             <Plus className='mr-2 h-5 w-5' />
             Cadastrar Ano Letivo
           </Button>
@@ -63,7 +62,7 @@ function AcademicYearCard({ academicYears = [] }) {
           <ul className='font-normal text-gray-700 dark:text-gray-400'>
             <li>Início: {formatDate(academicYear.start_date)}</li>
             <li>Fim: {formatDate(academicYear.end_date)}</li>
-            <li className='font-semibold'>
+            <li className='mt-2 font-semibold'>
               Turmas: {academicYear.groups_count}
             </li>
           </ul>
@@ -81,16 +80,6 @@ function AcademicYearCard({ academicYears = [] }) {
         </Card>
       ))}
     </section>
-  )
-}
-
-// ----------------------------------------------
-function AcademicYearNotFound() {
-  return (
-    <NotFound>
-      <XCircle />
-      Não existem anos letivos criados...
-    </NotFound>
   )
 }
 

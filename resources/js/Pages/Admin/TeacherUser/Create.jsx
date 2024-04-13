@@ -1,9 +1,9 @@
 import Form from '@/Components/Form'
+
 import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import UserFormData from './Partials/UserFormData'
-
 import { breadcrumbs, titles } from './data'
 
 export default function PageTeacherUserCreate({ teacher = {} }) {

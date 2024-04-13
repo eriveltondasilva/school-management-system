@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
-import { PencilLine, Plus, Undo2 } from 'lucide-react'
+import { PencilLine, Plus } from 'lucide-react'
 
 import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
@@ -40,13 +40,6 @@ export default function PageTeacherShow({ teacher = {} }) {
             size='xs'
             as={Link}>
             <Plus className='mx-1 h-4 w-4' />
-          </Button>
-          <Button
-            title='Voltar'
-            color='red'
-            size='xs'
-            onClick={() => history.back()}>
-            <Undo2 className='mx-1 h-4 w-4' />
           </Button>
         </Button.Group>
       </Form.Header>

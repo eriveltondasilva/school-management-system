@@ -1,16 +1,16 @@
 import { Link, usePage } from '@inertiajs/react'
 import { Button, Tooltip } from 'flowbite-react'
-import { Eye, Plus, Trash2, XCircle } from 'lucide-react'
+import { Eye, Plus, Trash2 } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
 import Alert from '@/Components/Alert'
-import NotFound from '@/Components/NotFound'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
 import useActionHandler from '@/Hooks/useActionHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
+import TeacherNotFound from './Partials/TeacherNotFound'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
@@ -36,8 +36,7 @@ export default function PageGroupTeacherIndex({ group = {}, teachers = [] }) {
           <Button
             as={Link}
             href={route('admin.groups.teachers.create', { group })}
-            color='blue'
-            className='uppercase'>
+            color='blue'>
             <Plus className='mr-2 h-5 w-5' />
             Adicionar professor
           </Button>
@@ -120,16 +119,6 @@ function TeacherTable({ group = {}, teachers = [] }) {
         ))}
       </Table.Body>
     </Table>
-  )
-}
-
-// ----------------------------------------------
-function TeacherNotFound() {
-  return (
-    <NotFound>
-      <XCircle />
-      Nenhum professor encontrado na turma...
-    </NotFound>
   )
 }
 

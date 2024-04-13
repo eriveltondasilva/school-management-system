@@ -1,12 +1,12 @@
 import { Link, usePage } from '@inertiajs/react'
 import { Button, Card, Tooltip } from 'flowbite-react'
-import { PencilLine, Plus, XCircle } from 'lucide-react'
+import { PencilLine, Plus } from 'lucide-react'
 
-import NotFound from '@/Components/NotFound'
 import Title from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 
+import GroupNotFound from './Partials/GroupNotFound'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
@@ -40,7 +40,7 @@ export default function PageGroupIndex({ groups = [] }) {
       {!hasGroups && <GroupNotFound />}
 
       {/* Exibe os cards das turmas */}
-      {hasGroups && <GroupCard groups={groups} />}
+      {hasGroups && <GroupCard {...{ groups }} />}
     </>
   )
 }
@@ -95,16 +95,6 @@ function GroupCard({ groups = [] }) {
         </Card>
       ))}
     </section>
-  )
-}
-
-// ----------------------------------------------
-function GroupNotFound() {
-  return (
-    <NotFound>
-      <XCircle />
-      Não existem turmas criadas para o ano letivo atual.
-    </NotFound>
   )
 }
 

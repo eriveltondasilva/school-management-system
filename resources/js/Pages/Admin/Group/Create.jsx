@@ -1,6 +1,4 @@
 import { Link, usePage } from '@inertiajs/react'
-import { Button } from 'flowbite-react'
-import { Undo2 } from 'lucide-react'
 
 import Alert from '@/Components/Alert'
 import Form from '@/Components/Form'
@@ -9,29 +7,24 @@ import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import GroupFormData from './Partials/GroupFormData'
-
 import { breadcrumbs, titles } from './data'
 
 // ===============================================
 export default function PageGroupCreate() {
-  const { message, id } = usePage().props.flash || {}
+  const { message, id: groupId } = usePage().props.flash || {}
 
-  const formDataOptions = {
-    method: 'POST',
-    route: 'admin.groups.store',
-  }
+  const formDataOptions = { method: 'POST', route: 'admin.groups.store' }
   const { handleSubmit, isLoading, errors } = useFormHandler(formDataOptions)
 
   return (
     <section>
-      {/*  Criar ano letivo */}
       <Form onSubmit={handleSubmit}>
         {/* Mensagem flash */}
         {message && (
           <Alert color='success'>
             <div>{message}</div>
             <Link
-              href={route('admin.groups.edit', { group: id })}
+              href={route('admin.groups.edit', { group: groupId })}
               className='font-medium underline'>
               Clique aqui para vê-lo.
             </Link>
@@ -41,17 +34,10 @@ export default function PageGroupCreate() {
         {/* header teacher */}
         <Form.Header>
           <Form.HeaderTitle title={titles.create} />
-          <Button
-            title='Voltar'
-            color='red'
-            size='xs'
-            onClick={() => history.back()}>
-            <Undo2 className='mx-1 h-4 w-4' />
-          </Button>
         </Form.Header>
 
         {/* form */}
-        <GroupFormData errors={errors} />
+        <GroupFormData {...{ errors }} />
 
         {/* footer teacher */}
         <Form.Footer>

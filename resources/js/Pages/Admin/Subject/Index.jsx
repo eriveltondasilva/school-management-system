@@ -1,12 +1,11 @@
 import { Link, usePage } from '@inertiajs/react'
 import { Button, Card } from 'flowbite-react'
-import { XCircle } from 'lucide-react'
 
-import NotFound from '@/Components/NotFound'
 import Title from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 
+import SubjectNotFound from './Partials/SubjectNotFound'
 import { breadcrumbs, titles } from './data'
 
 // ===============================================
@@ -25,7 +24,7 @@ export default function PageSubjectIndex({ subjects }) {
       <br />
 
       {/* Exibe mensagem se não houver grupos */}
-      {!hasSubjects && <NotFoundSubject />}
+      {!hasSubjects && <SubjectNotFound />}
 
       {/* Exibe os cards das turmas */}
       {hasSubjects && <CardSubject {...{ subjects }} />}
@@ -55,7 +54,6 @@ function CardSubject({ subjects = [] }) {
               as={Link}
               href={route('admin.subjects.teachers.index', { subject })}
               color='warning'
-              className='uppercase'
               fullSized>
               Professores
             </Button>
@@ -63,15 +61,6 @@ function CardSubject({ subjects = [] }) {
         </Card>
       ))}
     </section>
-  )
-}
-
-function NotFoundSubject() {
-  return (
-    <NotFound>
-      <XCircle />
-      Não existem disciplinas criadas para o ano letivo atual.
-    </NotFound>
   )
 }
 
