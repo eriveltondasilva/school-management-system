@@ -54,6 +54,7 @@ function CardSubject({ subjects = [] }) {
               as={Link}
               href={route('admin.subjects.teachers.index', { subject })}
               color='warning'
+              className='uppercase'
               fullSized>
               Professores
             </Button>

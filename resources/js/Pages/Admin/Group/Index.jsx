@@ -23,11 +23,7 @@ export default function PageGroupIndex({ groups = [] }) {
         <Title.Left title={pageTitle} />
 
         <Title.Right>
-          <Button
-            as={Link}
-            href={route('admin.groups.create')}
-            color='blue'
-            className='uppercase'>
+          <Button as={Link} href={route('admin.groups.create')} color='blue'>
             <Plus className='mr-2 h-5 w-5' />
             Cadastrar Turma
           </Button>
@@ -67,18 +63,17 @@ function GroupCard({ groups = [] }) {
             </Tooltip>
           </header>
 
-          <p className='font-normal text-gray-700 dark:text-gray-400'>
-            Alunos: {group.students_count || 'sem aluno'}
-          </p>
-          <p className='font-normal text-gray-700 dark:text-gray-400'>
-            Professores: {group.teachers_count || 'sem prof.'}
-          </p>
+          <ul className='font-normal text-gray-700 dark:text-gray-400'>
+            <li>Alunos: {group.students_count || 'sem aluno'}</li>
+            <li>Professores: {group.teachers_count || 'sem prof.'}</li>
+          </ul>
 
           <footer className='space-y-4'>
             <Button
               as={Link}
               href={route('admin.groups.students.index', { group })}
               color='blue'
+              size='sm'
               className='uppercase'
               fullSized>
               Alunos
@@ -87,6 +82,7 @@ function GroupCard({ groups = [] }) {
               as={Link}
               href={route('admin.groups.teachers.index', { group })}
               color='warning'
+              size='sm'
               className='uppercase'
               fullSized>
               Professores

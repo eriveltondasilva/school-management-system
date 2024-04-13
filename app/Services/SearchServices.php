@@ -13,7 +13,7 @@ class SearchServices
         ->when($searchTerm, function (Builder $query) use ($searchTerm) {
             $query->where('id', $searchTerm)->orWhere('name', 'like', "%{$searchTerm}%");
         })
-        ->orderBy('name');
+        ->orderBy('id', 'desc');
 
         return $query;
     }

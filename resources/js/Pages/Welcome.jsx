@@ -7,13 +7,14 @@ export default function WelcomePage({ auth, laravelVersion, phpVersion }) {
       <Head title='Welcome' />
       <div className='bg-dots-darker dark:bg-dots-lighter relative min-h-screen bg-gray-100 bg-center selection:bg-red-500 selection:text-white dark:bg-gray-900 sm:flex sm:items-center sm:justify-center'>
         <div className='p-6 text-end sm:fixed sm:right-0 sm:top-0'>
-          {auth.user ? (
+          {auth.user && (
             <Link
               href={route('dashboard')}
               className='font-semibold text-gray-600 hover:text-gray-900 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:text-gray-400 dark:hover:text-white'>
               Dashboard
             </Link>
-          ) : (
+          )}
+          {!auth.user && (
             <>
               <Link
                 href={route('login')}

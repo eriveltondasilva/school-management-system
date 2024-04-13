@@ -37,11 +37,7 @@ export default function PageStudentIndex({ students = [] }) {
       <Title>
         <Title.Left title={titles.index} />
         <Title.Right>
-          <Button
-            as={Link}
-            href={route('admin.students.create')}
-            color='blue'
-            className=''>
+          <Button as={Link} href={route('admin.students.create')} color='blue'>
             <Plus className='mr-2 h-5 w-5' />
             Cadastrar Aluno
           </Button>
@@ -106,7 +102,7 @@ function StudentTable({ students = [] }) {
         {students.map((student) => (
           <Table.Row key={student.id}>
             <Table.RowCell className='font-bold'>
-              #{formatId(student.id)}
+              {formatId(student.id)}
             </Table.RowCell>
             <Table.RowCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
               {student.name}

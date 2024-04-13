@@ -12,7 +12,7 @@ class GroupTeacherController extends Controller
     {
         $teachers = $group
             ->teachers()
-            ->select('teachers.id', 'teachers.name', 'teachers.cpf')
+            ->select('teachers.id', 'teachers.name', 'teachers.email')
             ->orderBy('teachers.name')
             ->get();
 
@@ -21,7 +21,7 @@ class GroupTeacherController extends Controller
 
     public function create(Group $group)
     {
-        $teachers = Teacher::select('id', 'name', 'cpf')
+        $teachers = Teacher::select('id', 'name', 'email')
             ->whereDoesntHave('groups', function (Builder $query) use ($group) {
                 $query->where('group_id', $group->id);
             })

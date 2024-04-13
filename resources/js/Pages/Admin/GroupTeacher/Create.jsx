@@ -55,7 +55,7 @@ function TeacherTable({ group = {}, teachers = [] }) {
       <Table.Header>
         <Table.HeaderCell className='w-0'></Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
-        <Table.HeaderCell>CPF</Table.HeaderCell>
+        <Table.HeaderCell>Email</Table.HeaderCell>
         <Table.HeaderCell></Table.HeaderCell>
       </Table.Header>
 
@@ -71,7 +71,7 @@ function TeacherTable({ group = {}, teachers = [] }) {
               )}>
               {teacher.name}
             </Table.RowCell>
-            <Table.RowCell>{teacher.cpf}</Table.RowCell>
+            <Table.RowCell>{teacher.email}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>
                 <Button

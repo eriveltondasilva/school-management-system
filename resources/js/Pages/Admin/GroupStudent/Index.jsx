@@ -40,8 +40,7 @@ export default function PageGroupStudentIndex({ group = {}, students = [] }) {
           <Button
             as={Link}
             href={route('admin.groups.students.create', { group })}
-            color='blue'
-            className='uppercase'>
+            color='blue'>
             <Plus className='mr-2 h-5 w-5' />
             Adicionar alunos
           </Button>
@@ -97,7 +96,7 @@ function StudentTable({ group = {}, students = [] }) {
               )}>
               {student.name}
             </Table.RowCell>
-            <Table.RowCell>#{formatId(student.id)}</Table.RowCell>
+            <Table.RowCell>{formatId(student.id)}</Table.RowCell>
             <Table.RowCell>{getGenderName(student.gender)}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>

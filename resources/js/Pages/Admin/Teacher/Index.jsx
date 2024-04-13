@@ -36,11 +36,7 @@ export default function PageTeacherIndex({ teachers = [] }) {
       <Title>
         <Title.Left title={titles.index} />
         <Title.Right>
-          <Button
-            as={Link}
-            href={route('admin.teachers.create')}
-            color='blue'
-            className=''>
+          <Button as={Link} href={route('admin.teachers.create')} color='blue'>
             <Plus className='mr-2 h-5 w-5' />
             Cadastrar Professor
           </Button>
@@ -94,7 +90,7 @@ function TeacherTable({ teachers = [] }) {
     <Table>
       {/* Table Header */}
       <Table.Header>
-        <Table.HeaderCell className='w-0'></Table.HeaderCell>
+        <Table.HeaderCell className='w-0 text-center'>ID</Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
         <Table.HeaderCell>Email</Table.HeaderCell>
         <Table.HeaderCell></Table.HeaderCell>
@@ -105,7 +101,7 @@ function TeacherTable({ teachers = [] }) {
         {teachers.map((teacher) => (
           <Table.Row key={teacher.id}>
             <Table.RowCell className='font-bold'>
-              #{formatId(teacher.id)}
+              {formatId(teacher.id)}
             </Table.RowCell>
             <Table.RowCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
               {teacher.name}
