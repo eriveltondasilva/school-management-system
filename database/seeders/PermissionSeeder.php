@@ -16,7 +16,7 @@ class PermissionSeeder extends Seeder
     {
         foreach (PermissionEnum::cases() as $permission) {
             Permission::create([
-                'name' => $permission->value,
+                'name'         => $permission->value,
                 'display_name' => $permission->label()
             ]);
         }

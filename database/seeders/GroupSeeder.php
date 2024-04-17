@@ -15,24 +15,24 @@ class GroupSeeder extends Seeder
 
         $groups = [
             [
-                'name' => '6° Ano',
+                'name'      => '6° Ano',
                 'classroom' => 'Sala 1',
-                'shift' => 'Vespertino',
+                'shift'     => 'Vespertino',
             ],
             [
-                'name' => '7° Ano',
+                'name'      => '7° Ano',
                 'classroom' => 'Sala 2',
-                'shift' => 'Vespertino',
+                'shift'     => 'Vespertino',
             ],
             [
-                'name' => '8° Ano',
+                'name'      => '8° Ano',
                 'classroom' => 'Sala 3',
-                'shift' => 'Vespertino',
+                'shift'     => 'Vespertino',
             ],
             [
-                'name' => '9° Ano',
+                'name'      => '9° Ano',
                 'classroom' => 'Sala 4',
-                'shift' => 'Vespertino',
+                'shift'     => 'Vespertino',
             ],
         ];
 

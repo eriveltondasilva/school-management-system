@@ -1,4 +1,3 @@
-// import Calendar from '@/Components/Calendar'
 import { BookCopy, Calendar, Users, UsersRound } from 'lucide-react'
 
 import Alert from '@/Components/Alert'
@@ -8,9 +7,11 @@ import { breadcrumbs, titles } from './data'
 
 let statistics = []
 
-// =====================================
+// ====================================
 export default function DashboardPage({ data, message }) {
-  const { studentsCount, teachersCount, groupsCount, currentYear } = data || {}
+  const { currentYear, studentsCount, groupsCount } = data || {}
+
+  console.log(data)
 
   statistics = [
     {
@@ -19,9 +20,9 @@ export default function DashboardPage({ data, message }) {
       value: studentsCount,
     },
     {
-      title: 'Professores',
+      title: 'Turmas',
       icon: <Users />,
-      value: teachersCount,
+      value: groupsCount,
     },
     {
       title: 'Turmas',

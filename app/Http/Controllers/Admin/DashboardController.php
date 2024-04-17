@@ -17,6 +17,8 @@ class DashboardController extends Controller
 
         $data = compact('currentYear', 'groupsCount', 'studentsCount', 'teachersCount');
 
-        return inertia('Admin/Dashboard', compact('data'));
+        $message = 'Bem-vindo(a)! Você está logado(a) como administrador(a).';
+
+        return inertia('Admin/Dashboard', compact('data'))->with('message', $message);
     }
 }

@@ -1,4 +1,5 @@
 import {
+  Album,
   Backpack,
   Briefcase,
   Calendar,
@@ -31,6 +32,10 @@ const TeacherSidebarItems = [
   [
     { title: 'Painel', icon: Home, route: 'teacher.dashboard' },
     { title: 'Calendário', icon: CalendarDays, route: 'teacher.calendar' },
+  ],
+  [
+    { title: 'Turmas', icon: UsersRound, route: 'teacher.groups.index' },
+    { title: 'Notas', icon: Album, route: 'test' },
   ]
 ]
 

@@ -12,7 +12,7 @@ class RoleSeeder extends Seeder
     {
         foreach (RoleEnum::cases() as $role) {
             Role::create([
-                'name' => $role->value,
+                'name'         => $role->value,
                 'display_name' => $role->label()
             ]);
         }
