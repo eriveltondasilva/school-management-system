@@ -46,12 +46,10 @@ Route::middleware('auth')->group(function () {
     Route::get('verify-email', EmailVerificationPromptController::class)->name('verification.notice');
     Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
 
-
     //# SEND EMAIL VERIFICATION
     Route::controller(EmailVerificationNotificationController::class)->group(function () {
         Route::post('email/verification-notification', 'store')->middleware('throttle:6,1')->name('verification.send');
     });
-
 
     //# CONFIRM PASSWORD
     Route::controller(ConfirmablePasswordController::class)->group(function () {
@@ -59,12 +57,10 @@ Route::middleware('auth')->group(function () {
         Route::post('confirm-password', 'store');
     });
 
-
     //# UPDATE PASSWORD
     Route::controller(PasswordController::class)->group(function () {
         Route::put('password', 'update')->name('password.update');
     });
-
 
     //# LOGOUT
     Route::controller(AuthenticatedSessionController::class)->group(function () {
