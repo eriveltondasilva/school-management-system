@@ -31,6 +31,7 @@
     "flowbite": "^2.2.1",
     "flowbite-react": "^0.7.2",
     "lucide-react": "^0.298.0",
+    "react-hot-toast": "^2.4.1",
     "sass": "^1.69.5",
     "tailwind-merge": "^2.1.0"
   }

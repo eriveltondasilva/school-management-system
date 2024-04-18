@@ -10,17 +10,14 @@ use App\Http\Controllers\{
 
 //# WEB ROUTES =================================================================
 Route::get('/', function () {
-    $canLogin       = Route::has('login');
-    $canRegister    = Route::has('register');
+    $canLogin = Route::has('login');
+    $canRegister = Route::has('register');
     $laravelVersion = Application::VERSION;
-    $phpVersion     = PHP_VERSION;
+    $phpVersion = PHP_VERSION;
 
-    return inertia('Welcome', compact(
-        'canLogin',
-        'canRegister',
-        'laravelVersion',
-        'phpVersion'
-    ));
+    $data = compact('canLogin', 'canRegister', 'laravelVersion', 'phpVersion');
+
+    return inertia('Welcome', compact('data'));
 })->name('welcome');
 
 
@@ -30,8 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/painel', DashboardController::class)->name('dashboard');
 
     //* PROFILE
-    Route::controller(ProfileController::class)
-    ->prefix('perfil')->name('profile.')->group(function () {
+    Route::controller(ProfileController::class)->prefix('perfil')->name('profile.')->group(function () {
         Route::get('/', 'edit')->name('edit');
         //* ACTIONS
         Route::patch('/', 'update')->name('update');

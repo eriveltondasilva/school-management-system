@@ -20,7 +20,7 @@ class DashboardController extends Controller
             return to_route('student.dashboard');
         }
 
-        $message = 'Alguma coisa deu errado. Por favor, tente novamente mais tarde.';
+        $message = 'Alguma coisa deu errado. Você não tem permissão para acessar esta página.';
 
         return inertia('Dashboard')->with('message', $message);
     }

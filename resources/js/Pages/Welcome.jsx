@@ -1,7 +1,9 @@
 import { Head, Link } from '@inertiajs/react'
 
 // ============================================================================
-export default function WelcomePage({ auth, laravelVersion, phpVersion }) {
+export default function WelcomePage({ auth, data }) {
+  const { laravelVersion, phpVersion } = data
+
   return (
     <>
       <Head title='Welcome' />

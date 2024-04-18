@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\{
 };
 
 //# ADMIN ROUTES ===============================================================
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     //* DASHBOARD ROUTES
     Route::get('/painel', DashboardController::class)->name('dashboard');
 

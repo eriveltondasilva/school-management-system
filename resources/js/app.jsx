@@ -4,10 +4,10 @@ import './bootstrap'
 import { createInertiaApp } from '@inertiajs/react'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { createRoot } from 'react-dom/client'
+import { Toaster } from 'react-hot-toast'
 
 import 'flowbite'
 import { Flowbite } from 'flowbite-react'
-
 import { customTheme } from './flowbiteTheme'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
@@ -25,6 +25,7 @@ createInertiaApp({
     root.render(
       <Flowbite theme={{ theme: customTheme }}>
         <App {...props} />
+        <Toaster />
       </Flowbite>
     )
   },
