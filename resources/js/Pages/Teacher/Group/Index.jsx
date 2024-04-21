@@ -1,34 +1,35 @@
-import { Link, usePage } from '@inertiajs/react'
+import { Link } from '@inertiajs/react'
 import { Button, Card } from 'flowbite-react'
-
-import Title from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 
-import GroupNotFound from './Partials/GroupNotFound'
 import { breadcrumbs, titles } from './data'
 
 // ==============================================
-export default function PageGroupIndex({ groups = [] }) {
-  const { activeYear } = usePage().props.auth || ''
+export default function PageGroupIndex({ data }) {
+  const { teacherGroups, selectedGroup } = data || {}
 
-  const pageTitle = `${titles.index} - ${activeYear}`
-  const hasGroups = groups.length > 0
+  // const { activeYear } = usePage().props.auth || ''
+
+  // const pageTitle = `${titles.index} - ${activeYear}`
+  // const hasGroups = groups.length > 0
+
+  console.log(selectedGroup)
 
   return (
     <>
       {/* Título */}
-      <Title>
+      {/* <Title>
         <Title.Left title={pageTitle} />
       </Title>
 
-      <br />
+      <br /> */}
 
       {/* Exibe mensagem se não houver grupos */}
-      {!hasGroups && <GroupNotFound />}
+      {/* {!hasGroups && <GroupNotFound />} */}
 
       {/* Exibe os cards das turmas */}
-      {hasGroups && <GroupCard {...{ groups }} />}
+      {/* {hasGroups && <GroupCard {...{ groups }} />} */}
     </>
   )
 }
@@ -54,15 +55,6 @@ function GroupCard({ groups = [] }) {
               className='uppercase'
               fullSized>
               Alunos
-            </Button>
-            <Button
-              as={Link}
-              href={route('admin.groups.teachers.index', { group })}
-              color='warning'
-              size='sm'
-              className='uppercase'
-              fullSized>
-              Professores
             </Button>
           </footer>
         </Card>

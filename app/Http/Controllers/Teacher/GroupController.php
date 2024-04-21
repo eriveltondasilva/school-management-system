@@ -3,23 +3,34 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
+use App\Models\{AcademicYear, Group};
 use Illuminate\Support\Facades\Auth;
-use App\Models\{Group, AcademicYear};
-
-// use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $currentYear = AcademicYear::select('id', 'year')->isActive();
+        $groupId = $request->query('group', '');
 
-        $teacher = Auth::user()->profile;
-        $groups = $teacher->groups()
-            ->where('academic_year_id', $currentYear->id)
+        $activeYear = AcademicYear::select('id', 'year')->isActive();
+
+        $currentTeacher = Auth::user()->profile;
+
+        $teacherGroups = $currentTeacher
+            ->groups()
+            ->select('groups.id', 'groups.name')
             ->get();
 
+        $selectedGroup = Group::With('students:id,name')
+            ->whereHas('teachers', function (Builder $query) use ($currentTeacher) {
+                $query->where('teachers.id', $currentTeacher->id);
+            })
+            ->findOrFail($groupId);
 
-        return inertia('Teacher/Group/Index', compact('groups'));
+        $data = compact('teacherGroups', 'selectedGroup');
+
+        return inertia('Teacher/Group/Index', compact('data'));
     }
 }

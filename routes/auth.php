@@ -16,10 +16,10 @@ use App\Http\Controllers\Auth\{
 // ==========================================================================
 Route::middleware('guest')->group(function () {
     //# REGISTER
-    Route::controller(RegisteredUserController::class)->group(function () {
-        Route::get('register', 'create')->name('register');
-        Route::post('register', 'store');
-    });
+    // Route::controller(RegisteredUserController::class)->group(function () {
+    //     Route::get('register', 'create')->name('register');
+    //     Route::post('register', 'store');
+    // });
 
     //# LOGIN
     Route::controller(AuthenticatedSessionController::class)->group(function () {
