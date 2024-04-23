@@ -72,7 +72,6 @@ class TeacherUserController extends Controller
 
     public function destroy(User $user, Teacher $teacher)
     {
-        // if
-
+        //
     }
 }

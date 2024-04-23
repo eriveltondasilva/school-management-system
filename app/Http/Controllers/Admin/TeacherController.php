@@ -5,28 +5,24 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PersonRequest;
 use App\Models\Teacher;
-use App\Services\SearchServices;
+use App\Services\SearchService;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
     public function __construct(
-        protected SearchServices $searchServices
+        protected SearchService $searchService
     ) {
     }
 
     public function index(Request $request)
     {
         $searchTerm = $request->query('search', '');
-        $columns = ['id', 'name', 'email'];
 
-        $teachers = $this->searchServices->searchPerson(
-            new Teacher(),
-            $searchTerm,
-            $columns
-        );
-
-        $teachers = $teachers->paginate(10);
+        $teachers = $this->searchService->searchByTerm(
+            query: Teacher::query()->select('id', 'name', 'email'),
+            searchTerm: $searchTerm,
+        )->paginate(10);
 
         return inertia('Admin/Teacher/Index', compact('teachers'));
     }
@@ -55,7 +51,7 @@ class TeacherController extends Controller
 
         return back()
             ->with('message', 'Cadastro do professor criado com sucesso!')
-            ->with('id', $teacher->id);
+            ->with('teacherId', $teacher->id);
     }
 
     public function update(PersonRequest $request, Teacher $teacher)

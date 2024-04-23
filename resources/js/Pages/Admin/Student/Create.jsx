@@ -12,10 +12,10 @@ import { breadcrumbs, titles } from './data'
 
 // ==============================================
 export default function PageStudentCreate() {
-  const { message, id: studentId } = usePage().props.flash || {}
+  const { message, studentId } = usePage().props.flash || {}
 
-  const formDataOptions = { method: 'POST', route: 'admin.students.store' }
-  const { handleSubmit, isLoading, errors } = useFormHandler(formDataOptions)
+  const formOptions = { method: 'POST', route: 'admin.students.store' }
+  const { handleSubmit, isLoading, errors } = useFormHandler(formOptions)
 
   return (
     <Form onSubmit={handleSubmit}>

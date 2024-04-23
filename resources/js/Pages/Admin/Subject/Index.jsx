@@ -10,9 +10,9 @@ import { breadcrumbs, titles } from './data'
 
 // ===============================================
 export default function PageSubjectIndex({ subjects }) {
-  const hasSubjects = subjects.length > 0
-
   const { activeYear } = usePage().props.auth
+
+  const hasSubjects = subjects.length > 0
   const pageTitle = `${titles.index} - Ano Letivo: ${activeYear}`
 
   return (

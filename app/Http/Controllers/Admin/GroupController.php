@@ -46,7 +46,7 @@ class GroupController extends Controller
 
         $message = sprintf('Turma do %s criada com sucesso!', $group->name);
 
-        return back()->with('message', $message)->with('id', $group->id);
+        return back()->with('message', $message)->with('groupId', $group->id);
     }
 
     public function update(GroupRequest $request, Group $group)

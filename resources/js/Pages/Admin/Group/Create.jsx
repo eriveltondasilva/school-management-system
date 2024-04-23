@@ -11,10 +11,10 @@ import { breadcrumbs, titles } from './data'
 
 // ===============================================
 export default function PageGroupCreate() {
-  const { message, id: groupId } = usePage().props.flash || {}
+  const { message, groupId } = usePage().props.flash || {}
 
-  const formDataOptions = { method: 'POST', route: 'admin.groups.store' }
-  const { handleSubmit, isLoading, errors } = useFormHandler(formDataOptions)
+  const formOptions = { method: 'POST', route: 'admin.groups.store' }
+  const { handleSubmit, isLoading, errors } = useFormHandler(formOptions)
 
   return (
     <section>

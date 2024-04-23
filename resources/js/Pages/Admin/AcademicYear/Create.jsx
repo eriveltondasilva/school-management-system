@@ -11,7 +11,7 @@ import { breadcrumbs, titles } from './data'
 
 // ==============================================
 export default function PageAcademicYearCreate() {
-  const { message, id: academicYearId } = usePage().props.flash || {}
+  const { message, academicYearId } = usePage().props.flash || {}
 
   const formOptions = { method: 'POST', route: 'admin.academic-years.store' }
   const { handleSubmit, errors, isLoading } = useFormHandler(formOptions)

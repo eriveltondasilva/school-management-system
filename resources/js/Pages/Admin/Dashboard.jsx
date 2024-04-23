@@ -10,7 +10,7 @@ let statistics = []
 
 // =====================================
 export default function DashboardPage({ data, message }) {
-  const { studentsCount, teachersCount, groupsCount, currentYear } = data || {}
+  const { studentsCount, teachersCount, groupsCount, activeYear } = data || {}
 
   statistics = [
     {
@@ -31,7 +31,7 @@ export default function DashboardPage({ data, message }) {
     {
       title: 'Ano Letivo',
       icon: <Calendar />,
-      value: currentYear.year,
+      value: activeYear,
     },
   ]
 

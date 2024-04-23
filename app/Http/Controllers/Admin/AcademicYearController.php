@@ -55,7 +55,7 @@ class AcademicYearController extends Controller
             $academicYear->year
         );
 
-        return back()->with('message', $message)->with('id', $academicYear->id);
+        return back()->with('message', $message)->with('academicYearId', $academicYear->id);
     }
 
     public function update(AcademicYearRequest $request, AcademicYear $academicYear)

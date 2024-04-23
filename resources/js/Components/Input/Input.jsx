@@ -65,8 +65,8 @@ export function InputSelect({
       {/* # input select */}
       <Select id={id} name={id} {...props}>
         {values.map((value, index) => (
-          <option key={index} value={value.value ?? value}>
-            {value.label ?? value}
+          <option key={index} value={value.id ?? value}>
+            {value.name ?? value}
           </option>
         ))}
       </Select>

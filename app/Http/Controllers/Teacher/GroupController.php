@@ -12,10 +12,8 @@ class GroupController extends Controller
 {
     public function index(Request $request)
     {
-        $groupId = $request->query('group', '');
-
-        $activeYear = AcademicYear::select('id', 'year')->isActive();
-
+        $groupId = $request->query('search', '');
+        $activeYear = AcademicYear::select('year')->isActive()->year;
         $currentTeacher = Auth::user()->profile;
 
         $teacherGroups = $currentTeacher
@@ -27,9 +25,9 @@ class GroupController extends Controller
             ->whereHas('teachers', function (Builder $query) use ($currentTeacher) {
                 $query->where('teachers.id', $currentTeacher->id);
             })
-            ->findOrFail($groupId);
+            ->find($groupId);
 
-        $data = compact('teacherGroups', 'selectedGroup');
+        $data = compact('teacherGroups', 'selectedGroup', 'activeYear');
 
         return inertia('Teacher/Group/Index', compact('data'));
     }

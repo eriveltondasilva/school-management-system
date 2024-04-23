@@ -11,12 +11,12 @@ let statistics = []
 
 // ====================================
 export default function DashboardPage({ data }) {
-  const { currentYear, studentsCount, groupsCount } = data || {}
+  const { activeYear, studentsCount, groupsCount } = data || {}
   const { message } = usePage().props
 
   if (message)
     toast.success(message, {
-      id: 'clipboard',
+      id: 'message',
     })
 
   statistics = [
@@ -38,7 +38,7 @@ export default function DashboardPage({ data }) {
     {
       title: 'Ano Letivo',
       icon: <Calendar />,
-      value: currentYear.year,
+      value: activeYear.year,
     },
   ]
 

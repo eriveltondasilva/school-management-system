@@ -28,8 +28,8 @@ export default function PageStudentIndex({ students = [] }) {
 
   const handleChange = (e) => setSearch(e.target.value)
 
-  const formDataOptions = { method: 'GET', route: 'admin.students.index' }
-  const { handleSubmit, isLoading } = useFormHandler(formDataOptions)
+  const formOptions = { method: 'GET', route: 'admin.students.index' }
+  const { handleSubmit, isLoading } = useFormHandler(formOptions)
 
   return (
     <>

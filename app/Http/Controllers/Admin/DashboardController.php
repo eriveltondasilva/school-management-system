@@ -9,14 +9,14 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {
-        $currentYear = AcademicYear::select('id', 'year')->isActive();
+        $academicYear = AcademicYear::select('id', 'year')->isActive();
+        $activeYear = $academicYear->year;
 
-        $groupsCount = optional($currentYear)->groups()->count() ?? 0;
+        $groupsCount = optional($academicYear)->groups()->count() ?? 0;
         $studentsCount = Student::count();
         $teachersCount = Teacher::count();
 
-        $data = compact('currentYear', 'groupsCount', 'studentsCount', 'teachersCount');
-
+        $data = compact('activeYear', 'groupsCount', 'studentsCount', 'teachersCount');
         $message = 'Bem-vindo(a)! Você está logado(a) como administrador(a).';
 
         return inertia('Admin/Dashboard', compact('data'))->with('message', $message);

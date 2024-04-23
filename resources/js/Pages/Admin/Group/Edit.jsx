@@ -15,12 +15,12 @@ import { breadcrumbs, titles } from './data'
 export default function PageGroupEdit({ group = {} }) {
   const { message } = usePage().props.flash || {}
 
-  const formDataOptions = {
+  const formOptions = {
     method: 'PUT',
     route: 'admin.groups.update',
     params: { group: group.id },
   }
-  const { handleSubmit, isLoading, errors } = useFormHandler(formDataOptions)
+  const { handleSubmit, isLoading, errors } = useFormHandler(formOptions)
 
   return (
     <Form onSubmit={handleSubmit}>
