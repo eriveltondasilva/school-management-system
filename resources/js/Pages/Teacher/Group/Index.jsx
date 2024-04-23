@@ -1,12 +1,14 @@
 import { Link } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
 import { Eye, PencilLine } from 'lucide-react'
+import { twJoin } from 'tailwind-merge'
 
 import Input from '@/Components/Input'
 import NotFound from '@/Components/NotFound'
 import Searchbar from '@/Components/Searchbar'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
+
 import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 import formatId from '@/Utils/formatId'
@@ -62,21 +64,25 @@ function StudentTable({ students = [] }) {
     <Table>
       {/* Table Header */}
       <Table.Header>
-        <Table.HeaderCell className='w-0 text-center'>ID</Table.HeaderCell>
+        <Table.HeaderCell className='w-0 text-center'></Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
+        <Table.HeaderCell>Matrícula</Table.HeaderCell>
         <Table.HeaderCell></Table.HeaderCell>
       </Table.Header>
 
       {/* Table Body */}
       <Table.Body>
-        {students.map((student) => (
+        {students.map((student, index) => (
           <Table.Row key={student.id}>
-            <Table.RowCell className='font-bold'>
-              {formatId(student.id)}
-            </Table.RowCell>
-            <Table.RowCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
+            <Table.RowCell className='font-bold'>{++index}</Table.RowCell>
+            <Table.RowCell
+              className={twJoin(
+                'whitespace-nowrap font-medium',
+                'text-gray-900 dark:text-white'
+              )}>
               {student.name}
             </Table.RowCell>
+            <Table.RowCell>{formatId(student.id)}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>
                 <Button
